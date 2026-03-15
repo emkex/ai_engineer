@@ -1,1064 +1,1841 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-<meta charset="UTF-8">
-<title>AI Engineer Plan</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;font-size:12px;background:#f0f2f5;color:#1a1a2e}
-h1{background:linear-gradient(135deg,#0d1b2a,#1b263b);color:#fff;padding:22px 28px;font-size:18px}
-h1 span{color:#4fc3f7}
-h1 small{display:block;color:#90caf9;font-size:11px;font-weight:400;margin-top:5px;line-height:1.6}
-.verdict{background:linear-gradient(135deg,#1b5e20,#2e7d32);color:#fff;padding:18px 24px;font-size:12px;line-height:1.8}
-.verdict h2{font-size:14px;margin-bottom:10px}
-.risk{background:rgba(0,0,0,.25);border-radius:4px;padding:8px 12px;margin:5px 0;font-size:11px}
-.risk b{color:#ffcc80}
-.legend{display:flex;flex-wrap:wrap;gap:14px;padding:10px 20px;background:#fff;border-bottom:2px solid #e0e0e0}
-.li{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600}
-.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.ph{background:#1a1a2e;color:#fff;padding:10px 16px;margin:20px 0 0;border-radius:6px 6px 0 0;font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-.ph span{color:#90caf9;font-weight:400;font-size:11px}
-.ph-pct{background:#4fc3f7;color:#0d1b2a;border-radius:10px;padding:2px 10px;font-size:11px;font-weight:800}
-.aut-ph{background:linear-gradient(135deg,#4a148c,#6a1b9a);color:#fff;padding:10px 16px;margin:20px 0 0;border-radius:6px 6px 0 0;font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-.aut-ph span{color:#ce93d8;font-weight:400;font-size:11px}
-table{width:100%;border-collapse:collapse;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:2px}
-th{background:#2c3e50;color:#fff;padding:7px 9px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
-tr:nth-child(even){background:#f8fafc}
-tr:hover{background:#eef4ff}
-td{padding:8px 9px;vertical-align:top;border-bottom:1px solid #eee;line-height:1.55;font-size:11px}
-.tag{display:inline-block;font-size:9px;padding:2px 6px;border-radius:8px;margin:1px 1px 3px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
-.t1{background:#e3f2fd;color:#0d47a1}.t2{background:#e8f5e9;color:#1b5e20}
-.t3{background:#f3e5f5;color:#4a148c}.t4{background:#fff3e0;color:#e65100}
-.clist{list-style:none;margin:4px 0 0}
-.clist li{margin:3px 0;padding-left:20px;position:relative;font-size:11px;line-height:1.5}
-.clist li::before{content:'\2610';position:absolute;left:0;color:#1565c0;font-size:12px;line-height:1.3}
-.clist li.done::before{content:'\2611';color:#d32f2f;font-size:18px;font-weight:bold}
-.clist li.skip{color:#aaa;text-decoration:line-through}
-.clist li.skip::before{color:#ccc}
-.src{font-size:10px;color:#888;margin-top:5px;padding-top:4px;border-top:1px dashed #e0e0e0;font-style:italic}
-.why{background:#fffde7;border-left:3px solid #f9a825;padding:6px 8px;border-radius:0 4px 4px 0;font-size:10px;line-height:1.6}
-.tcards{display:flex;flex-direction:column;gap:4px}
-.tcard{background:#f8f9fa;border:1px solid #dee2e6;border-left:3px solid #1565c0;border-radius:0 4px 4px 0;padding:5px 8px;font-size:10px}
-.tcard b{display:block;color:#0d1b2a;margin-bottom:2px;font-size:10px}
-.tcard span{color:#555;line-height:1.5}
-.sp{display:inline-block;border-radius:10px;padding:2px 8px;margin:2px;font-size:10px;font-weight:700}
-.new{background:#1565c0;color:#fff}.mastered{background:#2e7d32;color:#fff}
-.note{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:4px;padding:7px 10px;margin:4px 0;font-size:11px}
-.warn{background:#fff8e1;border:1px solid #ffe082;border-radius:4px;padding:7px 10px;margin:4px 0;font-size:11px}
-.pbl{font-weight:700;font-size:11px;color:#0d1b2a;display:block}
-.pls{font-size:9px;color:#888;font-weight:400;display:block;margin-top:2px}
-.pb{width:52px;height:8px;background:#e0e0e0;border-radius:4px;margin:0 auto 3px;overflow:hidden}
-.pf{height:100%;border-radius:4px}
-.pt{text-align:center;font-size:11px;font-weight:800;color:#1a1a2e}
-.wrap{padding:0 12px 40px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px 20px;background:#fff;border-radius:0 0 6px 6px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:24px}
-.box{border:1px solid #e0e0e0;border-radius:6px;padding:12px 14px;font-size:11px;line-height:1.7}
-.box h3{font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:800;margin-bottom:7px}
-.box.bl{border-color:#90caf9;background:#e3f2fd}.box.bl h3{color:#0d47a1}
-.box.gr{border-color:#a5d6a7;background:#e8f5e9}.box.gr h3{color:#1b5e20}
-.box.or{border-color:#ffcc80;background:#fff3e0}.box.or h3{color:#e65100}
-.box.te{border-color:#80cbc4;background:#e0f2f1}.box.te h3{color:#004d40}
-.box.re{border-color:#ef9a9a;background:#fce4ec}.box.re h3{color:#b71c1c}
-.box.pu{border-color:#ce93d8;background:#f3e5f5}.box.pu h3{color:#4a148c}
-.mblock{background:#fff;border-left:4px solid #6a1b9a;margin:2px 0;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
-.mblock h3{font-size:12px;font-weight:800;color:#4a148c;margin-bottom:10px}
-.mc{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.mh{font-size:10px;text-transform:uppercase;font-weight:700;color:#888;margin-bottom:5px}
-.day-rule{background:#fff;padding:16px 20px;border-radius:0 0 6px 6px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:24px;font-size:12px;line-height:2}
-</style>
+    <meta charset="UTF-8">
+    <title>AI Engineer Plan</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12px;
+            background: #f0f2f5;
+            color: #1a1a2e
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            color: #fff;
+            padding: 22px 28px;
+            font-size: 18px
+        }
+
+        h1 span {
+            color: #4fc3f7
+        }
+
+        h1 small {
+            display: block;
+            color: #90caf9;
+            font-size: 11px;
+            font-weight: 400;
+            margin-top: 5px;
+            line-height: 1.6
+        }
+
+        .verdict {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: #fff;
+            padding: 18px 24px;
+            font-size: 12px;
+            line-height: 1.8
+        }
+
+        .verdict h2 {
+            font-size: 14px;
+            margin-bottom: 10px
+        }
+
+        .risk {
+            background: rgba(0, 0, 0, .25);
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin: 5px 0;
+            font-size: 11px
+        }
+
+        .risk b {
+            color: #ffcc80
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            padding: 10px 20px;
+            background: #fff;
+            border-bottom: 2px solid #e0e0e0
+        }
+
+        .li {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 600
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .ph {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 16px;
+            margin: 20px 0 0;
+            border-radius: 6px 6px 0 0;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .ph span {
+            color: #90caf9;
+            font-weight: 400;
+            font-size: 11px
+        }
+
+        .ph-pct {
+            background: #4fc3f7;
+            color: #0d1b2a;
+            border-radius: 10px;
+            padding: 2px 10px;
+            font-size: 11px;
+            font-weight: 800
+        }
+
+        .aut-ph {
+            background: linear-gradient(135deg, #4a148c, #6a1b9a);
+            color: #fff;
+            padding: 10px 16px;
+            margin: 20px 0 0;
+            border-radius: 6px 6px 0 0;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .aut-ph span {
+            color: #ce93d8;
+            font-weight: 400;
+            font-size: 11px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+            margin-bottom: 2px
+        }
+
+        th {
+            background: #2c3e50;
+            color: #fff;
+            padding: 7px 9px;
+            text-align: left;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .4px
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc
+        }
+
+        tr:hover {
+            background: #eef4ff
+        }
+
+        td {
+            padding: 8px 9px;
+            vertical-align: top;
+            border-bottom: 1px solid #eee;
+            line-height: 1.55;
+            font-size: 11px
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 8px;
+            margin: 1px 1px 3px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .4px
+        }
+
+        .t1 {
+            background: #e3f2fd;
+            color: #0d47a1
+        }
+
+        .t2 {
+            background: #e8f5e9;
+            color: #1b5e20
+        }
+
+        .t3 {
+            background: #f3e5f5;
+            color: #4a148c
+        }
+
+        .t4 {
+            background: #fff3e0;
+            color: #e65100
+        }
+
+        .clist {
+            list-style: none;
+            margin: 4px 0 0
+        }
+
+        .clist li {
+            margin: 3px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 11px;
+            line-height: 1.5
+        }
+
+        .clist li::before {
+            content: '\2610';
+            position: absolute;
+            left: 0;
+            color: #1565c0;
+            font-size: 12px;
+            line-height: 1.3
+        }
+
+        .clist li.done::before {
+            content: '\2611';
+            color: #d32f2f;
+            font-size: 18px;
+            font-weight: bold
+        }
+
+        .clist li.skip {
+            color: #aaa;
+            text-decoration: line-through
+        }
+
+        .clist li.skip::before {
+            color: #ccc
+        }
+
+        .src {
+            font-size: 10px;
+            color: #888;
+            margin-top: 5px;
+            padding-top: 4px;
+            border-top: 1px dashed #e0e0e0;
+            font-style: italic
+        }
+
+        .why {
+            background: #fffde7;
+            border-left: 3px solid #f9a825;
+            padding: 6px 8px;
+            border-radius: 0 4px 4px 0;
+            font-size: 10px;
+            line-height: 1.6
+        }
+
+        .tcards {
+            display: flex;
+            flex-direction: column;
+            gap: 4px
+        }
+
+        .tcard {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-left: 3px solid #1565c0;
+            border-radius: 0 4px 4px 0;
+            padding: 5px 8px;
+            font-size: 10px
+        }
+
+        .tcard b {
+            display: block;
+            color: #0d1b2a;
+            margin-bottom: 2px;
+            font-size: 10px
+        }
+
+        .tcard span {
+            color: #555;
+            line-height: 1.5
+        }
+
+        .sp {
+            display: inline-block;
+            border-radius: 10px;
+            padding: 2px 8px;
+            margin: 2px;
+            font-size: 10px;
+            font-weight: 700
+        }
+
+        .new {
+            background: #1565c0;
+            color: #fff
+        }
+
+        .mastered {
+            background: #2e7d32;
+            color: #fff
+        }
+
+        .note {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 4px;
+            padding: 7px 10px;
+            margin: 4px 0;
+            font-size: 11px
+        }
+
+        .warn {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 4px;
+            padding: 7px 10px;
+            margin: 4px 0;
+            font-size: 11px
+        }
+
+        .pbl {
+            font-weight: 700;
+            font-size: 11px;
+            color: #0d1b2a;
+            display: block
+        }
+
+        .pls {
+            font-size: 9px;
+            color: #888;
+            font-weight: 400;
+            display: block;
+            margin-top: 2px
+        }
+
+        .pb {
+            width: 52px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 0 auto 3px;
+            overflow: hidden
+        }
+
+        .pf {
+            height: 100%;
+            border-radius: 4px
+        }
+
+        .pt {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 800;
+            color: #1a1a2e
+        }
+
+        .wrap {
+            padding: 0 12px 40px
+        }
+
+        .grid3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 16px 20px;
+            background: #fff;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+            margin-bottom: 24px
+        }
+
+        .box {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 12px 14px;
+            font-size: 11px;
+            line-height: 1.7
+        }
+
+        .box h3 {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            font-weight: 800;
+            margin-bottom: 7px
+        }
+
+        .box.bl {
+            border-color: #90caf9;
+            background: #e3f2fd
+        }
+
+        .box.bl h3 {
+            color: #0d47a1
+        }
+
+        .box.gr {
+            border-color: #a5d6a7;
+            background: #e8f5e9
+        }
+
+        .box.gr h3 {
+            color: #1b5e20
+        }
+
+        .box.or {
+            border-color: #ffcc80;
+            background: #fff3e0
+        }
+
+        .box.or h3 {
+            color: #e65100
+        }
+
+        .box.te {
+            border-color: #80cbc4;
+            background: #e0f2f1
+        }
+
+        .box.te h3 {
+            color: #004d40
+        }
+
+        .box.re {
+            border-color: #ef9a9a;
+            background: #fce4ec
+        }
+
+        .box.re h3 {
+            color: #b71c1c
+        }
+
+        .box.pu {
+            border-color: #ce93d8;
+            background: #f3e5f5
+        }
+
+        .box.pu h3 {
+            color: #4a148c
+        }
+
+        .mblock {
+            background: #fff;
+            border-left: 4px solid #6a1b9a;
+            margin: 2px 0;
+            padding: 14px 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .07)
+        }
+
+        .mblock h3 {
+            font-size: 12px;
+            font-weight: 800;
+            color: #4a148c;
+            margin-bottom: 10px
+        }
+
+        .mc {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px
+        }
+
+        .mh {
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #888;
+            margin-bottom: 5px
+        }
+
+        .day-rule {
+            background: #fff;
+            padding: 16px 20px;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+            margin-bottom: 24px;
+            font-size: 12px;
+            line-height: 2
+        }
+    </style>
 </head>
+
 <body>
-<h1>AI Engineer / AI Integrator &mdash; Master Plan v3 <span>FINAL</span>
-<br>9 марта 2026 &rarr; 1 января 2027
-<small>
-Фаза 0 (март&ndash;апр): Фундамент &nbsp;|&nbsp; Фаза 1 (апр&ndash;май): Агентская база &nbsp;|&nbsp;
-Фаза 2 (июн): Деплой+Диплом &nbsp;|&nbsp; Фаза 3 (июл&ndash;авг): Fine-tuning+Премиум &nbsp;|&nbsp;
-Осень&ndash;декабрь: Добивка+Коммерция
-</small>
-</h1>
+    <h1>AI Engineer / AI Integrator &mdash; Master Plan v3 <span>FINAL</span>
+        <br>9 марта 2026 &rarr; 1 января 2027
+        <small>
+            Фаза 0 (март&ndash;апр): Фундамент &nbsp;|&nbsp; Фаза 1 (апр&ndash;май): Агентская база &nbsp;|&nbsp;
+            Фаза 2 (июн): Деплой+Диплом &nbsp;|&nbsp; Фаза 3 (июл&ndash;авг): Fine-tuning+Премиум &nbsp;|&nbsp;
+            Осень&ndash;декабрь: Добивка+Коммерция
+        </small>
+    </h1>
 
-<div class="legend">
-<div class="li"><div class="dot" style="background:#1565c0"></div>ProGlib</div>
-<div class="li"><div class="dot" style="background:#2e7d32"></div>Самостоятельно</div>
-<div class="li"><div class="dot" style="background:#6a1b9a"></div>Деплой/Диплом</div>
-<div class="li"><div class="dot" style="background:#e65100"></div>Специализация</div>
-<div style="margin-left:auto;font-size:11px;color:#666;font-weight:600">&#9744; = сделать &nbsp;|&nbsp; &#9745; = готово</div>
-</div>
+    <div class="legend">
+        <div class="li">
+            <div class="dot" style="background:#1565c0"></div>ProGlib
+        </div>
+        <div class="li">
+            <div class="dot" style="background:#2e7d32"></div>Самостоятельно
+        </div>
+        <div class="li">
+            <div class="dot" style="background:#6a1b9a"></div>Деплой/Диплом
+        </div>
+        <div class="li">
+            <div class="dot" style="background:#e65100"></div>Специализация
+        </div>
+        <div style="margin-left:auto;font-size:11px;color:#666;font-weight:600">&#9744; = сделать &nbsp;|&nbsp; &#9745;
+            = готово</div>
+    </div>
 
-<div class="wrap">
-<!-- ====== ФАЗА 0 ====== -->
-<div class="ph">ФАЗА 0 &mdash; ФУНДАМЕНТ <span>9 марта &rarr; 19 апреля (6 недель)</span><div class="ph-pct">0 &rarr; 35%</div></div>
-<table>
-<tr>
-<th style="width:86px">Период</th>
-<th style="width:19%">&#127891; ProGlib</th>
-<th style="width:22%">&#128218; Самостоятельно</th>
-<th style="width:13%">&#128161; Почему сейчас?</th>
-<th style="width:15%">&#128295; Инструменты</th>
-<th style="width:17%">&#129514; Проект</th>
-<th style="width:9%">&#128200; Стек</th>
-<th style="width:58px;text-align:center">%</th>
-</tr>
+    <div class="wrap">
+        <!-- ====== ФАЗА 0 ====== -->
+        <div class="ph">ФАЗА 0 &mdash; ФУНДАМЕНТ <span>9 марта &rarr; 19 апреля (6 недель)</span>
+            <div class="ph-pct">0 &rarr; 35%</div>
+        </div>
+        <table>
+            <tr>
+                <th style="width:86px">Период</th>
+                <th style="width:19%">&#127891; ProGlib</th>
+                <th style="width:22%">&#128218; Самостоятельно</th>
+                <th style="width:13%">&#128161; Почему сейчас?</th>
+                <th style="width:15%">&#128295; Инструменты</th>
+                <th style="width:17%">&#129514; Проект</th>
+                <th style="width:9%">&#128200; Стек</th>
+                <th style="width:58px;text-align:center">%</th>
+            </tr>
 
-<tr>
-<td><span class="pbl">9&ndash;15 мар</span><span class="pls">Неделя 1</span></td>
-<td>
-<span class="tag t1">ProGlib</span><br>
-<ul class="clist">
-<li class="done">Базовый Python</li>
-<li class="done">Функции, модули</li>
-</ul>
-<div class="note">Не повторять. Вперёд.</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>Git + AI-теория</b>
-<ul class="clist">
-<li class="done">Ahillary бонус ур.1 (Git): commit, branch, push, pull, merge, .gitignore &mdash; пройти полностью</li>
-<li class="skip">githowto.com/ru &mdash; интерактивный тренажёр по git (1&ndash;2 ч)</li>
-<li class="done">Ahillary Notion &laquo;AI модели для чайников&raquo; &mdash; прочитать</li>
-<li>Зарегистрироваться: claude.ai + anthropic.com, получить API key</li>
-<li>Начать использовать Claude.ai ежедневно вместо Google</li>
-</ul>
-<div class="src">&#128218; Ahillary бонус ур.1 (git) + githowto.com/ru + Ahillary Notion (AI чайники)</div>
-</td>
-<td><div class="why"><b>Было:</b> Python базис.<br><b>Сейчас:</b> Git &mdash; инструмент #1 профессионала. Без него нет истории кода, нет портфолио. Упущение v2 исправлено: добавлен с недели 1.<br><b>Потом:</b> 1 коммит каждый день.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>Git + GitHub</b><span>Версионирование кода. Каждый коммит &mdash; запись прогресса. GitHub = публичное портфолио для работодателей.</span></div>
-<div class="tcard"><b>Claude.ai (браузер)</b><span>Ежедневный ИИ-помощник. Объясняет код, ошибки, концепции. Использовать вместо Google.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>Создать репозиторий <b>ai-engineer-journey</b> на GitHub</li>
-<li>README: цель, стек, план &mdash; на русском</li>
-<li>Первый коммит: структура папок проекта</li>
-<li>Правило на всё время: min 1 commit/day</li>
-</ul>
-</td>
-<td><span class="sp new">Git</span><span class="sp new">Claude.ai</span></td>
-<td><div class="pb"><div class="pf" style="width:5%;background:#1565c0"></div></div><div class="pt">5%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">9&ndash;15 мар</span><span class="pls">Неделя 1</span></td>
+                <td>
+                    <span class="tag t1">ProGlib</span><br>
+                    <ul class="clist">
+                        <li class="done">Базовый Python</li>
+                        <li class="done">Функции, модули</li>
+                    </ul>
+                    <div class="note">Не повторять. Вперёд.</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>Git + AI-теория</b>
+                    <ul class="clist">
+                        <li class="done">Ahillary бонус ур.1 (Git): commit, branch, push, pull, merge, .gitignore
+                            &mdash; пройти полностью</li>
+                        <li class="skip">githowto.com/ru &mdash; интерактивный тренажёр по git (1&ndash;2 ч)</li>
+                        <li class="done">Ahillary Notion &laquo;AI модели для чайников&raquo; &mdash; прочитать</li>
+                        <li class="done">Зарегистрироваться: claude.ai + anthropic.com, получить API key</li>
+                        <li class="done">Начать использовать Claude.ai ежедневно вместо Google</li>
+                    </ul>
+                    <div class="src">&#128218; Ahillary бонус ур.1 (git) + githowto.com/ru + Ahillary Notion (AI
+                        чайники)</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> Python базис.<br><b>Сейчас:</b> Git &mdash; инструмент #1
+                        профессионала. Без него нет истории кода, нет портфолио.<br><b>Потом:</b> 1 коммит каждый день.
+                    </div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Git + GitHub</b><span>Версионирование кода. Каждый коммит &mdash; запись
+                                прогресса. GitHub = публичное портфолио для работодателей.</span></div>
+                        <div class="tcard"><b>Claude.ai (браузер)</b><span>Ежедневный ИИ-помощник. Объясняет код,
+                                ошибки, концепции. Использовать вместо Google.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li class="done">Создать репозиторий <b>ai-engineer</b> на GitHub</li>
+                        <li class="skip">README: цель, стек, план &mdash; на русском</li>
+                        <li class="done">Первый коммит: структура папок проекта</li>
+                        <li class="done">Правило на всё время: min 1 commit/day</li>
+                    </ul>
+                </td>
+                <td><span class="sp new">Git</span><span class="sp new">Claude.ai</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:5%;background:#1565c0"></div>
+                    </div>
+                    <div class="pt">5%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">16&ndash;22 мар</span><span class="pls">Неделя 2</span></td>
-<td>
-<span class="tag t1">ProGlib</span><br>
-<b>Классы и ООП</b>
-<ul class="clist">
-<li>__init__, self, методы экземпляра</li>
-<li>Наследование, полиморфизм</li>
-<li>@dataclass &mdash; короткий способ писать классы</li>
-<li>Инкапсуляция, dunder-методы</li>
-</ul>
-<div class="src">&#128218; ProGlib + Ahillary ур.8 (ООП) &mdash; Notion конспект</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>Ollama: первая локальная AI-модель</b>
-<ul class="clist">
-<li>Установить Ollama: ollama.com/download</li>
-<li>ollama run llama3.2 &mdash; задать вопрос прямо в терминале</li>
-<li>Ahillary Notion &laquo;Как выбрать AI модель&raquo; + &laquo;Параметры модели&raquo;: 4B, Q4_K_M, context length</li>
-<li>Понять: GPT-4o vs Claude vs Llama vs Mistral &mdash; у каждого своё применение</li>
-</ul>
-<div class="src">&#128218; ollama.com + Ahillary Notion: Ollama + параметры модели</div>
-</td>
-<td><div class="why"><b>Было:</b> Python, Git.<br><b>Сейчас:</b> ООП &mdash; весь AI-код (LangChain, Pydantic, LangGraph) строится на классах. Без ООП их код нечитаем. Ollama &mdash; понимаешь как модели работают локально до вызова платного API.</div></td>
-<td><div class="tcards"><div class="tcard"><b>Ollama</b><span>AI-модели локально, бесплатно. Для экспериментов когда не хочется тратить токены API. llama3.2, mistral, phi3.</span></div></div></td>
-<td>
-<ul class="clist">
-<li>Написать класс <b>NewsItem</b>: поля title, source, date, importance(1&ndash;5), confirmed(bool)</li>
-<li>Это первый кирпич &laquo;Задумки по экономике&raquo;</li>
-</ul>
-</td>
-<td><span class="sp mastered">Git</span><span class="sp new">Ollama</span><span class="sp new">ООП</span></td>
-<td><div class="pb"><div class="pf" style="width:10%;background:#1565c0"></div></div><div class="pt">10%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">16&ndash;22 мар</span><span class="pls">Неделя 2</span></td>
+                <td>
+                    <span class="tag t1">ProGlib</span><br>
+                    <b>Классы и ООП</b>
+                    <ul class="clist">
+                        <li>__init__, self, методы экземпляра</li>
+                        <li>Наследование, полиморфизм</li>
+                        <li>@dataclass &mdash; короткий способ писать классы</li>
+                        <li>Инкапсуляция, dunder-методы</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + Ahillary ур.8 (ООП) &mdash; Notion конспект</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>Ollama: первая локальная AI-модель</b>
+                    <ul class="clist">
+                        <li>Установить Ollama: ollama.com/download</li>
+                        <li>ollama run llama3.2 &mdash; задать вопрос прямо в терминале</li>
+                        <li>Ahillary Notion &laquo;Как выбрать AI модель&raquo; + &laquo;Параметры модели&raquo;: 4B,
+                            Q4_K_M, context length</li>
+                        <li>Понять: GPT-4o vs Claude vs Llama vs Mistral &mdash; у каждого своё применение</li>
+                    </ul>
+                    <div class="src">&#128218; ollama.com + Ahillary Notion: Ollama + параметры модели</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> Python, Git.<br><b>Сейчас:</b> ООП &mdash; весь AI-код (LangChain,
+                        Pydantic, LangGraph) строится на классах. Без ООП их код нечитаем. Ollama &mdash; понимаешь как
+                        модели работают локально до вызова платного API.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Ollama</b><span>AI-модели локально, бесплатно. Для экспериментов когда не
+                                хочется тратить токены API. llama3.2, mistral, phi3.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>Написать класс <b>NewsItem</b>: поля title, source, date, importance(1&ndash;5),
+                            confirmed(bool)</li>
+                        <li>Это первый кирпич &laquo;Задумки по экономике&raquo;</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">Git</span><span class="sp new">Ollama</span><span
+                        class="sp new">ООП</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:10%;background:#1565c0"></div>
+                    </div>
+                    <div class="pt">10%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">23&ndash;29 мар</span><span class="pls">Неделя 3</span></td>
-<td>
-<span class="tag t1">ProGlib</span><br>
-<b>HTTP, REST, внешние API</b>
-<ul class="clist">
-<li>requests: GET, POST, заголовки, статус-коды</li>
-<li>Работа с JSON-ответами</li>
-<li>python-dotenv: .env файл для секретов</li>
-<li>venv: виртуальное окружение</li>
-</ul>
-<div class="src">&#128218; ProGlib + Ahillary ур.7 (парсинг) &mdash; Notion конспект</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>Первый вызов Claude API из Python</b>
-<ul class="clist">
-<li>pip install anthropic python-dotenv</li>
-<li>10 строк: отправить сообщение &rarr; получить ответ от Claude API</li>
-<li>Разница: Claude.ai (браузер) &ne; API (токены) &ne; Claude Code ($20/мес CLI)</li>
-<li>Ahillary ур.7: BeautifulSoup4, GET-запросы &mdash; понять принцип парсинга HTML</li>
-<li>Написать базовый RSS-парсер</li>
-</ul>
-<div class="src">&#128218; docs.anthropic.com/quickstart (Python) + Ahillary ур.7 Notion</div>
-</td>
-<td><div class="why"><b>Было:</b> ООП, Ollama.<br><b>Сейчас:</b> HTTP = язык интернета. Все данные &mdash; через HTTP. Первый вызов API &mdash; понимаешь как агент работает под капотом прежде чем использовать Claude Code как &laquo;магию&raquo;.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>Anthropic API</b><span>Claude из кода. Платишь за токены (~$0.003/1K). Основа всех агентов.</span></div>
-<div class="tcard"><b>requests + dotenv</b><span>requests = HTTP из Python. dotenv = секреты в .env, не в коде.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>RSS Reuters &rarr; 5 заголовков &rarr; один в Claude API &rarr; оценка важности 1&ndash;5</li>
-<li>Это начало &laquo;Задумки по экономике&raquo;</li>
-</ul>
-</td>
-<td><span class="sp mastered">Ollama</span><span class="sp new">Anthropic API</span><span class="sp new">requests</span></td>
-<td><div class="pb"><div class="pf" style="width:16%;background:#1565c0"></div></div><div class="pt">16%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">23&ndash;29 мар</span><span class="pls">Неделя 3</span></td>
+                <td>
+                    <span class="tag t1">ProGlib</span><br>
+                    <b>HTTP, REST, внешние API</b>
+                    <ul class="clist">
+                        <li>requests: GET, POST, заголовки, статус-коды</li>
+                        <li>Работа с JSON-ответами</li>
+                        <li>python-dotenv: .env файл для секретов</li>
+                        <li>venv: виртуальное окружение</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + Ahillary ур.7 (парсинг) &mdash; Notion конспект</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>Первый вызов Claude API из Python</b>
+                    <ul class="clist">
+                        <li>pip install anthropic python-dotenv</li>
+                        <li>10 строк: отправить сообщение &rarr; получить ответ от Claude API</li>
+                        <li>Разница: Claude.ai (браузер) &ne; API (токены) &ne; Claude Code ($20/мес CLI)</li>
+                        <li>Ahillary ур.7: BeautifulSoup4, GET-запросы &mdash; понять принцип парсинга HTML</li>
+                        <li>Написать базовый RSS-парсер</li>
+                    </ul>
+                    <div class="src">&#128218; docs.anthropic.com/quickstart (Python) + Ahillary ур.7 Notion</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> ООП, Ollama.<br><b>Сейчас:</b> HTTP = язык интернета. Все данные
+                        &mdash; через HTTP. Первый вызов API &mdash; понимаешь как агент работает под капотом прежде чем
+                        использовать Claude Code как &laquo;магию&raquo;.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Anthropic API</b><span>Claude из кода. Платишь за токены (~$0.003/1K).
+                                Основа всех агентов.</span></div>
+                        <div class="tcard"><b>requests + dotenv</b><span>requests = HTTP из Python. dotenv = секреты в
+                                .env, не в коде.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>RSS Reuters &rarr; 5 заголовков &rarr; один в Claude API &rarr; оценка важности 1&ndash;5
+                        </li>
+                        <li>Это начало &laquo;Задумки по экономике&raquo;</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">Ollama</span><span class="sp new">Anthropic API</span><span
+                        class="sp new">requests</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:16%;background:#1565c0"></div>
+                    </div>
+                    <div class="pt">16%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">30 мар&ndash;5 апр</span><span class="pls">Неделя 4</span></td>
-<td>
-<span class="tag t1">ProGlib</span><br>
-<b>pandas, NumPy, matplotlib</b>
-<ul class="clist">
-<li>DataFrame: создание, фильтрация, groupby, merge</li>
-<li>NumPy: массивы, векторные операции</li>
-<li>matplotlib: линейный, гистограмма, scatter</li>
-<li>Чтение/запись CSV, Excel</li>
-</ul>
-<div class="src">&#128218; ProGlib + pandas.pydata.org/docs/getting_started</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>HuggingFace: знакомство + NLP Course старт</b>
-<ul class="clist">
-<li>Прочитать 3 Ahillary конспекта по HuggingFace: обзор / выбор модели / карточка модели</li>
-<li>Зарегистрироваться на huggingface.co</li>
-<li>Найти модель sentiment-analysis &rarr; протестировать в браузере (Inference API)</li>
-<li>НЕ устанавливать transformers &mdash; только понять структуру экосистемы</li>
-<li>HuggingFace NLP Course гл.1&ndash;2 (huggingface.co/learn/nlp-course): pipeline API, введение</li>
-</ul>
-<div class="src">&#128218; Ahillary Notion (3 HF конспекта) + huggingface.co/learn/nlp-course (гл.1-2)</div>
-</td>
-<td><div class="why"><b>Было:</b> API, парсинг.<br><b>Сейчас:</b> pandas = главный инструмент для данных (котировки, новости, хроматограммы &mdash; всё таблицы). HF NLP Course бесплатный, закладывает фундамент понимания трансформеров до их запуска.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>pandas</b><span>Таблицы в Python. Любые данные: новости, котировки, химические измерения.</span></div>
-<div class="tcard"><b>HuggingFace Hub (браузер)</b><span>2.2 млн моделей. Сейчас &mdash; смотрим и понимаем структуру. Позже &mdash; запускаем.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>yfinance &rarr; DataFrame &rarr; 2 графика (цена + объём)</li>
-<li>Объединить котировки + RSS в один DataFrame по дате</li>
-</ul>
-</td>
-<td><span class="sp mastered">Anthropic API</span><span class="sp new">pandas</span><span class="sp new">HuggingFace</span></td>
-<td><div class="pb"><div class="pf" style="width:22%;background:#1565c0"></div></div><div class="pt">22%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">30 мар&ndash;5 апр</span><span class="pls">Неделя 4</span></td>
+                <td>
+                    <span class="tag t1">ProGlib</span><br>
+                    <b>pandas, NumPy, matplotlib</b>
+                    <ul class="clist">
+                        <li>DataFrame: создание, фильтрация, groupby, merge</li>
+                        <li>NumPy: массивы, векторные операции</li>
+                        <li>matplotlib: линейный, гистограмма, scatter</li>
+                        <li>Чтение/запись CSV, Excel</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + pandas.pydata.org/docs/getting_started</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>HuggingFace: знакомство + NLP Course старт</b>
+                    <ul class="clist">
+                        <li>Прочитать 3 Ahillary конспекта по HuggingFace: обзор / выбор модели / карточка модели</li>
+                        <li>Зарегистрироваться на huggingface.co</li>
+                        <li>Найти модель sentiment-analysis &rarr; протестировать в браузере (Inference API)</li>
+                        <li>НЕ устанавливать transformers &mdash; только понять структуру экосистемы</li>
+                        <li>HuggingFace NLP Course гл.1&ndash;2 (huggingface.co/learn/nlp-course): pipeline API,
+                            введение</li>
+                    </ul>
+                    <div class="src">&#128218; Ahillary Notion (3 HF конспекта) + huggingface.co/learn/nlp-course
+                        (гл.1-2)</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> API, парсинг.<br><b>Сейчас:</b> pandas = главный инструмент для данных
+                        (котировки, новости, хроматограммы &mdash; всё таблицы). HF NLP Course бесплатный, закладывает
+                        фундамент понимания трансформеров до их запуска.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>pandas</b><span>Таблицы в Python. Любые данные: новости, котировки,
+                                химические измерения.</span></div>
+                        <div class="tcard"><b>HuggingFace Hub (браузер)</b><span>2.2 млн моделей. Сейчас &mdash; смотрим
+                                и понимаем структуру. Позже &mdash; запускаем.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>yfinance &rarr; DataFrame &rarr; 2 графика (цена + объём)</li>
+                        <li>Объединить котировки + RSS в один DataFrame по дате</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">Anthropic API</span><span class="sp new">pandas</span><span
+                        class="sp new">HuggingFace</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:22%;background:#1565c0"></div>
+                    </div>
+                    <div class="pt">22%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">6&ndash;12 апр</span><span class="pls">Неделя 5</span></td>
-<td>
-<span class="tag t1">ProGlib</span><br>
-<b>Визуализация + метрики ML</b>
-<ul class="clist">
-<li>seaborn: heatmap, distribution, pairplot</li>
-<li>plotly: интерактивные графики</li>
-<li>ML метрики: accuracy, precision, recall, F1, ROC-AUC</li>
-<li>Confusion matrix &mdash; читать и интерпретировать</li>
-</ul>
-<div class="src">&#128218; ProGlib + seaborn.pydata.org/tutorial</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>async/await + Ahillary ур.9 + NLP Course продолжение</b>
-<ul class="clist">
-<li>Ahillary ур.9 (async): конспект Notion &mdash; GIL, asyncio, coroutines, gather</li>
-<li>Понять: синхронный vs асинхронный &mdash; почему агенты требуют async</li>
-<li>SemolinaCode ур.13 &mdash; альтернативное объяснение если непонятно</li>
-<li>Написать async-скрипт: 3 RSS параллельно &rarr; один DataFrame</li>
-<li>HuggingFace NLP Course гл.3&ndash;4: fine-tuning теория &mdash; только читать</li>
-</ul>
-<div class="src">&#128218; Ahillary ур.9 Notion + SemolinaCode TG ур.13 + huggingface.co/learn/nlp-course (гл.3-4)</div>
-</td>
-<td><div class="why"><b>Было:</b> pandas, HTTP.<br><b>Сейчас:</b> async &mdash; без него агент блокируется на каждом запросе. LangGraph и n8n асинхронны. Fine-tuning теорию читаем сейчас &mdash; к августу будем готовы к практике без потери времени.</div></td>
-<td><div class="tcards"><div class="tcard"><b>asyncio (Python)</b><span>Параллельное выполнение без многопоточности. Агент одновременно тянет данные из 3 источников &mdash; без asyncio это медленно.</span></div></div></td>
-<td>
-<ul class="clist">
-<li>async-скрипт: 3 RSS параллельно &rarr; один DataFrame</li>
-<li>Замер sync vs async по времени &mdash; записать разницу в README</li>
-</ul>
-</td>
-<td><span class="sp mastered">pandas</span><span class="sp new">asyncio</span><span class="sp new">seaborn/plotly</span></td>
-<td><div class="pb"><div class="pf" style="width:28%;background:#1565c0"></div></div><div class="pt">28%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">6&ndash;12 апр</span><span class="pls">Неделя 5</span></td>
+                <td>
+                    <span class="tag t1">ProGlib</span><br>
+                    <b>Визуализация + метрики ML</b>
+                    <ul class="clist">
+                        <li>seaborn: heatmap, distribution, pairplot</li>
+                        <li>plotly: интерактивные графики</li>
+                        <li>ML метрики: accuracy, precision, recall, F1, ROC-AUC</li>
+                        <li>Confusion matrix &mdash; читать и интерпретировать</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + seaborn.pydata.org/tutorial</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>async/await + Ahillary ур.9 + NLP Course продолжение</b>
+                    <ul class="clist">
+                        <li>Ahillary ур.9 (async): конспект Notion &mdash; GIL, asyncio, coroutines, gather</li>
+                        <li>Понять: синхронный vs асинхронный &mdash; почему агенты требуют async</li>
+                        <li>SemolinaCode ур.13 &mdash; альтернативное объяснение если непонятно</li>
+                        <li>Написать async-скрипт: 3 RSS параллельно &rarr; один DataFrame</li>
+                        <li>HuggingFace NLP Course гл.3&ndash;4: fine-tuning теория &mdash; только читать</li>
+                    </ul>
+                    <div class="src">&#128218; Ahillary ур.9 Notion + SemolinaCode TG ур.13 +
+                        huggingface.co/learn/nlp-course (гл.3-4)</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> pandas, HTTP.<br><b>Сейчас:</b> async &mdash; без него агент
+                        блокируется на каждом запросе. LangGraph и n8n асинхронны. Fine-tuning теорию читаем сейчас
+                        &mdash; к августу будем готовы к практике без потери времени.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>asyncio (Python)</b><span>Параллельное выполнение без многопоточности.
+                                Агент одновременно тянет данные из 3 источников &mdash; без asyncio это медленно.</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>async-скрипт: 3 RSS параллельно &rarr; один DataFrame</li>
+                        <li>Замер sync vs async по времени &mdash; записать разницу в README</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">pandas</span><span class="sp new">asyncio</span><span
+                        class="sp new">seaborn/plotly</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:28%;background:#1565c0"></div>
+                    </div>
+                    <div class="pt">28%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">13&ndash;19 апр</span><span class="pls">Неделя 6</span></td>
-<td>
-<span class="tag t1">ProGlib</span><br>
-<b>ML: scikit-learn</b>
-<ul class="clist">
-<li>LinearRegression, LogisticRegression</li>
-<li>DecisionTree, RandomForest</li>
-<li>train_test_split, cross_val_score</li>
-<li>sklearn Pipeline: предобработка + модель</li>
-</ul>
-<div class="src">&#128218; ProGlib + scikit-learn.org/stable/tutorial/basic/tutorial.html</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>RAG: первый pipeline &mdash; Ahillary YouTube ур.2</b>
-<ul class="clist">
-<li>Ahillary YouTube ур.2: первый RAG pipeline &mdash; смотреть + повторять код</li>
-<li>github.com/CrashNosok/RAG_lessons lesson_1 &mdash; разобрать построчно с Claude.ai</li>
-<li>Цепочка: документ &rarr; чанки &rarr; embeddings &rarr; ChromaDB &rarr; поиск &rarr; LLM &rarr; ответ</li>
-<li>Запустить на 2&ndash;3 PDF по экономике &rarr; задать 5 вопросов</li>
-<li>HuggingFace NLP Course гл.5&ndash;6: datasets, tokenizers (читать)</li>
-</ul>
-<div class="src">&#128218; Ahillary YouTube ур.2 + github.com/CrashNosok/RAG_lessons + huggingface.co/learn/nlp-course (гл.5-6)</div>
-</td>
-<td><div class="why"><b>Было:</b> async, ML метрики.<br><b>Сейчас:</b> RAG = основа &laquo;Задумки&raquo;. scikit-learn = фундамент для хроматографии в июле. Все кирпичи готовы &mdash; складываем первую систему.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>scikit-learn</b><span>Классический ML: регрессия, классификация, кластеризация. Нужен для хроматографических данных.</span></div>
-<div class="tcard"><b>ChromaDB (учебная)</b><span>Векторная БД для первых экспериментов. Потом заменим на Qdrant (продакшн).</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>RAG на 3 PDF &rarr; вопросы &rarr; ответы с источниками</li>
-<li>Убедиться: ответы из документов, не из &laquo;головы&raquo; LLM</li>
-</ul>
-</td>
-<td><span class="sp mastered">asyncio</span><span class="sp new">scikit-learn</span><span class="sp new">RAG/ChromaDB</span></td>
-<td><div class="pb"><div class="pf" style="width:35%;background:#1565c0"></div></div><div class="pt">35%</div></td>
-</tr>
-</table>
-<!-- ====== ФАЗА 1 ====== -->
-<div class="ph">ФАЗА 1 &mdash; АГЕНТСКАЯ БАЗА <span>20 апреля &rarr; 31 мая (6 недель)</span><div class="ph-pct">35 &rarr; 74%</div></div>
-<table>
-<tr>
-<th style="width:86px">Период</th>
-<th style="width:19%">&#127891; ProGlib</th>
-<th style="width:22%">&#128218; Самостоятельно</th>
-<th style="width:13%">&#128161; Почему сейчас?</th>
-<th style="width:15%">&#128295; Инструменты</th>
-<th style="width:17%">&#129514; Проект</th>
-<th style="width:9%">&#128200; Стек</th>
-<th style="width:58px;text-align:center">%</th>
-</tr>
+            <tr>
+                <td><span class="pbl">13&ndash;19 апр</span><span class="pls">Неделя 6</span></td>
+                <td>
+                    <span class="tag t1">ProGlib</span><br>
+                    <b>ML: scikit-learn</b>
+                    <ul class="clist">
+                        <li>LinearRegression, LogisticRegression</li>
+                        <li>DecisionTree, RandomForest</li>
+                        <li>train_test_split, cross_val_score</li>
+                        <li>sklearn Pipeline: предобработка + модель</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + scikit-learn.org/stable/tutorial/basic/tutorial.html</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>RAG: первый pipeline &mdash; Ahillary YouTube ур.2</b>
+                    <ul class="clist">
+                        <li>Ahillary YouTube ур.2: первый RAG pipeline &mdash; смотреть + повторять код</li>
+                        <li>github.com/CrashNosok/RAG_lessons lesson_1 &mdash; разобрать построчно с Claude.ai</li>
+                        <li>Цепочка: документ &rarr; чанки &rarr; embeddings &rarr; ChromaDB &rarr; поиск &rarr; LLM
+                            &rarr; ответ</li>
+                        <li>Запустить на 2&ndash;3 PDF по экономике &rarr; задать 5 вопросов</li>
+                        <li>HuggingFace NLP Course гл.5&ndash;6: datasets, tokenizers (читать)</li>
+                    </ul>
+                    <div class="src">&#128218; Ahillary YouTube ур.2 + github.com/CrashNosok/RAG_lessons +
+                        huggingface.co/learn/nlp-course (гл.5-6)</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> async, ML метрики.<br><b>Сейчас:</b> RAG = основа
+                        &laquo;Задумки&raquo;. scikit-learn = фундамент для хроматографии в июле. Все кирпичи готовы
+                        &mdash; складываем первую систему.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>scikit-learn</b><span>Классический ML: регрессия, классификация,
+                                кластеризация. Нужен для хроматографических данных.</span></div>
+                        <div class="tcard"><b>ChromaDB (учебная)</b><span>Векторная БД для первых экспериментов. Потом
+                                заменим на Qdrant (продакшн).</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>RAG на 3 PDF &rarr; вопросы &rarr; ответы с источниками</li>
+                        <li>Убедиться: ответы из документов, не из &laquo;головы&raquo; LLM</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">asyncio</span><span class="sp new">scikit-learn</span><span
+                        class="sp new">RAG/ChromaDB</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:35%;background:#1565c0"></div>
+                    </div>
+                    <div class="pt">35%</div>
+                </td>
+            </tr>
+        </table>
+        <!-- ====== ФАЗА 1 ====== -->
+        <div class="ph">ФАЗА 1 &mdash; АГЕНТСКАЯ БАЗА <span>20 апреля &rarr; 31 мая (6 недель)</span>
+            <div class="ph-pct">35 &rarr; 74%</div>
+        </div>
+        <table>
+            <tr>
+                <th style="width:86px">Период</th>
+                <th style="width:19%">&#127891; ProGlib</th>
+                <th style="width:22%">&#128218; Самостоятельно</th>
+                <th style="width:13%">&#128161; Почему сейчас?</th>
+                <th style="width:15%">&#128295; Инструменты</th>
+                <th style="width:17%">&#129514; Проект</th>
+                <th style="width:9%">&#128200; Стек</th>
+                <th style="width:58px;text-align:center">%</th>
+            </tr>
 
-<tr>
-<td><span class="pbl">20&ndash;26 апр</span><span class="pls">Неделя 7</span></td>
-<td>
-<span class="tag t1">ProGlib 20.04</span><br>
-<b>ИИ-агенты в 2026</b>
-<ul class="clist">
-<li>Агент vs чат-бот vs просто LLM &mdash; разница</li>
-<li>Выбор модели: цена/качество/скорость/контекст</li>
-<li>Бенчмарки: SWE-bench, AgentBench, LMArena</li>
-</ul>
-<span class="tag t1">ProGlib 23.04</span><br>
-<b>Управление мышлением агента</b>
-<ul class="clist">
-<li>effort, бюджеты токенов/шагов/стоимости</li>
-<li>Авто-маршрутизация: дешёвая&rarr;дорогая</li>
-</ul>
-<div class="src">&#128218; ProGlib + anthropic.com/research/building-effective-agents</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>Docker (впервые!) + n8n + Ahillary YouTube ур.3</b>
-<ul class="clist">
-<li>SemolinaCode ур.14 (Docker): Docker Desktop, образы/контейнеры/volume &mdash; начать отсюда</li>
-<li>Поднять n8n: docker run -p 5678:5678 n8nio/n8n &rarr; localhost:5678</li>
-<li>Первый n8n-пайплайн: Schedule &rarr; HTTP Request (RSS) &rarr; Write to File</li>
-<li>Ahillary YouTube ур.3: загрузка через sitemap, правильный chunking, embeddings для русского текста</li>
-</ul>
-<div class="src">&#128218; SemolinaCode TG ур.14 (Docker) + docs.n8n.io + Ahillary YouTube ур.3</div>
-<div class="warn">&#9888; Docker ставится впервые &mdash; начни с SemolinaCode ур.14!</div>
-</td>
-<td><div class="why"><b>Было:</b> RAG, scikit-learn.<br><b>Сейчас:</b> Docker нужен именно здесь &mdash; n8n и Qdrant требуют его. Ставить раньше было незачем. n8n &mdash; автоматизация визуально, понимаешь пайплайны до написания кода.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>Docker Desktop</b><span>Изолированные контейнеры. n8n, Qdrant, Langfuse &mdash; одной командой. Никаких конфликтов зависимостей.</span></div>
-<div class="tcard"><b>n8n</b><span>Визуальный конструктор пайплайнов. Блоки + стрелки: источник &rarr; обработка &rarr; выход.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>n8n: каждое утро 9:00 &rarr; 5 новостей из RSS &rarr; CSV файл</li>
-<li>Первая автономная система!</li>
-</ul>
-</td>
-<td><span class="sp mastered">RAG</span><span class="sp new">Docker</span><span class="sp new">n8n</span></td>
-<td><div class="pb"><div class="pf" style="width:42%;background:#2e7d32"></div></div><div class="pt">42%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">20&ndash;26 апр</span><span class="pls">Неделя 7</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 20.04</span><br>
+                    <b>ИИ-агенты в 2026</b>
+                    <ul class="clist">
+                        <li>Агент vs чат-бот vs просто LLM &mdash; разница</li>
+                        <li>Выбор модели: цена/качество/скорость/контекст</li>
+                        <li>Бенчмарки: SWE-bench, AgentBench, LMArena</li>
+                    </ul>
+                    <span class="tag t1">ProGlib 23.04</span><br>
+                    <b>Управление мышлением агента</b>
+                    <ul class="clist">
+                        <li>effort, бюджеты токенов/шагов/стоимости</li>
+                        <li>Авто-маршрутизация: дешёвая&rarr;дорогая</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + anthropic.com/research/building-effective-agents</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>Docker (впервые!) + n8n + Ahillary YouTube ур.3</b>
+                    <ul class="clist">
+                        <li>SemolinaCode ур.14 (Docker): Docker Desktop, образы/контейнеры/volume &mdash; начать отсюда
+                        </li>
+                        <li>Поднять n8n: docker run -p 5678:5678 n8nio/n8n &rarr; localhost:5678</li>
+                        <li>Первый n8n-пайплайн: Schedule &rarr; HTTP Request (RSS) &rarr; Write to File</li>
+                        <li>Ahillary YouTube ур.3: загрузка через sitemap, правильный chunking, embeddings для русского
+                            текста</li>
+                    </ul>
+                    <div class="src">&#128218; SemolinaCode TG ур.14 (Docker) + docs.n8n.io + Ahillary YouTube ур.3
+                    </div>
+                    <div class="warn">&#9888; Docker ставится впервые &mdash; начни с SemolinaCode ур.14!</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> RAG, scikit-learn.<br><b>Сейчас:</b> Docker нужен именно здесь &mdash;
+                        n8n и Qdrant требуют его. Ставить раньше было незачем. n8n &mdash; автоматизация визуально,
+                        понимаешь пайплайны до написания кода.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Docker Desktop</b><span>Изолированные контейнеры. n8n, Qdrant, Langfuse
+                                &mdash; одной командой. Никаких конфликтов зависимостей.</span></div>
+                        <div class="tcard"><b>n8n</b><span>Визуальный конструктор пайплайнов. Блоки + стрелки: источник
+                                &rarr; обработка &rarr; выход.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>n8n: каждое утро 9:00 &rarr; 5 новостей из RSS &rarr; CSV файл</li>
+                        <li>Первая автономная система!</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">RAG</span><span class="sp new">Docker</span><span
+                        class="sp new">n8n</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:42%;background:#2e7d32"></div>
+                    </div>
+                    <div class="pt">42%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">27 апр&ndash;3 май</span><span class="pls">Неделя 8</span></td>
-<td>
-<span class="tag t1">ProGlib 27.04</span><br>
-<b>RAG-системы углублённо</b>
-<ul class="clist">
-<li>Agentic RAG, GraphRAG</li>
-<li>Query expansion, multi-hop retrieval</li>
-<li>Qdrant, pgvector, LlamaIndex</li>
-<li>Предобработка грязных документов</li>
-</ul>
-<span class="tag t1">ProGlib 30.04</span><br>
-<b>PydanticAI</b>
-<ul class="clist">
-<li>Schema-first: типы вместо ручного JSON</li>
-<li>Validation loops: автоисправление LLM</li>
-</ul>
-<div class="src">&#128218; ProGlib + ai.pydantic.dev/docs + qdrant.tech/documentation</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>Qdrant + LangSmith + Pydantic (Ahillary архив ур.2)</b>
-<ul class="clist">
-<li>docker run qdrant/qdrant &rarr; pip install qdrant-client</li>
-<li>Переписать RAG с ChromaDB на Qdrant + метаданные (источник, дата, тема)</li>
-<li>Ahillary YouTube ур.5: подключить LangSmith &rarr; трейсы каждого запроса</li>
-<li>Ahillary архив ур.2 (Twitter/Pydantic): ТОЛЬКО раздел про Pydantic-модели и RootModel</li>
-</ul>
-<div class="src">&#128218; qdrant.tech/docs + Ahillary YouTube ур.5 + Ahillary архив ур.2 (только Pydantic-часть)</div>
-</td>
-<td><div class="why"><b>Было:</b> ChromaDB, базовый RAG.<br><b>Сейчас:</b> Qdrant &mdash; продакшн (ChromaDB был учебным). Pydantic &mdash; LLM возвращает структуру, не строку. LangSmith &mdash; первый мониторинг до того как система усложнилась.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>Qdrant</b><span>Продакшн векторная БД. Ядро RAG в экономическом проекте.</span></div>
-<div class="tcard"><b>LangSmith</b><span>Мониторинг LLM. Каждый шаг: что отправлено &rarr; получено &rarr; стоимость.</span></div>
-<div class="tcard"><b>PydanticAI</b><span>Строгие типы для ответов LLM. Агент возвращает объект &mdash; не парсишь JSON руками.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>NewsItem: title, source, date, importance(1&ndash;5), topic, confirmed(bool) &mdash; схема работает</li>
-<li>Claude API возвращает именно эту схему при оценке новости</li>
-<li>LangSmith: все вызовы LLM видны</li>
-</ul>
-</td>
-<td><span class="sp mastered">n8n</span><span class="sp new">Qdrant</span><span class="sp new">LangSmith</span><span class="sp new">PydanticAI</span></td>
-<td><div class="pb"><div class="pf" style="width:50%;background:#2e7d32"></div></div><div class="pt">50%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">27 апр&ndash;3 май</span><span class="pls">Неделя 8</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 27.04</span><br>
+                    <b>RAG-системы углублённо</b>
+                    <ul class="clist">
+                        <li>Agentic RAG, GraphRAG</li>
+                        <li>Query expansion, multi-hop retrieval</li>
+                        <li>Qdrant, pgvector, LlamaIndex</li>
+                        <li>Предобработка грязных документов</li>
+                    </ul>
+                    <span class="tag t1">ProGlib 30.04</span><br>
+                    <b>PydanticAI</b>
+                    <ul class="clist">
+                        <li>Schema-first: типы вместо ручного JSON</li>
+                        <li>Validation loops: автоисправление LLM</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + ai.pydantic.dev/docs + qdrant.tech/documentation</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>Qdrant + LangSmith + Pydantic (Ahillary архив ур.2)</b>
+                    <ul class="clist">
+                        <li>docker run qdrant/qdrant &rarr; pip install qdrant-client</li>
+                        <li>Переписать RAG с ChromaDB на Qdrant + метаданные (источник, дата, тема)</li>
+                        <li>Ahillary YouTube ур.5: подключить LangSmith &rarr; трейсы каждого запроса</li>
+                        <li>Ahillary архив ур.2 (Twitter/Pydantic): ТОЛЬКО раздел про Pydantic-модели и RootModel</li>
+                    </ul>
+                    <div class="src">&#128218; qdrant.tech/docs + Ahillary YouTube ур.5 + Ahillary архив ур.2 (только
+                        Pydantic-часть)</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> ChromaDB, базовый RAG.<br><b>Сейчас:</b> Qdrant &mdash; продакшн
+                        (ChromaDB был учебным). Pydantic &mdash; LLM возвращает структуру, не строку. LangSmith &mdash;
+                        первый мониторинг до того как система усложнилась.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Qdrant</b><span>Продакшн векторная БД. Ядро RAG в экономическом
+                                проекте.</span></div>
+                        <div class="tcard"><b>LangSmith</b><span>Мониторинг LLM. Каждый шаг: что отправлено &rarr;
+                                получено &rarr; стоимость.</span></div>
+                        <div class="tcard"><b>PydanticAI</b><span>Строгие типы для ответов LLM. Агент возвращает объект
+                                &mdash; не парсишь JSON руками.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>NewsItem: title, source, date, importance(1&ndash;5), topic, confirmed(bool) &mdash; схема
+                            работает</li>
+                        <li>Claude API возвращает именно эту схему при оценке новости</li>
+                        <li>LangSmith: все вызовы LLM видны</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">n8n</span><span class="sp new">Qdrant</span><span
+                        class="sp new">LangSmith</span><span class="sp new">PydanticAI</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:50%;background:#2e7d32"></div>
+                    </div>
+                    <div class="pt">50%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">4&ndash;10 май</span><span class="pls">Неделя 9</span></td>
-<td>
-<span class="tag t1">ProGlib 4.05</span><br>
-<b>Browser/Desktop automation</b>
-<ul class="clist">
-<li>Playwright &mdash; браузер из Python</li>
-<li>Sandbox, минимальные права</li>
-<li>Подтверждение перед рискованными действиями</li>
-</ul>
-<span class="tag t1">ProGlib 7.05</span><br>
-<b>Первый ИИ-агент</b>
-<ul class="clist">
-<li>LLM + инструменты + цикл ReAct</li>
-<li>Tool use: поиск, файлы, код</li>
-</ul>
-<div class="src">&#128218; ProGlib + playwright.dev/python/docs/intro</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>Claude Code &mdash; установка и ежедневный инструмент</b>
-<ul class="clist">
-<li>Установить Node.js &rarr; npm install -g @anthropic-ai/claude-code</li>
-<li>Запустить в папке проекта: claude &rarr; объяснить любой скрипт построчно</li>
-<li>Написать CLAUDE.md: &laquo;Python 3.10+, комментарии на русском, использовать dataclasses&raquo;</li>
-<li>С этого дня: Claude Code = основная среда разработки</li>
-<li>Playwright: скрипт &rarr; открыть сайт &rarr; взять заголовки &rarr; JSON</li>
-</ul>
-<div class="src">&#128218; docs.anthropic.com/claude-code + playwright.dev/python</div>
-</td>
-<td><div class="why"><b>Было:</b> Qdrant, PydanticAI.<br><b>Сейчас:</b> Claude Code ставим только сейчас &mdash; понимаешь что он делает, потому что есть база Python + API. Раньше = чёрный ящик. Playwright &mdash; для сайтов без API.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>Claude Code (CLI-агент)</b><span>Агент в терминале. Читает файлы, пишет код, запускает команды. Основной инструмент разработки. $20/мес.</span></div>
-<div class="tcard"><b>Playwright</b><span>Управляет реальным браузером из Python. Для сайтов без API.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>Claude Code переписывает RSS-парсер с sync на async &mdash; попросить его</li>
-<li>Playwright: заголовки с сайта &rarr; JSON &rarr; в Qdrant</li>
-</ul>
-</td>
-<td><span class="sp mastered">Qdrant</span><span class="sp new">Claude Code</span><span class="sp new">Playwright</span></td>
-<td><div class="pb"><div class="pf" style="width:56%;background:#2e7d32"></div></div><div class="pt">56%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">4&ndash;10 май</span><span class="pls">Неделя 9</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 4.05</span><br>
+                    <b>Browser/Desktop automation</b>
+                    <ul class="clist">
+                        <li>Playwright &mdash; браузер из Python</li>
+                        <li>Sandbox, минимальные права</li>
+                        <li>Подтверждение перед рискованными действиями</li>
+                    </ul>
+                    <span class="tag t1">ProGlib 7.05</span><br>
+                    <b>Первый ИИ-агент</b>
+                    <ul class="clist">
+                        <li>LLM + инструменты + цикл ReAct</li>
+                        <li>Tool use: поиск, файлы, код</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + playwright.dev/python/docs/intro</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>Claude Code &mdash; установка и ежедневный инструмент</b>
+                    <ul class="clist">
+                        <li>Установить Node.js &rarr; npm install -g @anthropic-ai/claude-code</li>
+                        <li>Запустить в папке проекта: claude &rarr; объяснить любой скрипт построчно</li>
+                        <li>Написать CLAUDE.md: &laquo;Python 3.10+, комментарии на русском, использовать
+                            dataclasses&raquo;</li>
+                        <li>С этого дня: Claude Code = основная среда разработки</li>
+                        <li>Playwright: скрипт &rarr; открыть сайт &rarr; взять заголовки &rarr; JSON</li>
+                    </ul>
+                    <div class="src">&#128218; docs.anthropic.com/claude-code + playwright.dev/python</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> Qdrant, PydanticAI.<br><b>Сейчас:</b> Claude Code ставим только сейчас
+                        &mdash; понимаешь что он делает, потому что есть база Python + API. Раньше = чёрный ящик.
+                        Playwright &mdash; для сайтов без API.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Claude Code (CLI-агент)</b><span>Агент в терминале. Читает файлы, пишет
+                                код, запускает команды. Основной инструмент разработки. $20/мес.</span></div>
+                        <div class="tcard"><b>Playwright</b><span>Управляет реальным браузером из Python. Для сайтов без
+                                API.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>Claude Code переписывает RSS-парсер с sync на async &mdash; попросить его</li>
+                        <li>Playwright: заголовки с сайта &rarr; JSON &rarr; в Qdrant</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">Qdrant</span><span class="sp new">Claude Code</span><span
+                        class="sp new">Playwright</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:56%;background:#2e7d32"></div>
+                    </div>
+                    <div class="pt">56%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">11&ndash;17 май</span><span class="pls">Неделя 10</span></td>
-<td>
-<span class="tag t1">ProGlib 12.05</span><br>
-<b>MCP + LangFlow</b>
-<ul class="clist">
-<li>Model Context Protocol &mdash; стандарт интеграций</li>
-<li>LangFlow: визуальный прототипинг</li>
-<li>Webhooks, триггеры, schedule</li>
-</ul>
-<span class="tag t1">ProGlib 14.05</span><br>
-<b>RAG: parent retrieval, Redis-кэш</b>
-<div class="src">&#128218; modelcontextprotocol.io/docs + langflow.org</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>MCP: 3 сервера к Claude Code</b>
-<ul class="clist">
-<li>MCP 1: filesystem (встроен в Claude Code &mdash; уже работает)</li>
-<li>MCP 2: Brave Search MCP &mdash; веб-поиск из агента (github.com/modelcontextprotocol/servers)</li>
-<li>MCP 3: написать свой Python MCP-сервер get_news(topic) &rarr; 5 новостей из RSS</li>
-<li>Прочитать ПОЛНЫЙ ГАЙД (файл проекта): разделы &laquo;CLI-агенты&raquo; и &laquo;MCP&raquo; полностью</li>
-</ul>
-<div class="src">&#128218; modelcontextprotocol.io + ПОЛНЫЙ ГАЙД (файл проекта) + github.com/modelcontextprotocol/servers</div>
-</td>
-<td><div class="why"><b>Было:</b> Claude Code работает.<br><b>Сейчас:</b> MCP = стандарт подключения инструментов к агентам. Написать свой MCP = перейти от &laquo;использую агентов&raquo; к &laquo;строю агентные системы&raquo;. Ключевая компетенция.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>MCP (Model Context Protocol)</b><span>Стандарт Anthropic. Написал MCP-сервер &mdash; агент работает с твоими данными как со встроенными функциями.</span></div>
-<div class="tcard"><b>LangFlow</b><span>Drag-and-drop редактор. Не для прода &mdash; для понимания архитектуры визуально.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>get_news(topic) &rarr; список NewsItem работает как MCP</li>
-<li>В Claude Code: &laquo;найди новости про инфляцию&raquo; &rarr; агент сам вызывает инструмент</li>
-</ul>
-</td>
-<td><span class="sp mastered">Claude Code</span><span class="sp new">MCP</span><span class="sp new">LangFlow</span></td>
-<td><div class="pb"><div class="pf" style="width:62%;background:#2e7d32"></div></div><div class="pt">62%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">11&ndash;17 май</span><span class="pls">Неделя 10</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 12.05</span><br>
+                    <b>MCP + LangFlow</b>
+                    <ul class="clist">
+                        <li>Model Context Protocol &mdash; стандарт интеграций</li>
+                        <li>LangFlow: визуальный прототипинг</li>
+                        <li>Webhooks, триггеры, schedule</li>
+                    </ul>
+                    <span class="tag t1">ProGlib 14.05</span><br>
+                    <b>RAG: parent retrieval, Redis-кэш</b>
+                    <div class="src">&#128218; modelcontextprotocol.io/docs + langflow.org</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>MCP: 3 сервера к Claude Code</b>
+                    <ul class="clist">
+                        <li>MCP 1: filesystem (встроен в Claude Code &mdash; уже работает)</li>
+                        <li>MCP 2: Brave Search MCP &mdash; веб-поиск из агента
+                            (github.com/modelcontextprotocol/servers)</li>
+                        <li>MCP 3: написать свой Python MCP-сервер get_news(topic) &rarr; 5 новостей из RSS</li>
+                        <li>Прочитать ПОЛНЫЙ ГАЙД (файл проекта): разделы &laquo;CLI-агенты&raquo; и &laquo;MCP&raquo;
+                            полностью</li>
+                    </ul>
+                    <div class="src">&#128218; modelcontextprotocol.io + ПОЛНЫЙ ГАЙД (файл проекта) +
+                        github.com/modelcontextprotocol/servers</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> Claude Code работает.<br><b>Сейчас:</b> MCP = стандарт подключения
+                        инструментов к агентам. Написать свой MCP = перейти от &laquo;использую агентов&raquo; к
+                        &laquo;строю агентные системы&raquo;. Ключевая компетенция.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>MCP (Model Context Protocol)</b><span>Стандарт Anthropic. Написал
+                                MCP-сервер &mdash; агент работает с твоими данными как со встроенными функциями.</span>
+                        </div>
+                        <div class="tcard"><b>LangFlow</b><span>Drag-and-drop редактор. Не для прода &mdash; для
+                                понимания архитектуры визуально.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>get_news(topic) &rarr; список NewsItem работает как MCP</li>
+                        <li>В Claude Code: &laquo;найди новости про инфляцию&raquo; &rarr; агент сам вызывает инструмент
+                        </li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">Claude Code</span><span class="sp new">MCP</span><span
+                        class="sp new">LangFlow</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:62%;background:#2e7d32"></div>
+                    </div>
+                    <div class="pt">62%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">18&ndash;24 май</span><span class="pls">Неделя 11</span></td>
-<td>
-<span class="tag t1">ProGlib 18.05</span><br>
-<b>LangGraph: профессиональная оркестрация</b>
-<ul class="clist">
-<li>State machine: состояния, ветвления, retries</li>
-<li>Checkpoint: сохранение и восстановление</li>
-<li>Human-in-the-loop: пауза, ожидание</li>
-<li>Time-travel дебаг &mdash; откат к любому состоянию</li>
-</ul>
-<span class="tag t1">ProGlib 21.05</span><br>
-<b>Мультиагентные системы</b>
-<ul class="clist">
-<li>CrewAI/AutoGen: роли, коллаборация</li>
-<li>Long-term memory между сессиями</li>
-</ul>
-<div class="src">&#128218; langchain-ai.github.io/langgraph/tutorials</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>LangGraph граф для &laquo;Задумки по экономике&raquo; + Ahillary ур.6</b>
-<ul class="clist">
-<li>Ahillary YouTube ур.6: агент внутри RAG-цепочки &mdash; разобрать и запустить</li>
-<li>Написать LangGraph граф (4 узла):</li>
-<li>&rarr; fetch_news() &mdash; тянет новость из RSS</li>
-<li>&rarr; evaluate() &mdash; LLM оценивает через PydanticAI &rarr; NewsItem</li>
-<li>&rarr; human_review() &mdash; ПАУЗА, вопрос в Telegram</li>
-<li>&rarr; store_or_reject() &mdash; пишет в Qdrant или отклоняет</li>
-</ul>
-<div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials</div>
-</td>
-<td><div class="why"><b>Было:</b> MCP, Qdrant, PydanticAI.<br><b>Сейчас:</b> все кирпичи готовы. LangGraph = момент сборки. Граф строим именно для &laquo;Задумки&raquo; &mdash; реальный целевой проект, не абстрактный пример.</div></td>
-<td><div class="tcards"><div class="tcard"><b>LangGraph</b><span>Граф состояний для агентов. Узлы (функции) + переходы. Полный контроль: паузы, повторы, ветвления, откат к любому состоянию.</span></div></div></td>
-<td>
-<ul class="clist">
-<li><b>&laquo;Задумка по экономике&raquo; v0.1 &mdash; живёт!</b></li>
-<li>Новость &rarr; оценка &rarr; Telegram &laquo;подтвердить?&raquo; &rarr; Qdrant</li>
-<li>Первый рабочий прототип целевого проекта</li>
-</ul>
-</td>
-<td><span class="sp mastered">MCP</span><span class="sp new">LangGraph</span><span class="sp new">CrewAI (теория)</span></td>
-<td><div class="pb"><div class="pf" style="width:68%;background:#2e7d32"></div></div><div class="pt">68%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">18&ndash;24 май</span><span class="pls">Неделя 11</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 18.05</span><br>
+                    <b>LangGraph: профессиональная оркестрация</b>
+                    <ul class="clist">
+                        <li>State machine: состояния, ветвления, retries</li>
+                        <li>Checkpoint: сохранение и восстановление</li>
+                        <li>Human-in-the-loop: пауза, ожидание</li>
+                        <li>Time-travel дебаг &mdash; откат к любому состоянию</li>
+                    </ul>
+                    <span class="tag t1">ProGlib 21.05</span><br>
+                    <b>Мультиагентные системы</b>
+                    <ul class="clist">
+                        <li>CrewAI/AutoGen: роли, коллаборация</li>
+                        <li>Long-term memory между сессиями</li>
+                    </ul>
+                    <div class="src">&#128218; langchain-ai.github.io/langgraph/tutorials</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>LangGraph граф для &laquo;Задумки по экономике&raquo; + Ahillary ур.6</b>
+                    <ul class="clist">
+                        <li>Ahillary YouTube ур.6: агент внутри RAG-цепочки &mdash; разобрать и запустить</li>
+                        <li>Написать LangGraph граф (4 узла):</li>
+                        <li>&rarr; fetch_news() &mdash; тянет новость из RSS</li>
+                        <li>&rarr; evaluate() &mdash; LLM оценивает через PydanticAI &rarr; NewsItem</li>
+                        <li>&rarr; human_review() &mdash; ПАУЗА, вопрос в Telegram</li>
+                        <li>&rarr; store_or_reject() &mdash; пишет в Qdrant или отклоняет</li>
+                    </ul>
+                    <div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> MCP, Qdrant, PydanticAI.<br><b>Сейчас:</b> все кирпичи готовы.
+                        LangGraph = момент сборки. Граф строим именно для &laquo;Задумки&raquo; &mdash; реальный целевой
+                        проект, не абстрактный пример.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>LangGraph</b><span>Граф состояний для агентов. Узлы (функции) + переходы.
+                                Полный контроль: паузы, повторы, ветвления, откат к любому состоянию.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li><b>&laquo;Задумка по экономике&raquo; v0.1 &mdash; живёт!</b></li>
+                        <li>Новость &rarr; оценка &rarr; Telegram &laquo;подтвердить?&raquo; &rarr; Qdrant</li>
+                        <li>Первый рабочий прототип целевого проекта</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">MCP</span><span class="sp new">LangGraph</span><span class="sp new">CrewAI
+                        (теория)</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:68%;background:#2e7d32"></div>
+                    </div>
+                    <div class="pt">68%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">25&ndash;31 май</span><span class="pls">Неделя 12</span></td>
-<td>
-<span class="tag t1">ProGlib 25.05</span><br>
-<b>AgentOps + Cost control</b>
-<ul class="clist">
-<li>Langfuse/LangSmith: трейсинг, дашборды</li>
-<li>RAGAS/DeepEval: автооценка RAG</li>
-<li>Semantic cache &mdash; экономия токенов</li>
-<li>SLA-алерты при деградации</li>
-</ul>
-<div class="src">&#128218; ProGlib + langfuse.com/docs + docs.ragas.io</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>Langfuse self-hosted + RAGAS первый отчёт</b>
-<ul class="clist">
-<li>Поднять Langfuse через docker-compose (langfuse.com/docs/deployment/self-host)</li>
-<li>Подключить к LangGraph &mdash; трейсы каждого запуска в дашборде</li>
-<li>RAGAS: оценить RAG на 10 вопросах &mdash; faithfulness, answer_relevancy</li>
-<li>Алерт в Telegram: стоимость за день больше $2 &rarr; сообщение</li>
-<li>n8n: добавить LLM-ноду &rarr; пайплайн вызывает Claude для оценки</li>
-</ul>
-<div class="src">&#128218; langfuse.com/docs + docs.ragas.io/tutorials + docs.n8n.io</div>
-</td>
-<td><div class="why"><b>Было:</b> LangGraph работает.<br><b>Сейчас:</b> система живёт &mdash; нужен мониторинг немедленно. Без Langfuse не знаешь почему агент дал плохой ответ. RAGAS &mdash; измеряешь качество, а не угадываешь.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>Langfuse (self-hosted)</b><span>Мониторинг LLM. Каждый шаг агента: вход &rarr; выход &rarr; стоимость &rarr; ошибки. Бесплатно при self-hosted.</span></div>
-<div class="tcard"><b>RAGAS</b><span>Автооценка RAG: faithfulness (не галлюцинирует?), answer_relevancy (по делу?), context_precision.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>Langfuse: трейсы всех запусков видны</li>
-<li>RAGAS: faithfulness больше 0.7 &mdash; цель недели</li>
-<li>n8n с LLM-оценкой работает</li>
-</ul>
-</td>
-<td><span class="sp mastered">LangGraph</span><span class="sp new">Langfuse</span><span class="sp new">RAGAS</span></td>
-<td><div class="pb"><div class="pf" style="width:74%;background:#2e7d32"></div></div><div class="pt">74%</div></td>
-</tr>
-</table>
+            <tr>
+                <td><span class="pbl">25&ndash;31 май</span><span class="pls">Неделя 12</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 25.05</span><br>
+                    <b>AgentOps + Cost control</b>
+                    <ul class="clist">
+                        <li>Langfuse/LangSmith: трейсинг, дашборды</li>
+                        <li>RAGAS/DeepEval: автооценка RAG</li>
+                        <li>Semantic cache &mdash; экономия токенов</li>
+                        <li>SLA-алерты при деградации</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + langfuse.com/docs + docs.ragas.io</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>Langfuse self-hosted + RAGAS первый отчёт</b>
+                    <ul class="clist">
+                        <li>Поднять Langfuse через docker-compose (langfuse.com/docs/deployment/self-host)</li>
+                        <li>Подключить к LangGraph &mdash; трейсы каждого запуска в дашборде</li>
+                        <li>RAGAS: оценить RAG на 10 вопросах &mdash; faithfulness, answer_relevancy</li>
+                        <li>Алерт в Telegram: стоимость за день больше $2 &rarr; сообщение</li>
+                        <li>n8n: добавить LLM-ноду &rarr; пайплайн вызывает Claude для оценки</li>
+                    </ul>
+                    <div class="src">&#128218; langfuse.com/docs + docs.ragas.io/tutorials + docs.n8n.io</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> LangGraph работает.<br><b>Сейчас:</b> система живёт &mdash; нужен
+                        мониторинг немедленно. Без Langfuse не знаешь почему агент дал плохой ответ. RAGAS &mdash;
+                        измеряешь качество, а не угадываешь.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Langfuse (self-hosted)</b><span>Мониторинг LLM. Каждый шаг агента: вход
+                                &rarr; выход &rarr; стоимость &rarr; ошибки. Бесплатно при self-hosted.</span></div>
+                        <div class="tcard"><b>RAGAS</b><span>Автооценка RAG: faithfulness (не галлюцинирует?),
+                                answer_relevancy (по делу?), context_precision.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>Langfuse: трейсы всех запусков видны</li>
+                        <li>RAGAS: faithfulness больше 0.7 &mdash; цель недели</li>
+                        <li>n8n с LLM-оценкой работает</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">LangGraph</span><span class="sp new">Langfuse</span><span
+                        class="sp new">RAGAS</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:74%;background:#2e7d32"></div>
+                    </div>
+                    <div class="pt">74%</div>
+                </td>
+            </tr>
+        </table>
 
-<!-- ====== ФАЗА 2 ====== -->
-<div class="ph">ФАЗА 2 &mdash; БЕЗОПАСНОСТЬ + ДЕПЛОЙ + ДИПЛОМ <span>1 июня &rarr; 18 июня</span><div class="ph-pct">74 &rarr; 84%</div></div>
-<table>
-<tr>
-<th style="width:86px">Период</th>
-<th style="width:19%">&#127891; ProGlib</th>
-<th style="width:22%">&#128218; Самостоятельно</th>
-<th style="width:13%">&#128161; Почему сейчас?</th>
-<th style="width:15%">&#128295; Инструменты</th>
-<th style="width:17%">&#129514; Проект</th>
-<th style="width:9%">&#128200; Стек</th>
-<th style="width:58px;text-align:center">%</th>
-</tr>
+        <!-- ====== ФАЗА 2 ====== -->
+        <div class="ph">ФАЗА 2 &mdash; БЕЗОПАСНОСТЬ + ДЕПЛОЙ + ДИПЛОМ <span>1 июня &rarr; 18 июня</span>
+            <div class="ph-pct">74 &rarr; 84%</div>
+        </div>
+        <table>
+            <tr>
+                <th style="width:86px">Период</th>
+                <th style="width:19%">&#127891; ProGlib</th>
+                <th style="width:22%">&#128218; Самостоятельно</th>
+                <th style="width:13%">&#128161; Почему сейчас?</th>
+                <th style="width:15%">&#128295; Инструменты</th>
+                <th style="width:17%">&#129514; Проект</th>
+                <th style="width:9%">&#128200; Стек</th>
+                <th style="width:58px;text-align:center">%</th>
+            </tr>
 
-<tr>
-<td><span class="pbl">1&ndash;7 июн</span><span class="pls">Неделя 13</span></td>
-<td>
-<span class="tag t1">ProGlib 1.06</span><br>
-<b>Безопасность агентов</b>
-<ul class="clist">
-<li>Prompt injection, tool hijacking</li>
-<li>Docker/E2B sandboxing</li>
-<li>Guardrails: фильтры и политики</li>
-</ul>
-<span class="tag t1">ProGlib 4.06</span><br>
-<b>A2A: агент-агент коммуникация</b>
-<ul class="clist">
-<li>Паттерны межагентного взаимодействия</li>
-<li>MCP + A2A в одном решении</li>
-</ul>
-<div class="src">&#128218; ProGlib + e2b.dev/docs</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>VPS деплой &mdash; Ahillary бонус ур.4 (ДОБАВЛЕНО из ahillary_3)</b>
-<ul class="clist">
-<li>Ahillary бонус ур.4: настройка сервера (SSH, nginx, systemd), шифрование данных &mdash; пройти полностью</li>
-<li>Написать Dockerfile для Python-агента</li>
-<li>Docker Compose: агент + Qdrant + Langfuse &mdash; один файл, одна команда</li>
-<li>Все секреты в .env &mdash; никаких ключей в коде</li>
-<li>Задеплоить на VPS: Hetzner CX21 (&euro;3.9/мес) или DigitalOcean ($6/мес)</li>
-<li>restart: always &mdash; автозапуск при падении</li>
-</ul>
-<div class="src">&#128218; Ahillary бонус ур.4 (сервер+шифрование) + docs.docker.com/compose + hetzner.com/cloud</div>
-</td>
-<td><div class="why"><b>Было:</b> система работает локально.<br><b>Сейчас:</b> деплой = разница между &laquo;у меня на компе&raquo; и &laquo;работает всегда&raquo;. Ahillary бонус ур.4 идеально сюда &mdash; перед выходом в интернет: SSH, nginx, шифрование.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>Docker Compose</b><span>Весь стек одной командой: docker compose up -d. Агент + Qdrant + Langfuse вместе.</span></div>
-<div class="tcard"><b>VPS</b><span>Сервер 24/7 в интернете. &euro;3.9&ndash;6/мес. Hetzner &mdash; лучшее соотношение цена/мощь.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>docker compose up -d &rarr; вся система на VPS 24/7</li>
-<li>Guardrail: больше 5 запросов/мин &rarr; стоп + алерт в Telegram</li>
-</ul>
-</td>
-<td><span class="sp mastered">Langfuse</span><span class="sp new">Docker Compose</span><span class="sp new">VPS</span></td>
-<td><div class="pb"><div class="pf" style="width:79%;background:#6a1b9a"></div></div><div class="pt">79%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">1&ndash;7 июн</span><span class="pls">Неделя 13</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 1.06</span><br>
+                    <b>Безопасность агентов</b>
+                    <ul class="clist">
+                        <li>Prompt injection, tool hijacking</li>
+                        <li>Docker/E2B sandboxing</li>
+                        <li>Guardrails: фильтры и политики</li>
+                    </ul>
+                    <span class="tag t1">ProGlib 4.06</span><br>
+                    <b>A2A: агент-агент коммуникация</b>
+                    <ul class="clist">
+                        <li>Паттерны межагентного взаимодействия</li>
+                        <li>MCP + A2A в одном решении</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + e2b.dev/docs</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>VPS деплой &mdash; Ahillary бонус ур.4 (ДОБАВЛЕНО из ahillary_3)</b>
+                    <ul class="clist">
+                        <li>Ahillary бонус ур.4: настройка сервера (SSH, nginx, systemd), шифрование данных &mdash;
+                            пройти полностью</li>
+                        <li>Написать Dockerfile для Python-агента</li>
+                        <li>Docker Compose: агент + Qdrant + Langfuse &mdash; один файл, одна команда</li>
+                        <li>Все секреты в .env &mdash; никаких ключей в коде</li>
+                        <li>Задеплоить на VPS: Hetzner CX21 (&euro;3.9/мес) или DigitalOcean ($6/мес)</li>
+                        <li>restart: always &mdash; автозапуск при падении</li>
+                    </ul>
+                    <div class="src">&#128218; Ahillary бонус ур.4 (сервер+шифрование) + docs.docker.com/compose +
+                        hetzner.com/cloud</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> система работает локально.<br><b>Сейчас:</b> деплой = разница между
+                        &laquo;у меня на компе&raquo; и &laquo;работает всегда&raquo;. Ahillary бонус ур.4 идеально сюда
+                        &mdash; перед выходом в интернет: SSH, nginx, шифрование.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Docker Compose</b><span>Весь стек одной командой: docker compose up -d.
+                                Агент + Qdrant + Langfuse вместе.</span></div>
+                        <div class="tcard"><b>VPS</b><span>Сервер 24/7 в интернете. &euro;3.9&ndash;6/мес. Hetzner
+                                &mdash; лучшее соотношение цена/мощь.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>docker compose up -d &rarr; вся система на VPS 24/7</li>
+                        <li>Guardrail: больше 5 запросов/мин &rarr; стоп + алерт в Telegram</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">Langfuse</span><span class="sp new">Docker Compose</span><span
+                        class="sp new">VPS</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:79%;background:#6a1b9a"></div>
+                    </div>
+                    <div class="pt">79%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">8&ndash;18 июн</span><span class="pls">Нед. 14&ndash;15</span></td>
-<td>
-<span class="tag t1">ProGlib 8.06</span><br>
-<b>Дипломный проект ProGlib v1</b>
-<ul class="clist">
-<li>MCP + LangGraph + AgentOps + security &mdash; всё вместе</li>
-<li>&laquo;Как в проде&raquo;: метрики, бюджеты, воспроизводимость</li>
-</ul>
-<br><b>&#127891; Диплом ProGlib: 18.06</b>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>&laquo;Задумка по экономике&raquo; v1.0 &mdash; полная сборка</b>
-<ul class="clist">
-<li>RAG: 10+ PDF по экономике загружены в Qdrant</li>
-<li>n8n: 3 источника новостей парсятся по расписанию</li>
-<li>LangGraph: полный цикл оценки работает</li>
-<li>Telegram: вопрос &rarr; ответ с источником и уверенностью</li>
-<li>Langfuse: трейсы видны, стоимость под контролем</li>
-<li>README на GitHub на английском: архитектура, как запустить</li>
-</ul>
-</td>
-<td><div class="why"><b>Было:</b> все компоненты работают.<br><b>Сейчас:</b> финальная сборка. &laquo;Задумка&raquo; = дипломный проект ProGlib = первый кейс портфолио. Три в одном.</div></td>
-<td><div class="tcards"><div class="tcard"><b>Весь стек Фаз 0&ndash;2</b><span>Момент синтеза. Всё изученное в одном работающем проекте.</span></div></div></td>
-<td>
-<ul class="clist">
-<li><b>&laquo;Задумка по экономике&raquo; v1.0 &mdash; 24/7 на VPS</b></li>
-<li>Диплом ProGlib сдан 18.06</li>
-<li>Первый публичный кейс задокументирован</li>
-</ul>
-</td>
-<td><span class="sp mastered">VPS</span><span class="sp mastered">LangGraph</span><span class="sp mastered">Qdrant</span></td>
-<td><div class="pb"><div class="pf" style="width:84%;background:#6a1b9a"></div></div><div class="pt">84%</div></td>
-</tr>
-</table>
+            <tr>
+                <td><span class="pbl">8&ndash;18 июн</span><span class="pls">Нед. 14&ndash;15</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 8.06</span><br>
+                    <b>Дипломный проект ProGlib v1</b>
+                    <ul class="clist">
+                        <li>MCP + LangGraph + AgentOps + security &mdash; всё вместе</li>
+                        <li>&laquo;Как в проде&raquo;: метрики, бюджеты, воспроизводимость</li>
+                    </ul>
+                    <br><b>&#127891; Диплом ProGlib: 18.06</b>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>&laquo;Задумка по экономике&raquo; v1.0 &mdash; полная сборка</b>
+                    <ul class="clist">
+                        <li>RAG: 10+ PDF по экономике загружены в Qdrant</li>
+                        <li>n8n: 3 источника новостей парсятся по расписанию</li>
+                        <li>LangGraph: полный цикл оценки работает</li>
+                        <li>Telegram: вопрос &rarr; ответ с источником и уверенностью</li>
+                        <li>Langfuse: трейсы видны, стоимость под контролем</li>
+                        <li>README на GitHub на английском: архитектура, как запустить</li>
+                    </ul>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> все компоненты работают.<br><b>Сейчас:</b> финальная сборка.
+                        &laquo;Задумка&raquo; = дипломный проект ProGlib = первый кейс портфолио. Три в одном.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>Весь стек Фаз 0&ndash;2</b><span>Момент синтеза. Всё изученное в одном
+                                работающем проекте.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li><b>&laquo;Задумка по экономике&raquo; v1.0 &mdash; 24/7 на VPS</b></li>
+                        <li>Диплом ProGlib сдан 18.06</li>
+                        <li>Первый публичный кейс задокументирован</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">VPS</span><span class="sp mastered">LangGraph</span><span
+                        class="sp mastered">Qdrant</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:84%;background:#6a1b9a"></div>
+                    </div>
+                    <div class="pt">84%</div>
+                </td>
+            </tr>
+        </table>
 
-<!-- ====== ФАЗА 3 ====== -->
-<div class="ph">ФАЗА 3 &mdash; FINE-TUNING + СПЕЦИАЛИЗАЦИЯ <span>19 июня &rarr; 31 августа (10 недель)</span><div class="ph-pct">84 &rarr; 100%</div></div>
-<table>
-<tr>
-<th style="width:86px">Период</th>
-<th style="width:19%">&#127891; ProGlib</th>
-<th style="width:22%">&#128218; Самостоятельно</th>
-<th style="width:13%">&#128161; Почему сейчас?</th>
-<th style="width:15%">&#128295; Инструменты</th>
-<th style="width:17%">&#129514; Проект</th>
-<th style="width:9%">&#128200; Стек</th>
-<th style="width:58px;text-align:center">%</th>
-</tr>
+        <!-- ====== ФАЗА 3 ====== -->
+        <div class="ph">ФАЗА 3 &mdash; FINE-TUNING + СПЕЦИАЛИЗАЦИЯ <span>19 июня &rarr; 31 августа (10 недель)</span>
+            <div class="ph-pct">84 &rarr; 100%</div>
+        </div>
+        <table>
+            <tr>
+                <th style="width:86px">Период</th>
+                <th style="width:19%">&#127891; ProGlib</th>
+                <th style="width:22%">&#128218; Самостоятельно</th>
+                <th style="width:13%">&#128161; Почему сейчас?</th>
+                <th style="width:15%">&#128295; Инструменты</th>
+                <th style="width:17%">&#129514; Проект</th>
+                <th style="width:9%">&#128200; Стек</th>
+                <th style="width:58px;text-align:center">%</th>
+            </tr>
 
-<tr>
-<td><span class="pbl">19 июн&ndash;6 июл</span><span class="pls">Нед. 16&ndash;18</span></td>
-<td>
-<span class="tag t1">ProGlib 27.07</span><br>
-<b>FinOps: оптимизация затрат</b>
-<ul class="clist">
-<li>Semantic cache / prefix caching</li>
-<li>Model routing: дешёвая&rarr;дорогая модель</li>
-<li>Атрибуция стоимости по фичам</li>
-<li>Алерты при аномалиях стоимости</li>
-</ul>
-<div class="src">&#128218; ProGlib + gptcache.readthedocs.io</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>vLLM (local inference) + Fine-tuning ТЕОРИЯ (читать)</b>
-<ul class="clist">
-<li>pip install vllm &rarr; запустить Mistral 7B или Qwen2.5 7B локально</li>
-<li>Подключить к LangGraph вместо Claude API для тестов</li>
-<li>Замерить: качество vs стоимость vs latency &mdash; записать в таблицу</li>
-<li>GGUF (CPU-квантование) vs AWQ (GPU-квантование) &mdash; разобрать разницу</li>
-<li>HuggingFace NLP Course гл.7&ndash;9: fine-tuning полный цикл &mdash; только читать теорию</li>
-<li>Chemometrics PDF гл.1&ndash;3: базовая статистика для аналитической химии</li>
-</ul>
-<div class="src">&#128218; vllm.readthedocs.io + huggingface.co/learn/nlp-course (гл.7-9) + Chemometrics PDF (гл.1-3)</div>
-</td>
-<td><div class="why"><b>Было:</b> диплом сдан, система на проде.<br><b>Сейчас:</b> оптимизируем стоимость &mdash; реальные деньги тратятся. vLLM учит что отдать дешёвой 7B, что &mdash; Claude. Fine-tuning теория читается сейчас &mdash; к августу готовы к практике.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>vLLM</b><span>High-performance сервер для локальных моделей. Альтернатива Claude API когда хватает качества 7B.</span></div>
-<div class="tcard"><b>Semantic Cache</b><span>Похожий вопрос задавался &rarr; из кэша без LLM. Экономия 30&ndash;40% токенов.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>Semantic cache в проекте: измерить экономию за неделю в Langfuse</li>
-<li>Первые PCA-эксперименты на хроматографических данных (sklearn)</li>
-</ul>
-</td>
-<td><span class="sp mastered">LangGraph</span><span class="sp new">vLLM</span><span class="sp new">Semantic Cache</span></td>
-<td><div class="pb"><div class="pf" style="width:87%;background:#e65100"></div></div><div class="pt">87%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">19 июн&ndash;6 июл</span><span class="pls">Нед. 16&ndash;18</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 27.07</span><br>
+                    <b>FinOps: оптимизация затрат</b>
+                    <ul class="clist">
+                        <li>Semantic cache / prefix caching</li>
+                        <li>Model routing: дешёвая&rarr;дорогая модель</li>
+                        <li>Атрибуция стоимости по фичам</li>
+                        <li>Алерты при аномалиях стоимости</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + gptcache.readthedocs.io</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>vLLM (local inference) + Fine-tuning ТЕОРИЯ (читать)</b>
+                    <ul class="clist">
+                        <li>pip install vllm &rarr; запустить Mistral 7B или Qwen2.5 7B локально</li>
+                        <li>Подключить к LangGraph вместо Claude API для тестов</li>
+                        <li>Замерить: качество vs стоимость vs latency &mdash; записать в таблицу</li>
+                        <li>GGUF (CPU-квантование) vs AWQ (GPU-квантование) &mdash; разобрать разницу</li>
+                        <li>HuggingFace NLP Course гл.7&ndash;9: fine-tuning полный цикл &mdash; только читать теорию
+                        </li>
+                        <li>Chemometrics PDF гл.1&ndash;3: базовая статистика для аналитической химии</li>
+                    </ul>
+                    <div class="src">&#128218; vllm.readthedocs.io + huggingface.co/learn/nlp-course (гл.7-9) +
+                        Chemometrics PDF (гл.1-3)</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> диплом сдан, система на проде.<br><b>Сейчас:</b> оптимизируем
+                        стоимость &mdash; реальные деньги тратятся. vLLM учит что отдать дешёвой 7B, что &mdash; Claude.
+                        Fine-tuning теория читается сейчас &mdash; к августу готовы к практике.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>vLLM</b><span>High-performance сервер для локальных моделей. Альтернатива
+                                Claude API когда хватает качества 7B.</span></div>
+                        <div class="tcard"><b>Semantic Cache</b><span>Похожий вопрос задавался &rarr; из кэша без LLM.
+                                Экономия 30&ndash;40% токенов.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>Semantic cache в проекте: измерить экономию за неделю в Langfuse</li>
+                        <li>Первые PCA-эксперименты на хроматографических данных (sklearn)</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">LangGraph</span><span class="sp new">vLLM</span><span
+                        class="sp new">Semantic Cache</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:87%;background:#e65100"></div>
+                    </div>
+                    <div class="pt">87%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">7&ndash;31 июл</span><span class="pls">Нед. 19&ndash;22</span></td>
-<td>
-<span class="tag t1">ProGlib 30.07</span><br>
-<b>Security углублённо</b>
-<ul class="clist">
-<li>Prompt injection: типы атак, защиты</li>
-<li>DLP: фильтрация PII и секретов</li>
-<li>RBAC: scoped tokens, kill switch</li>
-<li>Red teaming: атаковать своего агента</li>
-</ul>
-<span class="tag t1">ProGlib 3.08</span><br>
-<b>Infrastructure углублённо</b>
-<ul class="clist">
-<li>Streaming / WebSockets</li>
-<li>Queue-based архитектура</li>
-<li>Code sandboxing (E2B)</li>
-</ul>
-<div class="src">&#128218; ProGlib + e2b.dev/docs</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>Fine-tuning ПРАКТИКА (LoRA/QLoRA) + специализация химия</b>
-<ul class="clist">
-<li>pip install peft transformers datasets accelerate</li>
-<li>Взять небольшую модель: gemma-2b или phi-3-mini</li>
-<li>LoRA fine-tuning на 100&ndash;200 своих Q&A парах (химия или экономика)</li>
-<li>Сравнить base vs fine-tuned на 10 тестовых вопросах &mdash; оформить как эксперимент</li>
-<li>Chemometrics гл.4&ndash;6: PCA, PLS, cluster analysis</li>
-<li>sklearn Pipeline: PCA &rarr; классификатор на хроматографических данных CSV</li>
-<li>MCP-инструмент: analyze_chromatogram(file_path) &rarr; интерпретация пиков</li>
-</ul>
-<div class="src">&#128218; huggingface.co/docs/peft + Chemometrics PDF (гл.4-6) + huggingface.co/learn/nlp-course</div>
-</td>
-<td><div class="why"><b>Было:</b> vLLM, fine-tuning теория прочитана.<br><b>Сейчас:</b> первый fine-tuning эксперимент &mdash; не для прода, для понимания изнутри. Специализация по химии &mdash; оформляем в рабочий код &mdash; это уникальное конкурентное преимущество.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>PEFT / LoRA</b><span>Fine-tuning больших моделей с минимальными ресурсами. LoRA = адаптерные матрицы &mdash; обучать можно на Colab бесплатно.</span></div>
-<div class="tcard"><b>HuggingFace transformers + datasets</b><span>Запуск и дообучение моделей. datasets = готовые датасеты или свои данные.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li>Fine-tuning: base vs LoRA &mdash; разница задокументирована в README</li>
-<li>AI-инструмент для хроматографии: CSV &rarr; агент &rarr; интерпретация пиков &mdash; прототип работает</li>
-</ul>
-</td>
-<td><span class="sp mastered">vLLM</span><span class="sp new">PEFT/LoRA</span><span class="sp new">transformers</span><span class="sp new">Chemometrics ML</span></td>
-<td><div class="pb"><div class="pf" style="width:92%;background:#e65100"></div></div><div class="pt">92%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">7&ndash;31 июл</span><span class="pls">Нед. 19&ndash;22</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 30.07</span><br>
+                    <b>Security углублённо</b>
+                    <ul class="clist">
+                        <li>Prompt injection: типы атак, защиты</li>
+                        <li>DLP: фильтрация PII и секретов</li>
+                        <li>RBAC: scoped tokens, kill switch</li>
+                        <li>Red teaming: атаковать своего агента</li>
+                    </ul>
+                    <span class="tag t1">ProGlib 3.08</span><br>
+                    <b>Infrastructure углублённо</b>
+                    <ul class="clist">
+                        <li>Streaming / WebSockets</li>
+                        <li>Queue-based архитектура</li>
+                        <li>Code sandboxing (E2B)</li>
+                    </ul>
+                    <div class="src">&#128218; ProGlib + e2b.dev/docs</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>Fine-tuning ПРАКТИКА (LoRA/QLoRA) + специализация химия</b>
+                    <ul class="clist">
+                        <li>pip install peft transformers datasets accelerate</li>
+                        <li>Взять небольшую модель: gemma-2b или phi-3-mini</li>
+                        <li>LoRA fine-tuning на 100&ndash;200 своих Q&A парах (химия или экономика)</li>
+                        <li>Сравнить base vs fine-tuned на 10 тестовых вопросах &mdash; оформить как эксперимент</li>
+                        <li>Chemometrics гл.4&ndash;6: PCA, PLS, cluster analysis</li>
+                        <li>sklearn Pipeline: PCA &rarr; классификатор на хроматографических данных CSV</li>
+                        <li>MCP-инструмент: analyze_chromatogram(file_path) &rarr; интерпретация пиков</li>
+                    </ul>
+                    <div class="src">&#128218; huggingface.co/docs/peft + Chemometrics PDF (гл.4-6) +
+                        huggingface.co/learn/nlp-course</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> vLLM, fine-tuning теория прочитана.<br><b>Сейчас:</b> первый
+                        fine-tuning эксперимент &mdash; не для прода, для понимания изнутри. Специализация по химии
+                        &mdash; оформляем в рабочий код &mdash; это уникальное конкурентное преимущество.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>PEFT / LoRA</b><span>Fine-tuning больших моделей с минимальными ресурсами.
+                                LoRA = адаптерные матрицы &mdash; обучать можно на Colab бесплатно.</span></div>
+                        <div class="tcard"><b>HuggingFace transformers + datasets</b><span>Запуск и дообучение моделей.
+                                datasets = готовые датасеты или свои данные.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li>Fine-tuning: base vs LoRA &mdash; разница задокументирована в README</li>
+                        <li>AI-инструмент для хроматографии: CSV &rarr; агент &rarr; интерпретация пиков &mdash;
+                            прототип работает</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">vLLM</span><span class="sp new">PEFT/LoRA</span><span
+                        class="sp new">transformers</span><span class="sp new">Chemometrics ML</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:92%;background:#e65100"></div>
+                    </div>
+                    <div class="pt">92%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">1&ndash;20 авг</span><span class="pls">Нед. 23&ndash;26</span></td>
-<td>
-<span class="tag t1">ProGlib 6.08</span> Local Inference углублённо<br>
-<span class="tag t1">ProGlib 10.08</span> Governance &amp; Compliance<br>
-<span class="tag t1">ProGlib 17.08</span> Enterprise MCP + Human approvals<br>
-<span class="tag t1">ProGlib 20.08</span> Capstone: нагрузочное тест., red teaming, Go/No-Go
-<div class="src">&#128218; ProGlib + locust.io</div>
-</td>
-<td>
-<span class="tag t2">Самост.</span><br>
-<b>OpenClaw + финальный спринт портфолио</b>
-<ul class="clist">
-<li>OpenClaw на VPS: установить, подключить к Telegram, написать первый skill.md</li>
-<li>Release Engineering: версионирование промптов через git tags</li>
-<li>A/B тест промптов: 2 варианта оценки &rarr; выбрать лучший через RAGAS</li>
-<li>Кастомный MCP-сервер для хроматографии &mdash; публичный GitHub</li>
-<li>GitHub: 2 публичных репо + README + схема архитектуры + демо-видео (Loom)</li>
-<li>LinkedIn на английском: &laquo;AI Engineer | AI Integration for Analytical Chemistry&raquo;</li>
-<li>2 кейса: &laquo;проблема &rarr; решение &rarr; результат&raquo; &rarr; LinkedIn post</li>
-</ul>
-<div class="src">&#128218; openclaw.ai + docs.anthropic.com/claude-code + loom.com</div>
-</td>
-<td><div class="why"><b>Было:</b> оба проекта работают.<br><b>Сейчас:</b> упаковать в портфолио. AI-инженер без публичного кода &mdash; невидимка. Два репо + LinkedIn + кейсы = рыночная видимость.</div></td>
-<td>
-<div class="tcards">
-<div class="tcard"><b>OpenClaw</b><span>Персональный AI-агент 24/7. Telegram &rarr; агент выполняет задачи. Всегда онлайн.</span></div>
-<div class="tcard"><b>Release Engineering</b><span>Версионирование промптов, A/B тесты в проде, rollback при деградации.</span></div>
-</div>
-</td>
-<td>
-<ul class="clist">
-<li><b>Кейс 1:</b> Экономический агент &mdash; RAG + LangGraph + n8n + Telegram</li>
-<li><b>Кейс 2:</b> AI-инструмент для хроматографии &mdash; MCP + sklearn + HuggingFace</li>
-<li>Оба на VPS, задокументированы, ссылки в LinkedIn</li>
-</ul>
-</td>
-<td><span class="sp mastered">PEFT/LoRA</span><span class="sp new">OpenClaw</span><span class="sp new">Release Eng.</span></td>
-<td><div class="pb"><div class="pf" style="width:97%;background:#e65100"></div></div><div class="pt">97%</div></td>
-</tr>
+            <tr>
+                <td><span class="pbl">1&ndash;20 авг</span><span class="pls">Нед. 23&ndash;26</span></td>
+                <td>
+                    <span class="tag t1">ProGlib 6.08</span> Local Inference углублённо<br>
+                    <span class="tag t1">ProGlib 10.08</span> Governance &amp; Compliance<br>
+                    <span class="tag t1">ProGlib 17.08</span> Enterprise MCP + Human approvals<br>
+                    <span class="tag t1">ProGlib 20.08</span> Capstone: нагрузочное тест., red teaming, Go/No-Go
+                    <div class="src">&#128218; ProGlib + locust.io</div>
+                </td>
+                <td>
+                    <span class="tag t2">Самост.</span><br>
+                    <b>OpenClaw + финальный спринт портфолио</b>
+                    <ul class="clist">
+                        <li>OpenClaw на VPS: установить, подключить к Telegram, написать первый skill.md</li>
+                        <li>Release Engineering: версионирование промптов через git tags</li>
+                        <li>A/B тест промптов: 2 варианта оценки &rarr; выбрать лучший через RAGAS</li>
+                        <li>Кастомный MCP-сервер для хроматографии &mdash; публичный GitHub</li>
+                        <li>GitHub: 2 публичных репо + README + схема архитектуры + демо-видео (Loom)</li>
+                        <li>LinkedIn на английском: &laquo;AI Engineer | AI Integration for Analytical Chemistry&raquo;
+                        </li>
+                        <li>2 кейса: &laquo;проблема &rarr; решение &rarr; результат&raquo; &rarr; LinkedIn post</li>
+                    </ul>
+                    <div class="src">&#128218; openclaw.ai + docs.anthropic.com/claude-code + loom.com</div>
+                </td>
+                <td>
+                    <div class="why"><b>Было:</b> оба проекта работают.<br><b>Сейчас:</b> упаковать в портфолио.
+                        AI-инженер без публичного кода &mdash; невидимка. Два репо + LinkedIn + кейсы = рыночная
+                        видимость.</div>
+                </td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b>OpenClaw</b><span>Персональный AI-агент 24/7. Telegram &rarr; агент
+                                выполняет задачи. Всегда онлайн.</span></div>
+                        <div class="tcard"><b>Release Engineering</b><span>Версионирование промптов, A/B тесты в проде,
+                                rollback при деградации.</span></div>
+                    </div>
+                </td>
+                <td>
+                    <ul class="clist">
+                        <li><b>Кейс 1:</b> Экономический агент &mdash; RAG + LangGraph + n8n + Telegram</li>
+                        <li><b>Кейс 2:</b> AI-инструмент для хроматографии &mdash; MCP + sklearn + HuggingFace</li>
+                        <li>Оба на VPS, задокументированы, ссылки в LinkedIn</li>
+                    </ul>
+                </td>
+                <td><span class="sp mastered">PEFT/LoRA</span><span class="sp new">OpenClaw</span><span
+                        class="sp new">Release Eng.</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:97%;background:#e65100"></div>
+                    </div>
+                    <div class="pt">97%</div>
+                </td>
+            </tr>
 
-<tr>
-<td><span class="pbl">21&ndash;31 авг</span><span class="pls">ФИНАЛ</span></td>
-<td><span class="tag t1">ProGlib 31.08</span><br><b>&#127891; Диплом Capstone</b></td>
-<td>
-<ul class="clist">
-<li>Список компаний: фармацевтика, нефтехимия, промышленная аналитика &mdash; кто платит за AI</li>
-<li>Первые холодные контакты в LinkedIn (на английском)</li>
-<li>Оформить Upwork профиль: AI Engineer for Scientific Analytics</li>
-</ul>
-</td>
-<td><div class="why"><b>Итог:</b> ты готов к выходу на рынок.</div></td>
-<td>&mdash;</td>
-<td><div class="note"><b>&#9989; К 1 сентября:</b> AI Engineer &mdash; рабочие кейсы, fine-tuning понимание, специализация, GitHub, LinkedIn. Готов к коммерции.</div></td>
-<td><span class="sp mastered">Весь стек</span></td>
-<td><div class="pb"><div class="pf" style="width:100%;background:#b71c1c"></div></div><div class="pt">100%</div></td>
-</tr>
-</table>
+            <tr>
+                <td><span class="pbl">21&ndash;31 авг</span><span class="pls">ФИНАЛ</span></td>
+                <td><span class="tag t1">ProGlib 31.08</span><br><b>&#127891; Диплом Capstone</b></td>
+                <td>
+                    <ul class="clist">
+                        <li>Список компаний: фармацевтика, нефтехимия, промышленная аналитика &mdash; кто платит за AI
+                        </li>
+                        <li>Первые холодные контакты в LinkedIn (на английском)</li>
+                        <li>Оформить Upwork профиль: AI Engineer for Scientific Analytics</li>
+                    </ul>
+                </td>
+                <td>
+                    <div class="why"><b>Итог:</b> ты готов к выходу на рынок.</div>
+                </td>
+                <td>&mdash;</td>
+                <td>
+                    <div class="note"><b>&#9989; К 1 сентября:</b> AI Engineer &mdash; рабочие кейсы, fine-tuning
+                        понимание, специализация, GitHub, LinkedIn. Готов к коммерции.</div>
+                </td>
+                <td><span class="sp mastered">Весь стек</span></td>
+                <td>
+                    <div class="pb">
+                        <div class="pf" style="width:100%;background:#b71c1c"></div>
+                    </div>
+                    <div class="pt">100%</div>
+                </td>
+            </tr>
+        </table>
 
-<!-- ====== ОСЕНЬ-ДЕКАБРЬ ====== -->
-<div class="aut-ph">ОСЕНЬ&ndash;ДЕКАБРЬ 2026 &mdash; ПРОДВИНУТЫЙ УРОВЕНЬ + КОММЕРЦИЯ <span>1 сентября &rarr; 1 января 2027</span></div>
+        <!-- ====== ОСЕНЬ-ДЕКАБРЬ ====== -->
+        <div class="aut-ph">ОСЕНЬ&ndash;ДЕКАБРЬ 2026 &mdash; ПРОДВИНУТЫЙ УРОВЕНЬ + КОММЕРЦИЯ <span>1 сентября &rarr; 1
+                января 2027</span></div>
 
-<div class="mblock">
-<h3>Сентябрь 2026 &mdash; Математика для ML + Продвинутый Fine-tuning</h3>
-<div class="mc">
-<div>
-<div class="mh">Что изучаешь</div>
-<ul class="clist">
-<li>Stepik &laquo;Математика для анализа данных&raquo;: линейная алгебра, производные, теорвер &mdash; stepik.org/course/95</li>
-<li>fast.ai &laquo;Practical Deep Learning for Coders&raquo; (бесплатно, fast.ai/courses) &mdash; глубокое обучение, практика первой</li>
-<li>HuggingFace NLP Course: всё что оставалось + дообучение своих моделей</li>
-<li>QLoRA на Google Colab: дообучить Llama 3.1 8B на своих Q&A данных &rarr; опубликовать на HuggingFace Hub</li>
-<li>DPO (Direct Preference Optimization) &mdash; современная альтернатива RLHF: прочитать arxiv.org/abs/2305.18290</li>
-</ul>
-<div class="src">&#128218; stepik.org/course/95 + fast.ai + huggingface.co/learn/nlp-course + colab.research.google.com</div>
-</div>
-<div>
-<div class="mh">Что строишь</div>
-<ul class="clist">
-<li>Дообученная модель для классификации химических соединений &rarr; опубликовать на HuggingFace Hub</li>
-<li>Сравнение: base vs LoRA vs QLoRA &mdash; оформить как эксперимент/статью на GitHub</li>
-<li>Начало Проекта 3: AI-агент для автоматизации лабораторной отчётности</li>
-</ul>
-</div>
-<div>
-<div class="mh">Почему сейчас</div>
-<div class="why">После августа &mdash; фундамент AI-систем есть. Сентябрь &mdash; закрываем математические пробелы и переходим от &laquo;запускаю fine-tuning&raquo; к &laquo;понимаю что происходит внутри&raquo;. Публикация модели на HF Hub = первый вклад в open-source = репутация в сообществе.</div>
-</div>
-</div>
-</div>
+        <div class="mblock">
+            <h3>Сентябрь 2026 &mdash; Математика для ML + Продвинутый Fine-tuning</h3>
+            <div class="mc">
+                <div>
+                    <div class="mh">Что изучаешь</div>
+                    <ul class="clist">
+                        <li>Stepik &laquo;Математика для анализа данных&raquo;: линейная алгебра, производные, теорвер
+                            &mdash; stepik.org/course/95</li>
+                        <li>fast.ai &laquo;Practical Deep Learning for Coders&raquo; (бесплатно, fast.ai/courses)
+                            &mdash; глубокое обучение, практика первой</li>
+                        <li>HuggingFace NLP Course: всё что оставалось + дообучение своих моделей</li>
+                        <li>QLoRA на Google Colab: дообучить Llama 3.1 8B на своих Q&A данных &rarr; опубликовать на
+                            HuggingFace Hub</li>
+                        <li>DPO (Direct Preference Optimization) &mdash; современная альтернатива RLHF: прочитать
+                            arxiv.org/abs/2305.18290</li>
+                    </ul>
+                    <div class="src">&#128218; stepik.org/course/95 + fast.ai + huggingface.co/learn/nlp-course +
+                        colab.research.google.com</div>
+                </div>
+                <div>
+                    <div class="mh">Что строишь</div>
+                    <ul class="clist">
+                        <li>Дообученная модель для классификации химических соединений &rarr; опубликовать на
+                            HuggingFace Hub</li>
+                        <li>Сравнение: base vs LoRA vs QLoRA &mdash; оформить как эксперимент/статью на GitHub</li>
+                        <li>Начало Проекта 3: AI-агент для автоматизации лабораторной отчётности</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mh">Почему сейчас</div>
+                    <div class="why">После августа &mdash; фундамент AI-систем есть. Сентябрь &mdash; закрываем
+                        математические пробелы и переходим от &laquo;запускаю fine-tuning&raquo; к &laquo;понимаю что
+                        происходит внутри&raquo;. Публикация модели на HF Hub = первый вклад в open-source = репутация в
+                        сообществе.</div>
+                </div>
+            </div>
+        </div>
 
-<div class="mblock">
-<h3>Октябрь 2026 &mdash; Продвинутые паттерны + Первые коммерческие проекты</h3>
-<div class="mc">
-<div>
-<div class="mh">Что изучаешь</div>
-<ul class="clist">
-<li>Udemy: &laquo;LangChain &amp; Vector Databases in Production&raquo; (Activeloop) &mdash; продакшн RAG с реальными кейсами</li>
-<li>Паттерны: Reflection, Plan-and-Execute, Corrective RAG, Self-RAG &mdash; stateful агенты нового уровня</li>
-<li>DeepEval, Phoenix (Arize) &mdash; сравнить с RAGAS, выбрать лучший оценочный инструмент</li>
-<li>Stepik &laquo;PostgreSQL для разработчиков&raquo; &mdash; переход с SQLite на Postgres для продакшн БД</li>
-<li>Kubernetes основы: Pod, Deployment, Service &mdash; понимание, не продакшн ещё</li>
-</ul>
-<div class="src">&#128218; udemy.com + arxiv.org/abs/2310.11511 (Corrective RAG) + stepik.org + k8s.io/docs</div>
-</div>
-<div>
-<div class="mh">Что строишь</div>
-<ul class="clist">
-<li>Corrective RAG поверх &laquo;Задумки по экономике&raquo; &mdash; агент сам проверяет качество своего ответа</li>
-<li>Проект 3 (продолжение): PDF входит &rarr; структурированный лабораторный отчёт выходит</li>
-<li><b>Первый коммерческий проект:</b> реальная компания (LinkedIn / знакомые) &rarr; автоматизация одного процесса &rarr; фикс-прайс $500&ndash;2000</li>
-</ul>
-</div>
-<div>
-<div class="mh">Почему сейчас</div>
-<div class="why">Октябрь &mdash; время монетизации. Стек есть, кейсы есть. Первый коммерческий проект важнее следующего курса. Corrective RAG &mdash; клиенты требуют надёжности. PostgreSQL &mdash; SQLite не масштабируется.</div>
-</div>
-</div>
-</div>
+        <div class="mblock">
+            <h3>Октябрь 2026 &mdash; Продвинутые паттерны + Первые коммерческие проекты</h3>
+            <div class="mc">
+                <div>
+                    <div class="mh">Что изучаешь</div>
+                    <ul class="clist">
+                        <li>Udemy: &laquo;LangChain &amp; Vector Databases in Production&raquo; (Activeloop) &mdash;
+                            продакшн RAG с реальными кейсами</li>
+                        <li>Паттерны: Reflection, Plan-and-Execute, Corrective RAG, Self-RAG &mdash; stateful агенты
+                            нового уровня</li>
+                        <li>DeepEval, Phoenix (Arize) &mdash; сравнить с RAGAS, выбрать лучший оценочный инструмент</li>
+                        <li>Stepik &laquo;PostgreSQL для разработчиков&raquo; &mdash; переход с SQLite на Postgres для
+                            продакшн БД</li>
+                        <li>Kubernetes основы: Pod, Deployment, Service &mdash; понимание, не продакшн ещё</li>
+                    </ul>
+                    <div class="src">&#128218; udemy.com + arxiv.org/abs/2310.11511 (Corrective RAG) + stepik.org +
+                        k8s.io/docs</div>
+                </div>
+                <div>
+                    <div class="mh">Что строишь</div>
+                    <ul class="clist">
+                        <li>Corrective RAG поверх &laquo;Задумки по экономике&raquo; &mdash; агент сам проверяет
+                            качество своего ответа</li>
+                        <li>Проект 3 (продолжение): PDF входит &rarr; структурированный лабораторный отчёт выходит</li>
+                        <li><b>Первый коммерческий проект:</b> реальная компания (LinkedIn / знакомые) &rarr;
+                            автоматизация одного процесса &rarr; фикс-прайс $500&ndash;2000</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mh">Почему сейчас</div>
+                    <div class="why">Октябрь &mdash; время монетизации. Стек есть, кейсы есть. Первый коммерческий
+                        проект важнее следующего курса. Corrective RAG &mdash; клиенты требуют надёжности. PostgreSQL
+                        &mdash; SQLite не масштабируется.</div>
+                </div>
+            </div>
+        </div>
 
-<div class="mblock">
-<h3>Ноябрь 2026 &mdash; Multimodal + MLOps + Второй коммерческий проект</h3>
-<div class="mc">
-<div>
-<div class="mh">Что изучаешь</div>
-<ul class="clist">
-<li>HuggingFace Audio Course (huggingface.co/learn/audio-course) &mdash; обработка спектров в виде аудиоданных</li>
-<li>Multimodal агенты: Claude Vision &rarr; анализ изображений спектров и хроматограмм</li>
-<li>Stepik &laquo;MLOps: от модели к продукту&raquo; &mdash; CI/CD для ML, автоматическое переобучение</li>
-<li>&laquo;Designing Machine Learning Systems&raquo; (Chip Huyen) &mdash; читать онлайн бесплатно</li>
-<li>GraphRAG (Microsoft) &mdash; более мощный RAG для связанных сущностей (компании, персоны, события)</li>
-</ul>
-<div class="src">&#128218; huggingface.co/learn/audio-course + stepik.org + github.com/microsoft/graphrag + huyenchip.com/book</div>
-</div>
-<div>
-<div class="mh">Что строишь</div>
-<ul class="clist">
-<li>Multimodal агент: изображение хроматограммы &rarr; Claude Vision &rarr; интерпретация + числа</li>
-<li>MLOps pipeline: автоматическое переобучение модели при новых данных</li>
-<li>GraphRAG для экономического агента: связи компании-персоны-события</li>
-<li>Второй коммерческий проект (продолжение или новый клиент)</li>
-</ul>
-</div>
-<div>
-<div class="mh">Почему сейчас</div>
-<div class="why">Мультимодальность открывает химические данные как картинки (спектры, хроматограммы &mdash; это изображения). MLOps &mdash; клиенты хотят чтобы &laquo;обновлялось само&raquo;. GraphRAG мощнее для связанных данных в экономике.</div>
-</div>
-</div>
-</div>
+        <div class="mblock">
+            <h3>Ноябрь 2026 &mdash; Multimodal + MLOps + Второй коммерческий проект</h3>
+            <div class="mc">
+                <div>
+                    <div class="mh">Что изучаешь</div>
+                    <ul class="clist">
+                        <li>HuggingFace Audio Course (huggingface.co/learn/audio-course) &mdash; обработка спектров в
+                            виде аудиоданных</li>
+                        <li>Multimodal агенты: Claude Vision &rarr; анализ изображений спектров и хроматограмм</li>
+                        <li>Stepik &laquo;MLOps: от модели к продукту&raquo; &mdash; CI/CD для ML, автоматическое
+                            переобучение</li>
+                        <li>&laquo;Designing Machine Learning Systems&raquo; (Chip Huyen) &mdash; читать онлайн
+                            бесплатно</li>
+                        <li>GraphRAG (Microsoft) &mdash; более мощный RAG для связанных сущностей (компании, персоны,
+                            события)</li>
+                    </ul>
+                    <div class="src">&#128218; huggingface.co/learn/audio-course + stepik.org +
+                        github.com/microsoft/graphrag + huyenchip.com/book</div>
+                </div>
+                <div>
+                    <div class="mh">Что строишь</div>
+                    <ul class="clist">
+                        <li>Multimodal агент: изображение хроматограммы &rarr; Claude Vision &rarr; интерпретация +
+                            числа</li>
+                        <li>MLOps pipeline: автоматическое переобучение модели при новых данных</li>
+                        <li>GraphRAG для экономического агента: связи компании-персоны-события</li>
+                        <li>Второй коммерческий проект (продолжение или новый клиент)</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mh">Почему сейчас</div>
+                    <div class="why">Мультимодальность открывает химические данные как картинки (спектры, хроматограммы
+                        &mdash; это изображения). MLOps &mdash; клиенты хотят чтобы &laquo;обновлялось само&raquo;.
+                        GraphRAG мощнее для связанных данных в экономике.</div>
+                </div>
+            </div>
+        </div>
 
-<div class="mblock">
-<h3>Декабрь 2026 &mdash; Итоговые проекты + Позиционирование + План на 2027</h3>
-<div class="mc">
-<div>
-<div class="mh">Что изучаешь</div>
-<ul class="clist">
-<li>Kubernetes продвинутый: автомасштабирование, rolling updates &mdash; для продакшн деплоя</li>
-<li>Anthropic API: все новые возможности вышедшие за осень &mdash; отслеживать docs.anthropic.com</li>
-<li>Habit навсегда: arxiv.org &mdash; 1 статья в неделю по агентам / fine-tuning / RAG</li>
-<li>AI Alignment: anthropic.com/research &mdash; понять позицию лидера рынка</li>
-</ul>
-</div>
-<div>
-<div class="mh">Что строишь / публикуешь</div>
-<ul class="clist">
-<li>Проект 4: полный MLOps pipeline &mdash; данные &rarr; fine-tuning &rarr; деплой &rarr; мониторинг &rarr; автообновление</li>
-<li>Статья: Habr (рус.) или Medium (eng.) &mdash; &laquo;Как построил AI-систему для аналитической химии за 9 месяцев&raquo;</li>
-<li>GitHub: 4 публичных репозитория, документация на английском</li>
-<li>LinkedIn: 10+ постов за осень, 500+ связей в нише</li>
-<li>Список лидов на Q1 2027</li>
-</ul>
-</div>
-<div>
-<div class="mh">Цель к 1.01.2027</div>
-<div class="why">
-<b>Технически:</b> full-stack AI engineer &mdash; от fine-tuning до продакшн деплоя с MLOps.<br><br>
-<b>Коммерчески:</b> 1&ndash;2 платящих клиента, $1&ndash;4k/мес &mdash; первые реальные деньги.<br><br>
-<b>Репутационно:</b> LinkedIn + GitHub + публикации = видимость на рынке.<br><br>
-<b>К 2028:</b> при росте портфолио &rarr; $5&ndash;15k/мес реально.
-</div>
-</div>
-</div>
-</div>
-<!-- ====== ИТОГОВЫЙ СТЕК ====== -->
-<div class="ph" style="margin-top:24px">&#128230; Полный стек к 1 января 2027</div>
-<div class="grid3">
-<div class="box bl"><h3>Инфра и среда</h3>Python 3.10+, Git (ветки, PR, tags), Docker + Compose, VPS Linux (SSH, nginx), venv, .env, Node.js, PostgreSQL (осень)</div>
-<div class="box bl"><h3>Инструменты разработки</h3>Claude Code (CLI, основной), VS Code, Playwright (web automation), asyncio, Loguru (логирование)</div>
-<div class="box gr"><h3>AI-оркестрация агентов</h3>LangGraph (граф состояний), PydanticAI (типизация), LangChain, CrewAI (теория), MCP (свои серверы), LangFlow (прототипы)</div>
-<div class="box gr"><h3>RAG и память</h3>Qdrant (продакшн), ChromaDB (прототипы), LlamaIndex, GraphRAG (осень), Corrective RAG, Self-RAG, parent retrieval</div>
-<div class="box gr"><h3>Локальные модели</h3>Ollama, vLLM, HuggingFace Hub, GGUF (CPU-квантование), AWQ (GPU-квантование), OpenClaw (персональный агент)</div>
-<div class="box or"><h3>Fine-tuning (август&ndash;осень)</h3>PEFT/LoRA, QLoRA (Colab), HuggingFace transformers + datasets + accelerate, DPO (теория), публикация на HF Hub</div>
-<div class="box or"><h3>Автоматизация и интеграции</h3>n8n (пайплайны), MCP (стандарт), Playwright, Telegram Bot API, Webhooks, A2A</div>
-<div class="box or"><h3>Мониторинг и качество</h3>Langfuse (self-hosted), LangSmith, RAGAS, DeepEval, RAGAS A/B-тест, Semantic Cache, Cost dashboard</div>
-<div class="box or"><h3>Данные и классический ML</h3>pandas, NumPy, matplotlib, seaborn, plotly, scikit-learn, yfinance, BeautifulSoup4</div>
-<div class="box te"><h3>MLOps (декабрь)</h3>CI/CD для ML, автопереобучение, Kubernetes основы, rolling deploys, Model versioning</div>
-<div class="box pu"><h3>&#127919; Специализация (уникальная ниша)</h3>Chemometrics: PCA, PLS, cluster analysis. Анализ хроматограмм через ML. Multimodal: Vision API для спектров. AI для аналитической химии &mdash; ниша почти пустая.</div>
-<div class="box re"><h3>&#10060; Не тратить время</h3>Cursor (фронтенд-IDE), AutoGen (LangGraph лучше), Solidity/Aptos/Twitter-боты (Ahillary бонус &mdash; пропустить полностью), web3/крипто, Kubernetes до декабря</div>
-</div>
+        <div class="mblock">
+            <h3>Декабрь 2026 &mdash; Итоговые проекты + Позиционирование + План на 2027</h3>
+            <div class="mc">
+                <div>
+                    <div class="mh">Что изучаешь</div>
+                    <ul class="clist">
+                        <li>Kubernetes продвинутый: автомасштабирование, rolling updates &mdash; для продакшн деплоя
+                        </li>
+                        <li>Anthropic API: все новые возможности вышедшие за осень &mdash; отслеживать
+                            docs.anthropic.com</li>
+                        <li>Habit навсегда: arxiv.org &mdash; 1 статья в неделю по агентам / fine-tuning / RAG</li>
+                        <li>AI Alignment: anthropic.com/research &mdash; понять позицию лидера рынка</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mh">Что строишь / публикуешь</div>
+                    <ul class="clist">
+                        <li>Проект 4: полный MLOps pipeline &mdash; данные &rarr; fine-tuning &rarr; деплой &rarr;
+                            мониторинг &rarr; автообновление</li>
+                        <li>Статья: Habr (рус.) или Medium (eng.) &mdash; &laquo;Как построил AI-систему для
+                            аналитической химии за 9 месяцев&raquo;</li>
+                        <li>GitHub: 4 публичных репозитория, документация на английском</li>
+                        <li>LinkedIn: 10+ постов за осень, 500+ связей в нише</li>
+                        <li>Список лидов на Q1 2027</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mh">Цель к 1.01.2027</div>
+                    <div class="why">
+                        <b>Технически:</b> full-stack AI engineer &mdash; от fine-tuning до продакшн деплоя с
+                        MLOps.<br><br>
+                        <b>Коммерчески:</b> 1&ndash;2 платящих клиента, $1&ndash;4k/мес &mdash; первые реальные
+                        деньги.<br><br>
+                        <b>Репутационно:</b> LinkedIn + GitHub + публикации = видимость на рынке.<br><br>
+                        <b>К 2028:</b> при росте портфолио &rarr; $5&ndash;15k/мес реально.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ====== ИТОГОВЫЙ СТЕК ====== -->
+        <div class="ph" style="margin-top:24px">&#128230; Полный стек к 1 января 2027</div>
+        <div class="grid3">
+            <div class="box bl">
+                <h3>Инфра и среда</h3>Python 3.10+, Git (ветки, PR, tags), Docker + Compose, VPS Linux (SSH, nginx),
+                venv, .env, Node.js, PostgreSQL (осень)
+            </div>
+            <div class="box bl">
+                <h3>Инструменты разработки</h3>Claude Code (CLI, основной), VS Code, Playwright (web automation),
+                asyncio, Loguru (логирование)
+            </div>
+            <div class="box gr">
+                <h3>AI-оркестрация агентов</h3>LangGraph (граф состояний), PydanticAI (типизация), LangChain, CrewAI
+                (теория), MCP (свои серверы), LangFlow (прототипы)
+            </div>
+            <div class="box gr">
+                <h3>RAG и память</h3>Qdrant (продакшн), ChromaDB (прототипы), LlamaIndex, GraphRAG (осень), Corrective
+                RAG, Self-RAG, parent retrieval
+            </div>
+            <div class="box gr">
+                <h3>Локальные модели</h3>Ollama, vLLM, HuggingFace Hub, GGUF (CPU-квантование), AWQ (GPU-квантование),
+                OpenClaw (персональный агент)
+            </div>
+            <div class="box or">
+                <h3>Fine-tuning (август&ndash;осень)</h3>PEFT/LoRA, QLoRA (Colab), HuggingFace transformers + datasets +
+                accelerate, DPO (теория), публикация на HF Hub
+            </div>
+            <div class="box or">
+                <h3>Автоматизация и интеграции</h3>n8n (пайплайны), MCP (стандарт), Playwright, Telegram Bot API,
+                Webhooks, A2A
+            </div>
+            <div class="box or">
+                <h3>Мониторинг и качество</h3>Langfuse (self-hosted), LangSmith, RAGAS, DeepEval, RAGAS A/B-тест,
+                Semantic Cache, Cost dashboard
+            </div>
+            <div class="box or">
+                <h3>Данные и классический ML</h3>pandas, NumPy, matplotlib, seaborn, plotly, scikit-learn, yfinance,
+                BeautifulSoup4
+            </div>
+            <div class="box te">
+                <h3>MLOps (декабрь)</h3>CI/CD для ML, автопереобучение, Kubernetes основы, rolling deploys, Model
+                versioning
+            </div>
+            <div class="box pu">
+                <h3>&#127919; Специализация (уникальная ниша)</h3>Chemometrics: PCA, PLS, cluster analysis. Анализ
+                хроматограмм через ML. Multimodal: Vision API для спектров. AI для аналитической химии &mdash; ниша
+                почти пустая.
+            </div>
+            <div class="box re">
+                <h3>&#10060; Не тратить время</h3>Cursor (фронтенд-IDE), AutoGen (LangGraph лучше),
+                Solidity/Aptos/Twitter-боты (Ahillary бонус &mdash; пропустить полностью), web3/крипто, Kubernetes до
+                декабря
+            </div>
+        </div>
 
-<div class="verdict">
-<b>Реализуемость:</b> при 3&ndash;4 ч/день без пропусков. Через 6 месяцев ты строишь рабочие агентные системы: RAG, LangGraph, MCP, деплой, мониторинг.
-<br><br>
-<b>Специализация AI + аналитическая химия</b> &mdash; ниша почти пустая. Фармацевтика, нефтехимия, промышленная аналитика &mdash; платят хорошо, AI не понимают вообще. Два рабочих кейса + LinkedIn к январю 2027 = первые $3&ndash;8k/мес реально.
-<br><br>
-<b>К 25 годам</b> с этим стеком ты попадаешь в 5% специалистов в России по AI-интеграции для hard science отраслей. Пустая ниша + правильный стек = несимметричное преимущество.
-<div class="risk"><b>&#9888; Риск 1 &mdash; Темп:</b> ProGlib 2&ndash;3 занятия/нед + самостоятельная программа параллельно &mdash; плотно. Если ProGlib отстаёт &mdash; самостоятельное НЕ режешь. Режешь время на ProGlib.</div>
-<div class="risk"><b>&#9888; Риск 2 &mdash; Fine-tuning:</b> Глубокий fine-tuning за 6 мес при текущем уровне нереален. Теория &mdash; с апреля. Базовый LoRA эксперимент &mdash; август. Полноценно &mdash; осень. Так и запланировано.</div>
-<div class="risk"><b>&#9888; Риск 3 &mdash; Выгорание:</b> 180 дней подряд по 3&ndash;4 ч &mdash; физиология. Реши заранее: 1&ndash;2 тихих дня в месяц. Это управление ресурсами, не слабость.</div>
-<div class="risk"><b>&#9888; Риск 4 &mdash; Деньги:</b> $3&ndash;8k/мес через 12&ndash;18 мес при реальном портфолио &mdash; честная оценка старта. «Очень богатый слой» &mdash; 5&ndash;7 лет при правильном движении.</div>
-</div>
+        <div class="verdict">
+            <b>Реализуемость:</b> при 3&ndash;4 ч/день без пропусков. Через 6 месяцев ты строишь рабочие агентные
+            системы: RAG, LangGraph, MCP, деплой, мониторинг.
+            <br><br>
+            <b>Специализация AI + аналитическая химия</b> &mdash; ниша почти пустая. Фармацевтика, нефтехимия,
+            промышленная аналитика &mdash; платят хорошо, AI не понимают вообще. Два рабочих кейса + LinkedIn к январю
+            2027 = первые $3&ndash;8k/мес реально.
+            <br><br>
+            <b>К 25 годам</b> с этим стеком ты попадаешь в 5% специалистов в России по AI-интеграции для hard science
+            отраслей. Пустая ниша + правильный стек = несимметричное преимущество.
+            <div class="risk"><b>&#9888; Риск 1 &mdash; Темп:</b> ProGlib 2&ndash;3 занятия/нед + самостоятельная
+                программа параллельно &mdash; плотно. Если ProGlib отстаёт &mdash; самостоятельное НЕ режешь. Режешь
+                время на ProGlib.</div>
+            <div class="risk"><b>&#9888; Риск 2 &mdash; Fine-tuning:</b> Глубокий fine-tuning за 6 мес при текущем
+                уровне нереален. Теория &mdash; с апреля. Базовый LoRA эксперимент &mdash; август. Полноценно &mdash;
+                осень. Так и запланировано.</div>
+            <div class="risk"><b>&#9888; Риск 3 &mdash; Выгорание:</b> 180 дней подряд по 3&ndash;4 ч &mdash;
+                физиология. Реши заранее: 1&ndash;2 тихих дня в месяц. Это управление ресурсами, не слабость.</div>
+            <div class="risk"><b>&#9888; Риск 4 &mdash; Деньги:</b> $3&ndash;8k/мес через 12&ndash;18 мес при реальном
+                портфолио &mdash; честная оценка старта. «Очень богатый слой» &mdash; 5&ndash;7 лет при правильном
+                движении.</div>
+        </div>
 
-<!-- ====== ПРАВИЛО ДНЯ ====== -->
-<div class="ph">&#9201; Правила продуктивного дня</div>
-<div class="day-rule">
-<b>Блок 1 (1&ndash;1.5 ч):</b> Курс ProGlib &mdash; лекция или задание. Без параллельных вкладок.<br>
-<b>Блок 2 (1.5&ndash;2 ч):</b> Самостоятельная практика по плану недели. Пишешь, запускаешь, ломаешь, чинишь. Claude Code помогает &mdash; но каждую строчку объясняешь себе вслух или пишешь 1&ndash;2 строки в дневнике.<br>
-<b>Блок 3 (20&ndash;30 мин):</b> 1 git commit + 3&ndash;5 строк: что сделал, что непонятно, что завтра.<br><br>
-<b>Правило понимания:</b> Можешь объяснить за 2 минуты голосом &mdash; что сделал и почему именно так? Нет &rarr; не двигаешься дальше.<br><br>
-<b>Из Ahillary берёшь:</b> ООП (ур.8), async (ур.9), парсинг (ур.7), базы данных (доп. ур.5), Playwright (доп. ур.4), <b>Git (бонус ур.1 &mdash; ДОБАВЛЕНО в v3)</b>, <b>сервер+шифрование (бонус ур.4 &mdash; ДОБАВЛЕНО в v3)</b>, Pydantic (архив ур.2 &mdash; только Pydantic-раздел), RAG ур.2/3/5/6. <br><br>
-<b>HuggingFace NLP Course (huggingface.co/learn/nlp-course):</b> гл.1&ndash;2 (неделя 4) &rarr; гл.3&ndash;4 (неделя 5) &rarr; гл.5&ndash;6 (неделя 6) &rarr; гл.7&ndash;9 (июль). Бесплатно, читать параллельно с курсом.<br><br>
-<b>Буфер:</b> 1&ndash;2 &laquo;тихих&raquo; дня в месяц без обязательств. Это управление ресурсами.
-</div>
+        <!-- ====== ПРАВИЛО ДНЯ ====== -->
+        <div class="ph">&#9201; Правила продуктивного дня</div>
+        <div class="day-rule">
+            <b>Блок 1 (1&ndash;1.5 ч):</b> Курс ProGlib &mdash; лекция или задание. Без параллельных вкладок.<br>
+            <b>Блок 2 (1.5&ndash;2 ч):</b> Самостоятельная практика по плану недели. Пишешь, запускаешь, ломаешь,
+            чинишь. Claude Code помогает &mdash; но каждую строчку объясняешь себе вслух или пишешь 1&ndash;2 строки в
+            дневнике.<br>
+            <b>Блок 3 (20&ndash;30 мин):</b> 1 git commit + 3&ndash;5 строк: что сделал, что непонятно, что
+            завтра.<br><br>
+            <b>Правило понимания:</b> Можешь объяснить за 2 минуты голосом &mdash; что сделал и почему именно так? Нет
+            &rarr; не двигаешься дальше.<br><br>
+            <b>Из Ahillary берёшь:</b> ООП (ур.8), async (ур.9), парсинг (ур.7), базы данных (доп. ур.5), Playwright
+            (доп. ур.4), <b>Git (бонус ур.1 &mdash; ДОБАВЛЕНО в v3)</b>, <b>сервер+шифрование (бонус ур.4 &mdash;
+                ДОБАВЛЕНО в v3)</b>, Pydantic (архив ур.2 &mdash; только Pydantic-раздел), RAG ур.2/3/5/6. <br><br>
+            <b>HuggingFace NLP Course (huggingface.co/learn/nlp-course):</b> гл.1&ndash;2 (неделя 4) &rarr; гл.3&ndash;4
+            (неделя 5) &rarr; гл.5&ndash;6 (неделя 6) &rarr; гл.7&ndash;9 (июль). Бесплатно, читать параллельно с
+            курсом.<br><br>
+            <b>Буфер:</b> 1&ndash;2 &laquo;тихих&raquo; дня в месяц без обязательств. Это управление ресурсами.
+        </div>
 
-</div>
+    </div>
 </body>
+
 </html>
