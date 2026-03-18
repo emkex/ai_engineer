@@ -535,6 +535,16 @@
 .order-block b { color: #4fc3f7 }
 .order-step { background: rgba(255,255,255,.08); border-radius: 4px; padding: 6px 10px;
   margin: 4px 0; font-size: 11px }
+.st-yt     { background: #fce4ec; color: #b71c1c }
+.st-pdf    { background: #e8f5e9; color: #1b5e20 }
+.st-repo   { background: #f9fbe7; color: #558b2f }
+.st-linal  { background: #f3e5f5; color: #4a148c }
+.st-calc   { background: #fff8e1; color: #f57f17 }
+.st-stats  { background: #e0f2f1; color: #004d40 }
+.st-ml     { background: #e3f2fd; color: #0d47a1 }
+.st-dl     { background: #fce4ec; color: #880e4f }
+.st-llm    { background: #f3e5f5; color: #6a1b9a }
+.st-mlops  { background: #eceff1; color: #37474f }
     </style>
 </head>
 
@@ -630,8 +640,8 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-prog">PROG</span> Git How To</b><span><a href="https://githowto.com/ru" target="_blank">githowto.com/ru</a> — интерактивный тренажёр</span></div>
-                        <div class="tcard"><b><span class="src-tag st-video">VIDEO</span> 3Blue1Brown</b><span><a href="https://www.youtube.com/@3blue1brown" target="_blank">подписаться</a> — смотреть с нед. 2</span></div>
+                        <div class="tcard"><b><span class="src-tag st-repo">REPO</span><span class="src-tag st-prog">PROG</span> githowto.com/ru</b><span><a href="https://githowto.com/ru" target="_blank">githowto.com/ru</a> — интерактивный Git тренажёр</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3Blue1Brown</b><span><a href="https://www.youtube.com/@3blue1brown" target="_blank">подписаться</a> — старт с нед.2</span></div>
                     </div>
                 </td>
                 <td><span class="sp new">Git</span><span class="sp new">Claude.ai</span></td>
@@ -666,7 +676,7 @@
                             модели&raquo;: 4B,
                             Q4_K_M, context length</li>
                         <li>Понять: GPT vs Claude vs Llama vs Mistral &mdash; у каждого своё применение</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3Blue1Brown <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Essence of Linear Algebra</a> — видео 1–3 (Vectors, Linear combinations, Matrix transforms)</li>
+                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3Blue1Brown <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Essence of Linear Algebra</a> — гл.1–3: Vectors, Linear combinations, span, Linear transformations and matrices</li>
                     </ul>
                     <div class="src">&#128218; ollama.com + Ahillary Notion: Ollama + параметры модели</div>
                 </td>
@@ -690,8 +700,8 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-video">VIDEO</span> 3B1B LinAlg</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">вид. 1–3</a> (Vectors, Linear combinations)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> Chip Huyen 76мин</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">СМОТРЕТЬ</a> — полный обзор AI Engineering</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3B1B LinAlg гл.1–3</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Vectors, Transformations</a> — 20 мин/день</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> Chip Huyen 76мин 🔴</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">СМОТРЕТЬ СЕЙЧАС</a> — 00:00–14:50 (Foundation, Models)</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">Git</span><span class="sp new">Ollama</span><span
@@ -727,7 +737,7 @@
                         <li>Prompt Engineering: docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview &mdash; 30 мин, системно: structured prompts, in-context learning, defensive prompting</li>
                         <li>Ahillary ур.7: BeautifulSoup4, GET-запросы &mdash; понять принцип парсинга HTML</li>
                         <li>Написать базовый RSS-парсер</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> <a href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy Statistics</a> — Sampling, Mean/Median/Variance, Probability basics</li>
+                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3B1B <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">LinAlg</a> гл.4–6 (Matrix multiplication, Determinant, Inverse matrices). Параллельно: <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest YouTube</a> — Statistics Fundamentals плейлист (Histograms, Mean/Variance)</li>
                     </ul>
                     <div class="src">&#128218; docs.anthropic.com/quickstart (Python) + Ahillary ур.7 Notion</div>
                 </td>
@@ -753,8 +763,9 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-math">MATH</span> Khan Academy</b><span><a href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Statistics & Probability</a> (старт)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> Chip Huyen</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">23:15–30:20</a> (Prompt Engineering)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3B1B LinAlg гл.4–6</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Matrix mult, Determinant</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-stats">STATS</span> StatQuest: Statistics Fundamentals</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — Histograms, Distributions</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> Chip Huyen 23:15–30:20</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">Prompt Engineering</a></span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">Ollama</span><span class="sp new">Anthropic API</span><span
@@ -790,7 +801,7 @@
                         <li>НЕ устанавливать transformers &mdash; только понять структуру экосистемы</li>
                         <li>HuggingFace NLP Course гл.1&ndash;2 (huggingface.co/learn/nlp-course): pipeline API,
                             введение</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3Blue1Brown <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Essence of Calculus</a> — видео 1–5 (Derivatives, Chain rule) + Linear Algebra видео 4–8</li>
+                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3Blue1Brown <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Essence of Calculus</a> гл.1–5 (Derivatives, Chain Rule, Gradient intuition). Книга: <b>StatQuest Guide to ML</b> — гл.1–3 (ML concepts, Cross Validation, Statistics basics)</li>
                     </ul>
                     <div class="src">&#128218; Ahillary Notion (3 HF конспекта) + huggingface.co/learn/nlp-course
                         (гл.1-2)</div>
@@ -816,9 +827,10 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-video">VIDEO</span> 3B1B Calculus</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">вид. 1–5</a> (Derivatives, Chain rule)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> StatQuest ML</b><span>B1 — начать гл. 1–3 (Statistics basics, Bias/Variance, Trees)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> Hands-On ML</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">C1</a> — гл. 1: The ML Landscape</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-calc">CALC</span> 3B1B Calculus гл.1–5</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Derivatives, Chain Rule</a> — 20 мин/день</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.1–3: ML Fundamentals, Cross Validation</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">Géron</a> — гл.1: The ML Landscape</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-llm">LLM</span> HF LLM Course гл.1–2</b><span><a href="https://huggingface.co/learn/llm-course" target="_blank">llm-course</a> — pipeline API, трансформеры обзор (читать, не кодить)</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">Anthropic API</span><span class="sp new">pandas</span><span
@@ -853,7 +865,7 @@
                         <li>SemolinaCode ур.13 &mdash; альтернативное объяснение если непонятно</li>
                         <li>Написать async-скрипт: 3 RSS параллельно &rarr; один DataFrame</li>
                         <li>HuggingFace NLP Course гл.3&ndash;4: fine-tuning теория &mdash; только читать</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> <a href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy</a> — Distributions (Normal, Binomial), CLT, Bayes. Прямая связь: precision/recall/ROC-AUC которые учишь сейчас — это теорвер на практике</li>
+                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3B1B <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Calculus</a> гл.6–9 (Backprop интуиция). Книга: <b>StatQuest Guide to ML</b> гл.4–6 (Linear/Logistic Regression, Gradient Descent). Прямая связь: precision/recall/ROC-AUC которые учишь сейчас — это теорвер в действии.</li>
                     </ul>
                     <div class="src">&#128218; Ahillary ур.9 Notion + SemolinaCode TG ур.13 +
                         huggingface.co/learn/nlp-course (гл.3-4)</div>
@@ -878,9 +890,11 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-math">MATH</span> Khan Academy</b><span><a href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Distributions + CLT + Bayes</a></span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> StatQuest ML</b><span>B1 — гл. 4–6 (метрики, деревья, лес)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> MML Book</b><span><a href="https://mml-book.github.io" target="_blank">A5</a> — гл. 2 (Linear Algebra recap)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-calc">CALC</span> 3B1B Calculus гл.6–9</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Backprop интуиция</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.4–6: Linear/Logistic Regression, Gradient Descent</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-stats">STATS</span> StatQuest: ROC + Confusion Matrix</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — по теме метрик недели</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-linal">LINAL</span> MML Book гл.2</b><span><a href="https://mml-book.github.io" target="_blank">mml-book.github.io</a> — LinAlg recap (справочник)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-llm">LLM</span> HF LLM Course гл.3–4</b><span><a href="https://huggingface.co/learn/llm-course" target="_blank">llm-course</a> — fine-tuning теория + Hub (читать, код в июле)</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">pandas</span><span class="sp new">asyncio</span><span
@@ -916,7 +930,7 @@
                             &rarr; ответ</li>
                         <li>Запустить на 2&ndash;3 PDF по экономике &rarr; задать 5 вопросов</li>
                         <li>HuggingFace NLP Course гл.5&ndash;6: datasets, tokenizers (читать)</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3B1B <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Linear Algebra</a> вид. 13–15 (Eigenvalues → это PCA) + <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Calculus</a> вид. 8–9 (Gradient descent → это как учится LinearRegression)</li>
+                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3B1B <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">LinAlg</a> гл.13–15 (Change of basis, Eigenvectors, Abstract vector spaces → это и есть PCA) + <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Calculus</a> гл.8–9 (Gradient descent → так обучается LinearRegression который учишь сейчас)</li>
                     </ul>
                     <div class="src">&#128218; Ahillary YouTube ур.2 + github.com/CrashNosok/RAG_lessons +
                         huggingface.co/learn/nlp-course (гл.5-6)</div>
@@ -942,10 +956,12 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-video">VIDEO</span> 3B1B LinAlg</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">вид. 13–15</a> (Eigenvalues, PCA)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-video">VIDEO</span> 3B1B Calc</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">вид. 8–9</a> (Gradient descent)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> Hands-On ML</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">C1</a> — гл. 2–4 (end-to-end, классиф., регрессия)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> Chip Huyen</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">30:20–36:56</a> (RAG)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3B1B LinAlg гл.13–15</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Eigenvalues → это PCA</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-calc">CALC</span> 3B1B Calculus гл.8–9</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Gradient Descent → обучение LinearRegression</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> StatQuest ML (B1)</b><span>гл.7–10: Naive Bayes, Decision Trees, Regularization</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">гл.2–4</a>: end-to-end, Classification</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> Chip Huyen 30:20–36:56</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">RAG секция</a> — смотреть до RAG</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-llm">LLM</span> HF LLM Course гл.5–6</b><span><a href="https://huggingface.co/learn/llm-course" target="_blank">llm-course</a> — Datasets + Tokenizers (как устроены, читать)</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">asyncio</span><span class="sp new">scikit-learn</span><span
@@ -1029,8 +1045,8 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> Chip Huyen</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">36:56–43:02</a> (Agents + Memory)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> Hands-On ML</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">C1</a> — гл. 5–6 (SVM, Decision Trees)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> Chip Huyen 36:56–43:02</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">Agents + Memory</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">гл.5–6</a>: SVM, Decision Trees</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">RAG</span><span class="sp new">Docker</span><span
@@ -1070,7 +1086,7 @@
                         <li>Переписать RAG с ChromaDB на Qdrant + метаданные (источник, дата, тема)</li>
                         <li>Ahillary YouTube ур.5: подключить LangSmith &rarr; трейсы каждого запроса</li>
                         <li>Ahillary архив ур.2 (Twitter/Pydantic): ТОЛЬКО раздел про Pydantic-модели и RootModel</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (опц., 20 мин/день):</b> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest YouTube</a> — Neural Networks Pt.1 + Backpropagation. Зачем: embeddings = выход нейросети, понимаешь RAG глубже</li>
+                        <li style="margin-top:8px"><b>&#128290; Математика (опц., 20 мин/день):</b> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest YouTube</a> — Neural Networks плейлист (Pt.1 + Backpropagation). Зачем: embeddings = выход нейросети, понимаешь RAG и Qdrant глубже.</li>
                     </ul>
                     <div class="src">&#128218; qdrant.tech/docs + Ahillary YouTube ур.5 + Ahillary архив ур.2 (только
                         Pydantic-часть)</div>
@@ -1100,10 +1116,10 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-video">VIDEO</span> StatQuest NN</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — Neural Networks Pt.1 + Backprop</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> StatQuest NN</b><span>B2 — начать</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> MML Book</b><span><a href="https://mml-book.github.io" target="_blank">A5</a> — гл. 5–6 (Vector spaces)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> Hands-On ML</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">C1</a> — гл. 7–8 (Ensemble, Dimensionality Reduction)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> StatQuest: Neural Networks</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — Pt.1 + Backprop (embeddings = нейросеть)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-dl">DL</span> StatQuest Neural Networks (B2)</b><span>начать гл.1–3: основы, PyTorch intro</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-linal">LINAL</span> MML Book гл.5–6</b><span><a href="https://mml-book.github.io" target="_blank">mml-book.github.io</a> — Vector spaces</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">гл.7–8</a>: Ensemble, Dimensionality Reduction</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">n8n</span><span class="sp new">Qdrant</span><span
@@ -1168,8 +1184,8 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> StatQuest NN</b><span>B2 — продолжение (backprop, activation functions)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-prog">PROG</span> Claude Code</b><span><a href="https://docs.anthropic.com/claude-code" target="_blank">docs</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-dl">DL</span> StatQuest Neural Networks (B2)</b><span>гл.4–6: Backprop, Activation functions</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-prog">PROG</span> Claude Code docs</b><span><a href="https://docs.anthropic.com/claude-code" target="_blank">docs.anthropic.com</a></span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">Qdrant</span><span class="sp new">Claude Code</span><span
@@ -1233,8 +1249,8 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> MML Book</b><span><a href="https://mml-book.github.io" target="_blank">A5</a> — гл. 7 (Continuous Optimization — GD, SGD)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> Chip Huyen</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">59:45</a> (Inference Optimization)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-calc">CALC</span> MML Book гл.7</b><span><a href="https://mml-book.github.io" target="_blank">mml-book.github.io</a> — Optimization (GD, SGD)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> Chip Huyen 59:45</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">Inference Optimization</a> — TTFT, TPOT</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">Claude Code</span><span class="sp new">MCP</span><span
@@ -1299,9 +1315,9 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> StatQuest NN</b><span>B2 — финальные главы (Attention, Transformers)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> Chip Huyen</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">43:02–52:40</a> (Fine-tuning)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> Hands-On ML</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">C1</a> — гл. 10–11 (Neural Networks с Keras)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-dl">DL</span> StatQuest Neural Networks (B2)</b><span>гл.7–10: Attention, Transformers</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-llm">LLM</span> Chip Huyen 43:02–52:40</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">Fine-tuning + Dataset Eng.</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-dl">DL</span> Hands-On ML (C1)</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">гл.10–11</a>: Neural Networks с Keras</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">MCP</span><span class="sp new">LangGraph</span><span class="sp new">CrewAI
@@ -1361,8 +1377,8 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> Chip Huyen</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">01:09:01</a> (Architecture + User Feedback)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> Hands-On ML</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">C1</a> — гл. 12–13 (Custom Models, Preprocessing)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> Chip Huyen 01:09:01</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">Architecture + User Feedback</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">гл.12–13</a>: Custom Models, Preprocessing</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">LangGraph</span><span class="sp new">Langfuse</span><span
@@ -1447,7 +1463,7 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> Practical Stats</b><span><a href="https://amzn.to/4n2i4Io" target="_blank">C4</a> — гл. 6–7 (Statistical ML, Classification)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-llm">LLM</span> Hands-On LLMs (D1)</b><span><a href="https://amzn.to/4kGW0ld" target="_blank">начать</a> — гл.1–2 введение</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">Langfuse</span><span class="sp new">Docker Compose</span><span
@@ -1579,9 +1595,10 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> AI Engineering</b><span><a href="https://amzn.to/3Zy737M" target="_blank">D2 Chip Huyen</a> — начать читать книгу</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> MML Book</b><span><a href="https://mml-book.github.io" target="_blank">A5</a> — гл. 10–12 (Dimensionality Reduction, Classification)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-chem">CHEM</span> Chemometrics</b><span>гл. 1–3 (базовая статистика для хим. данных)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ai">AI</span> AI Engineering (D2)</b><span><a href="https://amzn.to/3Zy737M" target="_blank">Chip Huyen книга</a> — начать читать</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-llm">LLM</span> Hands-On LLMs (D1)</b><span><a href="https://amzn.to/4kGW0ld" target="_blank">гл.3–5</a>: embeddings, text generation</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-chem">CHEM</span> Chemometrics PDF</b><span>гл.1–3 — статистика для хим. данных (файл в проекте)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-linal">LINAL</span> MML Book гл.10–12</b><span><a href="https://mml-book.github.io" target="_blank">mml-book.github.io</a> — Dimensionality Reduction</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">LangGraph</span><span class="sp new">vLLM</span><span
@@ -1625,6 +1642,7 @@
                         <li>Chemometrics гл.4&ndash;6: PCA, PLS, cluster analysis</li>
                         <li>sklearn Pipeline: PCA &rarr; классификатор на хроматографических данных CSV</li>
                         <li>MCP-инструмент: analyze_chromatogram(file_path) &rarr; интерпретация пиков</li>
+                        <li>HF LLM Course гл.7 + гл.11: <a href="https://huggingface.co/learn/llm-course" target="_blank">NLP tasks (гл.7)</a> — NER, Q&A; <b>Fine-tune LLMs (гл.11) — LoRA + PEFT с trl</b>. Прямо под задачу LoRA/QLoRA этих недель. Запускать код!</li>
                     </ul>
                     <div class="src">&#128218; huggingface.co/docs/peft + Chemometrics PDF (гл.4-6) +
                         huggingface.co/learn/nlp-course</div>
@@ -1651,10 +1669,10 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> Hands-On ML</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">C1</a> — гл. 15–17 (Sequences, Attention, Transformers)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-chem">CHEM</span> Chemometrics</b><span>гл. 4–6 (PCA, PLS, Cluster Analysis)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-video">VIDEO</span> StatQuest PCA</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — Step-by-Step</span></div>
-                        <div class="tcard"><b><span class="src-tag st-course">COURSE</span> HF PEFT</b><span><a href="https://huggingface.co/docs/peft" target="_blank">docs</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-dl">DL</span> Hands-On ML (C1)</b><span><a href="https://amzn.to/4l4veCZ" target="_blank">гл.15–17</a>: Sequences, Attention, Transformers</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-chem">CHEM</span> Chemometrics PDF</b><span>гл.4–6: PCA, PLS, Cluster Analysis (файл в проекте)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-chem">CHEM</span> StatQuest: PCA Step-by-Step</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — поиск "PCA StatQuest"</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-llm">LLM</span> HF LLM Course гл.7 + гл.11</b><span><a href="https://huggingface.co/learn/llm-course" target="_blank">llm-course</a> — NLP tasks + <b>Fine-tune LLMs (LoRA, PEFT, trl)</b> — запускать код!</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">vLLM</span><span class="sp new">PEFT/LoRA</span><span
@@ -1688,6 +1706,7 @@
                         <li>LinkedIn на английском: &laquo;AI Engineer | AI Integration for Analytical Chemistry&raquo;
                         </li>
                         <li>2 кейса: &laquo;проблема &rarr; решение &rarr; результат&raquo; &rarr; LinkedIn post</li>
+                        <li>HF LLM Course гл.10: <a href="https://huggingface.co/learn/llm-course" target="_blank">Curate high-quality datasets</a> — как собрать и разметить данные для fine-tuning. Прямо под A/B тест промптов и Release Engineering этих недель.</li>
                     </ul>
                     <div class="src">&#128218; openclaw.ai + docs.anthropic.com/claude-code + loom.com</div>
                 </td>
@@ -1713,9 +1732,10 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-ai">AI</span> Hands-On LLMs</b><span><a href="https://amzn.to/4kGW0ld" target="_blank">D1</a> — начать читать</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span> 100-Page ML</b><span><a href="https://amzn.to/3FNAzzN" target="_blank">C2</a> — справочник</span></div>
-                        <div class="tcard"><b><span class="src-tag st-prog">PROG</span> PyTorch</b><span><a href="https://pytorch.org/tutorials" target="_blank">Tutorials</a> — параллельно</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-llm">LLM</span> Hands-On LLMs (D1)</b><span><a href="https://amzn.to/4kGW0ld" target="_blank">финальные главы</a>: fine-tuning, deployment</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> 100-Page ML Book (C2)</b><span><a href="https://amzn.to/3FNAzzN" target="_blank">справочник</a> — быстрое освежение</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> Andrej Karpathy: Let's build GPT</b><span><a href="https://www.youtube.com/@AndrejKarpathy" target="_blank">YouTube</a> — PyTorch с нуля</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-llm">LLM</span> HF LLM Course гл.10</b><span><a href="https://huggingface.co/learn/llm-course" target="_blank">llm-course</a> — Curate datasets для fine-tuning</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">PEFT/LoRA</span><span class="sp new">OpenClaw</span><span
@@ -2019,195 +2039,239 @@
 <div class="src-lib">
 
   <div class="order-block">
-    <b>&#128214; ПРАВИЛЬНЫЙ ПОРЯДОК (не нарушать):</b><br>
-    <div class="order-step">ЭТАП 0 (март–май, параллельно) → 3Blue1Brown: Linear Algebra + Calculus + Khan Academy Stats</div>
-    <div class="order-step">ЭТАП 1 (апрель–июнь) → StatQuest Guide to ML (B1) + Hands-On ML Géron (C1)</div>
-    <div class="order-step">ЭТАП 2 (июнь–август) → StatQuest Neural Networks & AI (B2) + HuggingFace NLP Course</div>
-    <div class="order-step">ЭТАП 3 (август–сентябрь) → Hands-On Large Language Models (D1)</div>
-    <div class="order-step">ЭТАП 4 (сентябрь–октябрь) → AI Engineering Chip Huyen (D2) — только после базы!</div>
-    <div class="order-step">ЭТАП 5 (ноябрь–декабрь) → GenAI System Design ByteByteGo (D3) + Practical MLOps (D4)</div>
+    <b>&#128214; ПРАВИЛЬНЫЙ ПОРЯДОК — не нарушать:</b><br>
+    <div class="order-step">&#9312; МАРТ–МАЙ (параллельно с курсом) → 3B1B LinAlg + Calculus + StatQuest Statistics YT</div>
+    <div class="order-step">&#9313; АПР–ИЮЛЬ → StatQuest ML книга (B1) + Hands-On ML Géron (C1, по главам)</div>
+    <div class="order-step">&#9314; МАЙ–АВГ → StatQuest Neural Networks & AI (B2) + HuggingFace NLP Course</div>
+    <div class="order-step">&#9315; АВГ–СЕНТ → Hands-On LLMs (D1) + Karpathy "Let's build GPT" YT</div>
+    <div class="order-step">&#9316; СЕНТ–ОКТ → AI Engineering книга Chip Huyen (D2) — только после D1 и мат.базы!</div>
+    <div class="order-step">&#9317; НОЯ–ДЕК → GenAI System Design ByteByteGo (D3) + Practical MLOps (D4)</div>
   </div>
 
-  <h3>&#128290; БЛОК A — Математика (обязательная база, март–май)</h3>
+  <!-- ===== ГРУППА 1: МАТЕМАТИКА ===== -->
+  <h3>&#128290; МАТЕМАТИКА — фундамент (март–май, 20 мин/день)</h3>
+  <p style="font-size:11px;color:var(--color-text-secondary,#555);margin:0 0 10px">Смотреть параллельно с курсом. Не читать подряд — по 2–3 видео в неделю, строго в порядке.</p>
+
+  <h4 style="font-size:11px;font-weight:700;color:#4a148c;text-transform:uppercase;letter-spacing:.4px;margin:8px 0 6px">Линейная алгебра</h4>
   <div class="src-grid">
     <div class="src-entry">
-      <b><span class="src-tag st-video">VIDEO</span> A1 — Linear Algebra (3Blue1Brown)</b>
-      Бесплатно, 15 видео × 10–15 мин<br>
-      Темы: Vectors, Matrix ops, Determinants, Eigenvalues, SVD, PCA<br>
-      <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">→ Плейлист</a><br>
-      <span class="when">Когда: недели 2–6 (по 2–3 видео/неделю)</span>
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3Blue1Brown — Essence of Linear Algebra</b>
+      15 видео, бесплатно, ~10–15 мин каждое.<br>
+      Лучший визуальный линал. Покрывает всё нужное для ML.<br>
+      Нед.2: гл.1–3 (Vectors, Transformations) · Нед.3: гл.4–8 (Matrix mult, Determinant, Inverse) · Нед.4–5: гл.9–12 · Нед.6: гл.13–15 (<b>Eigenvalues → это PCA</b>)<br>
+      <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">→ YouTube плейлист</a><br>
+      <span class="when">Сравнение: единственный топовый ресурс по линалу такого качества. MML Book — академический справочник, но не для первого знакомства.</span>
     </div>
     <div class="src-entry">
-      <b><span class="src-tag st-video">VIDEO</span> A2 — Calculus (3Blue1Brown)</b>
-      Бесплатно, 12 видео × 10–15 мин<br>
-      Темы: Derivatives, Chain rule, Gradient Descent<br>
-      <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">→ Плейлист</a><br>
-      <span class="when">Когда: недели 4–6</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-course">COURSE</span> A3 — Statistics & Probability (Khan Academy)</b>
-      Бесплатно. Темы: CLT, Distributions, Bayes, MLE, Regression<br>
-      <a href="https://www.khanacademy.org/math/statistics-probability" target="_blank">→ Khan Academy</a><br>
-      <span class="when">Когда: недели 3–5</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-book">BOOK</span> A5 — MML Book (справочник)</b>
-      Бесплатно PDF. Академическая база по линалу, calculus, теорверу для ML<br>
+      <b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-linal">LINAL</span> Mathematics for Machine Learning — eBook (справочник)</b>
+      Бесплатно PDF. Академический. Линейная алгебра, Calculus, теорвер для ML.<br>
+      НЕ читать подряд — открывать при конкретном ступоре.<br>
+      Полезные главы: гл.2 (LinAlg recap, нед.5), гл.5–6 (Vector spaces, нед.8), гл.7 (Optimization, нед.10), гл.10–12 (Dimensionality Reduction, июнь).<br>
       <a href="https://mml-book.github.io" target="_blank">→ mml-book.github.io</a><br>
-      <span class="when">Когда: справочник с нед.5+, углублённо — сентябрь</span>
+      <span class="when">Сравнение: 3B1B — для понимания, MML Book — для доказательств и формул. Используй вместе: сначала 3B1B, потом MML если хочется глубже.</span>
     </div>
   </div>
 
-  <h3>&#128202; БЛОК B — StatQuest (особо рекомендуется, читать ДО Chip Huyen)</h3>
+  <h4 style="font-size:11px;font-weight:700;color:#f57f17;text-transform:uppercase;letter-spacing:.4px;margin:14px 0 6px">Calculus</h4>
   <div class="src-grid">
     <div class="src-entry">
-      <b><span class="src-tag st-book">BOOK</span> B1 — StatQuest Guide to Machine Learning</b>
-      Josh Starmer. Рисунки + PyTorch примеры. Идеальная подготовка к Hands-On ML.<br>
-      Темы: Statistics, Trees, Neural Networks basics, Bias-Variance<br>
-      <a href="https://www.amazon.com/StatQuest-Illustrated-Guide-Machine-Learning/dp/B09ZCKR4H6" target="_blank">→ Amazon</a><br>
-      <span class="when">Когда: недели 4–8</span>
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-calc">CALC</span> 3Blue1Brown — Essence of Calculus</b>
+      12 видео, бесплатно, ~10–15 мин каждое.<br>
+      Нед.4: гл.1–5 (Derivatives, Chain Rule, Gradient интуиция) · Нед.5–6: гл.6–9 (<b>Gradient Descent → как учится LinearRegression</b>) · Нед.8+: гл.10–12 (Backprop через calculus)<br>
+      <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">→ YouTube плейлист</a><br>
+      <span class="when">Сравнение: единственный нужный ресурс по calculus для ML. MML Book гл.5–7 — если нужны формальные определения.</span>
     </div>
     <div class="src-entry">
-      <b><span class="src-tag st-book">BOOK</span> B2 — StatQuest Guide to Neural Networks & AI</b>
-      Josh Starmer. PyTorch примеры (не TensorFlow).<br>
-      Темы: Backprop, Attention, Transformers, практика на PyTorch<br>
-      <a href="https://www.amazon.com" target="_blank">→ Amazon (StatQuest Neural Networks)</a><br>
-      <span class="when">Когда: недели 8–12</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-video">VIDEO</span> StatQuest YouTube Channel</b>
-      Бесплатно. Плейлисты по статистике, ML, нейросетям<br>
-      Особо: Neural Networks Pt.1, Backpropagation, PCA, Random Forest<br>
-      <a href="https://www.youtube.com/@statquest" target="_blank">→ YouTube @statquest</a><br>
-      <span class="when">Когда: параллельно с книгами B1/B2</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-video">VIDEO</span> 3Blue1Brown YouTube Channel</b>
-      Лучшие визуальные объяснения математики и нейросетей<br>
-      Особо: Neural Networks плейлист + But what is a neural network?<br>
-      <a href="https://www.youtube.com/@3blue1brown" target="_blank">→ YouTube @3blue1brown</a><br>
-      <span class="when">Когда: постоянно</span>
+      <b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-linal">LINAL</span> MML Book гл.5–7 — Calculus + Optimization</b>
+      Справочник. Гл.5: Vector calculus. Гл.6: Probability. Гл.7: Continuous Optimization (SGD, momentum).<br>
+      Открывать при ступоре на нед.10+ (MCP, fine-tuning теория).<br>
+      <a href="https://mml-book.github.io" target="_blank">→ mml-book.github.io</a><br>
+      <span class="when">Сравнение: 3B1B даёт интуицию, MML Book даёт формальный аппарат. MML нужен если идёшь глубже в теорию, 3B1B достаточно для практики AI Engineer.</span>
     </div>
   </div>
 
-  <h3>&#128736;&#65039; БЛОК C — Практические книги ML</h3>
+  <h4 style="font-size:11px;font-weight:700;color:#004d40;text-transform:uppercase;letter-spacing:.4px;margin:14px 0 6px">Статистика и теорвер</h4>
   <div class="src-grid">
     <div class="src-entry">
-      <b><span class="src-tag st-book">BOOK</span> C1 — Hands-On ML (Géron) ⭐ ОСОБО РЕКОМЕНДОВАНА</b>
-      Aurélien Géron, 3-е издание, O'Reilly<br>
-      Весь pipeline ML: данные → модель → деплой. В книге TensorFlow, концепции универсальны.<br>
-      Гл. 1 (нед.4) → гл. 2–4 (нед.6) → гл. 5–8 (нед.7–8) → гл. 10–13 (нед.11–12) → гл. 15–17 (июль)<br>
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-stats">STATS</span> StatQuest — Statistics Fundamentals плейлист</b>
+      Бесплатно. Гистограммы, Mean/Variance, Distributions, p-values, Bayes, MLE.<br>
+      Нед.3–5: смотреть по теме недели (нед.5 — ROC/AUC/Confusion Matrix прямо с тем что учишь в ProGlib).<br>
+      <a href="https://www.youtube.com/@statquest" target="_blank">→ @statquest YouTube</a><br>
+      <span class="when">Сравнение: StatQuest YT — самый быстрый старт. StatQuest Statistics книга (B3) — то же самое + Python примеры + более полно. ISLP — академически строже, на сентябрь.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-stats">STATS</span> StatQuest — Illustrated Guide to Statistics (B3)</b>
+      Josh Starmer. 319 стр. Python + R примеры. Иллюстрированный.<br>
+      Histograms → Probability Distributions → Hypothesis Testing → p-values → Regression → t-tests → Power Analysis.<br>
+      <a href="https://statquest.org/statquest-store/" target="_blank">→ statquest.org/store</a><br>
+      <span class="when">Сравнение: лучше чем ISLP для старта — проще, с картинками. ISLP строже, ISLP в сентябрь. B3 — если хочешь книгу под руку с апреля.</span>
+    </div>
+  </div>
+
+  <!-- ===== ГРУППА 2: КЛАССИЧЕСКИЙ ML ===== -->
+  <h3 style="margin-top:20px">&#129516; КЛАССИЧЕСКИЙ ML (апрель–август)</h3>
+  <p style="font-size:11px;color:var(--color-text-secondary,#555);margin:0 0 10px">Читать по главам параллельно с ProGlib — глава в книге = тема недели в курсе.</p>
+  <div class="src-grid">
+    <div class="src-entry">
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> StatQuest — Illustrated Guide to ML (B1) ⭐</b>
+      Josh Starmer. 305 стр. Иллюстрированный. Без воды.<br>
+      ML Fundamentals → Cross Validation → Statistics → Linear Regression → Gradient Descent → Logistic Regression → Naive Bayes → Model Assessment → Regularization → Decision Trees → SVM → Neural Networks.<br>
+      <b>Точное совпадение с ProGlib нед.4–8</b> — читать главу в день по теме недели.<br>
+      <a href="https://statquest.gumroad.com/l/wvtmc" target="_blank">→ Gumroad (автор)</a> · <a href="https://www.amazon.com/dp/B0BLM4TLPY" target="_blank">→ Amazon</a><br>
+      <span class="when">Сравнение: лучше Géron для первого понимания — проще и с картинками. Géron (C1) глубже и с кодом. Читать вместе: B1 = понять, C1 = запустить.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> Hands-On ML (Géron, C1) ⭐ ОСОБО РЕКОМЕНДОВАНА</b>
+      Aurélien Géron. 3-е изд., O'Reilly. Весь ML pipeline от данных до деплоя. TF синтаксис, концепции универсальны.<br>
+      Гл.1 (нед.4) → гл.2–4 (нед.6) → гл.5–8 (нед.7–8) → гл.10–13 (нед.11–12) → гл.15–17 (июль).<br>
       <a href="https://amzn.to/4l4veCZ" target="_blank">→ amzn.to/4l4veCZ</a><br>
-      <span class="when">Когда: апрель–июль</span>
+      <span class="when">Сравнение: самая полная практическая книга по ML. B1 (StatQuest) проще, C2 (100-Page) компактнее, ISLP строже. C1 — основная на апрель–июль.</span>
     </div>
     <div class="src-entry">
-      <b><span class="src-tag st-book">BOOK</span> C2 — Hundred-Page ML Book</b>
-      Компактный справочник по всему ML. Читать быстро.<br>
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> The Hundred-Page ML Book (C2)</b>
+      Компактный справочник. Весь ML за ~150 стр. Читать быстро как обзор.<br>
       <a href="https://amzn.to/3FNAzzN" target="_blank">→ amzn.to/3FNAzzN</a><br>
-      <span class="when">Когда: август+ как справочник</span>
+      <span class="when">Сравнение: не замена C1, а дополнение. C1 глубокий и с кодом, C2 — быстрое освежение. Использовать в августе перед портфолио.</span>
     </div>
     <div class="src-entry">
-      <b><span class="src-tag st-book">BOOK</span> C3 — ISLP (Intro Statistical Learning, Python)</b>
-      Бесплатно PDF. Теоретическая база ML: regression, classification, resampling, trees<br>
+      <b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-ml">ML</span> ISLP — Intro to Statistical Learning (Python, C3)</b>
+      Бесплатно PDF. Академически строгий. Python-версия. Regression, Classification, Trees, SVM, Deep Learning.<br>
       <a href="https://www.statlearning.com" target="_blank">→ statlearning.com</a><br>
-      <span class="when">Когда: сентябрь–октябрь</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-book">BOOK</span> C4 — Practical Statistics for Data Science</b>
-      O'Reilly. Статистика применительно к DS задачам.<br>
-      <a href="https://amzn.to/4n2i4Io" target="_blank">→ amzn.to/4n2i4Io</a><br>
-      <span class="when">Когда: июнь (нед.13) — дополнительно</span>
+      <span class="when">Сравнение: строже чем StatQuest, проще чем Elements of Statistical Learning (который скипаем). Использовать в сентябре для углубления теории когда уже есть практика.</span>
     </div>
   </div>
 
-  <h3>&#129302; БЛОК D — AI Engineering (порядок строго соблюдать)</h3>
+  <!-- ===== ГРУППА 3: DEEP LEARNING / НЕЙРОСЕТИ ===== -->
+  <h3 style="margin-top:20px">&#129504; DEEP LEARNING — нейросети и трансформеры (май–сентябрь)</h3>
+  <p style="font-size:11px;color:var(--color-text-secondary,#555);margin:0 0 10px">Читать после StatQuest ML (B1). PyTorch — не TensorFlow.</p>
   <div class="src-grid">
     <div class="src-entry">
-      <b><span class="src-tag st-ai">AI</span> Chip Huyen — AI Engineering Speedrun (76 мин) &#128308; СМОТРЕТЬ НА НЕД.2</b>
-      Обзор всей книги за 76 мин. Смотреть ДО углублённого изучения.<br>
-      00:00 Foundation Models · 08:40 Evaluating · 14:50 Model Selection<br>
-      23:15 Prompt Eng (нед.3) · 30:20 RAG (нед.6) · 36:56 Agents (нед.7)<br>
-      43:02 Fine-tuning (нед.11) · 59:45 Inference Opt (нед.10) · 01:09:01 Architecture (нед.12)<br>
-      <a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">→ YouTube (76 мин)</a>
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-dl">DL</span> StatQuest — Neural Networks & AI (B2) ⭐</b>
+      Josh Starmer. 363 стр. Примеры на <b>PyTorch</b>.<br>
+      Backpropagation → Attention → Transformers → hands-on PyTorch.<br>
+      Нед.8–12: читать по главам. Август: финальные главы под fine-tuning.<br>
+      <a href="https://statquest.org/statquest-store/" target="_blank">→ statquest.org/store</a> · <a href="https://www.amazon.com" target="_blank">→ Amazon</a><br>
+      <span class="when">Сравнение: лучше Géron гл.10–11 для первого понимания нейросетей — проще и на PyTorch. Karpathy глубже и с нуля строит GPT. Порядок: B2 → Karpathy.</span>
     </div>
     <div class="src-entry">
-      <b><span class="src-tag st-ai">AI</span> D1 — Hands-On Large Language Models</b>
-      Практика LLM end-to-end: embeddings, fine-tuning, применение<br>
-      <a href="https://amzn.to/4kGW0ld" target="_blank">→ amzn.to/4kGW0ld</a><br>
-      <span class="when">Когда: август (нед.23+). ЧИТАТЬ ДО Chip Huyen книги.</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-ai">AI</span> D2 — AI Engineering (Chip Huyen) — книга</b>
-      Продакшн AI системы. Рассчитана на людей с базой Python + ML + LLM.<br>
-      ⚠️ Читать ПОСЛЕ D1 и после твёрдой мат.базы<br>
-      <a href="https://amzn.to/3Zy737M" target="_blank">→ amzn.to/3Zy737M</a><br>
-      <span class="when">Когда: сентябрь–октябрь</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-ai">AI</span> D3 — Generative AI System Design Interview (ByteByteGo)</b>
-      Ali Aminian & Hao Sheng. System design для production AI.<br>
-      <span class="when">Когда: ноябрь–декабрь</span>
-    </div>
-  </div>
-
-  <h3>&#127891; БЛОК E — Онлайн-курсы</h3>
-  <div class="src-grid">
-    <div class="src-entry">
-      <b><span class="src-tag st-course">COURSE</span> E1 — ML Specialization (Andrew Ng, Coursera)</b>
-      Академическая база ML. Факультативно — если нужна структура.<br>
-      <a href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank">→ Coursera</a><br>
-      <span class="when">Когда: параллельно с нед.6–10 по желанию</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-course">COURSE</span> E2 — Deep Learning Specialization (DeepLearning.AI)</b>
-      <a href="https://www.deeplearning.ai/courses/deep-learning-specialization/" target="_blank">→ deeplearning.ai</a><br>
-      <span class="when">Когда: август–сентябрь, после LoRA практики</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-course">COURSE</span> E3 — fast.ai Practical Deep Learning for Coders</b>
-      Бесплатно. Практика первая, теория потом.<br>
-      <a href="https://fast.ai/courses" target="_blank">→ fast.ai/courses</a><br>
-      <span class="when">Когда: сентябрь, как альтернативный путь</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-course">COURSE</span> E4 — Math for ML & DS (DeepLearning.AI, Coursera)</b>
-      3 курса: линал + calculus + теорвер+стат. ~100 часов.<br>
-      <a href="https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science" target="_blank">→ Coursera</a><br>
-      <span class="when">Когда: сентябрь–октябрь, если нужна академическая глубина</span>
-    </div>
-  </div>
-
-  <h3>⚗️ БЛОК H — Химия + ML (специализация)</h3>
-  <div class="src-grid">
-    <div class="src-entry">
-      <b><span class="src-tag st-chem">CHEM</span> H1 — Statistics and Chemometrics for Analytical Chemistry</b>
-      Файл уже в проекте: Statistics_and_Chemometrics_for_Analytical_Chemistry_6th.pdf<br>
-      Гл. 1–3 (нед.16–18, июнь) → Гл. 4–6 (нед.19–22, июль)<br>
-      Темы: PCA, PLS, Cluster Analysis — прямое применение к хроматографии<br>
-      <span class="when">Когда: июнь–июль</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-chem">CHEM</span> H2 — scikit-learn: PCA + clustering</b>
-      Документация по decomposition и clustering<br>
-      <a href="https://scikit-learn.org/stable/modules/decomposition.html" target="_blank">→ sklearn docs</a><br>
-      <span class="when">Когда: июль, параллельно с H1</span>
-    </div>
-  </div>
-
-  <h3>&#128293; БЛОК I — PyTorch (вместо TensorFlow)</h3>
-  <p>⚠️ ML-сообщество единодушно рекомендует PyTorch. В книге Géron используется TensorFlow — концепции те же, синтаксис разный. Для практики на PyTorch используй StatQuest книги (B1, B2).</p>
-  <div class="src-grid">
-    <div class="src-entry">
-      <b><span class="src-tag st-video">VIDEO</span> PyTorch Tutorials (YouTube)</b>
-      <a href="https://www.youtube.com/playlist?list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4" target="_blank">→ Плейлист</a> · <a href="https://pytorch.org/tutorials" target="_blank">→ Официальные доки</a><br>
-      <span class="when">Когда: с августа</span>
-    </div>
-    <div class="src-entry">
-      <b><span class="src-tag st-video">VIDEO</span> Andrej Karpathy — "Let's build GPT"</b>
-      PyTorch с нуля. Один из лучших материалов по нейросетям.<br>
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> Andrej Karpathy — "Let's build GPT" + "Intro to LLMs"</b>
+      PyTorch трансформер с нуля. Один из лучших материалов по нейросетям в мире.<br>
+      "Intro to LLMs" (1 час) — сначала. "Let's build GPT" — после B2.<br>
       <a href="https://www.youtube.com/@AndrejKarpathy" target="_blank">→ @AndrejKarpathy</a><br>
-      <span class="when">Когда: сентябрь</span>
+      <span class="when">Сравнение: Karpathy — практика с нуля. B2 (StatQuest) — теория с картинками. 3B1B Neural Networks плейлист — интуиция. Все три дополняют друг друга.</span>
     </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3Blue1Brown — Neural Networks плейлист</b>
+      4 видео. "But what is a neural network?" + "Gradient descent" + "Backpropagation".<br>
+      Смотреть в августе перед Karpathy.<br>
+      <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">→ Neural Networks плейлист</a><br>
+      <span class="when">Сравнение: самое чистое визуальное объяснение backprop. Короче StatQuest. Дополняет, не заменяет B2.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> PyTorch Tutorials (официальные)</b>
+      Практика PyTorch. Старт с августа параллельно с LoRA.<br>
+      <a href="https://pytorch.org/tutorials" target="_blank">→ pytorch.org/tutorials</a><br>
+      <span class="when">Сравнение: официальные доки хороши для справки. B2 (StatQuest) лучше для первого понимания PyTorch концепций. Используй вместе.</span>
+    </div>
+  </div>
+
+  <!-- ===== ГРУППА 4: AI ENGINEERING / LLM ===== -->
+  <h3 style="margin-top:20px">&#129302; AI ENGINEERING — LLM и продакшн (август–декабрь)</h3>
+  <p style="font-size:11px;color:var(--color-text-secondary,#555);margin:0 0 10px">Читать строго в указанном порядке. Chip Huyen книга — последней.</p>
+  <div class="src-grid">
+    <div class="src-entry">
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> Chip Huyen — AI Engineering Speedrun 76 мин &#128308; НЕД.2</b>
+      Обзор всей книги. Смотреть нед.2 целиком, потом возвращаться к секциям.<br>
+      00:00 Foundation Models · 08:40 Evaluating · 14:50 Model Selection (нед.2)<br>
+      23:15 Prompt Engineering (нед.3) · 30:20 RAG (нед.6) · 36:56 Agents (нед.7)<br>
+      43:02 Fine-tuning · 52:40 Dataset Eng. (нед.11) · 59:45 Inference Opt. (нед.10) · 01:09:01 Architecture (нед.12)<br>
+      <a href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">→ YouTube (76 мин)</a><br>
+      <span class="when">Сравнение: это обзор книги D2. Смотреть ДО книги — даёт карту. Книга D2 — глубина после практики.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-llm">LLM</span> Hands-On Large Language Models (D1)</b>
+      Практика LLM end-to-end: embeddings, fine-tuning, deployment.<br>
+      Старт нед.13, основная читка нед.16–23.<br>
+      Читать ДО книги Chip Huyen (D2).<br>
+      <a href="https://amzn.to/4kGW0ld" target="_blank">→ amzn.to/4kGW0ld</a><br>
+      <span class="when">Сравнение: более практичный чем D2. D2 — системный взгляд на архитектуру. D1 сначала — строишь руками, D2 — понимаешь зачем.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ai">AI</span> AI Engineering — Chip Huyen (D2)</b>
+      Продакшн AI системы. RAG, fine-tuning, evaluation, inference, архитектура.<br>
+      ⚠️ Читать ПОСЛЕ D1 + твёрдой базы Python + ML.<br>
+      Старт нед.16, основная читка сентябрь–октябрь.<br>
+      <a href="https://amzn.to/3Zy737M" target="_blank">→ amzn.to/3Zy737M</a><br>
+      <span class="when">Сравнение: самая полная книга по AI Engineering на 2025–2026. D1 = практика, D2 = архитектура и системное мышление. Видео-обзор (76 мин) = карта перед чтением.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ai">AI</span> GenAI System Design Interview (ByteByteGo, D3)</b>
+      Ali Aminian & Hao Sheng. System design для production AI. Позиционирование на рынке.<br>
+      Ноябрь–декабрь.<br>
+      <span class="when">Сравнение: D2 = как строить системы, D3 = как объяснять их на интервью и клиентам. Взаимодополняют.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-llm">LLM</span> HuggingFace LLM Course (бывший NLP Course)</b>
+      Бесплатно. 12 глав. Трансформеры → fine-tuning → LLM techniques.<br>
+      Переименован из "NLP Course" в "LLM Course" в 2025 — добавлены гл.10–12.<br>
+      <b>Когда читать по главам:</b><br>
+      Гл.1–2: нед.4 (читать, не кодить — нет базы DL)<br>
+      Гл.3–4: нед.5 (читать теорию fine-tuning)<br>
+      Гл.5–6: нед.6 (Datasets + Tokenizers — читать)<br>
+      Гл.7 + 11: нед.19–22 (июль) — <b>запускать код!</b> NLP tasks + LoRA/PEFT с trl<br>
+      Гл.10: нед.23–26 (август) — curate datasets для fine-tuning<br>
+      Гл.12: сентябрь — reasoning models (DeepSeek R1-style)<br>
+      Гл.8, 9: пропустить (форумы и Gradio — не приоритет)<br>
+      <a href="https://huggingface.co/learn/llm-course" target="_blank">→ huggingface.co/learn/llm-course</a><br>
+      <span class="when">Сравнение: D1 (Hands-On LLMs) — книга с кодом, D2 (Chip Huyen) — архитектура. HF Course — официальные доки в форме курса. Используй все три: HF Course = как пользоваться библиотеками, D1 = строишь руками, D2 = понимаешь зачем.</span>
+    </div>
+  </div>
+
+  <!-- ===== ГРУППА 5: MLOPS ===== -->
+  <h3 style="margin-top:20px">&#9881;&#65039; MLOPS — деплой и мониторинг (декабрь)</h3>
+  <div class="src-grid">
+    <div class="src-entry">
+      <b><span class="src-tag st-book">BOOK</span><span class="src-tag st-mlops">MLOPS</span> Practical MLOps (O'Reilly, D4)</b>
+      CI/CD для ML, автопереобучение, мониторинг моделей в проде.<br>
+      Декабрь — когда уже есть опыт с деплоем на VPS и Langfuse.<br>
+      <a href="https://amzn.to/44hTn3q" target="_blank">→ amzn.to/44hTn3q</a><br>
+      <span class="when">Сравнение: единственная книга по MLOps в списке. Хорошо дополняет практику деплоя из нед.13.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> fast.ai — Practical Deep Learning for Coders</b>
+      Бесплатно. Практика первая, теория потом. Альтернативный путь к DL.<br>
+      Сентябрь — как альтернатива если B2 (StatQuest) не зашёл.<br>
+      <a href="https://fast.ai/courses" target="_blank">→ fast.ai/courses</a><br>
+      <span class="when">Сравнение: fast.ai = практика-first, B2 = теория-first с PyTorch. Стиль разный — выбери что ближе. Не нужно оба.</span>
+    </div>
+  </div>
+
+  <!-- ===== ГРУППА 6: ХИМИЯ ===== -->
+  <h3 style="margin-top:20px">&#9879;&#65039; ХИМИЯ + ML — специализация (июнь–июль)</h3>
+  <div class="src-grid">
+    <div class="src-entry">
+      <b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-chem">CHEM</span> Statistics & Chemometrics for Analytical Chemistry (H1)</b>
+      Файл в проекте: Statistics_and_Chemometrics_for_Analytical_Chemistry_6th.pdf<br>
+      Гл.1–3 (нед.16–18, июнь): базовая статистика для хим. данных.<br>
+      Гл.4–6 (нед.19–22, июль): PCA, PLS, Cluster Analysis → прямо для хроматографии.<br>
+      <span class="when">Сравнение: единственный специализированный источник по хемометрике в списке. Дополняется sklearn docs (decomposition) и StatQuest PCA видео.</span>
+    </div>
+    <div class="src-entry">
+      <b><span class="src-tag st-yt">YT</span><span class="src-tag st-chem">CHEM</span> StatQuest — PCA Step-by-Step</b>
+      Лучшее визуальное объяснение PCA. Прямо под хроматографические данные.<br>
+      Июль — параллельно с Chemometrics гл.4–6.<br>
+      <a href="https://www.youtube.com/@statquest" target="_blank">→ @statquest</a> → поиск "PCA StatQuest"<br>
+      <span class="when">Сравнение: Chemometrics PDF = что делать с данными, StatQuest PCA = почему это работает математически. Оба нужны.</span>
+    </div>
+  </div>
+
+  <!-- ===== СКИПНУТО ===== -->
+  <h3 style="margin-top:20px;color:#b71c1c">&#10060; СКИПНУТО — почему</h3>
+  <div style="font-size:11px;line-height:1.9;background:var(--color-background-secondary,#f8fafc);padding:12px 14px;border-radius:var(--border-radius-md,8px)">
+    <b>ML Specialization (Andrew Ng, Coursera)</b> — дублирует ProGlib + Géron + StatQuest. Лишняя нагрузка.<br>
+    <b>Deep Learning Specialization (DeepLearning.AI)</b> — закрывается StatQuest B2 + Karpathy + HF NLP Course, которые лучше и бесплатнее.<br>
+    <b>The Elements of Statistical Learning</b> — академически тяжёлый, для research/PhD. Для AI Engineer ISLP (C3) достаточно и проще.<br>
+    <b>Python / CS50 / NeetCode / Learn Python</b> — Python уже знаешь (нед.1 = "не повторять, вперёд"). CS50 слишком общий. NeetCode = алго для FAANG-интервью, не под твою задачу.
   </div>
 
 </div>
