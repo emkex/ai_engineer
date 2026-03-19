@@ -79,6 +79,19 @@ Short version:
 
 ---
 
+## Practice Task Domain Rule
+
+When creating practice tasks for learning exercises (weekly files, drills, etc.):
+- Tasks must be in the **financial domain** — assets, portfolios, news, capital flows,
+  trading signals, liquidity analysis, data sources, API configs.
+- This is inspired by the private fin_advisor pet-project
+  (`/home/emkex/life/capital/areas/code/fin_advisor`).
+- **NEVER copy fin_advisor code or algorithms directly** — the learning repo is PUBLIC.
+- Use finance vocabulary loosely: tickers, OHLCV, funds, signal sources, news reliability.
+- The goal: build mental models that transfer to fin_advisor when the user works on it privately.
+
+---
+
 ## Global Skills Available
 
 - `create-new-skill` — create a new skill from template
