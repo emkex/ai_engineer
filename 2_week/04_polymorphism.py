@@ -163,7 +163,108 @@ for reader in readers:
 #
 # Покажи полиморфный запуск: for source in sources: source.describe(ticker)
 
-# >>> ПИШИ ЗДЕСЬ <<<
+class SignalSource:
+
+    def generate(self, ticker):
+        raise NotImplementedError("Подкласс должен реализовать generate()")
+    
+    def source_name(self):
+        raise NotImplementedError("Подкласс должен реализовать source_name()")
+    
+    def describe(self, ticker):
+        signal = self.generate(ticker)
+        return f"{self.source_name()}: {signal['direction'].upper()} {signal['ticker']} confidence={signal['confidence']:.2f}"
+
+class TechnicalAnalysis(SignalSource):
+
+    def __init__(self, lookback_days):
+        self.lookback_days = lookback_days
+    
+    def generate(self, ticker):
+        import random
+        directions = ["buy", "sell", "hold"]
+        return {
+            "ticker": ticker,
+            "direction": random.choice(directions),
+            "confidence": random.random(),
+            "source": self.source_name()
+        }
+    
+    def source_name(self):
+        return f"TechnicalAnalysis({self.lookback_days}d)"
+    
+class FundamentalAnalysis(SignalSource):
+
+    def __init__(self, universe):
+        self.universe = universe
+    
+    def generate(self, ticker):
+        import random
+        if ticker not in self.universe:
+            return {
+                "ticker": ticker,
+                "direction": "hold",
+                "confidence": 0.0,
+                "source": self.source_name()
+            }
+        directions = ["buy", "sell", "hold"]
+        return {
+            "ticker": ticker,
+            "direction": random.choice(directions),
+            "confidence": random.random(),
+            "source": self.source_name()
+        }
+    
+    def source_name(self):
+        return f"FundamentalAnalysis(universe={len(self.universe)})"
+
+class SentimentAnalysis(SignalSource):
+    
+    def generate(self, ticker):
+        import random
+        directions = ["buy", "sell", "hold"]
+        return {
+            "ticker": ticker,
+            "direction": random.choice(directions),
+            "confidence": random.random(),
+            "source": self.source_name()
+        }
+    
+    def source_name(self):
+        return "SentimentAnalysis"
+    
+def aggregate_signals(sources, ticker):
+    direction_weights = {"buy": 0, "sell": 0, "hold": 0}
+    for source in sources:
+        signal = source.generate(ticker)
+        direction_weights[signal["direction"]] += signal["confidence"]
+    best_direction = max(direction_weights, key=direction_weights.get)
+    return {"ticker": ticker, "direction": best_direction, "confidence": direction_weights[best_direction]}
+
+def strongest_signal(sources, ticker):
+    best_signal = None
+    for source in sources:
+        signal = source.generate(ticker)
+        if best_signal is None or signal["confidence"] > best_signal["confidence"]:
+            best_signal = signal
+    return best_signal
+
+# example usage:
+sources = [
+    TechnicalAnalysis(lookback_days=30),
+    FundamentalAnalysis(universe=["AAPL", "MSFT", "GOOG"]),
+    SentimentAnalysis()
+]   
+
+ticker = "AAPL"
+print("\n─── Источники сигналов ───")
+for source in sources:
+    print(source.describe(ticker))
+print("\n─── Итоговый сигнал ───")
+agg_signal = aggregate_signals(sources, ticker)
+print(f"Aggregate Signal: {agg_signal}")
+strong_signal = strongest_signal(sources, ticker)
+print(f"Strongest Signal: {strong_signal}")
 
 
 # ───────────────────────────────────────────────────────────────

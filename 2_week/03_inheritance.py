@@ -105,7 +105,6 @@ print(f"issubclass(HPLC, Instrument): {issubclass(HPLC, Instrument)}")
 # MRO — порядок разрешения методов
 print(f"\nMRO HPLC: {[c.__name__ for c in HPLC.__mro__]}")
 
-
 # ───────────────────────────────────────────────────────────────
 # ПРИМЕР: Множественное наследование + Миксины
 # ───────────────────────────────────────────────────────────────
@@ -161,15 +160,64 @@ print(f"MRO SensorReading: {[c.__name__ for c in SensorReading.__mro__]}")
 # ETF(Equity):
 #   - holdings_count: int  — кол-во бумаг в фонде
 #   - expense_ratio: float — TER в % (например 0.07)
-#   - annual_return(years) -> float  — market_cap * 0.06 / years  (ETF дешевле)
+#   - annual_return(years) -> float  — market_cap * 0.06 * years  (ETF дешевле)
 #   - describe() -> str  — добавляет expense_ratio и holdings_count
 #
 # Напиши функцию compare_return(instruments: list, years: int)
 # которая выводит все инструменты + их annual_return за years лет.
 # Функция должна работать для любого подкласса FinancialInstrument.
 
-# >>> ПИШИ ЗДЕСЬ <<<
+class FinancialInstrument:
 
+    def __init__(self, ticker, name, currency):
+        self.ticker = ticker
+        self.name = name
+        self.currency = currency
+    
+    def describe(self):
+        return f"{self.ticker} | {self.name} | {self.currency}"
+
+    def annual_return(self, years):
+        raise NotImplementedError("Подкласс должен реализовать annual_return()")
+
+class Equity(FinancialInstrument):
+
+    def __init__(self, ticker, name, currency, sector, market_cap):
+        super().__init__(ticker, name, currency)
+        self.sector = sector
+        self.market_cap = market_cap
+    
+    def annual_return(self, years):
+        return self.market_cap * 0.08 * years
+    
+    def describe(self):
+        base_desc = super().describe()
+        return f"{base_desc} | Sector: {self.sector}"
+
+class ETF(Equity):
+    
+    def __init__(self, ticker, name, currency, sector, market_cap, holdings_count, expense_ratio):
+        super().__init__(ticker, name, currency, sector, market_cap)
+        self.holdings_count = holdings_count
+        self.expense_ratio = expense_ratio
+    
+    def annual_return(self, years):
+        return self.market_cap * 0.06 * years
+    
+    def describe(self):
+        base_desc = super().describe()
+        return f"{base_desc} | Holdings: {self.holdings_count} | TER: {self.expense_ratio}%"
+
+def compare_return(instruments, years):
+    for instr in instruments:
+        print(f"{instr.describe()} | Annual Return: {instr.annual_return(years):.2f} {instr.currency}")
+
+
+# example usage:
+apple = Equity("AAPL", "Apple Inc.", "USD", "Technology", 2500)
+spy = ETF("SPY", "SPDR S&P 500 ETF", "USD", "Mixed", 400, 5000, 0.07)
+compare_return([apple, spy], 5)
+    
 
 # ───────────────────────────────────────────────────────────────
 # ЗАДАЧА 2: Миксин Timestamped + NewsEvent
