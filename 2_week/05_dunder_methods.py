@@ -204,8 +204,52 @@ with InstrumentSession("HPLC-1") as session:
 #   print(m1 * m2)    # [[19, 22], [43, 50]]
 #   print(m1[0, 1])   # 2
 
-# >>> ПИШИ ЗДЕСЬ <<<
+class Matrix:
+    """Матрица 2×2 с перегрузкой операторов."""
 
+    def __init__(self, data: list[list[float]]) -> None:
+        self.data = data  # [[a, b], [c, d]]
+
+    def __repr__(self) -> str:
+        a, b = self.data[0]
+        c, d = self.data[1]
+        return f"[[{a}, {b}], [{c}, {d}]]"
+
+    def __add__(self, other: "Matrix") -> "Matrix":
+        if isinstance(other, Matrix):
+            return Matrix([
+                [self.data[i][j] + other.data[i][j] for j in range(2)]
+                for i in range(2)
+            ])
+        return NotImplemented
+
+    def __mul__(self, other: "Matrix") -> "Matrix":
+        if isinstance(other, Matrix):
+            a, b = self.data[0]
+            c, d = self.data[1]
+            e, f = other.data[0]
+            g, h = other.data[1]
+            return Matrix([
+                [a*e + b*g, a*f + b*h],
+                [c*e + d*g, c*f + d*h],
+            ])
+        return NotImplemented
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Matrix):
+            return NotImplemented
+        return self.data == other.data
+
+    def __getitem__(self, key: tuple) -> float:
+        row, col = key
+        return self.data[row][col]
+
+#example
+m1 = Matrix([[1, 2], [3, 4]])
+m2 = Matrix([[5, 6], [7, 8]])
+print(m1 + m2)    # [[6, 8], [10, 12]]
+print(m1 * m2)    # [[19, 22], [43, 50]]
+print(m1[0, 1])   # 2   
 
 # ───────────────────────────────────────────────────────────────
 # ЗАДАЧА 2: Класс PriceHistory (контейнер временного ряда)
