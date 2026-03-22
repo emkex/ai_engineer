@@ -384,16 +384,110 @@ bad_service.alert({"ticker": "AAPL", "direction": "buy", "confidence": 0.82}, "e
 bad_service.alert({"ticker": "BTC", "direction": "sell", "confidence": 0.65}, "telegram", "@fund_bot")
 
 
-# ─── ЗАДАЧА: перепиши AlertService согласно SOLID ──────────────
-#
-# Требования:
-# 1. SRP: разделить форматирование сигнала, доставку, логирование
-# 2. OCP: добавить Slack-канал БЕЗ изменения существующего кода
-# 3. LSP: каждый канал заменяем на AbstractAlertChannel без сюрпризов
-# 4. ISP: IFormatter, ISender, ILogger — отдельные абстракции
-# 5. DIP: AlertService получает зависимости через конструктор
-#
-# Итог: AlertService не должен знать НИЧЕГО о конкретных
-#       реализациях каналов — только о абстракциях.
+# ─── РЕШЕНИЕ ───────────────────────────────────────────────────
 
-# >>> ПИШИ ЗДЕСЬ <<<
+from abc import ABC, abstractmethod
+
+# ISP: три отдельных абстракции вместо одного большого класса
+
+class IFormatter(ABC):
+    @abstractmethod
+    def format(self, signal: dict) -> str: ...
+
+
+class ISender(ABC):
+    @abstractmethod
+    def send(self, message: str, recipient: str) -> None: ...
+
+
+class ILogger(ABC):
+    @abstractmethod
+    def log(self, entry: str) -> None: ...
+
+
+# SRP: каждый класс — одна задача
+
+class SignalFormatter(IFormatter):
+    """Форматирует торговый сигнал в строку."""
+
+    def format(self, signal: dict) -> str:
+        ticker = signal.get("ticker", "?")
+        direction = signal.get("direction", "hold").upper()
+        confidence = signal.get("confidence", 0.0)
+        return f"[{direction}] {ticker} | confidence={confidence:.0%}"
+
+
+class InMemoryLogger(ILogger):
+    """Хранит лог в памяти."""
+
+    def __init__(self) -> None:
+        self._entries: list[str] = []
+
+    def log(self, entry: str) -> None:
+        self._entries.append(entry)
+        print(f"[LOG] {entry}")
+
+    def get_entries(self) -> list[str]:
+        return self._entries
+
+
+# OCP + LSP: новые каналы — новые классы, старый код не трогаем
+
+class EmailSender(ISender):
+    def send(self, message: str, recipient: str) -> None:
+        print(f"Email → {recipient}: {message}")
+
+
+class TelegramSender(ISender):
+    def send(self, message: str, recipient: str) -> None:
+        print(f"Telegram → {recipient}: {message[:200]}")
+
+
+class SmsSender(ISender):
+    def send(self, message: str, recipient: str) -> None:
+        print(f"SMS → {recipient}: {message[:160]}")
+
+
+class SlackSender(ISender):
+    """Новый канал — добавлен без изменения существующего кода (OCP)."""
+
+    def send(self, message: str, recipient: str) -> None:
+        print(f"Slack → #{recipient}: {message}")
+
+
+# DIP: AlertService зависит только от абстракций
+
+class AlertService:
+    """
+    Знает только об абстракциях IFormatter, ISender, ILogger.
+    Конкретные реализации инжектируются снаружи.
+    """
+
+    def __init__(self, formatter: IFormatter, sender: ISender, logger: ILogger) -> None:
+        self.formatter = formatter
+        self.sender = sender
+        self.logger = logger
+
+    def alert(self, signal: dict, recipient: str) -> None:
+        message = self.formatter.format(signal)
+        self.sender.send(message, recipient)
+        self.logger.log(f"{recipient} — {message}")
+
+
+# Демонстрация:
+print("\n─── SOLID AlertService ───")
+
+logger = InMemoryLogger()
+formatter = SignalFormatter()
+
+# Разные каналы — один и тот же интерфейс (LSP)
+signals = [
+    ({"ticker": "AAPL", "direction": "buy", "confidence": 0.82}, EmailSender(), "trader@fund.com"),
+    ({"ticker": "BTC", "direction": "sell", "confidence": 0.65}, TelegramSender(), "@fund_bot"),
+    ({"ticker": "NVDA", "direction": "buy", "confidence": 0.91}, SlackSender(), "alerts"),
+]
+
+for signal, sender, recipient in signals:
+    AlertService(formatter, sender, logger).alert(signal, recipient)
+
+print(f"\nВсего алертов в логе: {len(logger.get_entries())}")

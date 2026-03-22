@@ -172,7 +172,41 @@ print(f"astuple: {astuple(p)}")
 # Создай список из 5 новостей, отсортируй по reliability (убывание),
 # выведи только новости из "reuters" или "bloomberg".
 
-# >>> ПИШИ ЗДЕСЬ <<<
+@dataclass(order=True)
+class NewsItem:
+    sort_index: float = field(init=False, repr=False)
+    reliability: float = 0.5
+    headline: str = ""
+    source: str = ""
+    category: str = ""
+    published_at: datetime = field(default_factory=datetime.now)
+
+    def __post_init__(self):
+        if not (0.0 <= self.reliability <= 1.0):
+            raise ValueError(f"Reliability out of range [0, 1]")
+        self.sort_index = -self.reliability
+
+    def age_hours(self) -> float:
+        delta = datetime.now() - self.published_at
+        return delta.total_seconds() / 3600
+
+
+# Пример использования ЗАДАЧИ 1:
+news_list = [
+    NewsItem(0.95, "Fed raises rates", "reuters", "macro", datetime(2026, 1, 15, 10, 0)),
+    NewsItem(0.75, "Apple earnings", "bloomberg", "equity", datetime(2026, 1, 15, 11, 30)),
+    NewsItem(0.85, "Oil prices surge", "ft", "commodity", datetime(2026, 1, 15, 9, 0)),
+    NewsItem(0.60, "Bitcoin dips", "ccn", "crypto", datetime(2026, 1, 15, 12, 0)),
+    NewsItem(0.90, "Market volatility", "reuters", "macro", datetime(2026, 1, 15, 8, 30)),
+]
+
+news_sorted = sorted(news_list)
+trusted_sources = [n for n in news_sorted if n.source in ("reuters", "bloomberg")]
+print("\nРейтинговые новости (reuters/bloomberg):")
+for n in trusted_sources:
+    print(f"  {n.reliability:.2f} — {n.headline} ({n.source})")
+
+
 
 
 # ───────────────────────────────────────────────────────────────

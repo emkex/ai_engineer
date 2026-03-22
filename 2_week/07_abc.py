@@ -181,30 +181,173 @@ except TypeError as e:
 # ЗАДАЧА 1: ABC CapitalSource (источник ликвидности)
 # ───────────────────────────────────────────────────────────────
 # Создай ABC CapitalSource:
-#   @abstractmethod get_capital_usd() -> float   — объём капитала в USD
+#   @abstractmethod get_capital_usd() -> float   — объём капитала в USD (для сравнения)
 #   @abstractmethod flow_direction() -> str      — "inflow" / "outflow" / "neutral"
 #   @property @abstractmethod source_name() -> str
 #
-#   Конкретный метод describe() -> str:
-#     "FederalReserve: $8.50T | inflow"  (использует abstractmethod)
+#   Конкретный метод describe() -> str — выводит в читаемых единицах:
+#     "Federal Reserve: $8.50T | inflow"
+#     "Citadel: $62.00B | outflow"
+#     (триллионы для ЦБ, миллиарды для остальных)
 #
 # Подклассы (имитируй данные):
-#   CentralBank(reserve_trillions: float)
-#     — крупнейший источник, flow_direction зависит от reserve: > 7T → "inflow"
-#   HedgeFund(aum_billions: float, strategy: str)
-#     — меньше, но подвижнее; flow_direction = "outflow" если strategy == "short"
-#   CommercialBank(assets_billions: float, name: str)
+#   CentralBank(name: str, reserve_trillions: float)
+#     — крупнейший источник; flow_direction: > 7T → "inflow", иначе "outflow"
+#   HedgeFund(name: str, aum_billions: float, strategy: str)
+#     — подвижный игрок; flow_direction: "outflow" если strategy == "short", иначе "inflow"
+#   CommercialBank(name: str, assets_billions: float)
 #     — средний игрок; flow_direction всегда "neutral"
 #
 # Функции:
 #   dominant_source(sources: list[CapitalSource]) -> CapitalSource
 #     — источник с максимальным get_capital_usd()
 #   net_flow(sources: list[CapitalSource]) -> str
-#     — "net inflow" если inflow > outflow, иначе "net outflow"
+#     — "net inflow" если inflow > outflow, "net outflow" если outflow > inflow,
+#       "balanced" если поровну
 #
 # Проверь: попытка создать CapitalSource() → TypeError
 
-# >>> ПИШИ ЗДЕСЬ <<<
+
+from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
+from datetime import datetime
+
+
+class CapitalSource(ABC):
+    """Абстрактный класс источника ликвидности."""
+
+    @abstractmethod
+    def get_capital_usd(self) -> float:
+        """Объём капитала в USD (для сравнения источников)."""
+        ...
+
+    @abstractmethod
+    def flow_direction(self) -> str:
+        """Направление потока: 'inflow', 'outflow' или 'neutral'."""
+        ...
+
+    @property
+    @abstractmethod
+    def source_name(self) -> str:
+        """Название источника."""
+        ...
+
+    def describe(self) -> str:
+        """Шаблонный метод — описание источника в читаемых единицах."""
+        capital = self.get_capital_usd()
+        direction = self.flow_direction()
+        if capital >= 1e12:
+            capital_str = f"${capital / 1e12:.2f}T"
+        else:
+            capital_str = f"${capital / 1e9:.2f}B"
+        return f"{self.source_name}: {capital_str} | {direction}"
+
+
+class CentralBank(CapitalSource):
+    """Центральный банк — крупнейший источник ликвидности."""
+
+    def __init__(self, name: str, reserve_trillions: float) -> None:
+        self.name = name
+        self.reserve_trillions = reserve_trillions
+
+    @property
+    def source_name(self) -> str:
+        return self.name
+
+    def get_capital_usd(self) -> float:
+        """Резервы в триллионах → USD."""
+        return self.reserve_trillions * 1e12
+
+    def flow_direction(self) -> str:
+        """Крупные резервы (>7T) — накачка ликвидности (inflow)."""
+        return "inflow" if self.reserve_trillions > 7.0 else "outflow"
+
+
+class HedgeFund(CapitalSource):
+    """Хедж-фонд — подвижный игрок, направление зависит от стратегии."""
+
+    def __init__(self, name: str, aum_billions: float, strategy: str) -> None:
+        self.name = name
+        self.aum_billions = aum_billions
+        self.strategy = strategy  # "long" или "short"
+
+    @property
+    def source_name(self) -> str:
+        return self.name
+
+    def get_capital_usd(self) -> float:
+        """AUM в миллиардах → USD."""
+        return self.aum_billions * 1e9
+
+    def flow_direction(self) -> str:
+        """Short-стратегия давит на рынок (outflow), long — добавляет (inflow)."""
+        return "outflow" if self.strategy == "short" else "inflow"
+
+
+class CommercialBank(CapitalSource):
+    """Коммерческий банк — средний игрок с нейтральным потоком."""
+
+    def __init__(self, name: str, assets_billions: float) -> None:
+        self.name = name
+        self.assets_billions = assets_billions
+
+    @property
+    def source_name(self) -> str:
+        return self.name
+
+    def get_capital_usd(self) -> float:
+        """Активы в миллиардах → USD."""
+        return self.assets_billions * 1e9
+
+    def flow_direction(self) -> str:
+        """Коммерческие банки не создают направленного давления."""
+        return "neutral"
+
+
+def dominant_source(sources: list[CapitalSource]) -> CapitalSource:
+    """Источник с максимальным капиталом."""
+    return max(sources, key=lambda s: s.get_capital_usd())
+
+
+def net_flow(sources: list[CapitalSource]) -> str:
+    """Суммарный поток капитала по всем источникам."""
+    inflow_count = sum(1 for s in sources if s.flow_direction() == "inflow")
+    outflow_count = sum(1 for s in sources if s.flow_direction() == "outflow")
+
+    if inflow_count > outflow_count:
+        return "net inflow"
+    elif outflow_count > inflow_count:
+        return "net outflow"
+    else:
+        return "balanced"
+
+
+# ─── ДЕМОНСТРАЦИЯ РАБОТЫ ───
+print("─── ABC: Источники ликвидности ───\n")
+
+# Попытка создать экземпляр ABC → TypeError
+try:
+    source = CapitalSource()
+except TypeError as e:
+    print(f"Нельзя создать CapitalSource(): {e}\n")
+
+# Создание источников
+fed = CentralBank("Federal Reserve", 8.5)      # > 7T → inflow
+boj = CentralBank("Bank of Japan", 3.2)        # < 7T → outflow
+citadel = HedgeFund("Citadel", 62.0, "long")   # long → inflow
+melvin = HedgeFund("Melvin Capital", 12.5, "short")  # short → outflow
+jpmorgan = CommercialBank("JP Morgan", 3800.0)
+ubs = CommercialBank("UBS", 1400.0)
+
+sources = [fed, boj, citadel, melvin, jpmorgan, ubs]
+
+print("Источники ликвидности:")
+for source in sources:
+    print(f"  {source.describe()}")
+
+print(f"\nДоминирующий источник: {dominant_source(sources).source_name}")
+print(f"Суммарный поток: {net_flow(sources)}")
+
 
 
 # ───────────────────────────────────────────────────────────────
