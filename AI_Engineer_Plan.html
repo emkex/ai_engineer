@@ -843,7 +843,7 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li class="done">Написать классы под экономику (практика)</li>
+                        <li class="done">Прорешать практические задачи, основанные на задаче</li>
                     </ul>
                 </td>
                 <td>
@@ -2678,6 +2678,63 @@
         <!-- ====== КОНЕЦ БИБЛИОТЕКИ ====== -->
 
     </div>
+
+<script>
+(function() {
+  var STORAGE_KEY = 'ai_plan_done_items';
+
+  function loadDone() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch(e) { return {}; }
+  }
+
+  function saveDone(done) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(done)); }
+    catch(e) {}
+  }
+
+  function getItemId(li) {
+    return li.textContent.trim().substring(0, 60).replace(/\s+/g, '_');
+  }
+
+  function checkWeekDone(tr) {
+    var items = tr.querySelectorAll('.clist li:not(.skip)');
+    if (items.length === 0) return;
+    var allDone = Array.from(items).every(function(li) {
+      return li.classList.contains('done');
+    });
+    if (allDone) tr.classList.add('week-done');
+    else tr.classList.remove('week-done');
+  }
+
+  // Восстанавливаем состояние из localStorage
+  var done = loadDone();
+  document.querySelectorAll('.clist li:not(.skip)').forEach(function(li) {
+    var id = getItemId(li);
+    if (done[id]) li.classList.add('done');
+  });
+
+  // После восстановления — проверяем все недели
+  document.querySelectorAll('tr').forEach(function(tr) {
+    checkWeekDone(tr);
+  });
+
+  // Вешаем клик
+  document.querySelectorAll('.clist li:not(.skip)').forEach(function(li) {
+    li.style.cursor = 'pointer';
+    li.addEventListener('click', function() {
+      li.classList.toggle('done');
+      var done = loadDone();
+      var id = getItemId(li);
+      if (li.classList.contains('done')) done[id] = true;
+      else delete done[id];
+      saveDone(done);
+      var tr = li.closest('tr');
+      if (tr) checkWeekDone(tr);
+    });
+  });
+})();
+</script>
 </body>
 
 </html>
