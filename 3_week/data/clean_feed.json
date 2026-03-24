@@ -1,0 +1,51 @@
+[
+  {
+    "ticker": "AAPL",
+    "name": "Apple Inc.",
+    "price": 182.5,
+    "volume": 54200100,
+    "sector": "Technology"
+  },
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft Corp.",
+    "price": 415.2,
+    "volume": 22100400,
+    "sector": "Technology"
+  },
+  {
+    "ticker": "XOM",
+    "name": "ExxonMobil Corp.",
+    "price": 112.3,
+    "volume": 18500000,
+    "sector": "Energy"
+  },
+  {
+    "ticker": "SPY",
+    "name": "SPDR S&P 500 ETF",
+    "price": 521.1,
+    "volume": 88000000,
+    "sector": "ETF"
+  },
+  {
+    "ticker": "TSLA",
+    "name": "Unknown",
+    "price": 175.4,
+    "volume": 97300000,
+    "sector": "Technology"
+  },
+  {
+    "ticker": "NVDA",
+    "name": "NVIDIA Corp.",
+    "price": 875.4,
+    "volume": 41200000,
+    "sector": "Technology"
+  },
+  {
+    "ticker": "CVX",
+    "name": "Chevron Corp.",
+    "price": 156.8,
+    "volume": 12300000,
+    "sector": "Energy"
+  }
+]

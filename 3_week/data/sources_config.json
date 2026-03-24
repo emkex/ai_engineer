@@ -1,0 +1,44 @@
+{
+  "feeds": [
+    {
+      "id": "reuters_biz",
+      "name": "Reuters Business",
+      "url": "https://feeds.reuters.com/reuters/businessNews",
+      "tier": 1,
+      "lang": "en",
+      "topic": "markets"
+    },
+    {
+      "id": "rbc_news",
+      "name": "RBC News",
+      "url": "https://www.rbc.ru/rss/news",
+      "tier": 2,
+      "lang": "ru",
+      "topic": "economics"
+    },
+    {
+      "id": "ft_markets",
+      "name": "Financial Times Markets",
+      "url": "https://www.ft.com/rss/home",
+      "tier": 1,
+      "lang": "en",
+      "topic": "markets"
+    },
+    {
+      "id": "investing_com",
+      "name": "Investing.com News",
+      "url": "https://ru.investing.com/rss/news.rss",
+      "tier": 2,
+      "lang": "ru",
+      "topic": "economics"
+    },
+    {
+      "id": "yahoo_finance",
+      "name": "Yahoo Finance",
+      "url": "https://feeds.finance.yahoo.com/rss/2.0/headline",
+      "tier": 2,
+      "lang": "en",
+      "topic": "markets"
+    }
+  ]
+}

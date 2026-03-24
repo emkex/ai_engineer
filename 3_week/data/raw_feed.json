@@ -1,0 +1,14 @@
+[
+  {"ticker": "AAPL",  "name": "Apple Inc.",         "price": 182.50, "volume": 54200100, "sector": "Technology"},
+  {"ticker": "MSFT",  "name": "Microsoft Corp.",     "price": 415.20, "volume": 22100400, "sector": "Technology"},
+  {"ticker": "GOLD",  "name": "Barrick Gold Corp.",  "price": 17.85,  "volume": null,     "sector": "Commodities"},
+  {"ticker": "XOM",   "name": "ExxonMobil Corp.",    "price": 112.30, "volume": 18500000, "sector": "Energy"},
+  {"ticker": "BTC",   "name": "Bitcoin USD",         "price": 67400,  "volume": 0,        "sector": "Crypto"},
+  {"ticker": "SPY",   "name": "SPDR S&P 500 ETF",   "price": 521.10, "volume": 88000000, "sector": "ETF"},
+  {"ticker": "TSLA",  "name": null,                  "price": 175.40, "volume": 97300000, "sector": "Technology"},
+  {"ticker": "GLD",   "name": "SPDR Gold Shares",   "price": 231.70, "volume": 0,        "sector": "Commodities"},
+  {"ticker": "NVDA",  "name": "NVIDIA Corp.",        "price": 875.40, "volume": 41200000, "sector": "Technology"},
+  {"ticker": "TLT",   "name": "iShares 20+ Yr Bond", "price": 92.15,  "volume": null,     "sector": "Bonds"},
+  {"ticker": "ETH",   "name": "Ethereum USD",        "price": 3540,   "volume": 0,        "sector": "Crypto"},
+  {"ticker": "CVX",   "name": "Chevron Corp.",       "price": 156.80, "volume": 12300000, "sector": "Energy"}
+]

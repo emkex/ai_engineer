@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Web Parsing & Scraping</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Syne:wght@400;600;700;800&display=swap');
+
+  :root {
+    --bg: #07090f;
+    --bg2: #0d1117;
+    --card: #0d1420;
+    --border: #1e2d42;
+    --gold: #c8a84b;
+    --gold2: #e8c96a;
+    --teal: #1eb8a0;
+    --blue: #3d8ef0;
+    --purple: #9b6dff;
+    --orange: #e08040;
+    --green: #4caf7d;
+    --red: #e05252;
+    --gray: #8899aa;
+    --text: #d4dde8;
+    --text-dim: #5a6a7a;
+    --code-bg: #0a1020;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #07090f 0%, #0d1825 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 32px 48px 24px;
+  }
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gold2);
+    letter-spacing: 0.5px;
+  }
+  .header p {
+    color: var(--gray);
+    font-size: 11px;
+    margin-top: 6px;
+  }
+  .header .tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: rgba(200,168,75,0.1);
+    border: 1px solid rgba(200,168,75,0.3);
+    color: var(--gold);
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag.teal { background: rgba(30,184,160,0.1); border-color: rgba(30,184,160,0.3); color: var(--teal); }
+  .tag.blue { background: rgba(61,142,240,0.1); border-color: rgba(61,142,240,0.3); color: var(--blue); }
+  .tag.purple { background: rgba(155,109,255,0.1); border-color: rgba(155,109,255,0.3); color: var(--purple); }
+  .tag.green { background: rgba(76,175,125,0.1); border-color: rgba(76,175,125,0.3); color: var(--green); }
+
+  .wrap { padding: 0 48px 60px; max-width: 1200px; }
+
+  /* SECTION HEADER */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sec-num {
+    background: var(--gold);
+    color: var(--bg);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold2);
+  }
+  .sec-subtitle {
+    color: var(--gray);
+    font-size: 10px;
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-gold { background: var(--gold); }
+  .dot-teal { background: var(--teal); }
+  .dot-blue { background: var(--blue); }
+  .dot-purple { background: var(--purple); }
+  .dot-green { background: var(--green); }
+  .dot-orange { background: var(--orange); }
+  .dot-red { background: var(--red); }
+
+  /* CODE */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 10px 0;
+  }
+  pre.teal { border-left-color: var(--teal); }
+  pre.blue { border-left-color: var(--blue); }
+  pre.purple { border-left-color: var(--purple); }
+  pre.green { border-left-color: var(--green); }
+  pre.orange { border-left-color: var(--orange); }
+
+  code { color: var(--gold2); }
+  .kw { color: var(--purple); }
+  .fn { color: var(--teal); }
+  .str { color: var(--green); }
+  .cm { color: var(--text-dim); font-style: italic; }
+  .num { color: var(--orange); }
+  .cls { color: var(--blue); }
+
+  /* INLINE CODE */
+  ic { background: rgba(200,168,75,0.12); color: var(--gold2); padding: 1px 6px; border-radius: 3px; font-size: 11px; }
+
+  /* NOTE / WARN */
+  .note {
+    background: rgba(30,184,160,0.08);
+    border-left: 3px solid var(--teal);
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    font-size: 11px;
+    margin: 10px 0;
+  }
+  .warn {
+    background: rgba(224,128,64,0.08);
+    border-left: 3px solid var(--orange);
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    font-size: 11px;
+    margin: 10px 0;
+  }
+  .key {
+    background: rgba(155,109,255,0.08);
+    border-left: 3px solid var(--purple);
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    font-size: 11px;
+    margin: 10px 0;
+  }
+
+  p { margin: 8px 0; font-size: 11px; color: var(--text); }
+  b { color: var(--gold2); }
+  .dim { color: var(--gray); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 11px; margin: 10px 0; }
+  th { background: #0a1628; color: var(--gold); padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); font-size: 10px; text-transform: uppercase; letter-spacing: 0.4px; }
+  td { padding: 7px 10px; border-bottom: 1px solid rgba(30,45,66,0.5); vertical-align: top; }
+  tr:hover td { background: rgba(13,20,32,0.6); }
+
+  /* FLOW */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    font-size: 11px;
+  }
+  .flow-step {
+    background: rgba(200,168,75,0.1);
+    border: 1px solid rgba(200,168,75,0.25);
+    color: var(--gold2);
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .flow-arrow { color: var(--text-dim); font-size: 14px; }
+
+  /* STATUS */
+  .use { color: var(--green); font-weight: 600; }
+  .skip { color: var(--red); text-decoration: line-through; opacity: 0.6; }
+  .later { color: var(--orange); }
+
+  .full-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Web Parsing & Scraping — Методичка</h1>
+  <p>HTML · CSS селекторы · HTTP запросы · requests · BeautifulSoup · Playwright · MCP агенты</p>
+  <div class="tags">
+    <span class="tag">Неделя 3</span>
+    <span class="tag teal">requests</span>
+    <span class="tag blue">BeautifulSoup</span>
+    <span class="tag purple">Playwright</span>
+    <span class="tag green">MCP</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 1: КАК УСТРОЕНА СТРАНИЦА -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">1</div>
+  <div class="sec-title">Как устроена страница — минимум для парсинга</div>
+  <div class="sec-subtitle">HTML · CSS · DOM</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="dot dot-gold"></span>HTML — скелет</div>
+    <p>HTML = дерево тегов. Каждый тег — узел. Теги вкладываются друг в друга. Браузер строит из этого <b>DOM</b> (Document Object Model).</p>
+    <pre><code><span class="cm"># Ключевые теги для парсинга:</span>
+&lt;div class=<span class="str">"card"</span>&gt;     <span class="cm"># контейнер, группировка</span>
+&lt;p&gt;текст&lt;/p&gt;         <span class="cm"># параграф</span>
+&lt;a href=<span class="str">"url"</span>&gt;...&lt;/a&gt; <span class="cm"># ссылка — .get("href")</span>
+&lt;img src=<span class="str">"url"</span>&gt;       <span class="cm"># картинка — .get("src")</span>
+&lt;span class=<span class="str">"price"</span>&gt; <span class="cm"># инлайн-элемент</span>
+&lt;table&gt;&lt;tr&gt;&lt;td&gt;    <span class="cm"># таблицы с данными</span>
+&lt;ul&gt;&lt;li&gt;...        <span class="cm"># списки</span>
+&lt;h1&gt;...&lt;h6&gt;        <span class="cm"># заголовки</span></code></pre>
+    <div class="note">Атрибуты тега — это ключи. <ic>class</ic>, <ic>id</ic>, <ic>href</ic>, <ic>src</ic>, <ic>data-*</ic> — самые важные для поиска.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-teal"></span>CSS селекторы — язык поиска</div>
+    <p>CSS селекторы — это то, как ты говоришь "найди мне вот этот элемент". BeautifulSoup и Playwright оба понимают CSS селекторы.</p>
+    <table>
+      <tr><th>Селектор</th><th>Что ищет</th><th>Пример</th></tr>
+      <tr><td><ic>div</ic></td><td>все div</td><td>все блоки</td></tr>
+      <tr><td><ic>.name</ic></td><td>класс</td><td><ic>.card-title</ic></td></tr>
+      <tr><td><ic>#name</ic></td><td>id (уникален)</td><td><ic>#main</ic></td></tr>
+      <tr><td><ic>div.card</ic></td><td>div с классом card</td><td>конкретный тег+класс</td></tr>
+      <tr><td><ic>div p</ic></td><td>p внутри div</td><td>вложенность</td></tr>
+      <tr><td><ic>div > p</ic></td><td>p прямой потомок div</td><td>строже</td></tr>
+      <tr><td><ic>a[href]</ic></td><td>a с атрибутом href</td><td>все ссылки</td></tr>
+      <tr><td><ic>a[href^="https"]</ic></td><td>href начинается с https</td><td>внешние ссылки</td></tr>
+      <tr><td><ic>.class1.class2</ic></td><td>оба класса</td><td>без пробела</td></tr>
+      <tr><td><ic>li:first-child</ic></td><td>первый li</td><td>псевдокласс</td></tr>
+    </table>
+    <div class="key">Пробел между селекторами = "внутри". Точка без пробела = "оба класса на одном элементе".</div>
+  </div>
+</div>
+
+<div class="full-card">
+  <div class="card-title"><span class="dot dot-blue"></span>Как найти селектор нужного элемента в браузере</div>
+  <div class="grid3">
+    <div>
+      <p><b>Способ 1 — DevTools (F12)</b></p>
+      <p>Правая кнопка на элемент → "Просмотреть код" → в панели Elements навести на элемент → правая кнопка → Copy → Copy selector</p>
+      <div class="warn">Скопированный селектор часто избыточный (длинная цепочка). Упрости до класса или id.</div>
+    </div>
+    <div>
+      <p><b>Способ 2 — Network tab</b></p>
+      <p>F12 → Network → XHR/Fetch → перезагрузить страницу → искать запросы с JSON данными. Часто данные приходят напрямую через API, без парсинга HTML вообще.</p>
+      <div class="note">Это лучший способ. Нашёл JSON-эндпоинт → парсить HTML не нужно.</div>
+    </div>
+    <div>
+      <p><b>Способ 3 — Console JS</b></p>
+      <p>F12 → Console → проверить селектор прямо в браузере:</p>
+      <pre class="teal"><code><span class="cm">// проверить что находит</span>
+document.<span class="fn">querySelectorAll</span>(<span class="str">'.price'</span>)
+<span class="cm">// текст первого элемента</span>
+document.<span class="fn">querySelector</span>(<span class="str">'.title'</span>).innerText</code></pre>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 2: HTTP И REQUESTS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">2</div>
+  <div class="sec-title">HTTP запросы и библиотека requests</div>
+  <div class="sec-subtitle">requests · headers · status codes · JSON</div>
+</div>
+
+<div class="full-card">
+  <div class="card-title"><span class="dot dot-gold"></span>Анатомия HTTP запроса и ответа</div>
+  <div class="grid2">
+    <div>
+      <p><b>Запрос состоит из:</b></p>
+      <table>
+        <tr><th>Часть</th><th>Что это</th></tr>
+        <tr><td><b>Метод</b></td><td>GET (получить) / POST (отправить) / PUT / DELETE</td></tr>
+        <tr><td><b>URL</b></td><td>адрес + путь + query params после ?</td></tr>
+        <tr><td><b>Headers</b></td><td>метаданные: кто ты, что принимаешь, токен авторизации</td></tr>
+        <tr><td><b>Body</b></td><td>только у POST/PUT — данные которые отправляешь (JSON)</td></tr>
+      </table>
+      <p style="margin-top:10px"><b>Ответ состоит из:</b></p>
+      <table>
+        <tr><th>Часть</th><th>Что это</th></tr>
+        <tr><td><b>Status code</b></td><td>200 OK, 404 не найдено, 403 нет доступа, 429 лимит</td></tr>
+        <tr><td><b>Headers</b></td><td>Content-Type (json/html), Set-Cookie, X-RateLimit</td></tr>
+        <tr><td><b>Body</b></td><td>сами данные — HTML строка или JSON</td></tr>
+      </table>
+    </div>
+    <div>
+      <p><b>URL разбор:</b></p>
+      <pre><code>https://api.example.com/v1/news?topic=economics&limit=10
+
+https://          <span class="cm"># протокол</span>
+api.example.com   <span class="cm"># хост</span>
+/v1/news          <span class="cm"># путь (endpoint)</span>
+?topic=economics  <span class="cm"># query параметр</span>
+&limit=10         <span class="cm"># ещё один параметр</span></code></pre>
+      <p><b>Важные статус-коды:</b></p>
+      <table>
+        <tr><td><ic>200</ic></td><td class="use">OK — всё хорошо</td></tr>
+        <tr><td><ic>201</ic></td><td class="use">Created — создано (POST)</td></tr>
+        <tr><td><ic>400</ic></td><td style="color:var(--orange)">Bad Request — ошибка в запросе</td></tr>
+        <tr><td><ic>401</ic></td><td style="color:var(--orange)">Unauthorized — нужна авторизация</td></tr>
+        <tr><td><ic>403</ic></td><td style="color:var(--red)">Forbidden — нет доступа</td></tr>
+        <tr><td><ic>404</ic></td><td style="color:var(--red)">Not Found</td></tr>
+        <tr><td><ic>429</ic></td><td style="color:var(--orange)">Rate Limited — слишком много запросов</td></tr>
+        <tr><td><ic>500</ic></td><td style="color:var(--red)">Server Error — ошибка сервера</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="dot dot-teal"></span>requests — основные команды</div>
+    <pre class="teal"><code><span class="kw">import</span> requests
+
+<span class="cm"># GET запрос</span>
+r = requests.<span class="fn">get</span>(<span class="str">'https://httpbin.org/get'</span>)
+r.status_code   <span class="cm"># 200</span>
+r.text          <span class="cm"># строка (HTML или JSON как строка)</span>
+r.content       <span class="cm"># байты (для картинок, PDF)</span>
+r.json()        <span class="cm"># автоматически парсит JSON → dict</span>
+r.headers       <span class="cm"># заголовки ответа</span>
+
+<span class="cm"># GET с параметрами в URL</span>
+params = {<span class="str">'topic'</span>: <span class="str">'economics'</span>, <span class="str">'limit'</span>: <span class="num">10</span>}
+r = requests.<span class="fn">get</span>(url, params=params)
+<span class="cm"># → url?topic=economics&limit=10</span>
+
+<span class="cm"># POST с JSON телом</span>
+data = {<span class="str">'query'</span>: <span class="str">'нефть'</span>, <span class="str">'lang'</span>: <span class="str">'ru'</span>}
+r = requests.<span class="fn">post</span>(url, json=data)
+<span class="cm"># json= автоматически сериализует и ставит Content-Type</span>
+
+<span class="cm"># Всегда проверяй статус</span>
+r.<span class="fn">raise_for_status</span>()  <span class="cm"># бросает исключение если 4xx/5xx</span></code></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-blue"></span>Заголовки — зачем и когда нужны</div>
+    <pre class="blue"><code><span class="kw">import</span> requests
+<span class="kw">from</span> fake_useragent <span class="kw">import</span> FakeUserAgent
+
+<span class="cm"># Минимальные заголовки для обхода блокировок</span>
+headers = {
+    <span class="str">'User-Agent'</span>: FakeUserAgent().random,
+    <span class="str">'Accept'</span>: <span class="str">'application/json'</span>,
+    <span class="str">'Accept-Language'</span>: <span class="str">'ru-RU,ru;q=0.9'</span>,
+}
+
+<span class="cm"># Авторизация через Bearer токен (Claude API, etc.)</span>
+headers = {
+    <span class="str">'Authorization'</span>: <span class="str">f'Bearer {api_key}'</span>,
+    <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span>,
+}
+
+<span class="cm"># Session — переиспользует соединение (быстрее)</span>
+session = requests.<span class="cls">Session</span>()
+session.headers.<span class="fn">update</span>(headers)
+r = session.<span class="fn">get</span>(url1)
+r = session.<span class="fn">get</span>(url2)  <span class="cm"># те же заголовки</span></code></pre>
+    <div class="note"><b>User-Agent</b> — строка "кто делает запрос". Без неё многие сайты отвечают 403 или пустой страницей.</div>
+  </div>
+</div>
+
+<div class="full-card">
+  <div class="card-title"><span class="dot dot-purple"></span>Паттерн для надёжного парсинга с requests</div>
+  <pre class="purple"><code><span class="kw">import</span> requests
+<span class="kw">import</span> time
+<span class="kw">from</span> fake_useragent <span class="kw">import</span> FakeUserAgent
+
+<span class="kw">def</span> <span class="fn">safe_get</span>(url: str, retries: int = <span class="num">3</span>) -> requests.Response | None:
+    headers = {<span class="str">'User-Agent'</span>: FakeUserAgent().random}
+    <span class="kw">for</span> attempt <span class="kw">in</span> <span class="fn">range</span>(retries):
+        <span class="kw">try</span>:
+            r = requests.<span class="fn">get</span>(url, headers=headers, timeout=<span class="num">10</span>)
+            r.<span class="fn">raise_for_status</span>()
+            <span class="kw">return</span> r
+        <span class="kw">except</span> requests.<span class="cls">HTTPError</span> <span class="kw">as</span> e:
+            <span class="kw">if</span> r.status_code == <span class="num">429</span>:      <span class="cm"># rate limit</span>
+                time.<span class="fn">sleep</span>(<span class="num">2</span> ** attempt)  <span class="cm"># экспоненциальный backoff</span>
+            <span class="kw">else</span>:
+                <span class="kw">break</span>
+        <span class="kw">except</span> requests.<span class="cls">RequestException</span> <span class="kw">as</span> e:
+            time.<span class="fn">sleep</span>(<span class="num">1</span>)
+    <span class="kw">return</span> None
+
+<span class="cm"># Использование</span>
+r = <span class="fn">safe_get</span>(<span class="str">'https://example.com'</span>)
+<span class="kw">if</span> r:
+    <span class="fn">print</span>(r.json())</code></pre>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 3: BEAUTIFULSOUP -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">3</div>
+  <div class="sec-title">BeautifulSoup — парсинг HTML</div>
+  <div class="sec-subtitle">статичные страницы · CSS селекторы · извлечение данных</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="dot dot-gold"></span>Базовый API — всё что нужно</div>
+    <pre><code><span class="kw">from</span> bs4 <span class="kw">import</span> BeautifulSoup <span class="kw">as</span> BS
+<span class="kw">import</span> requests
+
+r = requests.<span class="fn">get</span>(url)
+soup = <span class="cls">BS</span>(r.content, <span class="str">'html.parser'</span>)
+
+<span class="cm"># ПОИСК</span>
+<span class="cm"># Один элемент (первый найденный)</span>
+el = soup.<span class="fn">select_one</span>(<span class="str">'.card-title'</span>)
+el = soup.<span class="fn">find</span>(<span class="str">'h1'</span>)
+
+<span class="cm"># Все элементы → список</span>
+items = soup.<span class="fn">select</span>(<span class="str">'.news-item'</span>)
+items = soup.<span class="fn">find_all</span>(<span class="str">'a'</span>)
+
+<span class="cm"># ИЗВЛЕЧЕНИЕ ДАННЫХ</span>
+el.text             <span class="cm"># текст включая вложенные теги</span>
+el.get_text(<span class="fn">strip</span>=<span class="kw">True</span>)  <span class="cm"># текст без пробелов</span>
+el.<span class="fn">get</span>(<span class="str">'href'</span>)     <span class="cm"># атрибут — безопасно (None если нет)</span>
+el[<span class="str">'href'</span>]         <span class="cm"># атрибут — KeyError если нет</span>
+el[<span class="str">'class'</span>]        <span class="cm"># возвращает список классов!</span>
+
+<span class="cm"># НАВИГАЦИЯ по дереву</span>
+el.parent           <span class="cm"># родитель</span>
+el.children         <span class="cm"># прямые потомки</span>
+el.find(<span class="str">'span'</span>)    <span class="cm"># поиск внутри элемента</span></code></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-teal"></span>Практические паттерны</div>
+    <pre class="teal"><code><span class="cm"># Паттерн 1: список карточек → данные</span>
+cards = soup.<span class="fn">select</span>(<span class="str">'.news-card'</span>)
+results = []
+<span class="kw">for</span> card <span class="kw">in</span> cards:
+    title_el = card.<span class="fn">select_one</span>(<span class="str">'h2'</span>)
+    link_el  = card.<span class="fn">select_one</span>(<span class="str">'a'</span>)
+    <span class="kw">if not</span> title_el:
+        <span class="kw">continue</span>
+    results.<span class="fn">append</span>({
+        <span class="str">'title'</span>: title_el.<span class="fn">get_text</span>(strip=<span class="kw">True</span>),
+        <span class="str">'url'</span>:   link_el.<span class="fn">get</span>(<span class="str">'href'</span>) <span class="kw">if</span> link_el <span class="kw">else</span> <span class="kw">None</span>,
+    })
+
+<span class="cm"># Паттерн 2: таблица → список словарей</span>
+table = soup.<span class="fn">select_one</span>(<span class="str">'table'</span>)
+headers = [th.<span class="fn">get_text</span>(strip=<span class="kw">True</span>)
+           <span class="kw">for</span> th <span class="kw">in</span> table.<span class="fn">select</span>(<span class="str">'th'</span>)]
+rows = []
+<span class="kw">for</span> tr <span class="kw">in</span> table.<span class="fn">select</span>(<span class="str">'tbody tr'</span>):
+    cells = [td.<span class="fn">get_text</span>(strip=<span class="kw">True</span>)
+             <span class="kw">for</span> td <span class="kw">in</span> tr.<span class="fn">select</span>(<span class="str">'td'</span>)]
+    rows.<span class="fn">append</span>(<span class="fn">dict</span>(<span class="fn">zip</span>(headers, cells)))
+
+<span class="cm"># Паттерн 3: все ссылки с домена</span>
+base = <span class="str">'https://example.com'</span>
+links = {
+    a[<span class="str">'href'</span>] <span class="kw">for</span> a <span class="kw">in</span> soup.<span class="fn">select</span>(<span class="str">'a[href^="/"]'</span>)
+}
+absolute = {base + l <span class="kw">for</span> l <span class="kw">in</span> links}</code></pre>
+    <div class="warn"><b>Важно:</b> BeautifulSoup работает ТОЛЬКО со статичным HTML. Если контент подгружается JS — нужен Playwright.</div>
+  </div>
+</div>
+
+<div class="full-card">
+  <div class="card-title"><span class="dot dot-orange"></span>RSS парсинг — основной источник данных для "Задумки"</div>
+  <div class="grid2">
+    <div>
+      <p>RSS — это XML файл с новостями. Структурированный, без JS, без капч. Идеально для агентов.</p>
+      <pre class="orange"><code><span class="kw">import</span> requests
+<span class="kw">from</span> bs4 <span class="kw">import</span> BeautifulSoup <span class="kw">as</span> BS
+
+<span class="kw">def</span> <span class="fn">parse_rss</span>(url: str) -> list[dict]:
+    r = requests.<span class="fn">get</span>(url, timeout=<span class="num">10</span>)
+    <span class="cm"># xml парсер для RSS/Atom</span>
+    soup = <span class="cls">BS</span>(r.content, <span class="str">'xml'</span>)
+    items = []
+    <span class="kw">for</span> item <span class="kw">in</span> soup.<span class="fn">find_all</span>(<span class="str">'item'</span>):
+        items.<span class="fn">append</span>({
+            <span class="str">'title'</span>:   item.<span class="fn">find</span>(<span class="str">'title'</span>).text,
+            <span class="str">'link'</span>:    item.<span class="fn">find</span>(<span class="str">'link'</span>).text,
+            <span class="str">'pubDate'</span>: item.<span class="fn">find</span>(<span class="str">'pubDate'</span>).text,
+            <span class="str">'desc'</span>:    item.<span class="fn">find</span>(<span class="str">'description'</span>).text,
+        })
+    <span class="kw">return</span> items
+
+<span class="cm"># Примеры RSS для экономики</span>
+feeds = [
+    <span class="str">'https://feeds.reuters.com/reuters/businessNews'</span>,
+    <span class="str">'https://www.rbc.ru/rss/news'</span>,
+]</code></pre>
+    </div>
+    <div>
+      <p><b>Чем RSS лучше парсинга HTML:</b></p>
+      <table>
+        <tr><th></th><th>RSS</th><th>HTML парсинг</th></tr>
+        <tr><td>Структура</td><td class="use">фиксированная</td><td class="later">меняется</td></tr>
+        <tr><td>JS</td><td class="use">не нужен</td><td class="later">иногда нужен</td></tr>
+        <tr><td>Капча</td><td class="use">нет</td><td class="later">бывает</td></tr>
+        <tr><td>Стабильность</td><td class="use">высокая</td><td style="color:var(--red)">хрупкий</td></tr>
+        <tr><td>Лимиты</td><td class="later">бывают</td><td class="later">бывают</td></tr>
+      </table>
+      <div class="note">Всегда проверяй: есть ли у сайта RSS или API. Парсить HTML — последний вариант, не первый.</div>
+      <p style="margin-top:10px"><b>lxml парсер быстрее html.parser:</b></p>
+      <pre class="orange"><code><span class="cm"># установить: pip install lxml</span>
+soup = <span class="cls">BS</span>(content, <span class="str">'lxml'</span>)      <span class="cm"># быстрее</span>
+soup = <span class="cls">BS</span>(content, <span class="str">'html.parser'</span>) <span class="cm"># стандартный</span>
+soup = <span class="cls">BS</span>(content, <span class="str">'xml'</span>)       <span class="cm"># для RSS/XML</span></code></pre>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 4: PLAYWRIGHT -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">4</div>
+  <div class="sec-title">Playwright — динамические сайты</div>
+  <div class="sec-subtitle">JS-рендеринг · SPA · автоматизация · скриншоты</div>
+</div>
+
+<div class="full-card">
+  <div class="card-title"><span class="dot dot-purple"></span>Когда нужен Playwright, а когда нет</div>
+  <div class="grid3">
+    <div>
+      <p><b class="use">Playwright нужен:</b></p>
+      <p>Страница грузится, но данных нет в HTML → JS подгружает их потом. Нужно кликнуть кнопку "Показать ещё". Нужна авторизация через форму. Нужен скриншот страницы.</p>
+    </div>
+    <div>
+      <p><b style="color:var(--orange)">Сначала проверь Network tab:</b></p>
+      <p>Открой F12 → Network → XHR/Fetch → найди запрос с данными. Если данные приходят через API с JSON — используй requests напрямую. Это быстрее и надёжнее.</p>
+    </div>
+    <div>
+      <p><b class="skip">Playwright не нужен:</b></p>
+      <p>Если данные есть в исходном HTML (Ctrl+U), если есть RSS или API, если нужен просто парсинг статичного контента.</p>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="dot dot-purple"></span>Установка и базовый API</div>
+    <pre class="purple"><code><span class="cm"># pip install playwright</span>
+<span class="cm"># playwright install chromium</span>
+
+<span class="kw">from</span> playwright.sync_api <span class="kw">import</span> sync_playwright
+
+<span class="kw">with</span> <span class="fn">sync_playwright</span>() <span class="kw">as</span> p:
+    browser = p.chromium.<span class="fn">launch</span>(headless=<span class="kw">True</span>)
+    page = browser.<span class="fn">new_page</span>()
+
+    page.<span class="fn">goto</span>(<span class="str">'https://example.com'</span>)
+
+    <span class="cm"># ОЖИДАНИЕ (важно!)</span>
+    page.<span class="fn">wait_for_load_state</span>(<span class="str">'networkidle'</span>)
+
+    <span class="cm"># ПОИСК через CSS селекторы</span>
+    title = page.<span class="fn">text_content</span>(<span class="str">'h1'</span>)
+    links = page.<span class="fn">query_selector_all</span>(<span class="str">'a.news-link'</span>)
+
+    <span class="cm"># ДЕЙСТВИЯ</span>
+    page.<span class="fn">click</span>(<span class="str">'button.load-more'</span>)
+    page.<span class="fn">fill</span>(<span class="str">'input[name="email"]'</span>, <span class="str">'<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="542031272014203127207a373b39">[email&#160;protected]</a>'</span>)
+    page.<span class="fn">press</span>(<span class="str">'input'</span>, <span class="str">'Enter'</span>)
+
+    <span class="cm"># Забрать HTML после рендеринга</span>
+    html = page.<span class="fn">content</span>()
+    <span class="cm"># Теперь можно парсить через BeautifulSoup</span>
+
+    browser.<span class="fn">close</span>()</code></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-blue"></span>Async Playwright (для агентов)</div>
+    <pre class="blue"><code><span class="kw">from</span> playwright.async_api <span class="kw">import</span> async_playwright
+<span class="kw">import</span> asyncio
+
+<span class="kw">async def</span> <span class="fn">scrape_page</span>(url: str) -> str:
+    <span class="kw">async with</span> <span class="fn">async_playwright</span>() <span class="kw">as</span> p:
+        browser = <span class="kw">await</span> p.chromium.<span class="fn">launch</span>(headless=<span class="kw">True</span>)
+        page = <span class="kw">await</span> browser.<span class="fn">new_page</span>()
+
+        <span class="cm"># Блокировать картинки — быстрее</span>
+        <span class="kw">await</span> page.<span class="fn">route</span>(
+            <span class="str">'**/*.{png,jpg,gif,svg}'</span>,
+            <span class="kw">lambda</span> route: route.<span class="fn">abort</span>()
+        )
+
+        <span class="kw">await</span> page.<span class="fn">goto</span>(url, wait_until=<span class="str">'domcontentloaded'</span>)
+
+        <span class="cm"># Ждать конкретный элемент</span>
+        <span class="kw">await</span> page.<span class="fn">wait_for_selector</span>(<span class="str">'.article-content'</span>)
+
+        html = <span class="kw">await</span> page.<span class="fn">content</span>()
+        <span class="kw">await</span> browser.<span class="fn">close</span>()
+        <span class="kw">return</span> html
+
+<span class="cm"># Запуск</span>
+html = asyncio.<span class="fn">run</span>(<span class="fn">scrape_page</span>(<span class="str">'https://example.com'</span>))</code></pre>
+    <div class="note">В агентах всегда используй async версию — LangGraph и asyncio совместимы.</div>
+  </div>
+</div>
+
+<div class="full-card">
+  <div class="card-title"><span class="dot dot-teal"></span>Playwright + BeautifulSoup вместе</div>
+  <pre class="teal"><code><span class="cm"># Стандартный паттерн: Playwright рендерит → BS парсит</span>
+<span class="kw">from</span> playwright.sync_api <span class="kw">import</span> sync_playwright
+<span class="kw">from</span> bs4 <span class="kw">import</span> BeautifulSoup <span class="kw">as</span> BS
+
+<span class="kw">def</span> <span class="fn">get_dynamic_data</span>(url: str) -> list[dict]:
+    <span class="kw">with</span> <span class="fn">sync_playwright</span>() <span class="kw">as</span> p:
+        browser = p.chromium.<span class="fn">launch</span>(headless=<span class="kw">True</span>)
+        page = browser.<span class="fn">new_page</span>()
+        page.<span class="fn">goto</span>(url)
+        page.<span class="fn">wait_for_load_state</span>(<span class="str">'networkidle'</span>)
+        html = page.<span class="fn">content</span>()  <span class="cm"># HTML после JS</span>
+        browser.<span class="fn">close</span>()
+
+    <span class="cm"># Теперь парсим как обычно</span>
+    soup = <span class="cls">BS</span>(html, <span class="str">'lxml'</span>)
+    cards = soup.<span class="fn">select</span>(<span class="str">'.data-card'</span>)
+    <span class="kw">return</span> [{<span class="str">'title'</span>: c.<span class="fn">get_text</span>(strip=<span class="kw">True</span>)} <span class="kw">for</span> c <span class="kw">in</span> cards]</code></pre>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 5: АГЕНТЫ И MCP -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">5</div>
+  <div class="sec-title">Как это делают агенты и MCP</div>
+  <div class="sec-subtitle">современный подход · инструменты · MCP серверы</div>
+</div>
+
+<div class="full-card">
+  <div class="card-title"><span class="dot dot-gold"></span>Пирамида инструментов для получения данных из веба</div>
+  <div class="flow" style="flex-direction:column;align-items:flex-start;gap:4px;">
+    <div style="display:flex;align-items:center;gap:10px;width:100%">
+      <span class="flow-step" style="background:rgba(76,175,125,0.15);border-color:rgba(76,175,125,0.4);color:var(--green);min-width:200px">1. Готовый API / RSS</span>
+      <span class="dim">→ requests.get(url).json() — быстро, надёжно, структурировано</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;width:100%">
+      <span class="flow-step" style="background:rgba(61,142,240,0.15);border-color:rgba(61,142,240,0.4);color:var(--blue);min-width:200px">2. MCP web-search</span>
+      <span class="dim">→ агент сам ищет через Brave/Tavily MCP — не пишешь парсер вообще</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;width:100%">
+      <span class="flow-step" style="min-width:200px">3. requests + BeautifulSoup</span>
+      <span class="dim">→ статичный HTML, стабильная структура сайта</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;width:100%">
+      <span class="flow-step" style="background:rgba(224,128,64,0.15);border-color:rgba(224,128,64,0.4);color:var(--orange);min-width:200px">4. Playwright + BS</span>
+      <span class="dim">→ JS-сайты, SPA, нужны клики и авторизация</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;width:100%">
+      <span class="flow-step" style="background:rgba(224,82,82,0.15);border-color:rgba(224,82,82,0.4);color:var(--red);min-width:200px">5. Claude Vision</span>
+      <span class="dim">→ скриншот страницы → модель читает визуально (последний вариант)</span>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="dot dot-teal"></span>MCP серверы для веба (неделя 10)</div>
+    <table>
+      <tr><th>MCP сервер</th><th>Что делает</th><th>Когда</th></tr>
+      <tr><td><b>Brave Search MCP</b></td><td>веб-поиск по запросу → список URL + сниппеты</td><td class="use">нед.10</td></tr>
+      <tr><td><b>Fetch MCP</b></td><td>загружает страницу, отдаёт текст/markdown</td><td class="use">нед.10</td></tr>
+      <tr><td><b>Playwright MCP</b></td><td>браузер как инструмент агента</td><td class="later">нед.9</td></tr>
+      <tr><td><b>Firecrawl MCP</b></td><td>краулинг сайта целиком в markdown</td><td class="later">нед.10+</td></tr>
+    </table>
+    <pre class="teal"><code><span class="cm"># Пример: агент с MCP fetch</span>
+<span class="cm"># Агент сам решает когда сходить в веб</span>
+<span class="cm"># Ты пишешь только логику, не парсер</span>
+
+<span class="cm"># Твой MCP-сервер get_news (нед.10):</span>
+<span class="kw">def</span> <span class="fn">get_news</span>(topic: str) -> list[dict]:
+    <span class="cm"># внутри — requests + BS</span>
+    <span class="cm"># снаружи — инструмент для агента</span>
+    rss_url = RSS_FEEDS[topic]
+    <span class="kw">return</span> <span class="fn">parse_rss</span>(rss_url)</code></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-blue"></span>Как агент использует парсинг</div>
+    <p>Агент не парсит HTML напрямую. Ты пишешь <b>инструмент</b> (функцию), агент его вызывает когда нужно.</p>
+    <pre class="blue"><code><span class="cm"># Инструмент для LangGraph агента</span>
+<span class="kw">from</span> langchain_core.tools <span class="kw">import</span> tool
+
+<span class="kw">@tool</span>
+<span class="kw">def</span> <span class="fn">fetch_news</span>(topic: str) -> str:
+    <span class="str">"""Получает последние новости по теме.
+    Используй для получения актуальной информации."""</span>
+    items = <span class="fn">parse_rss</span>(RSS_FEEDS.get(topic, DEFAULT_FEED))
+    <span class="kw">return</span> <span class="str">'\n'</span>.<span class="fn">join</span>(
+        <span class="str">f"{i['title']} — {i['link']}"</span>
+        <span class="kw">for</span> i <span class="kw">in</span> items[:<span class="num">5</span>]
+    )
+
+<span class="cm"># Агент сам решает когда вызвать</span>
+<span class="cm"># "найди новости про инфляцию"</span>
+<span class="cm"># → вызывает fetch_news("инфляция")</span>
+<span class="cm"># → получает текст → отвечает пользователю</span></code></pre>
+    <div class="note">Вся ценность: ты один раз пишешь надёжный парсер, оборачиваешь в инструмент — агент использует его как нужно.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 6: БЫСТРАЯ ШПАРГАЛКА -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">6</div>
+  <div class="sec-title">Шпаргалка — что учить, что пропустить</div>
+  <div class="sec-subtitle">приоритеты для AI Engineer</div>
+</div>
+
+<div class="grid3">
+  <div class="card">
+    <div class="card-title"><span class="dot dot-green"></span>Учить обязательно</div>
+    <table>
+      <tr><td class="use">requests GET/POST</td></tr>
+      <tr><td class="use">headers, params, json=</td></tr>
+      <tr><td class="use">response.json(), .text, .content</td></tr>
+      <tr><td class="use">raise_for_status()</td></tr>
+      <tr><td class="use">CSS селекторы (.class, #id, div p)</td></tr>
+      <tr><td class="use">BS.select() / select_one()</td></tr>
+      <tr><td class="use">el.get_text(), el.get('attr')</td></tr>
+      <tr><td class="use">RSS парсинг через xml парсер</td></tr>
+      <tr><td class="use">Playwright базовый sync API</td></tr>
+      <tr><td class="use">page.content() → BeautifulSoup</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-orange"></span>Знать концептуально</div>
+    <table>
+      <tr><td class="later">XPath (иногда встречается)</td></tr>
+      <tr><td class="later">Session() для переиспользования</td></tr>
+      <tr><td class="later">fake-useragent</td></tr>
+      <tr><td class="later">wait_for_selector в Playwright</td></tr>
+      <tr><td class="later">async Playwright для агентов</td></tr>
+      <tr><td class="later">page.route() блокировка ресурсов</td></tr>
+      <tr><td class="later">Network tab DevTools</td></tr>
+      <tr><td class="later">cURL → Python конвертер</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-red"></span>Не тратить время</div>
+    <table>
+      <tr><td class="skip">Selenium (устарел, Playwright лучше)</td></tr>
+      <tr><td class="skip">MechanicalSoup</td></tr>
+      <tr><td class="skip">Scrapy (фреймворк, избыточно)</td></tr>
+      <tr><td class="skip">regex для парсинга HTML</td></tr>
+      <tr><td class="skip">urllib напрямую</td></tr>
+      <tr><td class="skip">Глубокий JS/CSS — это фронтенд</td></tr>
+      <tr><td class="skip">lxml XPath (CSS селекторы лучше)</td></tr>
+    </table>
+    <div class="note" style="margin-top:10px">Агент с MCP Brave Search заменяет большинство сценариев парсинга. Вложи силы туда.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 7: СВЯЗЬ С ПЛАНОМ -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">7</div>
+  <div class="sec-title">Связь с планом обучения</div>
+  <div class="sec-subtitle">что когда пригодится</div>
+</div>
+
+<div class="full-card">
+  <table>
+    <tr>
+      <th>Неделя</th>
+      <th>Тема</th>
+      <th>Где используется парсинг</th>
+    </tr>
+    <tr>
+      <td><b>Нед.3 сейчас</b></td>
+      <td>requests + BS</td>
+      <td>RSS парсер → 5 заголовков → Claude API оценка важности</td>
+    </tr>
+    <tr>
+      <td><b>Нед.5</b></td>
+      <td>async</td>
+      <td>3 RSS параллельно через asyncio → один DataFrame</td>
+    </tr>
+    <tr>
+      <td><b>Нед.6</b></td>
+      <td>RAG</td>
+      <td>скачать PDF по URL (requests) → чанки → embeddings</td>
+    </tr>
+    <tr>
+      <td><b>Нед.9</b></td>
+      <td>Playwright</td>
+      <td>заголовки с сайта без API → JSON → Qdrant</td>
+    </tr>
+    <tr>
+      <td><b>Нед.10</b></td>
+      <td>MCP</td>
+      <td>get_news(topic) MCP сервер — обёртка над RSS парсером</td>
+    </tr>
+    <tr>
+      <td><b>Нед.11</b></td>
+      <td>LangGraph</td>
+      <td>fetch_news() как узел графа → evaluate() → store()</td>
+    </tr>
+    <tr>
+      <td><b>Нояб.</b></td>
+      <td>Multimodal</td>
+      <td>Playwright скриншот хроматогraммы → Claude Vision анализ</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 8: РАЗБОР РЕАЛЬНОГО КОДА — COOKIES/HEADERS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">8</div>
+  <div class="sec-title">Разбор реального запроса — cookies, headers, params</div>
+  <div class="sec-subtitle">cURL · перехват · безопасность</div>
+</div>
+
+<div class="full-card">
+  <div class="card-title"><span class="dot dot-gold"></span>Как получить готовый Python код из браузера (cURL)</div>
+  <div class="flow">
+    <span class="flow-step">F12 → Network</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">XHR/Fetch tab</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">Нужный запрос → ПКМ → Copy as cURL</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">curlconverter.com</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step">Готовый requests код</span>
+  </div>
+  <p style="margin-top:10px">Это называется <b>перехват запроса</b>. Смотришь что браузер отправляет → повторяешь из Python. Так делают неофициальные API-клиенты. XHR/Fetch — типы фоновых запросов: XHR старый способ, Fetch современный. Именно они несут данные (JSON), не картинки и шрифты.</p>
+</div>
+
+<div class="grid3">
+  <div class="card">
+    <div class="card-title"><span class="dot dot-teal"></span>cookies — что безопасно</div>
+    <table>
+      <tr><th>Куки</th><th>Статус</th></tr>
+      <tr><td><ic>SID</ic>, <ic>PSID</ic>, <ic>SAPISID</ic></td><td style="color:var(--red)">твои auth токены — в .env только!</td></tr>
+      <tr><td><ic>PREF</ic></td><td class="use">настройки — не секрет</td></tr>
+      <tr><td><ic>VISITOR_INFO</ic></td><td class="later">анонимный id — нейтрально</td></tr>
+      <tr><td><ic>YSC</ic></td><td class="later">сессия YouTube — протухает</td></tr>
+    </table>
+    <div class="warn">Куки протухают через часы/дни. Хардкодить нельзя. Хранить в <ic>.env</ic>, добавить в <ic>.gitignore</ic>.</div>
+    <pre style="margin-top:8px"><code>cookies = {'SID': os.getenv('YT_SID')}</code></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-blue"></span>headers — разбор</div>
+    <table>
+      <tr><th>Заголовок</th><th>Суть</th></tr>
+      <tr><td><ic>User-Agent</ic></td><td>притворяешься браузером — важен</td></tr>
+      <tr><td><ic>Referer</ic></td><td>откуда "пришёл" — иногда помогает обойти защиту</td></tr>
+      <tr><td><ic>Accept</ic></td><td>что принимаешь в ответ</td></tr>
+      <tr><td><ic>Sec-Fetch-*</ic></td><td>заголовки безопасности браузера — для маскировки</td></tr>
+      <tr><td><ic>Authorization</ic></td><td style="color:var(--red)">Bearer токен — только в .env</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-purple"></span>Reverse-engineered API</div>
+    <p>Официального API нет? Делай свой. Network tab → XHR → найди JSON ответ → Copy as cURL → Python код.</p>
+    <p style="margin-top:8px">Именно так работают <ic>yt-dlp</ic>, <ic>pytube</ic> — нашли внутренние эндпоинты YouTube и повторяют запросы из кода.</p>
+    <div class="note">params= в URL — не секрет. cookies с токенами — секрет. headers без токенов — нейтральны.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- РАЗДЕЛ 9: RSS — КАК НАЙТИ -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">9</div>
+  <div class="sec-title">RSS — как найти фид и отличить от не-RSS</div>
+  <div class="sec-subtitle">XML · Atom · детекция</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="dot dot-gold"></span>3 способа найти RSS</div>
+    <p><b>1 — стандартные пути (открыть в браузере):</b></p>
+    <pre><code>site.com/feed
+site.com/rss
+site.com/feed.xml
+site.com/atom.xml</code></pre>
+    <p style="margin-top:10px"><b>2 — в &lt;head&gt; страницы (Ctrl+U):</b></p>
+    <pre><code>&lt;!-- ЭТО RSS — берёшь href --&gt;
+&lt;link rel="alternate"
+      type="application/rss+xml"
+      href="/feed/rss"&gt;
+
+&lt;!-- НЕ ЭТО — это поиск сайта --&gt;
+&lt;link type="application/opensearchdescription+xml"&gt;</code></pre>
+    <div class="note">Ключевое: <ic>rel="alternate"</ic> + <ic>rss+xml</ic> или <ic>atom+xml</ic>. Значение href — это URL фида.</div>
+    <p style="margin-top:10px"><b>3 — расширение Feedbro:</b></p>
+    <p>Устанавливаешь → оно само сканирует head каждой страницы → показывает иконку если RSS есть. Тебе нужно только скопировать URL.</p>
+    <p style="margin-top:10px"><b>YouTube RSS (специальный случай):</b></p>
+    <pre><code>youtube.com/feeds/videos.xml?channel_id=UCxxx
+youtube.com/feeds/videos.xml?playlist_id=PLxxx</code></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-teal"></span>RSS vs API vs HTML парсинг</div>
+    <p>RSS — стандартный XML фид для новостных читалок. Не API. Только читать, не управлять.</p>
+    <p style="margin-top:8px">API — разработчики сами создают эндпоинты. Документируют. Часто с авторизацией, фильтрами, пагинацией. Двусторонний.</p>
+    <p style="margin-top:8px">HTML парсинг — последний вариант когда нет ни RSS ни API.</p>
+    <table style="margin-top:10px">
+      <tr><th>Ситуация</th><th>Инструмент</th></tr>
+      <tr><td>Есть RSS</td><td class="use">requests + BS xml</td></tr>
+      <tr><td>Есть API</td><td class="use">requests + docs</td></tr>
+      <tr><td>Network tab → JSON</td><td class="use">Copy as cURL → requests</td></tr>
+      <tr><td>Статичный HTML</td><td class="later">requests + BeautifulSoup</td></tr>
+      <tr><td>SPA/динамика</td><td class="later">Playwright + BS</td></tr>
+      <tr><td>MCP Fetch доступен</td><td class="use">парсер не нужен вообще</td></tr>
+    </table>
+    <div class="note" style="margin-top:10px">RSS дают не все сайты. Многие русские новостные — нет или дают урезанный. Поэтому иногда парсят HTML.</div>
+  </div>
+</div>
+
+</div><!-- end wrap -->
+</body>
+</html>
