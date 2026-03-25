@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP — Методичка</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --accent: #4f8ef7;
+    --accent2: #a78bfa;
+    --green: #34d399;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --code-bg: #0d1117;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.7; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  h1 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 48px; }
+
+  h2 { font-size: 1.25rem; font-weight: 600; color: var(--accent); margin: 48px 0 16px; border-left: 3px solid var(--accent); padding-left: 12px; }
+  h3 { font-size: 1rem; font-weight: 600; color: var(--accent2); margin: 28px 0 10px; }
+
+  p { margin-bottom: 14px; color: #cbd5e1; }
+  ul, ol { padding-left: 20px; margin-bottom: 14px; color: #cbd5e1; }
+  li { margin-bottom: 6px; }
+
+  code { background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.85em; color: #93c5fd; }
+
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; overflow-x: auto; margin: 16px 0; }
+  pre code { background: none; border: none; padding: 0; font-size: 0.83em; color: #e2e8f0; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 16px 0; }
+  .card.green { border-left: 3px solid var(--green); }
+  .card.yellow { border-left: 3px solid var(--yellow); }
+  .card.red { border-left: 3px solid var(--red); }
+  .card.blue { border-left: 3px solid var(--accent); }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 600; margin-right: 6px; }
+  .badge.green { background: rgba(52,211,153,.15); color: var(--green); }
+  .badge.blue { background: rgba(79,142,247,.15); color: var(--accent); }
+  .badge.purple { background: rgba(167,139,250,.15); color: var(--accent2); }
+  .badge.yellow { background: rgba(251,191,36,.15); color: var(--yellow); }
+
+  .diagram { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 24px; text-align: center; font-family: monospace; font-size: 0.82em; line-height: 1.9; overflow-x: auto; margin: 16px 0; }
+  .diagram .box { display: inline-block; border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; background: var(--surface); }
+  .diagram .box.host { border-color: var(--accent); color: var(--accent); }
+  .diagram .box.server { border-color: var(--green); color: var(--green); }
+  .diagram .box.tool { border-color: var(--accent2); color: var(--accent2); }
+  .arrow { color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88em; }
+  th { background: var(--surface); color: var(--accent); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 9px 14px; border-bottom: 1px solid rgba(42,45,58,.6); color: #cbd5e1; }
+  tr:last-child td { border-bottom: none; }
+
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 40px; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .toc li { margin-bottom: 4px; }
+
+  .step { counter-increment: step; display: flex; gap: 16px; margin-bottom: 20px; }
+  .step-num { flex-shrink: 0; width: 28px; height: 28px; background: rgba(79,142,247,.2); border: 1px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8em; font-weight: 700; color: var(--accent); margin-top: 2px; }
+  .step-body { flex: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Model Context Protocol</h1>
+  <p class="subtitle">Методичка · Неделя 3 · Как работают MCP-серверы и зачем они нужны</p>
+
+  <div class="toc">
+    <strong style="color:#fff">Содержание</strong>
+    <ol style="margin-top:10px">
+      <li><a href="#what">Что такое MCP</a></li>
+      <li><a href="#why">Почему это важно — аналогия USB-C</a></li>
+      <li><a href="#arch">Архитектура: хост, клиент, сервер</a></li>
+      <li><a href="#protocol">Как работает протокол (JSON-RPC)</a></li>
+      <li><a href="#primitives">Примитивы: Tools, Resources, Prompts</a></li>
+      <li><a href="#transport">Транспорт: stdio vs HTTP</a></li>
+      <li><a href="#playwright">MCP Playwright — что даёт агенту</a></li>
+      <li><a href="#serena">MCP Serena — что даёт агенту</a></li>
+      <li><a href="#install">Установка: пошаговая инструкция</a></li>
+      <li><a href="#usecase">Как агент использует MCP в твоём проекте</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <h2 id="what">1. Что такое MCP</h2>
+  <p>MCP (Model Context Protocol) — открытый стандарт, разработанный Anthropic, для подключения AI-приложений к внешним системам. Опубликован в 2024 году, сейчас поддерживается Claude, ChatGPT, VSCode Copilot, Cursor и другими.</p>
+
+  <div class="card blue">
+    <strong>Точная формулировка:</strong> MCP — это протокол для обмена контекстом между LLM-приложением (хостом) и внешними инструментами/данными (серверами). Он стандартизирует <em>как</em> инструменты описываются, вызываются и как возвращают результат.
+  </div>
+
+  <p>До MCP каждый AI-клиент делал свою интеграцию по-своему: Claude — через function calling в API, GPT — через plugins, Cursor — через своё API. Каждый инструмент нужно было писать заново под каждого клиента. MCP решает это как USB решил проблему разных разъёмов.</p>
+
+  <!-- 2 -->
+  <h2 id="why">2. Аналогия USB-C</h2>
+
+  <div class="card green">
+    <strong>USB-C аналогия:</strong><br><br>
+    До USB-C у каждого устройства был свой разъём. Хочешь подключить принтер к ноуту — нужен специфический провод для этой пары.<br><br>
+    MCP — это USB-C для AI. Один стандартный протокол. Написал MCP-сервер один раз → он работает с Claude, GPT, Cursor, любым хостом который поддерживает MCP.
+  </div>
+
+  <p>Конкретно это значит:</p>
+  <ul>
+    <li>Playwright MCP написан один раз → работает и в Claude Desktop, и в Claude Code, и в Cursor</li>
+    <li>Твой кастомный MCP-сервер для fin_advisor → подключается к любому AI без переписывания</li>
+    <li>Сообщество пишет серверы (GitHub, Slack, PostgreSQL, Notion) → ты просто подключаешь</li>
+  </ul>
+
+  <!-- 3 -->
+  <h2 id="arch">3. Архитектура: хост, клиент, сервер</h2>
+
+  <p>Три участника:</p>
+
+  <div class="diagram">
+    <div style="margin-bottom:8px"><span class="box host">MCP Host</span> <span style="color:var(--muted)">— AI-приложение (Claude Code, Claude Desktop, Cursor)</span></div>
+    <div style="margin-bottom:8px; padding-left:40px"><span class="arrow">↕ создаёт и управляет</span></div>
+    <div style="margin-bottom:8px; padding-left:40px"><span class="box" style="border-color:var(--yellow);color:var(--yellow)">MCP Client</span> <span style="color:var(--muted)">— компонент внутри хоста, одно соединение = один клиент</span></div>
+    <div style="margin-bottom:8px; padding-left:80px"><span class="arrow">↕ JSON-RPC через stdio или HTTP</span></div>
+    <div style="padding-left:80px"><span class="box server">MCP Server</span> <span style="color:var(--muted)">— внешняя программа (Playwright, Serena, твой сервер)</span></div>
+  </div>
+
+  <p><strong>Хост</strong> (Claude Code) — главный. Он запускает серверы, создаёт клиентов для каждого из них, передаёт список доступных инструментов в LLM.</p>
+
+  <p><strong>Клиент</strong> — объект внутри хоста. Один клиент = одно соединение с одним сервером. Если подключено 3 сервера — 3 клиента.</p>
+
+  <p><strong>Сервер</strong> — отдельная программа (или процесс). Может быть локальной (запускается как дочерний процесс) или удалённой (работает где-то в сети). Она не знает ничего о LLM — только отвечает на запросы по протоколу.</p>
+
+  <!-- 4 -->
+  <h2 id="protocol">4. Как работает протокол (JSON-RPC)</h2>
+
+  <p>MCP использует <strong>JSON-RPC 2.0</strong> — простой протокол вызова удалённых процедур через JSON. Каждое сообщение — это JSON-объект.</p>
+
+  <h3>Жизненный цикл соединения</h3>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body"><strong>Initialize</strong> — клиент отправляет initialize с версией протокола и своими capabilities. Сервер отвечает своими capabilities (какие примитивы поддерживает).</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body"><strong>Discovery</strong> — клиент запрашивает <code>tools/list</code>. Сервер возвращает список инструментов с описаниями и JSON Schema параметров. Хост добавляет их в контекст LLM.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body"><strong>Execution</strong> — LLM решает вызвать инструмент. Хост отправляет <code>tools/call</code> с аргументами. Сервер выполняет действие, возвращает результат. Хост добавляет результат в разговор.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body"><strong>Notifications</strong> — сервер может сам уведомить клиента об изменениях (например, список инструментов обновился). Клиент не опрашивает — просто получает уведомление.</div>
+  </div>
+
+  <h3>Пример: вызов инструмента</h3>
+  <pre><code>// Хост → Сервер: вызвать инструмент
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "tools/call",
+  "params": {
+    "name": "browser_navigate",
+    "arguments": { "url": "https://www.ft.com/" }
+  }
+}
+
+// Сервер → Хост: результат
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [{ "type": "text", "text": "Navigated to https://www.ft.com/ — page loaded" }]
+  }
+}</code></pre>
+
+  <!-- 5 -->
+  <h2 id="primitives">5. Примитивы: Tools, Resources, Prompts</h2>
+
+  <table>
+    <tr>
+      <th>Примитив</th>
+      <th>Что это</th>
+      <th>Пример</th>
+    </tr>
+    <tr>
+      <td><span class="badge green">Tools</span></td>
+      <td>Функции которые агент может вызвать для действия</td>
+      <td><code>browser_click</code>, <code>query_db</code>, <code>send_email</code></td>
+    </tr>
+    <tr>
+      <td><span class="badge blue">Resources</span></td>
+      <td>Данные/контекст которые агент может прочитать</td>
+      <td>Содержимое файла, схема БД, результат API</td>
+    </tr>
+    <tr>
+      <td><span class="badge purple">Prompts</span></td>
+      <td>Шаблоны системных промптов от сервера</td>
+      <td>"Ты аналитик. Вот данные: {data}"</td>
+    </tr>
+  </table>
+
+  <p>Для тебя сейчас главное — <strong>Tools</strong>. Агент видит список инструментов как список функций с описаниями. Когда LLM понимает что нужно кликнуть по кнопке — она генерирует вызов <code>browser_click</code> с нужными параметрами, хост отправляет это в сервер, сервер кликает, результат возвращается.</p>
+
+  <!-- 6 -->
+  <h2 id="transport">6. Транспорт: stdio vs HTTP</h2>
+
+  <table>
+    <tr>
+      <th>Тип</th>
+      <th>Как работает</th>
+      <th>Когда использовать</th>
+    </tr>
+    <tr>
+      <td><span class="badge green">stdio</span></td>
+      <td>Хост запускает сервер как дочерний процесс, общение через stdin/stdout. Сервер живёт пока живёт хост.</td>
+      <td>Локальные серверы (Playwright, Serena, файловая система). Самый простой вариант.</td>
+    </tr>
+    <tr>
+      <td><span class="badge blue">HTTP/SSE</span></td>
+      <td>Сервер работает отдельно, хост подключается по HTTP. Поддерживает много клиентов одновременно.</td>
+      <td>Удалённые серверы, корпоративные интеграции (Sentry, Notion, GitHub).</td>
+    </tr>
+  </table>
+
+  <p>Playwright MCP и Serena — <strong>stdio</strong>. Claude Code запускает их как процессы, общается через stdin/stdout. Ты не видишь эти процессы явно — Claude Code управляет ими сам.</p>
+
+  <!-- 7 -->
+  <h2 id="playwright">7. MCP Playwright — что даёт агенту</h2>
+
+  <p>50+ инструментов для управления браузером. Агент больше не пишет код с Playwright — он просто <em>вызывает инструменты</em> как команды.</p>
+
+  <h3>Основные инструменты</h3>
+  <table>
+    <tr><th>Инструмент</th><th>Что делает</th></tr>
+    <tr><td><code>browser_navigate</code></td><td>Перейти на URL</td></tr>
+    <tr><td><code>browser_click</code></td><td>Кликнуть по элементу (по тексту/роли)</td></tr>
+    <tr><td><code>browser_type</code></td><td>Ввести текст в поле</td></tr>
+    <tr><td><code>browser_snapshot</code></td><td>Получить accessibility tree страницы (текстовое представление DOM)</td></tr>
+    <tr><td><code>browser_take_screenshot</code></td><td>Скриншот для визуальной проверки</td></tr>
+    <tr><td><code>browser_wait_for</code></td><td>Ждать появления элемента</td></tr>
+    <tr><td><code>browser_evaluate</code></td><td>Выполнить JavaScript на странице</td></tr>
+    <tr><td><code>browser_select_option</code></td><td>Выбрать опцию в select</td></tr>
+    <tr><td><code>browser_get_cookies</code></td><td>Получить все куки текущего контекста</td></tr>
+  </table>
+
+  <h3>Snapshot режим — ключевое отличие от обычного Playwright</h3>
+  <div class="card blue">
+    Вместо скриншотов сервер отдаёт <strong>accessibility tree</strong> — структурированное текстовое представление страницы. Агент получает что-то вроде:<br><br>
+    <code style="font-size:0.8em">button "Accept cookies" [id=sp_choice_type_11]<br>link "Markets" href="/markets"<br>heading "Global Economy" level=1</code><br><br>
+    Это в 10–50x токенов дешевле чем описывать скриншот. И детерминированно — агент точно знает что кликнуть.
+  </div>
+
+  <h3>Как агент находит кнопку consent banner</h3>
+  <p>Агент вызывает <code>browser_snapshot</code>, видит в дереве <code>button "Accept" [class=sp_choice_type_11]</code>, затем вызывает <code>browser_click</code> с этим селектором. Никакого hardcode — агент сам разберётся по дереву.</p>
+
+  <!-- 8 -->
+  <h2 id="serena">8. MCP Serena — что даёт агенту</h2>
+
+  <p>Serena — инструменты для работы с кодовой базой на уровне символов, не строк. Это как дать агенту функциональность IDE.</p>
+
+  <table>
+    <tr><th>Инструмент</th><th>Что делает</th></tr>
+    <tr><td><code>find_symbol</code></td><td>Найти функцию/класс по имени во всём проекте</td></tr>
+    <tr><td><code>find_referencing_symbols</code></td><td>Найти все места где используется символ</td></tr>
+    <tr><td><code>insert_after_symbol</code></td><td>Вставить код сразу после определения функции</td></tr>
+    <tr><td><code>get_symbol_definition</code></td><td>Получить полное определение символа</td></tr>
+    <tr><td><code>search_symbols_in_file</code></td><td>Список всех символов в файле</td></tr>
+  </table>
+
+  <div class="card yellow">
+    <strong>Зачем это нужно?</strong> Claude Code по умолчанию читает файлы целиком. Для большого проекта (fin_advisor с десятками модулей) это дорого по токенам и медленно. Serena позволяет агенту работать точечно — "найди функцию X, посмотри где она вызывается, вставь изменение". Это важно когда проект вырастет.
+  </div>
+
+  <!-- 9 -->
+  <h2 id="install">9. Установка — пошаговая инструкция</h2>
+
+  <h3>Шаг 1: Установить Node.js (нужен для Playwright MCP)</h3>
+
+  <div class="card blue">
+    <strong>Зачем Node.js?</strong><br><br>
+    Playwright MCP — это JavaScript-пакет (<code>@playwright/mcp</code>), опубликованный в npm (реестр пакетов Node.js). Команда <code>npx @playwright/mcp@latest</code> — это "скачай и запусти npm-пакет".<br><br>
+    <strong>Node.js</strong> — среда выполнения JavaScript вне браузера. Как Python — среда для .py файлов, так Node.js — среда для .js/.ts файлов.<br><br>
+    <strong>npm</strong> — менеджер пакетов Node.js (как pip для Python).<br><br>
+    <strong>npx</strong> — утилита из npm: скачать пакет + сразу запустить, не устанавливая глобально. Аналог <code>uvx</code> в Python-экосистеме.<br><br>
+    Без Node.js команда <code>npx</code> не существует → MCP-сервер не запустится → Claude Code не сможет подключиться к Playwright.
+  </div>
+
+  <pre><code>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node --version   # должно быть v22.x
+npx --version    # должно появиться автоматически вместе с node</code></pre>
+
+  <h3>Шаг 2: Установить uv и uvx (нужен для Serena)</h3>
+
+  <div class="card blue">
+    <strong>Зачем uv и uvx?</strong><br><br>
+    <strong>uv</strong> — это современный менеджер Python-пакетов и окружений, написанный на Rust. Быстрее pip в 10–100x. Умеет создавать venv, устанавливать пакеты, управлять версиями Python.<br><br>
+    <strong>uvx</strong> — субкоманда uv: запустить Python-инструмент в изолированном окружении без установки. Это точный аналог <code>npx</code> для Python.<br><br>
+    Serena — Python-пакет. Команда <code>uvx --from git+https://... serena start-mcp-server</code> значит:<br>
+    "скачай serena прямо с GitHub, создай временное venv, запусти как MCP-сервер".<br><br>
+    Почему не просто <code>pip install serena</code>? Потому что Serena не опубликована в PyPI — только на GitHub. И uvx изолирует зависимости Serena от твоего проекта.<br><br>
+    <strong>Аналогия npm/pip:</strong>
+    <table style="margin-top:8px">
+      <tr><th>JavaScript</th><th>Python</th><th>Что делает</th></tr>
+      <tr><td><code>npm</code></td><td><code>pip</code></td><td>Установить пакет</td></tr>
+      <tr><td><code>npx pkg</code></td><td><code>uvx pkg</code></td><td>Скачать и запустить без установки</td></tr>
+      <tr><td><code>node</code></td><td><code>python</code></td><td>Выполнить код</td></tr>
+      <tr><td><code>package.json</code></td><td><code>requirements.txt</code></td><td>Зависимости проекта</td></tr>
+    </table>
+  </div>
+
+  <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh
+# перезапусти терминал или:
+source ~/.bashrc
+uv --version
+uvx --version   # появляется вместе с uv</code></pre>
+
+  <h3>Шаг 3: Добавить Playwright MCP в Claude Code</h3>
+  <pre><code># Локально для проекта (рекомендую):
+claude mcp add playwright npx @playwright/mcp@latest
+
+# Или через VSCode команду:
+code --add-mcp '{"name":"playwright","command":"npx","args":["@playwright/mcp@latest"]}'</code></pre>
+
+  <p>После этого в <code>.claude/settings.json</code> появится:</p>
+  <pre><code>{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}</code></pre>
+
+  <h3>Шаг 4: Добавить Serena</h3>
+  <pre><code># Проверить что работает:
+uvx --from git+https://github.com/oraios/serena serena start-mcp-server --help
+
+# Добавить в Claude Code:
+claude mcp add serena uvx --from git+https://github.com/oraios/serena serena start-mcp-server</code></pre>
+
+  <h3>Шаг 5: Проверить что серверы видны</h3>
+  <pre><code>claude mcp list
+# Должно показать: playwright, serena</code></pre>
+
+  <div class="card red">
+    <strong>Важно:</strong> Claude Code нужно перезапустить после добавления MCP-серверов. При первом запуске Playwright скачает браузер (~110MB) — это нормально.
+  </div>
+
+  <h3>Опциональные флаги для Playwright MCP</h3>
+  <pre><code># Headed режим (видишь браузер):
+claude mcp add playwright npx @playwright/mcp@latest -- --headed
+
+# Включить cookies/storage инструменты:
+claude mcp add playwright npx @playwright/mcp@latest -- --caps storage
+
+# Headed + storage (удобно для отладки):
+claude mcp add playwright npx @playwright/mcp@latest -- --headed --caps storage</code></pre>
+
+  <!-- 10 -->
+  <h2 id="usecase">10. Как агент использует MCP в твоём проекте</h2>
+
+  <h3>Сценарий: агент сам чинит сломанный consent-клик</h3>
+
+  <div class="card green">
+    <p style="margin-bottom:8px"><strong>Ты говоришь агенту:</strong> "Кнопка consent banner не нажимается, проверь и почини"</p>
+
+    <p style="margin-bottom:4px">Агент (с Playwright MCP):</p>
+    <ol style="margin-bottom:0">
+      <li>Вызывает <code>browser_navigate</code> → заходит на ft.com</li>
+      <li>Вызывает <code>browser_snapshot</code> → смотрит дерево страницы</li>
+      <li>Находит кнопку, видит реальный класс/текст</li>
+      <li>Вызывает <code>browser_click</code> → проверяет что сработало</li>
+      <li>Читает код <code>ft.py</code> (через Serena или Read)</li>
+      <li>Исправляет селектор в <code>refresh_cookies_playwright()</code></li>
+    </ol>
+  </div>
+
+  <h3>Без MCP vs с MCP</h3>
+  <table>
+    <tr><th></th><th>Без MCP</th><th>С MCP Playwright</th></tr>
+    <tr>
+      <td>Найти нужный элемент</td>
+      <td>Ты идёшь в браузер, копируешь селектор, пишешь агенту</td>
+      <td>Агент сам заходит, смотрит дерево, находит</td>
+    </tr>
+    <tr>
+      <td>Протухли куки</td>
+      <td>Ты открываешь DevTools, копируешь куки, обновляешь .env</td>
+      <td>Агент сам логинится, забирает куки, обновляет сессию</td>
+    </tr>
+    <tr>
+      <td>Сайт изменил вёрстку</td>
+      <td>Код ломается, ты ищешь новый селектор</td>
+      <td>Агент получает ошибку, сам смотрит новую структуру, чинит</td>
+    </tr>
+  </table>
+
+  <h3>Схема для ft.py: агент + MCP</h3>
+  <pre><code>FTClient.refresh_cookies_playwright()
+  → если ошибка / кнопка не найдена
+  → агент получает exception
+  → вызывает browser_navigate(ft.com)
+  → вызывает browser_snapshot()
+  → анализирует дерево
+  → находит новый селектор
+  → редактирует ft.py
+  → повторяет попытку</code></pre>
+
+  <p>Это и есть агент-петля с инструментами. Фаза 1 твоего плана (апрель–май) — именно это: LangGraph/PydanticAI агент + MCP-инструменты + петля с обработкой ошибок.</p>
+
+  <div class="card blue" style="margin-top:32px">
+    <strong>Короткий итог:</strong><br><br>
+    MCP = стандартный разъём для AI-инструментов.<br>
+    Хост (Claude Code) → создаёт клиент → соединяется с сервером → LLM видит инструменты → вызывает их через JSON-RPC → результат идёт обратно в контекст.<br><br>
+    Playwright MCP даёт агенту браузер. Serena даёт агенту понимание кода.<br>
+    Вместе — агент может сам разбираться с внештатными ситуациями без тебя.
+  </div>
+
+  <!-- 11 -->
+  <h2 id="mental_model">11. Как это реально работает — механизм в деталях</h2>
+
+  <h3>Твоё понимание: верно ли?</h3>
+
+  <div class="card green">
+    <strong>Да, понял правильно.</strong> Уточню механизм точнее:<br><br>
+    <ol style="margin-top:8px">
+      <li><strong>Хост</strong> (Claude Code) — это ты как пользователь + LLM + оболочка. Он знает о всех подключённых MCP-серверах.</li>
+      <li>При старте хост создаёт <strong>MCP-клиент</strong> для каждого сервера и запрашивает <code>tools/list</code> — список доступных инструментов. Этот список добавляется в системный промпт LLM.</li>
+      <li>LLM видит что-то вроде: <em>"У тебя есть инструмент <code>browser_click(selector)</code> — кликнуть по элементу в браузере"</em>.</li>
+      <li>Когда в коде вылетает <code>RuntimeError("consent_banner_selector_outdated")</code> — LLM получает это в контекст и <strong>сама решает</strong> вызвать <code>browser_navigate</code>, потом <code>browser_snapshot</code>.</li>
+      <li>Хост перехватывает это намерение LLM, отправляет JSON-RPC запрос <code>tools/call</code> на MCP-сервер Playwright.</li>
+      <li>Сервер Playwright (локальный процесс, запущенный через npx) открывает браузер, выполняет действие, возвращает результат.</li>
+      <li>Результат (accessibility tree страницы) возвращается в контекст LLM. LLM видит структуру, находит кнопку, генерирует правку в <code>ft.py</code>.</li>
+    </ol>
+  </div>
+
+  <p><strong>Важное уточнение:</strong> "агентик-клиент" в твоей формулировке — это не отдельная сущность, это сама LLM внутри хоста, которая принимает решения. MCP-клиент — просто объект-соединение, не агент. Агент = LLM + хост + инструменты вместе.</p>
+
+  <pre><code>// Упрощённо: что происходит когда вылетает ошибка в ft.py
+
+[ft.py]          RuntimeError: consent_banner_selector_outdated
+      ↓
+[Claude Code]    LLM получает ошибку в контексте
+                 LLM решает: "надо посмотреть страницу через браузер"
+                 LLM генерирует вызов инструмента browser_navigate
+      ↓
+[MCP Client]     отправляет JSON-RPC → { "method": "tools/call",
+                                          "params": { "name": "browser_navigate",
+                                                      "arguments": { "url": "https://ft.com" } } }
+      ↓
+[MCP Server]     (npx @playwright/mcp — локальный процесс)
+                 открывает Chromium, переходит на ft.com
+                 возвращает: { "result": { "content": [{ "type": "text", "text": "Navigated" }] } }
+      ↓
+[Claude Code]    LLM вызывает browser_snapshot()
+                 получает accessibility tree: "button 'Accept' [class=sp_choice_type_11]"
+                 видит актуальный селектор
+                 редактирует ft.py → готово</code></pre>
+
+  <!-- 12 -->
+  <h2 id="runtimes">12. Среды выполнения: Python, Node.js — как это работает</h2>
+
+  <h3>Что такое "среда" (runtime)</h3>
+
+  <p>Процессор понимает только машинный код — последовательность байтов, каждый из которых означает конкретную инструкцию (сложить, записать в память, перейти по адресу). Высокоуровневые языки — Python, JavaScript — человекочитаемый текст. Процессор не понимает <code>for item in items:</code>.</p>
+
+  <p><strong>Среда выполнения</strong> — это программа-посредник, которая берёт твой код и делает из него то, что процессор понимает. Два основных подхода:</p>
+
+  <table>
+    <tr><th>Подход</th><th>Как работает</th><th>Пример</th></tr>
+    <tr>
+      <td><span class="badge green">Компиляция</span></td>
+      <td>Весь код сразу переводится в машинный код → получается .exe. Среда нужна только при компиляции.</td>
+      <td>C, Rust, Go</td>
+    </tr>
+    <tr>
+      <td><span class="badge blue">Интерпретация</span></td>
+      <td>Код читается и выполняется строка за строкой в реальном времени. Среда нужна при каждом запуске.</td>
+      <td>Python, JavaScript</td>
+    </tr>
+    <tr>
+      <td><span class="badge purple">Гибрид (JIT)</span></td>
+      <td>Интерпретируется, но горячие участки кода компилируются на лету для скорости.</td>
+      <td>Java, Node.js V8, PyPy</td>
+    </tr>
+  </table>
+
+  <h3>Как работает Python</h3>
+
+  <div class="card blue">
+    <strong>Шаги от .py файла до результата:</strong><br><br>
+    <ol>
+      <li><strong>Лексер</strong> — разбивает текст на токены: <code>for</code>, <code>item</code>, <code>in</code>, <code>items</code>, <code>:</code></li>
+      <li><strong>Парсер</strong> — строит AST (Abstract Syntax Tree) — дерево структуры кода</li>
+      <li><strong>Компилятор</strong> — переводит AST в <strong>байткод</strong> (.pyc файлы в <code>__pycache__/</code>) — промежуточный низкоуровневый формат</li>
+      <li><strong>CPython VM</strong> — виртуальная машина, выполняет байткод инструкцию за инструкцией</li>
+    </ol>
+    <br>
+    Байткод — не машинный код. Это инструкции для <em>виртуальной</em> машины Python. Поэтому один .py файл запускается на Windows, Linux, Mac без перекомпиляции — везде своя CPython VM, но байткод одинаковый.
+  </div>
+
+  <pre><code># Посмотреть байткод Python — это реально существует:
+import dis
+dis.dis("for item in items: print(item)")
+
+# Вывод:
+#   1     LOAD_NAME    0 (items)
+#         GET_ITER
+#   >>    FOR_ITER     4 (to 14)
+#         STORE_NAME   1 (item)
+#         LOAD_NAME    2 (print)
+#         LOAD_NAME    1 (item)
+#         CALL         1
+#         POP_TOP
+#         JUMP_BACKWARD 6 (to 4)</code></pre>
+
+  <h3>Как работает JavaScript / Node.js</h3>
+
+  <p>JavaScript изначально создавался только для браузеров — каждый браузер встраивал свой JS-движок. Google для Chrome написал <strong>V8</strong> — очень быстрый движок с JIT-компиляцией.</p>
+
+  <p><strong>Node.js</strong> — это V8, вытащенный из браузера и упакованный как самостоятельная программа. Плюс добавили API для работы с файлами, сетью, процессами — то, чего в браузере нет по соображениям безопасности.</p>
+
+  <div class="card yellow">
+    <strong>Ключевое отличие Node.js от Python:</strong><br><br>
+    Node.js изначально построен на <strong>event loop + async I/O</strong>. Одним потоком обслуживает тысячи соединений одновременно — не блокируется на ожидании ответа от сети или диска. Именно поэтому Node.js стал стандартом для серверов и инструментов реального времени.<br><br>
+    Python добавил async/await позже (3.4+), и он менее органичен. В Node.js async — это DNA, не надстройка.
+  </div>
+
+  <h3>Где хранятся среды и пакеты</h3>
+
+  <table>
+    <tr><th></th><th>Python</th><th>Node.js</th></tr>
+    <tr><td>Интерпретатор</td><td><code>/usr/bin/python3</code> или <code>.venv/bin/python</code></td><td><code>/usr/bin/node</code></td></tr>
+    <tr><td>Менеджер пакетов</td><td>pip → <code>.venv/lib/python3.x/site-packages/</code></td><td>npm → <code>node_modules/</code></td></tr>
+    <tr><td>Глобальные пакеты</td><td><code>/usr/lib/python3/dist-packages/</code></td><td><code>/usr/lib/node_modules/</code></td></tr>
+    <tr><td>Изоляция</td><td>venv / conda</td><td>node_modules в папке проекта</td></tr>
+    <tr><td>Запустить без установки</td><td><code>uvx package</code></td><td><code>npx package</code></td></tr>
+  </table>
+
+  <h3>npx и uvx — точный механизм</h3>
+
+  <div class="card green">
+    <strong>Твоё понимание верно:</strong> npx/uvx — это "воспользоваться инструментом, не загружая его полностью глобально".<br><br>
+    Но точнее: они <em>всё равно скачивают</em> пакет — просто во временную или кэш-папку, а не в глобальную среду. Разница:<br><br>
+    <strong><code>npm install -g @playwright/mcp</code></strong> — устанавливает глобально в <code>/usr/lib/node_modules/</code>. Остаётся навсегда. Версия одна на всю систему.<br><br>
+    <strong><code>npx @playwright/mcp@latest</code></strong> — скачивает в кэш (<code>~/.npm/_npx/</code>), запускает, кэш можно удалить. Всегда берёт последнюю версию если не указана конкретная. Не загрязняет глобальную среду.<br><br>
+    Аналогично uvx: скачивает в <code>~/.cache/uv/</code>, создаёт изолированный venv, запускает, не трогает твой проект.
+  </div>
+
+  <h3>Почему Playwright MCP написан на Node.js, а не Python</h3>
+
+  <ul>
+    <li>Playwright — библиотека Microsoft, изначально написана на TypeScript/Node.js. Python-версия — это биндинги поверх Node.js ядра.</li>
+    <li>Node.js async I/O идеально подходит для MCP-сервера: он ждёт команды от хоста, выполняет действие в браузере, возвращает результат — всё асинхронно, без блокировок.</li>
+    <li>MCP-протокол разработан Anthropic в экосистеме TypeScript → эталонные реализации на Node.js. Python SDK появился позже.</li>
+  </ul>
+
+  <div class="card blue" style="margin-top:24px">
+    <strong>Итог по средам:</strong><br><br>
+    Язык → текст который ты пишешь.<br>
+    Среда (runtime) → программа которая этот текст выполняет (CPython для Python, V8/Node.js для JS).<br>
+    Пакетный менеджер → инструмент чтобы скачать чужой код (pip, npm).<br>
+    npx/uvx → скачать и запустить без постоянной установки. Пакет всё равно скачивается — просто в кэш, не в глобальную среду.<br><br>
+    MCP-серверы могут быть написаны на любом языке — важно только что они говорят по протоколу JSON-RPC. Playwright MCP — Node.js. Serena — Python. Твой будущий сервер — на чём удобно.
+  </div>
+
+</div>
+</body>
+</html>
