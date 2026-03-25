@@ -889,7 +889,7 @@
                         <li>Разница: Claude.ai (браузер) &ne; API (токены) &ne; Claude Code ($20/мес CLI)</li>
                         <li>Prompt Engineering: docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview
                             &mdash; 30 мин, системно: structured prompts, in-context learning, defensive prompting</li>
-                        <li>Ahillary ур.7: BeautifulSoup4, GET-запросы &mdash; понять принцип парсинга HTML</li>
+                        <li class='done'>Ahillary ур.7: BeautifulSoup4, GET-запросы &mdash; понять принцип парсинга HTML</li>
                         <li>Написать базовый RSS-парсер</li>
                         <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3B1B <a
                                 href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"
@@ -2719,20 +2719,6 @@
     checkWeekDone(tr);
   });
 
-  // Вешаем клик
-  document.querySelectorAll('.clist li:not(.skip)').forEach(function(li) {
-    li.style.cursor = 'pointer';
-    li.addEventListener('click', function() {
-      li.classList.toggle('done');
-      var done = loadDone();
-      var id = getItemId(li);
-      if (li.classList.contains('done')) done[id] = true;
-      else delete done[id];
-      saveDone(done);
-      var tr = li.closest('tr');
-      if (tr) checkWeekDone(tr);
-    });
-  });
 })();
 </script>
 </body>
