@@ -201,3 +201,40 @@ TASK_HTML = """
 
 
 # ── твой код ниже ──────────────────────────────────────────────
+
+soup = BS(TASK_HTML, 'html.parser')
+
+table = soup.select_one('table.assets-table')
+
+headers = []
+for th in table.select('th'):
+    header = th.get_text()
+    headers.append(header)
+    print(f"Header: {header}")
+
+assets = []
+for tr in table.select('tbody tr'):
+    cells = []
+    for td in tr.select('td'):
+        cell = td.get_text()
+        cells.append(cell)
+        print(f"  Cell: {cell}")
+    assets.append(dict(zip(headers, cells)))
+
+print("\nAssets:")
+for asset in assets:
+    print(f"  {asset['Ticker']} — {asset['Price']} ({asset['Change']})")
+
+# Найти актив с максимальной ценой
+max_price = 0.0
+max_asset = None
+for asset in assets:
+    price_str = asset['Price']  # "$875.40"
+    price = float(price_str.replace('$', '').replace(',', ''))
+    if price > max_price:
+        max_price = price
+        max_asset = asset
+
+print(f"\nAsset with max price: {max_asset['Ticker']} — {max_asset['Price']}")
+
+...

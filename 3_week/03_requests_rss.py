@@ -86,47 +86,8 @@ print(f"Получено новостей: {len(news)}")
 for n in news[:3]:
     print(f"  [{n['pubDate']}] {n['title']}")
 
-
 # ═══════════════════════════════════════════════════════════════
-# ЗАДАЧА: Агрегатор источников из конфига
-# ═══════════════════════════════════════════════════════════════
-#
-# В файле  data/sources_config.json  лежит список RSS-источников.
-# Каждый источник: id, name, url, tier, lang, topic.
-#
-# Нужно:
-#   1. Загрузить конфиг из data/sources_config.json (json.load)
-#
-#   2. Реализовать функцию  fetch_feed(source: dict) -> list[dict]
-#      которая:
-#        - берёт url из source
-#        - вызывает safe_get()
-#        - парсит RSS через BeautifulSoup 'xml'
-#        - к каждой новости добавляет поля source_id и source_tier
-#          из переданного source
-#        - возвращает список новостей (пустой список если ошибка)
-#
-#   3. Пройти по всем источникам из конфига:
-#        - вызвать fetch_feed() для каждого
-#        - собрать все новости в один список all_news
-#
-#   4. Вывести:
-#        - сколько новостей получено от каждого source_id
-#        - 3 последние новости (по порядку в списке) с полями:
-#          source_id, title (обрезать до 80 символов)
-#
-# Подсказка:
-#   Некоторые RSS-фиды могут быть недоступны или пустые —
-#   это нормально, safe_get() вернёт None и fetch_feed() вернёт [].
-#   Не падать, просто пропускать.
-#
-
-
-# ── твой код ниже ──────────────────────────────────────────────
-
-
-# ═══════════════════════════════════════════════════════════════
-# ЗАДАЧА 2: GET с JSON-ответом и POST-запрос
+# ЗАДАЧА: GET с JSON-ответом и POST-запрос
 # ═══════════════════════════════════════════════════════════════
 #
 # Используем публичный тестовый API: https://httpbin.org
@@ -153,3 +114,41 @@ for n in news[:3]:
 #
 
 # ── твой код ниже ──────────────────────────────────────────────
+
+import json
+import requests
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:148.0) Gecko/20100101 Firefox/148.0',
+    'Accept': 'application/json',
+    'Accept-Language': 'en-US,en;q=0.9',
+    # 'Accept-Encoding': 'gzip, deflate, br, zstd',
+    'Referer': 'https://httpbin.org/',
+    'Connection': 'keep-alive',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'Priority': 'u=0',
+}
+
+params = {'ticker':'AAPL', 'interval':'1d',}
+
+response = requests.get('https://httpbin.org/get', headers=headers, params=params)
+
+url = response.url
+print(f'URL: {url}')
+
+res = response.json()
+
+print(f'interval: {res['args']['interval']}')
+print(f'ticker: {res['args']['ticker']}')
+
+params = {"ticker": "MSFT", "action": "buy", "qty": 10}
+
+response = requests.post('https://httpbin.org/post', headers=headers, json=json.dumps(params))
+# how to send data= or json=? | if data= then it will be form-encoded, if json= then it will be sent as JSON with the appropriate Content-Type header
+
+print(f'Status code: {response.status_code}')
+response.raise_for_status()
+
+print(f'Body of my POST-request: {response.json()['json']}')
