@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP · REST · API — Глубокая методичка</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #0a0c0f;
+  --bg2: #0f1318;
+  --bg3: #141920;
+  --border: #1e2630;
+  --border2: #2a3540;
+  --amber: #e8a020;
+  --amber2: #f5c060;
+  --cyan: #20b8d0;
+  --cyan2: #60d8e8;
+  --green: #38c060;
+  --green2: #70e090;
+  --red: #e04040;
+  --orange: #e06820;
+  --purple: #9060e0;
+  --text: #c8d8e8;
+  --text2: #7890a0;
+  --text3: #455060;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--amber);
+  padding: 0 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-logo {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--amber2);
+  letter-spacing: 1px;
+}
+.topbar-nav {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+.topbar-nav a {
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 3px;
+  transition: all .15s;
+}
+.topbar-nav a:hover { background: var(--bg3); color: var(--amber2); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 48px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 600px; height: 100%;
+  background: radial-gradient(ellipse at 80% 50%, rgba(232,160,32,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.hero h1 span { color: var(--amber2); }
+.hero p {
+  color: var(--text2);
+  font-size: 13px;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.htag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .5px;
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+.htag-amber { background: rgba(232,160,32,.12); border: 1px solid rgba(232,160,32,.3); color: var(--amber2); }
+.htag-cyan  { background: rgba(32,184,208,.1);  border: 1px solid rgba(32,184,208,.3); color: var(--cyan2); }
+.htag-green { background: rgba(56,192,96,.1);   border: 1px solid rgba(56,192,96,.3);  color: var(--green2); }
+.htag-red   { background: rgba(224,64,64,.1);   border: 1px solid rgba(224,64,64,.3);  color: #f07070; }
+
+/* ── LAYOUT ── */
+.page { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 48px); }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  position: sticky;
+  top: 48px;
+  height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+.sb-section {
+  padding: 8px 20px 4px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-top: 12px;
+}
+.sb-link {
+  display: block;
+  padding: 6px 20px;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 12px;
+  border-left: 2px solid transparent;
+  transition: all .12s;
+}
+.sb-link:hover { color: var(--amber2); border-left-color: var(--amber); background: rgba(232,160,32,.04); }
+.sb-link.active { color: var(--amber2); border-left-color: var(--amber); }
+
+/* ── MAIN ── */
+.main { padding: 40px 48px 80px; max-width: 900px; }
+
+/* ── SECTIONS ── */
+.section { margin-bottom: 56px; }
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.sec-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 1px;
+}
+.sec-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.sec-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  margin-left: auto;
+  letter-spacing: .5px;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cyan2);
+  margin: 28px 0 10px;
+}
+
+p { margin-bottom: 12px; font-size: 13px; color: var(--text); }
+
+/* ── CODE ── */
+pre {
+  background: #060a0e;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: 4px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  margin: 12px 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  line-height: 1.65;
+}
+pre.cyan   { border-left-color: var(--cyan); }
+pre.green  { border-left-color: var(--green); }
+pre.red    { border-left-color: var(--red); }
+pre.purple { border-left-color: var(--purple); }
+pre code { color: #c8d8e8; }
+.k  { color: #9060e0; }
+.f  { color: var(--cyan2); }
+.s  { color: var(--green2); }
+.c  { color: var(--text3); font-style: italic; }
+.n  { color: var(--amber2); }
+.cl { color: #70b0f0; }
+.op { color: var(--text2); }
+
+ic { background: rgba(232,160,32,.1); color: var(--amber2); padding: 1px 6px; border-radius: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border: 1px solid rgba(232,160,32,.2); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin: 12px 0;
+}
+.card.amber { border-left: 3px solid var(--amber); }
+.card.cyan  { border-left: 3px solid var(--cyan); }
+.card.green { border-left: 3px solid var(--green); }
+.card.red   { border-left: 3px solid var(--red); }
+.card.warn  { border-left: 3px solid var(--orange); background: rgba(224,104,32,.05); }
+.card p { margin: 0; }
+.card-title { font-weight: 700; color: #fff; margin-bottom: 8px; font-size: 13px; }
+
+/* ── GRID ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+/* ── TABLE ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 12px 0;
+  font-family: 'IBM Plex Mono', monospace;
+}
+th {
+  background: rgba(232,160,32,.08);
+  color: var(--amber);
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(30,38,48,.8);
+  color: var(--text2);
+  vertical-align: top;
+}
+td b { color: var(--text); }
+tr:hover td { background: rgba(20,25,32,.6); }
+
+/* ── FLOW ── */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+.flow-box {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  padding: 6px 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text);
+}
+.flow-box.a { border-color: var(--amber); color: var(--amber2); }
+.flow-box.c { border-color: var(--cyan); color: var(--cyan2); }
+.flow-box.g { border-color: var(--green); color: var(--green2); }
+.flow-arr { color: var(--text3); font-size: 18px; }
+
+/* ── STATUS CODES ── */
+.sc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin: 12px 0; }
+.sc {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 10px 14px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.sc-code { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+.sc-desc { font-size: 10px; color: var(--text2); }
+.sc-2xx .sc-code { color: var(--green2); border-left: 3px solid var(--green); padding-left: 10px; }
+.sc-3xx .sc-code { color: var(--cyan2);  border-left: 3px solid var(--cyan);  padding-left: 10px; }
+.sc-4xx .sc-code { color: var(--amber2); border-left: 3px solid var(--amber); padding-left: 10px; }
+.sc-5xx .sc-code { color: #f07070;       border-left: 3px solid var(--red);   padding-left: 10px; }
+
+/* ── PLAN BLOCK ── */
+.plan-item {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.plan-item:last-child { border-bottom: none; }
+.plan-day {
+  flex-shrink: 0;
+  width: 80px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--amber);
+  padding-top: 2px;
+  letter-spacing: .5px;
+}
+.plan-content h4 { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+.plan-content p { font-size: 12px; color: var(--text2); margin: 0; }
+.plan-tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.ptag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  letter-spacing: .3px;
+}
+
+/* ── DIFF ── */
+.diff { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin: 12px 0; }
+.diff-bad { background: rgba(224,64,64,.05); padding: 14px 16px; }
+.diff-good { background: rgba(56,192,96,.05); padding: 14px 16px; }
+.diff-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .5px; margin-bottom: 8px; }
+.diff-bad .diff-label { color: var(--red); }
+.diff-good .diff-label { color: var(--green); }
+
+/* ── LIST ── */
+ul.checklist { list-style: none; padding: 0; }
+ul.checklist li {
+  padding: 4px 0 4px 22px;
+  position: relative;
+  font-size: 12px;
+  color: var(--text2);
+}
+ul.checklist li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ── ANATOMY ── */
+.anatomy {
+  background: #060a0e;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px;
+  margin: 12px 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  line-height: 2;
+}
+.a-comment { color: var(--text3); }
+.a-method  { color: var(--purple); font-weight: 600; }
+.a-path    { color: var(--amber2); }
+.a-version { color: var(--text3); }
+.a-host    { color: var(--cyan2); }
+.a-header  { color: var(--green2); }
+.a-body    { color: var(--text); }
+.a-status  { color: var(--green2); font-weight: 600; }
+.a-resp    { color: var(--text2); }
+.a-bracket { display: block; padding-left: 16px; }
+.a-sep { border-top: 1px dashed var(--border2); margin: 8px 0; }
+
+/* ── BADGE ── */
+.badge {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: .5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+.b-get    { background: rgba(56,192,96,.15);  color: var(--green2); border: 1px solid rgba(56,192,96,.3); }
+.b-post   { background: rgba(232,160,32,.15); color: var(--amber2); border: 1px solid rgba(232,160,32,.3); }
+.b-put    { background: rgba(32,184,208,.15); color: var(--cyan2);  border: 1px solid rgba(32,184,208,.3); }
+.b-patch  { background: rgba(144,96,224,.15); color: #b090f0;       border: 1px solid rgba(144,96,224,.3); }
+.b-delete { background: rgba(224,64,64,.15);  color: #f07070;       border: 1px solid rgba(224,64,64,.3); }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-logo">HTTP · REST · API</span>
+  <nav class="topbar-nav">
+    <a href="#http">HTTP</a>
+    <a href="#rest">REST</a>
+    <a href="#auth">Auth</a>
+    <a href="#python">Python</a>
+    <a href="#patterns">Паттерны</a>
+    <a href="#practice">Практика</a>
+    <a href="#plan">План</a>
+  </nav>
+</div>
+
+<div class="hero">
+  <div class="hero-label">Методичка · Неделя 3 · AI Engineer Path</div>
+  <h1>HTTP · REST · <span>Внешние API</span></h1>
+  <p>Полная база: от анатомии запроса до профессиональных паттернов работы с реальными API. Под задачи экономики, химии и агентных систем.</p>
+  <div class="hero-tags">
+    <span class="htag htag-amber">requests</span>
+    <span class="htag htag-cyan">REST</span>
+    <span class="htag htag-green">JSON</span>
+    <span class="htag htag-amber">Auth / API Keys</span>
+    <span class="htag htag-cyan">Rate Limiting</span>
+    <span class="htag htag-green">Error Handling</span>
+    <span class="htag htag-red">jsonplaceholder · etherscan</span>
+  </div>
+</div>
+
+<div class="page">
+<nav class="sidebar">
+  <div class="sb-section">Теория</div>
+  <a class="sb-link" href="#http">1. HTTP изнутри</a>
+  <a class="sb-link" href="#methods">2. Методы</a>
+  <a class="sb-link" href="#status">3. Статус-коды</a>
+  <a class="sb-link" href="#headers">4. Заголовки</a>
+  <a class="sb-link" href="#rest">5. REST принципы</a>
+  <div class="sb-section">Практика</div>
+  <a class="sb-link" href="#auth">6. Авторизация</a>
+  <a class="sb-link" href="#python">7. requests в Python</a>
+  <a class="sb-link" href="#patterns">8. Паттерны</a>
+  <a class="sb-link" href="#errors">9. Ошибки и retry</a>
+  <a class="sb-link" href="#ratelimit">10. Rate Limiting</a>
+  <div class="sb-section">Применение</div>
+  <a class="sb-link" href="#sources">11. Источники уроков</a>
+  <a class="sb-link" href="#practice">12. Практические задачи</a>
+  <a class="sb-link" href="#plan">13. План на 7 дней</a>
+</nav>
+
+<main class="main">
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 1. HTTP ИЗНУТРИ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="http">
+<div class="sec-head">
+  <span class="sec-num">01</span>
+  <span class="sec-title">HTTP изнутри</span>
+  <span class="sec-sub">протокол · TCP · запрос-ответ</span>
+</div>
+
+<p>HTTP (HyperText Transfer Protocol) — текстовый протокол поверх TCP. Каждый запрос и ответ это просто текстовые сообщения с чёткой структурой.</p>
+
+<div class="card amber">
+  <div class="card-title">Полный цикл: что происходит когда ты делаешь GET запрос</div>
+  <div class="flow">
+    <div class="flow-box a">DNS lookup</div>
+    <div class="flow-arr">→</div>
+    <div class="flow-box">TCP connect</div>
+    <div class="flow-arr">→</div>
+    <div class="flow-box c">TLS handshake</div>
+    <div class="flow-arr">→</div>
+    <div class="flow-box a">HTTP Request</div>
+    <div class="flow-arr">→</div>
+    <div class="flow-box g">HTTP Response</div>
+    <div class="flow-arr">→</div>
+    <div class="flow-box">TCP close</div>
+  </div>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2)">requests.get() делает ВСЁ это за тебя. Но понимать что под капотом — обязательно.</p>
+</div>
+
+<h3>Анатомия HTTP запроса</h3>
+<div class="anatomy">
+<span class="a-comment"># HTTP REQUEST</span>
+<span class="a-method">GET</span> <span class="a-path">/api/v1/articles?topic=inflation&limit=10</span> <span class="a-version">HTTP/1.1</span>
+<span class="a-comment">──── HEADERS ─────────────────────────────────────────</span>
+<span class="a-header">Host:</span> api.example.com
+<span class="a-header">Authorization:</span> Bearer eyJhbGc...
+<span class="a-header">Accept:</span> application/json
+<span class="a-header">User-Agent:</span> MyApp/1.0 Python/3.11
+<span class="a-header">Content-Type:</span> application/json
+<span class="a-comment">──── (пустая строка = конец заголовков) ──────────────</span>
+<span class="a-comment">
+</span>
+<span class="a-comment"># У GET нет тела. У POST/PUT есть:</span>
+<span class="a-body">{"query": "inflation", "lang": "ru"}</span>
+</div>
+
+<h3>Анатомия HTTP ответа</h3>
+<div class="anatomy">
+<span class="a-comment"># HTTP RESPONSE</span>
+<span class="a-version">HTTP/1.1</span> <span class="a-status">200 OK</span>
+<span class="a-comment">──── HEADERS ─────────────────────────────────────────</span>
+<span class="a-header">Content-Type:</span> application/json; charset=utf-8
+<span class="a-header">Content-Length:</span> 1247
+<span class="a-header">X-RateLimit-Remaining:</span> 95
+<span class="a-header">X-RateLimit-Reset:</span> 1711540800
+<span class="a-comment">──── BODY ─────────────────────────────────────────────</span>
+<span class="a-body">{</span>
+<span class="a-bracket">  <span class="a-header">"status":</span> "ok",</span>
+<span class="a-bracket">  <span class="a-header">"data":</span> [{"id": 1, "title": "Inflation hits 8%"}]</span>
+<span class="a-body">}</span>
+</div>
+
+<h3>URL разбор — каждая часть имеет смысл</h3>
+<div class="anatomy">
+https://api.example.com:443/v1/news?topic=inflation&limit=10#section
+
+<span class="a-comment">├── https://        → протокол (http или https)</span>
+<span class="a-comment">├── api.example.com → хост (доменное имя)</span>
+<span class="a-comment">├── :443            → порт (443 для HTTPS по умолчанию, 80 для HTTP)</span>
+<span class="a-comment">├── /v1/news        → путь (endpoint)</span>
+<span class="a-comment">├── ?               → начало query string</span>
+<span class="a-comment">├── topic=inflation → query параметр (key=value)</span>
+<span class="a-comment">├── &limit=10       → ещё один параметр (& = разделитель)</span>
+<span class="a-comment">└── #section        → fragment (только в браузере, не отправляется серверу)</span>
+</div>
+
+<div class="card warn">
+  <div class="card-title">⚠ Важно про HTTPS и HTTP</div>
+  <p>HTTPS = HTTP + TLS шифрование. В HTTPS всё тело запроса зашифровано — провайдер видит только хост, не URL и не тело. Всегда используй HTTPS для API ключей. HTTP = всё открытым текстом.</p>
+</div>
+
+<h3>HTTP/1.1 vs HTTP/2 — что это значит для тебя</h3>
+<table>
+  <tr><th>Версия</th><th>Что нового</th><th>Практически</th></tr>
+  <tr><td>HTTP/1.1</td><td>Keepalive соединения</td><td>requests.Session() переиспользует TCP</td></tr>
+  <tr><td>HTTP/2</td><td>Мультиплексирование, сжатие заголовков</td><td>httpx поддерживает, requests — нет</td></tr>
+  <tr><td>HTTP/3</td><td>Поверх QUIC (UDP), быстрее при потерях</td><td>экзотика, не для практики сейчас</td></tr>
+</table>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 2. МЕТОДЫ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="methods">
+<div class="sec-head">
+  <span class="sec-num">02</span>
+  <span class="sec-title">HTTP методы</span>
+  <span class="sec-sub">GET · POST · PUT · PATCH · DELETE</span>
+</div>
+
+<table>
+  <tr>
+    <th>Метод</th>
+    <th>Назначение</th>
+    <th>Тело</th>
+    <th>Идемпотент?</th>
+    <th>Пример</th>
+  </tr>
+  <tr>
+    <td><span class="badge b-get">GET</span></td>
+    <td>Получить данные</td>
+    <td>Нет</td>
+    <td>Да — повтор безопасен</td>
+    <td>Загрузить список новостей</td>
+  </tr>
+  <tr>
+    <td><span class="badge b-post">POST</span></td>
+    <td>Создать ресурс / отправить данные</td>
+    <td>Да (JSON)</td>
+    <td>Нет — повтор создаёт дубль</td>
+    <td>Создать задачу, запросить токен</td>
+  </tr>
+  <tr>
+    <td><span class="badge b-put">PUT</span></td>
+    <td>Полностью заменить ресурс</td>
+    <td>Да</td>
+    <td>Да</td>
+    <td>Обновить весь профиль</td>
+  </tr>
+  <tr>
+    <td><span class="badge b-patch">PATCH</span></td>
+    <td>Частично обновить ресурс</td>
+    <td>Да (только поля)</td>
+    <td>Условно</td>
+    <td>Изменить только email</td>
+  </tr>
+  <tr>
+    <td><span class="badge b-delete">DELETE</span></td>
+    <td>Удалить ресурс</td>
+    <td>Обычно нет</td>
+    <td>Да — повтор безопасен</td>
+    <td>Удалить запись</td>
+  </tr>
+</table>
+
+<div class="card cyan">
+  <div class="card-title">Идемпотентность — важная концепция</div>
+  <p>Идемпотентный метод: выполни его 5 раз — результат тот же что от одного выполнения. GET /users/1 можно звать бесконечно — пользователь не размножится. POST /users создаст нового пользователя каждый раз. Это важно при retry логике: GET/PUT/DELETE можно повторять при ошибке, POST — нет.</p>
+</div>
+
+<pre class="cyan"><code><span class="k">import</span> requests
+
+<span class="c"># GET — получить данные (нет тела)</span>
+r = requests.<span class="f">get</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts'</span>,
+                params={<span class="s">'userId'</span>: <span class="n">1</span>})
+
+<span class="c"># POST — создать (тело — JSON)</span>
+r = requests.<span class="f">post</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts'</span>,
+                 json={<span class="s">'title'</span>: <span class="s">'test'</span>, <span class="s">'body'</span>: <span class="s">'text'</span>, <span class="s">'userId'</span>: <span class="n">1</span>})
+
+<span class="c"># PUT — полная замена</span>
+r = requests.<span class="f">put</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts/1'</span>,
+                json={<span class="s">'id'</span>: <span class="n">1</span>, <span class="s">'title'</span>: <span class="s">'new'</span>, <span class="s">'body'</span>: <span class="s">'new body'</span>, <span class="s">'userId'</span>: <span class="n">1</span>})
+
+<span class="c"># PATCH — частичное обновление</span>
+r = requests.<span class="f">patch</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts/1'</span>,
+                  json={<span class="s">'title'</span>: <span class="s">'only title changed'</span>})
+
+<span class="c"># DELETE</span>
+r = requests.<span class="f">delete</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts/1'</span>)</code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 3. СТАТУС-КОДЫ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="status">
+<div class="sec-head">
+  <span class="sec-num">03</span>
+  <span class="sec-title">Статус-коды</span>
+  <span class="sec-sub">2xx · 3xx · 4xx · 5xx</span>
+</div>
+
+<p>Статус-код — первое что ты проверяешь в ответе. Три цифры, первая — группа.</p>
+
+<div class="sc-grid">
+  <div class="sc sc-2xx"><div class="sc-code">200 OK</div><div class="sc-desc">Стандартный успех для GET</div></div>
+  <div class="sc sc-2xx"><div class="sc-code">201 Created</div><div class="sc-desc">POST создал ресурс</div></div>
+  <div class="sc sc-2xx"><div class="sc-code">204 No Content</div><div class="sc-desc">Успех, нет тела (DELETE)</div></div>
+  <div class="sc sc-3xx"><div class="sc-code">301 Moved</div><div class="sc-desc">Постоянный редирект</div></div>
+  <div class="sc sc-3xx"><div class="sc-code">304 Not Modified</div><div class="sc-desc">Кэш актуален</div></div>
+  <div class="sc sc-4xx"><div class="sc-code">400 Bad Request</div><div class="sc-desc">Ошибка в твоём запросе</div></div>
+  <div class="sc sc-4xx"><div class="sc-code">401 Unauthorized</div><div class="sc-desc">Нужна авторизация</div></div>
+  <div class="sc sc-4xx"><div class="sc-code">403 Forbidden</div><div class="sc-desc">Нет прав (токен есть, но доступ закрыт)</div></div>
+  <div class="sc sc-4xx"><div class="sc-code">404 Not Found</div><div class="sc-desc">Ресурс не существует</div></div>
+  <div class="sc sc-4xx"><div class="sc-code">409 Conflict</div><div class="sc-desc">Конфликт состояний</div></div>
+  <div class="sc sc-4xx"><div class="sc-code">422 Unprocessable</div><div class="sc-desc">Невалидные данные</div></div>
+  <div class="sc sc-4xx"><div class="sc-code">429 Too Many</div><div class="sc-desc">Rate limit — жди и повтори</div></div>
+  <div class="sc sc-5xx"><div class="sc-code">500 Server Error</div><div class="sc-desc">Сервер сломан — retry</div></div>
+  <div class="sc sc-5xx"><div class="sc-code">502 Bad Gateway</div><div class="sc-desc">Прокси не достучался</div></div>
+  <div class="sc sc-5xx"><div class="sc-code">503 Unavailable</div><div class="sc-desc">Сервис временно недоступен</div></div>
+</div>
+
+<div class="g2">
+  <div class="card red">
+    <div class="card-title">401 vs 403 — частая путаница</div>
+    <p><b>401</b>: ты не представился. Нет токена или токен неверный. Решение: добавить/поправить токен.<br><b>403</b>: ты представился, но тебе сюда нельзя. Токен верный, но прав нет. Решение: другой токен с другими правами.</p>
+  </div>
+  <div class="card cyan">
+    <div class="card-title">429 — что делать</div>
+    <p>Сервер говорит "притормози". Смотри заголовок <ic>Retry-After</ic> — там секунды до следующей попытки. Или <ic>X-RateLimit-Reset</ic> — UNIX timestamp. Реализуй exponential backoff.</p>
+  </div>
+</div>
+
+<pre><code><span class="c"># Правильная обработка статус-кодов</span>
+<span class="k">def</span> <span class="f">handle_response</span>(r: requests.<span class="cl">Response</span>) -> dict | <span class="k">None</span>:
+    <span class="k">if</span> r.status_code == <span class="n">200</span>:
+        <span class="k">return</span> r.<span class="f">json</span>()
+    <span class="k">elif</span> r.status_code == <span class="n">401</span>:
+        <span class="k">raise</span> <span class="cl">AuthError</span>(<span class="s">"Проверь API ключ"</span>)
+    <span class="k">elif</span> r.status_code == <span class="n">429</span>:
+        retry_after = <span class="f">int</span>(r.headers.<span class="f">get</span>(<span class="s">'Retry-After'</span>, <span class="n">60</span>))
+        <span class="k">raise</span> <span class="cl">RateLimitError</span>(<span class="s">f"Rate limit. Жди {retry_after}с"</span>)
+    <span class="k">elif</span> r.status_code >= <span class="n">500</span>:
+        <span class="k">raise</span> <span class="cl">ServerError</span>(<span class="s">f"Сервер упал: {r.status_code}"</span>)
+    <span class="k">else</span>:
+        r.<span class="f">raise_for_status</span>()  <span class="c"># всё остальное 4xx — исключение</span></code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 4. ЗАГОЛОВКИ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="headers">
+<div class="sec-head">
+  <span class="sec-num">04</span>
+  <span class="sec-title">HTTP заголовки</span>
+  <span class="sec-sub">request headers · response headers · зачем каждый</span>
+</div>
+
+<h3>Заголовки запроса — что и зачем отправлять</h3>
+<table>
+  <tr><th>Заголовок</th><th>Зачем</th><th>Типичное значение</th></tr>
+  <tr><td><b>Authorization</b></td><td>Передать токен доступа</td><td><ic>Bearer eyJhbGc...</ic> или <ic>Token abc123</ic></td></tr>
+  <tr><td><b>Content-Type</b></td><td>Тип данных в теле запроса</td><td><ic>application/json</ic></td></tr>
+  <tr><td><b>Accept</b></td><td>Какой тип данных принять в ответ</td><td><ic>application/json</ic></td></tr>
+  <tr><td><b>User-Agent</b></td><td>Кто делает запрос</td><td><ic>MyApp/1.0 Python/3.11</ic></td></tr>
+  <tr><td><b>X-API-Key</b></td><td>API ключ (альтернатива Authorization)</td><td>Зависит от API</td></tr>
+  <tr><td><b>Accept-Language</b></td><td>Предпочтительный язык ответа</td><td><ic>ru-RU,ru;q=0.9</ic></td></tr>
+</table>
+
+<h3>Заголовки ответа — что читать</h3>
+<table>
+  <tr><th>Заголовок</th><th>Что говорит</th></tr>
+  <tr><td><b>Content-Type</b></td><td>Тип данных в ответе — всегда проверяй</td></tr>
+  <tr><td><b>X-RateLimit-Limit</b></td><td>Максимум запросов в период</td></tr>
+  <tr><td><b>X-RateLimit-Remaining</b></td><td>Сколько запросов осталось</td></tr>
+  <tr><td><b>X-RateLimit-Reset</b></td><td>UNIX timestamp сброса лимита</td></tr>
+  <tr><td><b>Retry-After</b></td><td>Секунды до следующей попытки (после 429)</td></tr>
+  <tr><td><b>Location</b></td><td>URL созданного ресурса (после 201)</td></tr>
+</table>
+
+<pre><code><span class="c"># Читать заголовки ответа — реальный паттерн</span>
+r = requests.<span class="f">get</span>(url, headers={<span class="s">'Authorization'</span>: <span class="s">f'Bearer {api_key}'</span>})
+
+<span class="c"># Все заголовки ответа</span>
+<span class="f">print</span>(dict(r.headers))
+
+<span class="c"># Rate limit мониторинг</span>
+remaining = r.headers.<span class="f">get</span>(<span class="s">'X-RateLimit-Remaining'</span>)
+reset_at  = r.headers.<span class="f">get</span>(<span class="s">'X-RateLimit-Reset'</span>)
+<span class="k">if</span> remaining <span class="k">and</span> <span class="f">int</span>(remaining) < <span class="n">5</span>:
+    <span class="f">print</span>(<span class="s">f"Осталось {remaining} запросов, сброс в {reset_at}"</span>)
+
+<span class="c"># Проверить тип контента</span>
+content_type = r.headers.<span class="f">get</span>(<span class="s">'Content-Type'</span>, <span class="s">''</span>)
+<span class="k">if</span> <span class="s">'application/json'</span> <span class="k">in</span> content_type:
+    data = r.<span class="f">json</span>()
+<span class="k">else</span>:
+    <span class="f">print</span>(<span class="s">f"Неожиданный Content-Type: {content_type}"</span>)</code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 5. REST ПРИНЦИПЫ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="rest">
+<div class="sec-head">
+  <span class="sec-num">05</span>
+  <span class="sec-title">REST принципы</span>
+  <span class="sec-sub">архитектура · ресурсы · статelessness</span>
+</div>
+
+<p>REST (Representational State Transfer) — архитектурный стиль, не протокол. Набор соглашений о том как строить API. Большинство публичных API следуют REST.</p>
+
+<div class="g2">
+  <div>
+    <h3>6 принципов REST</h3>
+    <ul class="checklist">
+      <li><b>Client-Server</b> — клиент и сервер независимы, общаются через интерфейс</li>
+      <li><b>Stateless</b> — каждый запрос самодостаточен, сервер не хранит состояние клиента</li>
+      <li><b>Cacheable</b> — ответы можно кэшировать если сервер разрешил</li>
+      <li><b>Uniform Interface</b> — единообразные URL и методы</li>
+      <li><b>Layered System</b> — клиент не знает через сколько слоёв идёт запрос</li>
+      <li><b>Code on Demand</b> — сервер может отдавать исполняемый код (опционально)</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Главное для практики: Stateless</h3>
+    <div class="card amber">
+      <p>Каждый запрос содержит ВСЁ что нужно серверу для ответа. Нет "памяти" между запросами. Если нужна авторизация — токен передаётся в каждом запросе, не один раз при "входе".</p>
+      <p style="margin-top:8px">Следствие: API ключ = в каждом запросе. Session в requests не хранит "авторизацию" на сервере — он хранит заголовки локально и отправляет их с каждым запросом.</p>
+    </div>
+  </div>
+</div>
+
+<h3>REST URL соглашения — как читать и строить endpoints</h3>
+<pre><code><span class="c"># Ресурс — существительное во множественном числе</span>
+GET  /articles           <span class="c"># список всех</span>
+GET  /articles/42        <span class="c"># конкретный по id</span>
+POST /articles           <span class="c"># создать новый</span>
+PUT  /articles/42        <span class="c"># заменить полностью</span>
+PATCH /articles/42       <span class="c"># обновить частично</span>
+DELETE /articles/42      <span class="c"># удалить</span>
+
+<span class="c"># Вложенные ресурсы (отношения)</span>
+GET  /users/1/posts      <span class="c"># все посты пользователя 1</span>
+GET  /users/1/posts/5    <span class="c"># пост 5 пользователя 1</span>
+
+<span class="c"># Фильтрация через query params (не через путь)</span>
+GET  /articles?status=published&topic=economics&sort=date&limit=20
+<span class="c"># НЕ ТАК: /articles/published/economics — это не REST</span>
+
+<span class="c"># Версионирование (обязательно в prod API)</span>
+GET  /api/v1/articles    <span class="c"># версия в пути</span>
+GET  /api/v2/articles    <span class="c"># новая версия без поломки старой</span></code></pre>
+
+<h3>REST vs не-REST: реальные примеры из источников твоего курса</h3>
+<table>
+  <tr><th>API</th><th>Стиль</th><th>Особенность</th></tr>
+  <tr><td>JSONPlaceholder</td><td>REST эталон</td><td>Идеальный REST, для учёбы</td></tr>
+  <tr><td>Etherscan API</td><td>REST + action-based</td><td>?module=account&action=balance — не чистый REST</td></tr>
+  <tr><td>ByBit API</td><td>REST</td><td>Аутентификация через HMAC подпись</td></tr>
+  <tr><td>Anthropic API</td><td>REST</td><td>POST /v1/messages — один endpoint</td></tr>
+  <tr><td>OKX API</td><td>REST</td><td>API ключ в headers, не params</td></tr>
+</table>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 6. АВТОРИЗАЦИЯ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="auth">
+<div class="sec-head">
+  <span class="sec-num">06</span>
+  <span class="sec-title">Авторизация в API</span>
+  <span class="sec-sub">API Keys · Bearer · HMAC · OAuth</span>
+</div>
+
+<div class="g2">
+  <div class="card green">
+    <div class="card-title">API Key в заголовке (самый частый)</div>
+    <pre class="green"><code>headers = {
+    <span class="s">'Authorization'</span>: <span class="s">f'Bearer {api_key}'</span>
+    <span class="c"># или:</span>
+    <span class="s">'X-API-Key'</span>: api_key       <span class="c"># etherscan v2</span>
+    <span class="c"># или:</span>
+    <span class="s">'apikey'</span>: api_key           <span class="c"># зависит от API</span>
+}</code></pre>
+  </div>
+  <div class="card amber">
+    <div class="card-title">API Key в query params (устаревший, но встречается)</div>
+    <pre><code><span class="c"># Etherscan v1 — ключ в URL</span>
+params = {
+    <span class="s">'apikey'</span>: api_key,
+    <span class="s">'module'</span>: <span class="s">'account'</span>,
+    <span class="s">'action'</span>: <span class="s">'balance'</span>
+}
+<span class="c"># → url?apikey=ABC&module=account&action=balance</span>
+<span class="c"># ⚠ Ключ видно в логах и истории браузера!</span></code></pre>
+  </div>
+</div>
+
+<h3>HMAC подпись (ByBit, OKX) — как это работает</h3>
+<div class="card cyan">
+  <div class="card-title">Почему биржи не используют просто API Key</div>
+  <p>Простой Bearer токен: если кто-то перехватил заголовок — всё, у него полный доступ навсегда. HMAC: каждый запрос подписывается уникально используя timestamp + тело запроса. Перехваченная подпись работает только для того конкретного запроса и только в течение нескольких секунд.</p>
+</div>
+
+<pre class="cyan"><code><span class="k">import</span> hmac, hashlib, time
+
+<span class="k">def</span> <span class="f">make_bybit_headers</span>(api_key: str, api_secret: str,
+                       params: dict) -> dict:
+    timestamp = <span class="f">str</span>(<span class="f">int</span>(time.<span class="f">time</span>() * <span class="n">1000</span>))  <span class="c"># ms</span>
+    recv_window = <span class="s">"5000"</span>
+
+    <span class="c"># Строка для подписи: timestamp + key + window + params</span>
+    param_str = <span class="s">"&"</span>.<span class="f">join</span>(<span class="s">f"{k}={v}"</span> <span class="k">for</span> k, v <span class="k">in</span> <span class="f">sorted</span>(params.<span class="f">items</span>()))
+    sign_str  = timestamp + api_key + recv_window + param_str
+
+    <span class="c"># HMAC-SHA256 подпись</span>
+    signature = hmac.<span class="f">new</span>(
+        api_secret.<span class="f">encode</span>(),
+        sign_str.<span class="f">encode</span>(),
+        hashlib.sha256
+    ).<span class="f">hexdigest</span>()
+
+    <span class="k">return</span> {
+        <span class="s">'X-BAPI-API-KEY'</span>:     api_key,
+        <span class="s">'X-BAPI-TIMESTAMP'</span>:   timestamp,
+        <span class="s">'X-BAPI-RECV-WINDOW'</span>: recv_window,
+        <span class="s">'X-BAPI-SIGN'</span>:        signature,
+    }</code></pre>
+
+<h3>.env файл — обязательный паттерн</h3>
+<div class="diff">
+  <div class="diff-bad">
+    <div class="diff-label">✗ НИКОГДА</div>
+    <pre class="red" style="margin:0"><code><span class="c"># Хардкод ключей в коде</span>
+API_KEY = <span class="s">"sk-ant-api03-abc123..."</span>
+r = requests.<span class="f">get</span>(url, headers={
+    <span class="s">'Authorization'</span>: <span class="s">f'Bearer {API_KEY}'</span>
+})
+<span class="c"># → ключ попадёт в git, в логи, везде</span></code></pre>
+  </div>
+  <div class="diff-good">
+    <div class="diff-label">✓ ВСЕГДА</div>
+    <pre class="green" style="margin:0"><code><span class="c"># .env файл (в .gitignore!)</span>
+<span class="c"># ANTHROPIC_API_KEY=sk-ant-api03-abc...</span>
+
+<span class="k">import</span> os
+<span class="k">from</span> dotenv <span class="k">import</span> load_dotenv
+<span class="f">load_dotenv</span>()
+api_key = os.<span class="f">getenv</span>(<span class="s">'ANTHROPIC_API_KEY'</span>)
+r = requests.<span class="f">get</span>(url, headers={
+    <span class="s">'Authorization'</span>: <span class="s">f'Bearer {api_key}'</span>
+})</code></pre>
+  </div>
+</div>
+
+<pre><code><span class="c"># Структура .env файла</span>
+<span class="c"># ANTHROPIC_API_KEY=sk-ant-api03-xyz</span>
+<span class="c"># ETHERSCAN_API_KEY=ABCDEF123</span>
+<span class="c"># BYBIT_API_KEY=your_key</span>
+<span class="c"># BYBIT_API_SECRET=your_secret</span>
+
+<span class="c"># .gitignore — обязательно добавить:</span>
+<span class="c"># .env</span>
+<span class="c"># *.env</span>
+
+<span class="c"># Python код</span>
+<span class="k">from</span> dotenv <span class="k">import</span> load_dotenv
+<span class="k">import</span> os
+
+load_dotenv()  <span class="c"># ищет .env в текущей папке</span>
+
+<span class="c"># os.getenv возвращает None если нет → безопаснее чем os.environ[]</span>
+api_key = os.<span class="f">getenv</span>(<span class="s">'ANTHROPIC_API_KEY'</span>)
+<span class="k">if not</span> api_key:
+    <span class="k">raise</span> <span class="cl">ValueError</span>(<span class="s">"ANTHROPIC_API_KEY не найден в .env"</span>)</code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 7. PYTHON REQUESTS -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="python">
+<div class="sec-head">
+  <span class="sec-num">07</span>
+  <span class="sec-title">requests в Python — полный API</span>
+  <span class="sec-sub">все методы · response объект · Session</span>
+</div>
+
+<h3>Response объект — всё что в нём есть</h3>
+<pre><code>r = requests.<span class="f">get</span>(<span class="s">'https://api.example.com/data'</span>)
+
+<span class="c"># СТАТУС</span>
+r.status_code         <span class="c"># int: 200, 404, 429...</span>
+r.ok                  <span class="c"># bool: True если 200-299</span>
+r.<span class="f">raise_for_status</span>()  <span class="c"># кидает HTTPError если 4xx/5xx</span>
+
+<span class="c"># ТЕЛО ОТВЕТА</span>
+r.text                <span class="c"># str — декодированная строка (UTF-8 по умолч.)</span>
+r.content             <span class="c"># bytes — сырые байты (для изображений, PDF)</span>
+r.<span class="f">json</span>()              <span class="c"># dict/list — парсит JSON (KeyError если не JSON!)</span>
+
+<span class="c"># ЗАГОЛОВКИ</span>
+r.headers             <span class="c"># dict-like объект (case-insensitive)</span>
+r.headers[<span class="s">'Content-Type'</span>]
+r.headers.<span class="f">get</span>(<span class="s">'X-RateLimit-Remaining'</span>)  <span class="c"># безопасно</span>
+
+<span class="c"># МЕТАДАННЫЕ</span>
+r.url                 <span class="c"># финальный URL (после редиректов)</span>
+r.elapsed             <span class="c"># timedelta — время запроса</span>
+r.encoding            <span class="c"># кодировка (обычно UTF-8)</span>
+r.cookies             <span class="c"># RequestsCookieJar</span>
+r.history             <span class="c"># список редиректов</span></code></pre>
+
+<h3>Session — правильный инструмент для серии запросов</h3>
+<pre class="cyan"><code>session = requests.<span class="cl">Session</span>()
+
+<span class="c"># Установить заголовки один раз — будут на всех запросах</span>
+session.headers.<span class="f">update</span>({
+    <span class="s">'Authorization'</span>: <span class="s">f'Bearer {api_key}'</span>,
+    <span class="s">'Accept'</span>: <span class="s">'application/json'</span>,
+    <span class="s">'User-Agent'</span>: <span class="s">'EconBot/1.0'</span>,
+})
+
+<span class="c"># Установить базовый URL (не встроено в Session,</span>
+<span class="c"># но можно сделать через класс-обёртку)</span>
+
+<span class="c"># Все запросы через сессию — переиспользует TCP соединение</span>
+r1 = session.<span class="f">get</span>(<span class="s">'https://api.example.com/users'</span>)
+r2 = session.<span class="f">get</span>(<span class="s">'https://api.example.com/posts'</span>)
+r3 = session.<span class="f">post</span>(<span class="s">'https://api.example.com/items'</span>, json={<span class="s">'name'</span>: <span class="s">'test'</span>})
+
+<span class="c"># Менять заголовки для конкретного запроса (дополняет, не заменяет)</span>
+r4 = session.<span class="f">get</span>(url, headers={<span class="s">'X-Custom-Header'</span>: <span class="s">'value'</span>})
+
+<span class="c"># Session как context manager — автоматически закрывает</span>
+<span class="k">with</span> requests.<span class="cl">Session</span>() <span class="k">as</span> session:
+    session.headers.<span class="f">update</span>({...})
+    r = session.<span class="f">get</span>(url)</code></pre>
+
+<h3>Timeout — обязателен всегда</h3>
+<pre><code><span class="c"># Без timeout запрос может висеть вечно!</span>
+r = requests.<span class="f">get</span>(url, timeout=<span class="n">10</span>)           <span class="c"># 10 секунд на всё</span>
+r = requests.<span class="f">get</span>(url, timeout=(<span class="n">5</span>, <span class="n">30</span>))        <span class="c"># (connect, read)</span>
+<span class="c"># connect timeout = сколько ждать соединения</span>
+<span class="c"># read timeout = сколько ждать данных после соединения</span>
+
+<span class="c"># Правило: всегда timeout. Без него скрипт может зависнуть навсегда.</span></code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 8. ПАТТЕРНЫ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="patterns">
+<div class="sec-head">
+  <span class="sec-num">08</span>
+  <span class="sec-title">Профессиональные паттерны</span>
+  <span class="sec-sub">API Client class · Paginaton · Custom Exceptions</span>
+</div>
+
+<h3>Паттерн 1: Класс-клиент для API</h3>
+<p>Оборачиваешь всё взаимодействие с API в класс. Это то, что делается в уроке про Etherscan, ByBit, ADS Power. Один паттерн — разные API.</p>
+
+<pre class="green"><code><span class="k">from</span> dotenv <span class="k">import</span> load_dotenv
+<span class="k">import</span> os, requests, time
+
+load_dotenv()
+
+<span class="c"># Кастомные исключения — из урока про Etherscan</span>
+<span class="k">class</span> <span class="cl">APIError</span>(Exception): <span class="k">pass</span>
+<span class="k">class</span> <span class="cl">AuthError</span>(<span class="cl">APIError</span>): <span class="k">pass</span>
+<span class="k">class</span> <span class="cl">RateLimitError</span>(<span class="cl">APIError</span>): <span class="k">pass</span>
+
+<span class="k">class</span> <span class="cl">BaseAPIClient</span>:
+    <span class="s">"""Базовый класс для любого REST API клиента."""</span>
+
+    BASE_URL = <span class="s">""</span>  <span class="c"># перегружать в наследниках</span>
+
+    <span class="k">def</span> <span class="f">__init__</span>(self, api_key: str):
+        self._session = requests.<span class="cl">Session</span>()
+        self._session.headers.<span class="f">update</span>(self.<span class="f">_default_headers</span>(api_key))
+
+    <span class="k">def</span> <span class="f">_default_headers</span>(self, api_key: str) -> dict:
+        <span class="k">return</span> {
+            <span class="s">'Authorization'</span>: <span class="s">f'Bearer {api_key}'</span>,
+            <span class="s">'Accept'</span>: <span class="s">'application/json'</span>,
+        }
+
+    <span class="k">def</span> <span class="f">_request</span>(self, method: str, endpoint: str,
+                  retries: int = <span class="n">3</span>, **kwargs) -> dict:
+        url = self.BASE_URL + endpoint
+        <span class="k">for</span> attempt <span class="k">in</span> <span class="f">range</span>(retries):
+            <span class="k">try</span>:
+                r = self._session.<span class="f">request</span>(method, url,
+                                            timeout=<span class="n">10</span>, **kwargs)
+                <span class="k">if</span> r.status_code == <span class="n">401</span>:
+                    <span class="k">raise</span> <span class="cl">AuthError</span>(<span class="s">"Неверный API ключ"</span>)
+                <span class="k">if</span> r.status_code == <span class="n">429</span>:
+                    wait = <span class="f">int</span>(r.headers.<span class="f">get</span>(<span class="s">'Retry-After'</span>, <span class="n">2</span> ** attempt))
+                    time.<span class="f">sleep</span>(wait)
+                    <span class="k">continue</span>
+                r.<span class="f">raise_for_status</span>()
+                <span class="k">return</span> r.<span class="f">json</span>()
+            <span class="k">except</span> (<span class="cl">AuthError</span>, <span class="cl">RateLimitError</span>):
+                <span class="k">raise</span>
+            <span class="k">except</span> requests.<span class="cl">RequestException</span> <span class="k">as</span> e:
+                <span class="k">if</span> attempt == retries - <span class="n">1</span>:
+                    <span class="k">raise</span> <span class="cl">APIError</span>(<span class="s">f"Запрос упал: {e}"</span>) <span class="k">from</span> e
+                time.<span class="f">sleep</span>(<span class="n">2</span> ** attempt)
+        <span class="k">raise</span> <span class="cl">APIError</span>(<span class="s">"Исчерпаны попытки"</span>)
+
+    <span class="k">def</span> <span class="f">get</span>(self, endpoint: str, **kwargs) -> dict:
+        <span class="k">return</span> self.<span class="f">_request</span>(<span class="s">'GET'</span>, endpoint, **kwargs)
+
+    <span class="k">def</span> <span class="f">post</span>(self, endpoint: str, **kwargs) -> dict:
+        <span class="k">return</span> self.<span class="f">_request</span>(<span class="s">'POST'</span>, endpoint, **kwargs)
+
+
+<span class="c"># Конкретный клиент — Etherscan-подобный</span>
+<span class="k">class</span> <span class="cl">EtherscanClient</span>(<span class="cl">BaseAPIClient</span>):
+    BASE_URL = <span class="s">"https://api.etherscan.io/v2/api"</span>
+
+    <span class="k">def</span> <span class="f">_default_headers</span>(self, api_key: str) -> dict:
+        <span class="c"># Etherscan ключ идёт в params, не headers</span>
+        self._api_key = api_key
+        <span class="k">return</span> {<span class="s">'Accept'</span>: <span class="s">'application/json'</span>}
+
+    <span class="k">def</span> <span class="f">get_balance</span>(self, address: str) -> <span class="f">float</span>:
+        data = self.<span class="f">get</span>(<span class="s">""</span>, params={
+            <span class="s">'chainid'</span>: <span class="n">1</span>,
+            <span class="s">'module'</span>:  <span class="s">'account'</span>,
+            <span class="s">'action'</span>:  <span class="s">'balance'</span>,
+            <span class="s">'address'</span>: address,
+            <span class="s">'apikey'</span>:  self._api_key,
+        })
+        <span class="k">return</span> <span class="f">int</span>(data[<span class="s">'result'</span>]) / <span class="n">1e18</span>  <span class="c"># wei → ETH</span></code></pre>
+
+<h3>Паттерн 2: Пагинация</h3>
+<p>Большинство API не отдают сразу тысячи записей. Они разбивают на страницы (pagination). Три основных вида:</p>
+
+<pre><code><span class="c"># ──────────────────────────────────────────────────────────
+# Вид 1: offset/limit (JSONPlaceholder, большинство REST)
+# ──────────────────────────────────────────────────────────</span>
+<span class="k">def</span> <span class="f">get_all_offset</span>(base_url: str, limit: int = <span class="n">100</span>) -> list:
+    results, offset = [], <span class="n">0</span>
+    <span class="k">while True</span>:
+        r = requests.<span class="f">get</span>(base_url, params={<span class="s">'_start'</span>: offset, <span class="s">'_limit'</span>: limit})
+        page = r.<span class="f">json</span>()
+        <span class="k">if not</span> page:  <span class="c"># пустая страница = конец</span>
+            <span class="k">break</span>
+        results.<span class="f">extend</span>(page)
+        offset += limit
+    <span class="k">return</span> results
+
+<span class="c"># ──────────────────────────────────────────────────────────
+# Вид 2: page/per_page (GitHub API, многие REST)
+# ──────────────────────────────────────────────────────────</span>
+<span class="k">def</span> <span class="f">get_all_pages</span>(url: str) -> list:
+    results, page = [], <span class="n">1</span>
+    <span class="k">while True</span>:
+        r = requests.<span class="f">get</span>(url, params={<span class="s">'page'</span>: page, <span class="s">'per_page'</span>: <span class="n">100</span>})
+        data = r.<span class="f">json</span>()
+        <span class="k">if not</span> data:
+            <span class="k">break</span>
+        results.<span class="f">extend</span>(data)
+        <span class="c"># Многие API отдают total в заголовке</span>
+        total = r.headers.<span class="f">get</span>(<span class="s">'X-Total-Count'</span>)
+        <span class="k">if</span> total <span class="k">and</span> <span class="f">len</span>(results) >= <span class="f">int</span>(total):
+            <span class="k">break</span>
+        page += <span class="n">1</span>
+    <span class="k">return</span> results
+
+<span class="c"># ──────────────────────────────────────────────────────────
+# Вид 3: cursor (Twitter/X API, Etherscan txlist)
+# ──────────────────────────────────────────────────────────</span>
+<span class="k">def</span> <span class="f">get_all_cursor</span>(url: str, params: dict) -> list:
+    results = []
+    <span class="k">while True</span>:
+        r = requests.<span class="f">get</span>(url, params=params)
+        data = r.<span class="f">json</span>()
+        results.<span class="f">extend</span>(data[<span class="s">'items'</span>])
+        next_cursor = data.<span class="f">get</span>(<span class="s">'next_cursor'</span>)
+        <span class="k">if not</span> next_cursor:
+            <span class="k">break</span>
+        params[<span class="s">'cursor'</span>] = next_cursor
+    <span class="k">return</span> results</code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 9. ОБРАБОТКА ОШИБОК -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="errors">
+<div class="sec-head">
+  <span class="sec-num">09</span>
+  <span class="sec-title">Ошибки и Retry логика</span>
+  <span class="sec-sub">exceptions · exponential backoff · jitter</span>
+</div>
+
+<pre class="purple"><code><span class="k">import</span> requests, time, random
+
+<span class="c"># Иерархия исключений requests</span>
+<span class="c"># RequestException</span>
+<span class="c">#   ├── ConnectionError     — сеть недоступна, DNS упал</span>
+<span class="c">#   ├── Timeout             — connect или read timeout</span>
+<span class="c">#   │   ├── ConnectTimeout</span>
+<span class="c">#   │   └── ReadTimeout</span>
+<span class="c">#   └── HTTPError           — raise_for_status() при 4xx/5xx</span>
+
+<span class="k">def</span> <span class="f">safe_request</span>(method: str, url: str,
+                  max_retries: int = <span class="n">3</span>,
+                  backoff_base: <span class="f">float</span> = <span class="n">1.0</span>,
+                  **kwargs) -> requests.<span class="cl">Response</span>:
+    <span class="s">"""
+    Надёжный HTTP запрос с exponential backoff + jitter.
+    Повторяет только при: ConnectionError, Timeout, 429, 5xx.
+    НЕ повторяет: 4xx (кроме 429) — это ошибка запроса, не сети.
+    """</span>
+
+    RETRIABLE_STATUS = {<span class="n">429</span>, <span class="n">500</span>, <span class="n">502</span>, <span class="n">503</span>, <span class="n">504</span>}
+
+    <span class="k">for</span> attempt <span class="k">in</span> <span class="f">range</span>(max_retries + <span class="n">1</span>):
+        <span class="k">try</span>:
+            r = requests.<span class="f">request</span>(method, url, timeout=<span class="n">10</span>, **kwargs)
+
+            <span class="k">if</span> r.status_code <span class="k">in</span> RETRIABLE_STATUS <span class="k">and</span> attempt < max_retries:
+                <span class="c"># Для 429 читаем Retry-After</span>
+                wait = <span class="f">float</span>(r.headers.<span class="f">get</span>(<span class="s">'Retry-After'</span>,
+                               backoff_base * (<span class="n">2</span> ** attempt)))
+                <span class="c"># Jitter: добавляем случайность чтобы не все клиенты</span>
+                <span class="c"># стучались одновременно после общего сбоя</span>
+                jitter = random.<span class="f">uniform</span>(<span class="n">0</span>, wait * <span class="n">0.1</span>)
+                time.<span class="f">sleep</span>(wait + jitter)
+                <span class="k">continue</span>
+
+            r.<span class="f">raise_for_status</span>()
+            <span class="k">return</span> r
+
+        <span class="k">except</span> (requests.<span class="cl">ConnectionError</span>, requests.<span class="cl">Timeout</span>) <span class="k">as</span> e:
+            <span class="k">if</span> attempt == max_retries:
+                <span class="k">raise</span>
+            wait = backoff_base * (<span class="n">2</span> ** attempt) + random.<span class="f">uniform</span>(<span class="n">0</span>, <span class="n">0.1</span>)
+            time.<span class="f">sleep</span>(wait)
+
+    <span class="k">raise</span> requests.<span class="cl">RequestException</span>(<span class="s">"Max retries exceeded"</span>)</code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 10. RATE LIMITING -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="ratelimit">
+<div class="sec-head">
+  <span class="sec-num">10</span>
+  <span class="sec-title">Rate Limiting</span>
+  <span class="sec-sub">лимиты · throttling · мониторинг</span>
+</div>
+
+<p>Все серьёзные API имеют лимиты. Anthropic: 50 req/min для бесплатного. Etherscan: 5 req/sec (бесплатный tier). ByBit: 120 req/min. Если не соблюдать — 429 и временный бан.</p>
+
+<pre><code><span class="k">import</span> time
+<span class="k">from</span> collections <span class="k">import</span> deque
+
+<span class="k">class</span> <span class="cl">RateLimiter</span>:
+    <span class="s">"""Sliding window rate limiter."""</span>
+
+    <span class="k">def</span> <span class="f">__init__</span>(self, max_calls: int, period: <span class="f">float</span>):
+        self.max_calls = max_calls
+        self.period    = period  <span class="c"># секунды</span>
+        self._calls    = <span class="f">deque</span>()
+
+    <span class="k">def</span> <span class="f">__call__</span>(self):
+        now = time.<span class="f">monotonic</span>()
+        <span class="c"># Удалить старые вызовы за пределами окна</span>
+        <span class="k">while</span> self._calls <span class="k">and</span> self._calls[<span class="n">0</span>] < now - self.period:
+            self._calls.<span class="f">popleft</span>()
+        <span class="c"># Если лимит — ждём</span>
+        <span class="k">if</span> <span class="f">len</span>(self._calls) >= self.max_calls:
+            sleep_time = self.period - (now - self._calls[<span class="n">0</span>])
+            <span class="k">if</span> sleep_time > <span class="n">0</span>:
+                time.<span class="f">sleep</span>(sleep_time)
+        self._calls.<span class="f">append</span>(time.<span class="f">monotonic</span>())
+
+<span class="c"># Использование</span>
+limiter = <span class="cl">RateLimiter</span>(max_calls=<span class="n">5</span>, period=<span class="n">1.0</span>)  <span class="c"># 5 req/sec</span>
+
+<span class="k">for</span> address <span class="k">in</span> addresses:
+    <span class="f">limiter</span>()  <span class="c"># блокирует если слишком быстро</span>
+    balance = client.<span class="f">get_balance</span>(address)</code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 11. ИСТОЧНИКИ ИЗ УРОКОВ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="sources">
+<div class="sec-head">
+  <span class="sec-num">11</span>
+  <span class="sec-title">Уроки из твоих источников</span>
+  <span class="sec-sub">Etherscan · ByBit · ADS Power — связь с теорией</span>
+</div>
+
+<div class="card amber">
+  <div class="card-title">Как эти уроки ложатся на то что ты только что прочитал</div>
+  <p>Уроки про Etherscan, ByBit, ADS Power — это не что-то отдельное. Это одни и те же паттерны: класс-клиент, retry, кастомные исключения, .env для ключей. Разница только в деталях конкретного API.</p>
+</div>
+
+<table>
+  <tr><th>Урок</th><th>Паттерн</th><th>Что нового</th></tr>
+  <tr>
+    <td><b>Etherscan API</b></td>
+    <td>BaseAPIClient → конкретные классы (Account, Contract)</td>
+    <td>Ключ в params (не headers), action-based URL, async через curl-cffi</td>
+  </tr>
+  <tr>
+    <td><b>ByBit API</b></td>
+    <td>Тот же BaseAPIClient + HMAC подпись</td>
+    <td>Криптографическая подпись каждого запроса, биржевые endpoint'ы</td>
+  </tr>
+  <tr>
+    <td><b>ADS Power API</b></td>
+    <td>Локальный REST API (localhost:50325)</td>
+    <td>API не в интернете — это программа на твоём компе, принципы те же</td>
+  </tr>
+</table>
+
+<h3>curl-cffi из урока Etherscan — зачем</h3>
+<div class="card cyan">
+  <p>Некоторые сайты блокируют обычный requests через fingerprinting (отличают Python от браузера по TLS handshake). <ic>curl-cffi</ic> имитирует fingerprint браузера (Chrome, Firefox). API как Etherscan этого не требуют — там обычный requests достаточен. curl-cffi нужен для сайтов с Cloudflare и продвинутой защитой.</p>
+</div>
+
+<pre class="cyan"><code><span class="c"># curl-cffi — когда нужно (не для JSON API, для сайтов с защитой)</span>
+<span class="k">from</span> curl_cffi.requests <span class="k">import</span> AsyncSession
+
+<span class="k">async def</span> <span class="f">fetch</span>(url: str) -> dict:
+    <span class="k">async with</span> <span class="cl">AsyncSession</span>() <span class="k">as</span> session:
+        r = <span class="k">await</span> session.<span class="f">get</span>(url, impersonate=<span class="s">"chrome"</span>)
+        <span class="k">return</span> r.<span class="f">json</span>()
+
+<span class="c"># API интерфейс почти идентичен requests — та же логика</span></code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 12. ПРАКТИЧЕСКИЕ ЗАДАЧИ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="practice">
+<div class="sec-head">
+  <span class="sec-num">12</span>
+  <span class="sec-title">Практические задачи</span>
+  <span class="sec-sub">jsonplaceholder · etherscan · anthropic</span>
+</div>
+
+<div class="card green">
+  <div class="card-title">JSONPlaceholder — тренировочная площадка</div>
+  <p><ic>jsonplaceholder.typicode.com</ic> — бесплатный fake REST API. Все методы: GET/POST/PUT/PATCH/DELETE. Идеально для отработки паттернов без реальных ключей.</p>
+</div>
+
+<pre class="green"><code><span class="c"># ЗАДАЧИ на jsonplaceholder.typicode.com</span>
+
+<span class="c"># 1. БАЗОВЫЕ — выполни каждый метод</span>
+requests.<span class="f">get</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts'</span>)
+requests.<span class="f">get</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts/1'</span>)
+requests.<span class="f">get</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts'</span>, params={<span class="s">'userId'</span>: <span class="n">1</span>})
+requests.<span class="f">post</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts'</span>,
+              json={<span class="s">'title'</span>: <span class="s">'test'</span>, <span class="s">'body'</span>: <span class="s">'body'</span>, <span class="s">'userId'</span>: <span class="n">1</span>})
+requests.<span class="f">patch</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts/1'</span>,
+              json={<span class="s">'title'</span>: <span class="s">'new title'</span>})
+requests.<span class="f">delete</span>(<span class="s">'https://jsonplaceholder.typicode.com/posts/1'</span>)
+
+<span class="c"># 2. ПАТТЕРНЫ — напиши самостоятельно</span>
+<span class="c"># a) Получить все посты пользователя 3 → отфильтровать где title длиннее 40 символов</span>
+<span class="c"># b) Написать класс JSONPlaceholderClient с методами:</span>
+<span class="c">#    - get_posts(user_id=None) → list[dict]</span>
+<span class="c">#    - get_comments(post_id) → list[dict]</span>
+<span class="c">#    - create_post(title, body, user_id) → dict</span>
+<span class="c"># c) Реализовать пагинацию: загрузить все 100 постов через _start/_limit</span>
+<span class="c"># d) Написать get_posts_with_comments(user_id) → список постов с комментариями</span>
+<span class="c">#    (для каждого поста нужен отдельный GET /comments?postId=X)</span>
+
+<span class="c"># 3. СБОРКА — полный пайплайн под "Задумку"</span>
+<span class="c"># Используй jsonplaceholder как замену RSS (пока нет реального)</span>
+<span class="c"># posts ≈ новости, userId ≈ источник</span>
+<span class="c"># get_posts() → записать в DataFrame → отправить заголовок в Claude API → оценка 1-5</span></code></pre>
+
+<h3>Anthropic API — первый настоящий вызов</h3>
+<pre><code><span class="k">import</span> anthropic, os
+<span class="k">from</span> dotenv <span class="k">import</span> load_dotenv
+
+load_dotenv()
+client = anthropic.<span class="cl">Anthropic</span>()  <span class="c"># ищет ANTHROPIC_API_KEY автоматически</span>
+
+<span class="k">def</span> <span class="f">evaluate_news</span>(title: str) -> int:
+    <span class="s">"""Оценить экономическую важность новости от 1 до 5."""</span>
+    message = client.messages.<span class="f">create</span>(
+        model=<span class="s">"claude-sonnet-4-5"</span>,
+        max_tokens=<span class="n">10</span>,
+        messages=[{
+            <span class="s">"role"</span>: <span class="s">"user"</span>,
+            <span class="s">"content"</span>: <span class="s">f"Оцени важность новости для экономики от 1 до 5.\n"</span>
+                       <span class="s">f"Отвечай ТОЛЬКО цифрой.\nНовость: {title}"</span>
+        }]
+    )
+    <span class="k">return</span> <span class="f">int</span>(message.content[<span class="n">0</span>].text.<span class="f">strip</span>())
+
+<span class="c"># Проверить что это REST вызов — смотри в r.text в отладке</span>
+<span class="c"># POST https://api.anthropic.com/v1/messages</span>
+<span class="c"># Authorization: x-api-key: sk-ant-...</span>
+<span class="c"># Content-Type: application/json</span>
+<span class="c"># Body: {"model": "...", "max_tokens": 10, "messages": [...]}</span></code></pre>
+
+</section>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- 13. ПЛАН НА 7 ДНЕЙ -->
+<!-- ════════════════════════════════════════════════ -->
+<section class="section" id="plan">
+<div class="sec-head">
+  <span class="sec-num">13</span>
+  <span class="sec-title">План на 7 дней</span>
+  <span class="sec-sub">от теории к RSS парсеру</span>
+</div>
+
+<div class="plan-item">
+  <div class="plan-day">ДЕНЬ 1</div>
+  <div class="plan-content">
+    <h4>HTTP анатомия + jsonplaceholder базовые методы</h4>
+    <p>Прочитать разделы 1–3 этой методички. Отправить руками: GET список, GET по id, POST создать, PATCH обновить, DELETE. Для каждого: распечатать status_code, headers, первые 200 символов body. Понять что возвращает каждый метод.</p>
+    <div class="plan-tags">
+      <span class="ptag htag-amber">jsonplaceholder</span>
+      <span class="ptag htag-cyan">requests basics</span>
+    </div>
+  </div>
+</div>
+
+<div class="plan-item">
+  <div class="plan-day">ДЕНЬ 2</div>
+  <div class="plan-content">
+    <h4>Заголовки + .env + Session</h4>
+    <p>Читать заголовки ответа: Content-Type, X-RateLimit-*. Создать .env, добавить в .gitignore, загружать через python-dotenv. Написать Session с базовыми заголовками. Написать класс JSONPlaceholderClient с тремя методами.</p>
+    <div class="plan-tags">
+      <span class="ptag htag-amber">.env</span>
+      <span class="ptag htag-cyan">Session</span>
+      <span class="ptag htag-green">BaseAPIClient</span>
+    </div>
+  </div>
+</div>
+
+<div class="plan-item">
+  <div class="plan-day">ДЕНЬ 3</div>
+  <div class="plan-content">
+    <h4>Пагинация + обработка ошибок</h4>
+    <p>Реализовать get_all_posts() через offset/limit pagination. Добавить кастомные исключения (AuthError, RateLimitError). Написать safe_request с exponential backoff. Протестировать на jsonplaceholder.</p>
+    <div class="plan-tags">
+      <span class="ptag htag-amber">pagination</span>
+      <span class="ptag htag-red">exceptions</span>
+      <span class="ptag htag-cyan">retry</span>
+    </div>
+  </div>
+</div>
+
+<div class="plan-item">
+  <div class="plan-day">ДЕНЬ 4</div>
+  <div class="plan-content">
+    <h4>Anthropic API — первый реальный вызов</h4>
+    <p>pip install anthropic. Создать API ключ на console.anthropic.com. Написать evaluate_news(title) → оценка 1-5. Понять структуру запроса: смотреть в Network tab или добавить debug print. Это первый шаг "Задумки по экономике".</p>
+    <div class="plan-tags">
+      <span class="ptag htag-amber">Anthropic API</span>
+      <span class="ptag htag-green">первый реальный API</span>
+    </div>
+  </div>
+</div>
+
+<div class="plan-item">
+  <div class="plan-day">ДЕНЬ 5</div>
+  <div class="plan-content">
+    <h4>RSS парсер — цель недели</h4>
+    <p>Написать parse_rss(url) через requests + BS4 xml. Протестировать на 2–3 источниках (Reuters, RBC или любых). Получить список NewsItem словарей: title, link, pubDate, description. Сохранить в JSON файл.</p>
+    <div class="plan-tags">
+      <span class="ptag htag-cyan">RSS</span>
+      <span class="ptag htag-green">BeautifulSoup xml</span>
+      <span class="ptag htag-amber">JSON файл</span>
+    </div>
+  </div>
+</div>
+
+<div class="plan-item">
+  <div class="plan-day">ДЕНЬ 6</div>
+  <div class="plan-content">
+    <h4>RSS + Anthropic — первый пайплайн</h4>
+    <p>Соединить: RSS парсер → взять 5 последних заголовков → каждый отправить в Claude API → получить оценку 1-5 → сохранить в DataFrame → распечатать топ-3 важных. Это прямо из плана недели 3 "Задумки".</p>
+    <div class="plan-tags">
+      <span class="ptag htag-amber">первый пайплайн</span>
+      <span class="ptag htag-cyan">DataFrame</span>
+      <span class="ptag htag-green">Задумка v0</span>
+    </div>
+  </div>
+</div>
+
+<div class="plan-item">
+  <div class="plan-day">ДЕНЬ 7</div>
+  <div class="plan-content">
+    <h4>Просмотр источников (опционально) + оформление</h4>
+    <p>Посмотреть 15–20 минут урока про Etherscan — найти знакомые паттерны (BaseAPIClient, кастомные исключения, .env). Оформить код: добавить docstrings, комментарии, README. Коммит в GitHub.</p>
+    <div class="plan-tags">
+      <span class="ptag htag-amber">Etherscan урок</span>
+      <span class="ptag htag-green">README</span>
+      <span class="ptag htag-cyan">git commit</span>
+    </div>
+  </div>
+</div>
+
+<div class="card green" style="margin-top:24px">
+  <div class="card-title">Что НЕ нужно делать из источников сейчас</div>
+  <p><b>ByBit/OKX урок</b> — HMAC подпись, биржевой API. Это фаза 1 плана (апрель–май). Пройдёшь когда будет нужна реальная торговля. Паттерн знаешь — его достаточно.<br><br>
+  <b>ADS Power/Dolphin урок</b> — антидетект браузеры. Это веб3 инструментарий, не нужен для твоей специализации. Playwright MCP в неделе 9 плана заменяет это с лучшей архитектурой.<br><br>
+  <b>Etherscan урок</b> — посмотри 15 мин для узнавания паттернов. Целиком проходить не нужно — это не в твоём плане.</p>
+</div>
+
+</section>
+
+</main>
+</div><!-- end page -->
+
+</body>
+</html>
