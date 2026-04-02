@@ -44,8 +44,8 @@ def run_conversation():
 
     # Четыре хода диалога — одна тема, каждый вопрос строится на предыдущем
     turns = [
-        "Привет, Claude. Расскажи мне несколько фактов про Уругвай. Что там с экономикой, уровнем жизни и чем там заняться ии-инженеру?",
-        "Что скажешь про хим. индустрию? Есть ли там компании, которые могли бы быть клиентами для ИИ-инструментов?",
+        "Насколько большая разница в температуре между Ереваном и горами в Армении?",
+        "Как назвать дочь с отчеством Евгеньевна?"
     ]
 
     for i, user_text in enumerate(turns, 1):
@@ -54,10 +54,10 @@ def run_conversation():
 
         response = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=2048,
-            system="Ты финансовый аналитик в химической индустрии. Основываешься на фактах, не угождаешь и не фантазируешь.",
+            max_tokens=1024,
+            system="Основываешься на фактах, не угождаешь и не фантазируешь.",
             messages=history,   # вся история целиком при каждом вызове
-            temperature=0.3,    # низкая — факты, не фантазии
+            temperature=0.7,    # низкая — факты, не фантазии
         )
 
         assistant_text = response.content[0].text
@@ -119,23 +119,23 @@ def show_temperature():
 # =============================================================================
 
 if __name__ == '__main__':
-    # 1. Разбор ответа
-    print("══ 1. РАЗБОР RESPONSE ══════════════════════")
-    r = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=100,
-        messages=[{"role": "user", "content": "Что такое черемша? Одно предложение."}],
-    )
-    show_response(r)
+    # # 1. Разбор ответа
+    # print("══ 1. РАЗБОР RESPONSE ══════════════════════")
+    # r = client.messages.create(
+    #     model="claude-haiku-4-5-20251001",
+    #     max_tokens=100,
+    #     messages=[{"role": "user", "content": "Что такое черемша? Одно предложение."}],
+    # )
+    # show_response(r)
 
     # 2. Многоходовой диалог
     print("\n══ 2. ДИАЛОГ 4 ХОДА ════════════════════════")
     run_conversation()
 
-    # 3. stop_sequences
-    print("\n══ 3. STOP SEQUENCE ════════════════════════")
-    show_stop_sequence()
+    # # 3. stop_sequences
+    # print("\n══ 3. STOP SEQUENCE ════════════════════════")
+    # show_stop_sequence()
 
-    # 4. temperature
-    print("\n══ 4. TEMPERATURE 0.0 vs 1.0 ══════════════")
-    show_temperature()
+    # # 4. temperature
+    # print("\n══ 4. TEMPERATURE 0.0 vs 1.0 ══════════════")
+    # show_temperature()

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ollama API — Справочник</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800;900&family=Fira+Code:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #f5f0e8;
+  --bg2: #ede8de;
+  --ink: #1a1410;
+  --ink2: #3d342a;
+  --gold: #b8860b;
+  --gold2: #d4a017;
+  --gold-light: #f0d060;
+  --teal: #1a6b5c;
+  --teal-light: #e0f0ec;
+  --red: #8b2020;
+  --red-light: #f5e0e0;
+  --blue: #1a3a6b;
+  --blue-light: #e0e8f5;
+  --orange: #7a4010;
+  --orange-light: #f5ece0;
+  --green: #2a5c1a;
+  --green-light: #e8f0e0;
+  --gray: #7a6e62;
+  --border: #c8bfaa;
+  --purple: #4a1a6b;
+  --purple-light: #ede0f5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.header {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 30px 48px 26px;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: 'OLLAMA';
+  position: absolute;
+  right: -10px; top: -8px;
+  font-size: 100px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  letter-spacing: -2px;
+  pointer-events: none;
+}
+.header h1 { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 4px; }
+.header h1 span { color: var(--gold-light); }
+.header p { font-size: 11px; color: #aaa; font-weight: 300; }
+
+.wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 60px; }
+
+/* ══ SECTION TITLE ══ */
+.sec-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 6px;
+  margin: 32px 0 16px;
+}
+
+/* ══ CONCEPT CARDS ══ */
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.concept-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  padding: 14px 16px;
+  border-radius: 2px;
+}
+.concept-card.blue { border-left-color: var(--blue); }
+.concept-card.teal { border-left-color: var(--teal); }
+.concept-card.orange { border-left-color: var(--orange); }
+.concept-card.red { border-left-color: var(--red); }
+.concept-card.purple { border-left-color: var(--purple); }
+.concept-card.green { border-left-color: var(--green); }
+
+.concept-title {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.concept-card p { font-size: 12px; color: var(--ink2); line-height: 1.55; }
+.concept-card code {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  background: var(--bg2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  color: var(--blue);
+}
+
+/* ══ ANSWER BLOCKS ══ */
+.qa-block {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.qa-q {
+  background: var(--ink);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 14px;
+  letter-spacing: 0.3px;
+}
+.qa-a {
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+.qa-a b { color: var(--ink); font-weight: 700; }
+.qa-a code {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  background: var(--bg2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  color: var(--blue);
+}
+.tag-no { display:inline-block; background: var(--red-light); color: var(--red); font-size:10px; font-weight:800; padding:1px 6px; border-radius:2px; margin-left:4px; }
+.tag-yes { display:inline-block; background: var(--green-light); color: var(--green); font-size:10px; font-weight:800; padding:1px 6px; border-radius:2px; margin-left:4px; }
+
+/* ══ CODE BLOCK ══ */
+.code-block {
+  background: #1a1410;
+  border-radius: 3px;
+  margin: 10px 0 6px;
+  overflow: hidden;
+}
+.code-label {
+  background: #2a2018;
+  color: var(--gold);
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 12px;
+  letter-spacing: 0.5px;
+}
+.code-block pre {
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px;
+  color: #e8e0d0;
+  padding: 12px 16px;
+  overflow-x: auto;
+  line-height: 1.6;
+  white-space: pre;
+}
+.c-kw { color: #f0d060; }
+.c-str { color: #a8e080; }
+.c-cm { color: #7a6e62; font-style: italic; }
+.c-fn { color: #80c8f0; }
+.c-num { color: #f0a860; }
+.c-key { color: #c8a0f0; }
+
+/* ══ COMPARE TABLE ══ */
+.cmp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.cmp-table th {
+  background: var(--ink);
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  text-align: left;
+}
+.cmp-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink2);
+  vertical-align: top;
+}
+.cmp-table tr:nth-child(even) td { background: var(--bg2); }
+.cmp-table td:first-child { font-family: 'Fira Code', monospace; font-size: 11px; color: var(--blue); font-weight: 600; }
+
+/* ══ FLOW ══ */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.flow-node {
+  background: var(--blue-light);
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+.flow-node.gold { background: #fff8e0; border-color: var(--gold); color: var(--orange); }
+.flow-node.teal { background: var(--teal-light); border-color: var(--teal); color: var(--teal); }
+.flow-arr { color: var(--gray); font-weight: 700; font-size: 14px; }
+
+/* ══ WARN / NOTE ══ */
+.note-box {
+  background: var(--blue-light);
+  border-left: 3px solid var(--blue);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--ink2);
+  margin: 10px 0;
+  border-radius: 0 2px 2px 0;
+}
+.warn-box {
+  background: var(--red-light);
+  border-left: 3px solid var(--red);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--ink2);
+  margin: 10px 0;
+  border-radius: 0 2px 2px 0;
+}
+.ok-box {
+  background: var(--green-light);
+  border-left: 3px solid var(--green);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--ink2);
+  margin: 10px 0;
+  border-radius: 0 2px 2px 0;
+}
+
+.divline { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Ollama API — <span>Справочник</span></h1>
+  <p>HTTP, порты, аутентификация, совместимость с Anthropic SDK, ответы моделей</p>
+</div>
+
+<div class="wrap">
+
+  <!-- ════ БЛОК 0: АРХИТЕКТУРА ════ -->
+  <div class="sec-title">Блок 0 — Сервер, хост, порт</div>
+
+  <div class="concept-grid">
+    <div class="concept-card blue">
+      <div class="concept-title">localhost / 127.0.0.1</div>
+      <p>Одно и то же. <code>localhost</code> — человекочитаемое имя, резолвится в <code>127.0.0.1</code> через <code>/etc/hosts</code>. Это loopback-интерфейс — виртуальный, пакет не покидает ОС, физической сети нет.</p>
+    </div>
+    <div class="concept-card orange">
+      <div class="concept-title">Порт 11434</div>
+      <p>IP доставляет до машины — порт доставляет до процесса. ОС маршрутизирует входящий пакет нужному процессу по номеру порта. 11434 — произвольный выбор команды Ollama, просто конвенция.</p>
+    </div>
+    <div class="concept-card red">
+      <div class="concept-title">0.0.0.0 — опасно</div>
+      <p>Слушает <b>все</b> интерфейсы — и loopback, и WiFi-адаптер. Кто угодно в той же сети может достучаться. HTTP не шифрует — тело запроса, заголовки, ключи читаемы через Wireshark.</p>
+    </div>
+    <div class="concept-card green">
+      <div class="concept-title">127.0.0.1 — безопасно локально</div>
+      <p>Пакет идёт через loopback, физически не выходит на WiFi-карту. Перехватывать нечего. HTTP без HTTPS — норм. Как только выставляешь на VPS или <code>0.0.0.0</code> — нужен nginx + TLS.</p>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-label">bash — проверить на каком адресе слушает Ollama</div>
+    <pre><span class="c-cm"># требует sudo — процесс запущен от другого пользователя</span>
+sudo lsof -i :11434
+
+<span class="c-cm"># хороший вывод: только localhost</span>
+ollama  2138 ollama  TCP <span class="c-str">localhost:11434</span> (LISTEN)
+
+<span class="c-cm"># плохой вывод: торчит наружу</span>
+ollama  2138 ollama  TCP <span class="c-str">0.0.0.0:11434</span> (LISTEN)
+
+<span class="c-cm"># пинг сервиса</span>
+curl http://localhost:11434
+<span class="c-cm"># → Ollama is running</span></pre>
+  </div>
+
+  <hr class="divline">
+
+  <!-- ════ БЛОК 1: HTTP vs HTTPS ════ -->
+  <div class="sec-title">Блок 1 — Почему HTTP норм локально</div>
+
+  <div class="qa-block">
+    <div class="qa-q">Я подключён к WiFi — разве HTTP не небезопасен?</div>
+    <div class="qa-a">
+      <b>Нет, если слушаешь 127.0.0.1.</b> Loopback и WiFi — разные сетевые интерфейсы в ОС. Трафик на <code>127.0.0.1</code> никогда не попадает на WiFi-адаптер физически. HTTPS нужен когда пакет идёт через чужую сеть. Здесь сети нет вообще — только память ОС.
+    </div>
+  </div>
+
+  <hr class="divline">
+
+  <!-- ════ БЛОК 2: АУТЕНТИФИКАЦИЯ ════ -->
+  <div class="sec-title">Блок 2 — Аутентификация</div>
+
+  <div class="concept-grid">
+    <div class="concept-card teal">
+      <div class="concept-title">Ollama локально</div>
+      <p>Аутентификация не требуется. Никаких заголовков <code>Authorization</code>. Сервис доступен только с локальной машины — это и есть защита.</p>
+    </div>
+    <div class="concept-card blue">
+      <div class="concept-title">Anthropic SDK</div>
+      <p>API-ключ передаётся при создании клиента → SDK автоматически добавляет его в заголовок <code>x-api-key</code> каждого запроса. Хранишь в <code>.env</code>, достаёшь через <code>python-dotenv</code>.</p>
+    </div>
+  </div>
+
+  <hr class="divline">
+
+  <!-- ════ БЛОК 3: ФОРМАТЫ ОТВЕТОВ ════ -->
+  <div class="sec-title">Блок 3 — Форматы ответов: Ollama vs Anthropic</div>
+
+  <div class="qa-block">
+    <div class="qa-q">Могу ли я обратиться к сохранённому ответу по id через Anthropic API?</div>
+    <div class="qa-a">
+      <b>Нет.</b> <code>id</code> в ответе Anthropic — это идентификатор конкретного запроса для логирования и отладки, не ключ хранилища. Anthropic не хранит твои сообщения для последующего доступа. Модель stateless — каждый запрос независим. История = то, что ты сам передаёшь в <code>messages</code>.
+    </div>
+  </div>
+
+  <table class="cmp-table">
+    <tr>
+      <th>Поле</th>
+      <th>Ollama /api/generate</th>
+      <th>Anthropic /v1/messages</th>
+    </tr>
+    <tr>
+      <td>текст ответа</td>
+      <td><code>response.json()["response"]</code></td>
+      <td><code>response.content[0].text</code></td>
+    </tr>
+    <tr>
+      <td>токены входа</td>
+      <td><code>prompt_eval_count</code></td>
+      <td><code>usage.input_tokens</code></td>
+    </tr>
+    <tr>
+      <td>токены выхода</td>
+      <td><code>eval_count</code></td>
+      <td><code>usage.output_tokens</code></td>
+    </tr>
+    <tr>
+      <td>причина остановки</td>
+      <td><code>done_reason: "stop"</code></td>
+      <td><code>stop_reason: "end_turn"</code></td>
+    </tr>
+    <tr>
+      <td>время инференса</td>
+      <td><code>eval_duration</code> (наносек.)</td>
+      <td>нет</td>
+    </tr>
+    <tr>
+      <td>id запроса</td>
+      <td>нет</td>
+      <td><code>id: "msg_..."</code> (только для логов)</td>
+    </tr>
+  </table>
+
+  <hr class="divline">
+
+  <!-- ════ БЛОК 4: СОВМЕСТИМОСТЬ ANTHROPIC ════ -->
+  <div class="sec-title">Блок 4 — Anthropic SDK → Ollama (совместимость)</div>
+
+  <div class="qa-block">
+    <div class="qa-q">Могу ли я использовать Anthropic SDK для запросов к Ollama?</div>
+    <div class="qa-a">
+      <b>Да.</b> Ollama реализует эндпоинт <code>/v1/messages</code> совместимый с Anthropic API. Меняешь только <code>base_url</code> и <code>api_key</code> (ключ любой — он игнорируется). Весь остальной код — тот же. <code>messages</code>, <code>tools</code>, <code>stream</code>, <code>system</code> — работают одинаково.
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-label">python — один клиент, два бэкенда</div>
+    <pre><span class="c-kw">import</span> anthropic
+<span class="c-kw">from</span> dotenv <span class="c-kw">import</span> load_dotenv
+<span class="c-kw">import</span> os
+
+load_dotenv()
+
+<span class="c-cm"># ── Anthropic (облако) ──────────────────────────────</span>
+client_cloud = anthropic.<span class="c-fn">Anthropic</span>(
+    api_key=os.<span class="c-fn">getenv</span>(<span class="c-str">"ANTHROPIC_API_KEY"</span>)
+)
+
+<span class="c-cm"># ── Ollama (локально) ───────────────────────────────</span>
+client_local = anthropic.<span class="c-fn">Anthropic</span>(
+    base_url=<span class="c-str">"http://localhost:11434"</span>,
+    api_key=<span class="c-str">"ollama"</span>   <span class="c-cm"># обязательно, но игнорируется</span>
+)
+
+<span class="c-cm"># ── Запрос — одинаковый код для обоих ───────────────</span>
+<span class="c-kw">def</span> <span class="c-fn">ask</span>(client, model, text):
+    msg = client.messages.<span class="c-fn">create</span>(
+        model=model,
+        max_tokens=<span class="c-num">1024</span>,
+        messages=[{<span class="c-str">"role"</span>: <span class="c-str">"user"</span>, <span class="c-str">"content"</span>: text}]
+    )
+    <span class="c-kw">return</span> msg.content[<span class="c-num">0</span>].text
+
+<span class="c-cm"># облако</span>
+<span class="c-fn">ask</span>(client_cloud, <span class="c-str">"claude-sonnet-4-5"</span>, <span class="c-str">"Привет"</span>)
+
+<span class="c-cm"># локально</span>
+<span class="c-fn">ask</span>(client_local, <span class="c-str">"gemma3:4b"</span>, <span class="c-str">"Привет"</span>)</pre>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-q">Когда всё же стоит использовать requests напрямую, а не SDK?</div>
+    <div class="qa-a">
+      Три случая: (1) <b>нужен эндпоинт которого нет в SDK</b> — например <code>/api/tags</code> (список моделей), <code>/api/pull</code> (скачать модель), <code>/api/show</code> — это нативные Ollama-эндпоинты, Anthropic SDK их не знает. (2) <b>минимальные зависимости</b> — скрипт на сервере где не хочешь тянуть SDK. (3) <b>отладка и изучение</b> — видишь сырой HTTP, понимаешь что происходит. Для основной работы с моделями — SDK предпочтительнее.
+    </div>
+  </div>
+
+  <hr class="divline">
+
+  <!-- ════ БЛОК 5: КОНТЕКСТ / ПАМЯТЬ ════ -->
+  <div class="sec-title">Блок 5 — Контекст и память</div>
+
+  <div class="qa-block">
+    <div class="qa-q">Ollama помнит историю сама?</div>
+    <div class="qa-a">
+      <b>Нет.</b> Модель stateless. <code>/set history</code> в интерактивном режиме — это история команд терминала (стрелка вверх), не контекст разговора. История = ты сам передаёшь весь список <code>messages</code> в каждом запросе.
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-label">python — накопление истории вручную</div>
+    <pre>messages = []
+
+<span class="c-kw">def</span> <span class="c-fn">chat</span>(user_input):
+    messages.<span class="c-fn">append</span>({<span class="c-str">"role"</span>: <span class="c-str">"user"</span>, <span class="c-str">"content"</span>: user_input})
+    
+    response = client.messages.<span class="c-fn">create</span>(
+        model=<span class="c-str">"gemma3:4b"</span>,
+        max_tokens=<span class="c-num">1024</span>,
+        messages=messages   <span class="c-cm"># вся история каждый раз</span>
+    )
+    
+    answer = response.content[<span class="c-num">0</span>].text
+    messages.<span class="c-fn">append</span>({<span class="c-str">"role"</span>: <span class="c-str">"assistant"</span>, <span class="c-str">"content"</span>: answer})
+    <span class="c-kw">return</span> answer</pre>
+  </div>
+
+  <table class="cmp-table">
+    <tr>
+      <th>Параметр</th>
+      <th>Назначение</th>
+      <th>Пример</th>
+    </tr>
+    <tr>
+      <td>num_ctx</td>
+      <td>Контекстное окно — суммарный лимит токенов (все сообщения + ответы)</td>
+      <td>10000 → ~18 обменов по 550 токенов</td>
+    </tr>
+    <tr>
+      <td>num_predict</td>
+      <td>Макс. токенов в одном ответе модели</td>
+      <td>1024</td>
+    </tr>
+    <tr>
+      <td>temperature</td>
+      <td>Случайность ответа. 0 = детерминировано, 1+ = творчески</td>
+      <td>0.7</td>
+    </tr>
+  </table>
+
+  <div class="warn-box">
+    <b>Важно:</b> когда окно переполняется — Ollama обрезает <b>старые</b> сообщения. Твой Python-код всё ещё хранит полный список. Можешь сам управлять: всегда оставлять system-промпт + последние N обменов.
+  </div>
+
+  <hr class="divline">
+
+  <!-- ════ БЛОК 6: ЭНДПОИНТЫ ════ -->
+  <div class="sec-title">Блок 6 — Эндпоинты Ollama</div>
+
+  <table class="cmp-table">
+    <tr>
+      <th>Эндпоинт</th>
+      <th>CLI аналог</th>
+      <th>Назначение</th>
+    </tr>
+    <tr>
+      <td>POST /api/generate</td>
+      <td>ollama run</td>
+      <td>Запрос к модели, одиночный промпт</td>
+    </tr>
+    <tr>
+      <td>POST /api/chat</td>
+      <td>ollama run</td>
+      <td>Мультитёрн с messages[]</td>
+    </tr>
+    <tr>
+      <td>GET /api/tags</td>
+      <td>ollama list</td>
+      <td>Список скачанных моделей</td>
+    </tr>
+    <tr>
+      <td>POST /api/pull</td>
+      <td>ollama pull</td>
+      <td>Скачать модель</td>
+    </tr>
+    <tr>
+      <td>POST /api/show</td>
+      <td>ollama show</td>
+      <td>Инфо о модели</td>
+    </tr>
+    <tr>
+      <td>POST /api/delete</td>
+      <td>ollama rm</td>
+      <td>Удалить модель</td>
+    </tr>
+    <tr>
+      <td>POST /v1/messages</td>
+      <td>—</td>
+      <td>Anthropic-совместимый эндпоинт (SDK работает)</td>
+    </tr>
+  </table>
+
+  <div class="note-box">
+    <b>ollama serve</b> — единственная команда которую нельзя заменить API-вызовом. Сервер должен быть запущен до любых запросов. У тебя запускается автоматически через systemd при старте системы.
+  </div>
+
+</div>
+</body>
+</html>
