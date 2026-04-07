@@ -1,6 +1,6 @@
 '''
 Сравнение скорости ответа: Ollama (llama3.2) vs Claude API (haiku)
-на одинаковый запрос на английском.
+на одинаковый запросs.
 '''
 
 import time
@@ -12,7 +12,7 @@ from anthropic import Anthropic
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(CUR_DIR, '.env'))
 
-PROMPT = "Explain what a large language model is in three sentences."
+PROMPT = "Which football team is GOAT in your opinion?"
 
 # --- Ollama ---
 def call_ollama(prompt: str) -> tuple[str, float]:
@@ -30,8 +30,8 @@ def call_ollama(prompt: str) -> tuple[str, float]:
 
 # --- Claude API ---
 def call_claude(prompt: str) -> tuple[str, float]:
-    client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
     start = time.time()
+    client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
     message = client.messages.create(
         model="claude-haiku-4-5",
         max_tokens=256,
