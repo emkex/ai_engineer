@@ -980,16 +980,12 @@
                                 target="_blank">through local API</a></li>
                         <li class="done">Зарегистрироваться на huggingface.co</li>
                         <li class="done">Прочитать 3 Ahillary конспекта по HuggingFace: обзор / выбор модели / карточка модели</li>
-                        <li>Найти модель sentiment-analysis &rarr; протестировать в браузере (Inference API)</li>
-                        <li>НЕ устанавливать transformers &mdash; только понять структуру экосистемы</li>
-                        <li>HuggingFace NLP Course гл.1&ndash;2 (huggingface.co/learn/nlp-course): pipeline API,
-                            введение</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3Blue1Brown <a
-                                href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-                                target="_blank">Essence of Calculus</a> гл.1–5 (Derivatives, Chain Rule, Gradient
-                            intuition). Книга: <b>StatQuest Guide to ML</b> — гл.1–3 (ML concepts, Cross Validation,
-                            Statistics basics)</li>
+                        <li class="skip">Найти модель sentiment-analysis &rarr; протестировать в браузере (&rarr; перенесено на нед.5)</li>
+                        <li class="skip">НЕ устанавливать transformers &mdash; только понять структуру экосистемы (&rarr; перенесено на нед.5)</li>
+                        <li class="skip">HuggingFace NLP Course гл.1&ndash;2: pipeline API, введение (&rarr; перенесено на нед.5)</li>
+                        <li class="skip" style="margin-top:8px"><b>&#128290; Математика:</b> 3B1B Calculus гл.1&ndash;5 + StatQuest ML гл.1&ndash;3 (&rarr; перенесено на нед.5)</li>
                     </ul>
+                    <div class="warn">&#9888;&#65039; Отпуск. Сделано только: Ollama local API + HF регистрация. Остальное &rarr; нед.5</div>
                     <div class="src">&#128218; Ahillary Notion (3 HF конспекта) + huggingface.co/learn/nlp-course
                         (гл.1-2)</div>
                 </td>
@@ -1044,88 +1040,79 @@
             <tr>
                 <td><span class="pbl">6&ndash;12 апр</span><span class="pls">Неделя 5</span></td>
                 <td>
-                    <span class="tag t1">ProGlib</span><br>
-                    <b>Визуализация + метрики ML</b>
+                    <span class="tag t1">ProGlib &mdash; Курс ML</span><br>
+                    <b>Старт: Введение в ML + Линейная регрессия + Градиентный спуск</b>
                     <ul class="clist">
-                        <li>seaborn: heatmap, distribution, pairplot</li>
-                        <li>plotly: интерактивные графики</li>
-                        <li>ML метрики: accuracy, precision, recall, F1, ROC-AUC</li>
-                        <li>Confusion matrix &mdash; читать и интерпретировать</li>
+                        <li>Тема 1: Введение в машинное обучение &mdash; типы задач, supervised/unsupervised, метрики</li>
+                        <li>Тема 2: Линейные модели: регрессия &mdash; МНК, MSE, MAE, R&sup2;, интерпретация коэффициентов</li>
+                        <li>Тема 3: Градиентный спуск и его модификации &mdash; SGD, Adam, RMSprop, L1/L2 регуляризация</li>
                     </ul>
-                    <div class="src">&#128218; ProGlib + seaborn.pydata.org/tutorial</div>
+                    <span class="tag t1">ProGlib &mdash; Курс Математика AI</span><br>
+                    <b>Старт: Векторы + Линейная регрессия через МНК</b>
+                    <ul class="clist">
+                        <li>Занятие 1: Векторы и матрицы, операции с ними &mdash; применение в ML</li>
+                        <li>Занятие 2: Линейная регрессия &mdash; реализация в NumPy vs sklearn</li>
+                    </ul>
+                    <div class="src">&#128218; proglib.academy/machine-learning + proglib.academy/math-for-ds-express</div>
                 </td>
                 <td>
                     <span class="tag t2">Самост.</span><br>
-                    <b>async/await + Ahillary ур.9 + NLP Course продолжение</b>
+                    <b>Перенос с нед.4 + продолжение</b>
                     <ul class="clist">
-                        <li>Попробовать объединить резы прошлой недели = источник + его оценка ИИ-агентом (вендорная модель vs. local)</li>
-                        <li>Ahillary ур.9 (async): конспект Notion &mdash; GIL, asyncio, coroutines, gather</li>
-                        <li>Понять: синхронный vs асинхронный &mdash; почему агенты требуют async</li>
-                        <li>SemolinaCode ур.13 &mdash; альтернативное объяснение если непонятно</li>
-                        <li>Написать async-скрипт: 3 RSS параллельно &rarr; один DataFrame</li>
-                        <li>HuggingFace NLP Course гл.3&ndash;4: fine-tuning теория &mdash; только читать</li>
+                        <li>HuggingFace: найти модель sentiment-analysis &rarr; протестировать в браузере (Inference API)</li>
+                        <li>НЕ устанавливать transformers &mdash; только понять структуру экосистемы</li>
+                        <li>HuggingFace NLP Course гл.1&ndash;2: pipeline API, введение (читать, не кодить)</li>
                         <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3B1B <a
                                 href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-                                target="_blank">Calculus</a> гл.6–9 (Backprop интуиция). Книга: <b>StatQuest Guide to
-                                ML</b> гл.4–6 (Linear/Logistic Regression, Gradient Descent). Прямая связь:
-                            precision/recall/ROC-AUC которые учишь сейчас — это теорвер в действии.</li>
-                        <li style="margin-top:8px"><b>&#128250; ШАД:</b>
+                                target="_blank">Calculus</a> гл.1&ndash;5 (Derivatives, Chain Rule) + <b>StatQuest Guide to ML</b> гл.1&ndash;3 (ML concepts, Cross Validation, Statistics basics)</li>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (max 2 лекции):</b>
                             <ul class="clist" style="margin-top:4px">
-                                <li><a href="https://shad.yandex.ru/abweek" target="_blank">A/B Week — Лек.1 «Статистика для A/B: распределения, t-тест»</a> (~1 час, середина недели): гипотезы, p-value, t-критерий — статбаза под precision/recall/ROC-AUC</li>
-                                <li><a href="https://shad.yandex.ru/abweek" target="_blank">A/B Week — Лек.2 «Ошибки I и II рода, MDE»</a> (~1 час, конец недели): false positive = I рода, false negative = II рода — это precision/recall другими словами</li>
-                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week — Лек.1.1 «Intro to AI Agents LLM»</a> (~50 мин): ReAct loop, архитектура агентов — карта на нед.7–10</li>
-                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week — Лек.1.2 «Tools. MCP»</a> (~50 мин): MCP и tools концептуально — инструменты не будут сюрпризом на нед.10</li>
+                                <li><a href="https://shad.yandex.ru/abweek" target="_blank">A/B Week &mdash; Лек.1 &laquo;Статистика для A/B: распределения, t-тест&raquo;</a> (~1 час) &mdash; статбаза под ML метрики</li>
+                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.1.1 &laquo;Intro to AI Agents LLM&raquo;</a> (~50 мин) &mdash; ReAct loop, карта на нед.7&ndash;10</li>
                             </ul>
                         </li>
                     </ul>
-                    <div class="src">&#128218; Ahillary ур.9 Notion + SemolinaCode TG ур.13 +
-                        huggingface.co/learn/nlp-course (гл.3-4) + shad.yandex.ru/abweek + shad.yandex.ru/agentsweek</div>
+                    <div class="src">&#128218; huggingface.co/learn/nlp-course (гл.1-2) + shad.yandex.ru/abweek + shad.yandex.ru/agentsweek</div>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> pandas, HTTP.<br><b>Сейчас:</b> async &mdash; без него агент
-                        блокируется на каждом запросе. LangGraph и n8n асинхронны. Fine-tuning теорию читаем сейчас
-                        &mdash; к августу будем готовы к практике без потери времени.</div>
+                    <div class="why"><b>Было:</b> API, парсинг, Ollama.<br><b>Сейчас:</b> ProGlib выдал два полноценных курса (ML + математика) вместо отдельных уроков. Курс ML &mdash; фундамент sklearn и хроматографии. Математика AI &mdash; линалг и МНК для понимания моделей изнутри.</div>
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>asyncio (Python)</b><span>Параллельное выполнение без многопоточности.
-                                Агент одновременно тянет данные из 3 источников &mdash; без asyncio это медленно.</span>
-                        </div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML</b><span>proglib.academy/machine-learning &mdash; темы 1&ndash;3 на этой неделе</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-calc">CALC</span> ProGlib Математика AI</b><span>proglib.academy/math-for-ds-express &mdash; занятия 1&ndash;2 на этой неделе</span></div>
+                        <div class="tcard"><b>HuggingFace Hub (браузер)</b><span>2.2 млн моделей. Сейчас &mdash; смотрим и понимаем структуру.</span></div>
                     </div>
                 </td>
                 <td>
                     <ul class="clist">
-                        <li>async-скрипт: 3 RSS параллельно &rarr; один DataFrame</li>
-                        <li>Замер sync vs async по времени &mdash; записать разницу в README</li>
+                        <li>Пройти темы 1&ndash;3 ML курса + занятия 1&ndash;2 математики</li>
+                        <li>HF sentiment-analysis &rarr; протестировать в браузере</li>
                     </ul>
                 </td>
                 <td>
                     <div class="tcards">
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span
-                                    class="src-tag st-calc">CALC</span> 3B1B Calculus гл.6–9</b><span><a
+                                    class="src-tag st-calc">CALC</span> 3B1B Calculus гл.1&ndash;5</b><span><a
                                     href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-                                    target="_blank">Backprop интуиция</a></span></div>
+                                    target="_blank">Derivatives, Chain Rule</a> &mdash; 20 мин/день</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
-                                    class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.4–6:
-                                Linear/Logistic Regression, Gradient Descent</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span
-                                    class="src-tag st-stats">STATS</span> StatQuest: ROC + Confusion Matrix</b><span><a
-                                    href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — по теме
-                                метрик недели</span></div>
+                                    class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.1&ndash;3: ML
+                                Fundamentals, Cross Validation</span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
+                                    class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
+                                    href="https://amzn.to/4l4veCZ" target="_blank">G&eacute;ron</a> &mdash; гл.1: The ML
+                                Landscape</span></div>
                         <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span
-                                    class="src-tag st-linal">LINAL</span> MML Book гл.2</b><span><a
-                                    href="https://mml-book.github.io" target="_blank">mml-book.github.io</a> — LinAlg
-                                recap (справочник)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span
-                                    class="src-tag st-llm">LLM</span> HF LLM Course гл.3–4</b><span><a
-                                    href="https://huggingface.co/learn/llm-course" target="_blank">llm-course</a> —
-                                fine-tuning теория + Hub (читать, код в июле)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-stats">STATS</span> ШАД | A/B Week</b><span><a href="https://shad.yandex.ru/abweek" target="_blank">shad.yandex.ru/abweek</a> — Лек.1+2 на нед.5</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> — Лек.1.1+1.2 на нед.5</span></div>
+                                    class="src-tag st-llm">LLM</span> HF NLP Course гл.1&ndash;2</b><span><a
+                                    href="https://huggingface.co/learn/nlp-course" target="_blank">nlp-course</a> &mdash;
+                                pipeline API, введение (читать)</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-stats">STATS</span> ШАД | A/B Week</b><span><a href="https://shad.yandex.ru/abweek" target="_blank">shad.yandex.ru/abweek</a> &mdash; Лек.1 на нед.5</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.1.1 на нед.5</span></div>
                     </div>
                 </td>
-                <td><span class="sp mastered">pandas</span><span class="sp new">asyncio</span><span
-                        class="sp new">seaborn/plotly</span></td>
+                <td><span class="sp mastered">Anthropic API</span><span class="sp new">ML курс</span><span
+                        class="sp new">Математика AI</span></td>
                 <td>
                     <div class="pb">
                         <div class="pf" style="width:28%;background:#1565c0"></div>
@@ -1137,89 +1124,84 @@
             <tr>
                 <td><span class="pbl">13&ndash;19 апр</span><span class="pls">Неделя 6</span></td>
                 <td>
-                    <span class="tag t1">ProGlib</span><br>
-                    <b>ML: scikit-learn</b>
+                    <span class="tag t1">ProGlib &mdash; Курс ML (продолжение)</span><br>
+                    <b>Линейная классификация + SVM + Нелинейные методы</b>
                     <ul class="clist">
-                        <li>LinearRegression, LogisticRegression</li>
-                        <li>DecisionTree, RandomForest</li>
-                        <li>train_test_split, cross_val_score</li>
-                        <li>sklearn Pipeline: предобработка + модель</li>
+                        <li>Тема 4: Линейные методы классификации &mdash; логистическая регрессия, sigmoid, precision/recall/F1/ROC-AUC</li>
+                        <li>Тема 5: Методы опорных векторов (SVM) &mdash; максимизация отступа, ядра, кросс-валидация</li>
+                        <li>Тема 6: Нелинейные методы классификации &mdash; полиномиальные признаки, регуляризация</li>
                     </ul>
-                    <div class="src">&#128218; ProGlib + scikit-learn.org/stable/tutorial/basic/tutorial.html</div>
+                    <span class="tag t1">ProGlib &mdash; Курс Математика AI (продолжение)</span><br>
+                    <b>Матричные разложения + Производные</b>
+                    <ul class="clist">
+                        <li>Занятие 3: Матричные разложения (SVD) &mdash; снижение размерности, рекомендательные системы в NumPy</li>
+                        <li>Занятие 4&ndash;5: Функция одной переменной, пределы + Функции нескольких переменных &mdash; частные производные, градиент</li>
+                    </ul>
+                    <div class="src">&#128218; proglib.academy/machine-learning + proglib.academy/math-for-ds-express</div>
                 </td>
                 <td>
                     <span class="tag t2">Самост.</span><br>
-                    <b>RAG: первый pipeline &mdash; Ahillary YouTube ур.2</b>
+                    <b>async/await + RAG первый pipeline + ML метрики</b>
                     <ul class="clist">
-                        <li>Ahillary YouTube ур.2: первый RAG pipeline &mdash; смотреть + повторять код</li>
-                        <li>github.com/CrashNosok/RAG_lessons lesson_1 &mdash; разобрать построчно с Claude.ai</li>
-                        <li>Цепочка: документ &rarr; чанки &rarr; embeddings &rarr; ChromaDB &rarr; поиск &rarr; LLM
-                            &rarr; ответ</li>
-                        <li>Запустить на 2&ndash;3 PDF по экономике &rarr; задать 5 вопросов</li>
-                        <li>HuggingFace NLP Course гл.5&ndash;6: datasets, tokenizers (читать)</li>
+                        <li>Ahillary ур.9 (async): GIL, asyncio, coroutines, gather &mdash; конспект Notion</li>
+                        <li>Понять: синхронный vs асинхронный &mdash; почему агенты требуют async</li>
+                        <li>RAG: Ahillary YouTube ур.2 &mdash; первый pipeline (перенос с нед.6 оригинальной)</li>
+                        <li>Цепочка: документ &rarr; чанки &rarr; embeddings &rarr; ChromaDB &rarr; поиск &rarr; LLM &rarr; ответ</li>
+                        <li>seaborn: heatmap, distribution &mdash; базово (перенос с нед.5)</li>
+                        <li>ML метрики на практике: confusion matrix, ROC-AUC &mdash; sklearn на реальных данных</li>
                         <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3B1B <a
-                                href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"
-                                target="_blank">LinAlg</a> гл.13–15 (Change of basis, Eigenvectors, Abstract vector
-                            spaces → это и есть PCA) + <a
                                 href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-                                target="_blank">Calculus</a> гл.8–9 (Gradient descent → так обучается LinearRegression
-                            который учишь сейчас)</li>
-                        <li style="margin-top:8px"><b>&#128250; ШАД:</b>
+                                target="_blank">Calculus</a> гл.6&ndash;9 (Backprop интуиция) + <b>StatQuest Guide to ML</b> гл.4&ndash;6 (Linear/Logistic Regression, Gradient Descent)</li>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (max 2 лекции):</b>
                             <ul class="clist" style="margin-top:4px">
-                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week — Лек.2 «Memory and Guardrails»</a> (~1 час): как агент помнит контекст, guardrails как ограничитель поведения — прямая связь с RAG pipeline который строишь</li>
+                                <li><a href="https://shad.yandex.ru/abweek" target="_blank">A/B Week &mdash; Лек.2 &laquo;Ошибки I и II рода, MDE&raquo;</a> (~1 час)</li>
+                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.1.2 &laquo;Tools. MCP&raquo;</a> (~50 мин) &mdash; концептуально</li>
                             </ul>
                         </li>
                     </ul>
-                    <div class="src">&#128218; Ahillary YouTube ур.2 + github.com/CrashNosok/RAG_lessons +
-                        huggingface.co/learn/nlp-course (гл.5-6) + shad.yandex.ru/agentsweek</div>
+                    <div class="src">&#128218; Ahillary ур.9 Notion + Ahillary YouTube ур.2 + github.com/CrashNosok/RAG_lessons + shad.yandex.ru/abweek + shad.yandex.ru/agentsweek</div>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> async, ML метрики.<br><b>Сейчас:</b> RAG = основа
-                        &laquo;Задумки&raquo;. scikit-learn = фундамент для хроматографии в июле. Все кирпичи готовы
-                        &mdash; складываем первую систему.</div>
+                    <div class="why"><b>Было:</b> ML курс темы 1&ndash;3, HF знакомство.<br><b>Сейчас:</b> ML курс углубляется в классификацию (precision/recall/F1 &mdash; будут нужны для оценки RAG). async &mdash; без него агент блокируется. RAG = основа &laquo;Задумки&raquo;. Переходная неделя перед ФАЗОЙ 1.</div>
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>scikit-learn</b><span>Классический ML: регрессия, классификация,
-                                кластеризация. Нужен для хроматографических данных.</span></div>
-                        <div class="tcard"><b>ChromaDB (учебная)</b><span>Векторная БД для первых экспериментов. Потом
-                                заменим на Qdrant (продакшн).</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML</b><span>Темы 4&ndash;6: классификация, SVM, нелинейные методы</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-calc">CALC</span> ProGlib Математика AI</b><span>Занятия 3&ndash;5: SVD, пределы, частные производные</span></div>
+                        <div class="tcard"><b>asyncio (Python)</b><span>Параллельное выполнение. Агент тянет данные из 3 источников &mdash; без asyncio медленно.</span></div>
+                        <div class="tcard"><b>ChromaDB (учебная)</b><span>Векторная БД для первых RAG экспериментов. Потом заменим на Qdrant.</span></div>
                     </div>
                 </td>
                 <td>
                     <ul class="clist">
-                        <li>RAG на 3 PDF &rarr; вопросы &rarr; ответы с источниками</li>
-                        <li>Убедиться: ответы из документов, не из &laquo;головы&raquo; LLM</li>
+                        <li>RAG на 2&ndash;3 PDF &rarr; вопросы &rarr; ответы с источниками</li>
+                        <li>ML метрики: confusion matrix + ROC-AUC на sklearn данных</li>
                     </ul>
                 </td>
                 <td>
                     <div class="tcards">
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span
-                                    class="src-tag st-linal">LINAL</span> 3B1B LinAlg гл.13–15</b><span><a
-                                    href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"
-                                    target="_blank">Eigenvalues → это PCA</a></span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span
-                                    class="src-tag st-calc">CALC</span> 3B1B Calculus гл.8–9</b><span><a
+                                    class="src-tag st-calc">CALC</span> 3B1B Calculus гл.6&ndash;9</b><span><a
                                     href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-                                    target="_blank">Gradient Descent → обучение LinearRegression</a></span></div>
+                                    target="_blank">Backprop интуиция</a></span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
-                                    class="src-tag st-ml">ML</span> StatQuest ML (B1)</b><span>гл.7–10: Naive Bayes,
-                                Decision Trees, Regularization</span></div>
+                                    class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.4&ndash;6:
+                                Linear/Logistic Regression, Gradient Descent</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span
+                                    class="src-tag st-stats">STATS</span> StatQuest: ROC + Confusion Matrix</b><span><a
+                                    href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> &mdash; по теме метрик недели</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
-                                    href="https://amzn.to/4l4veCZ" target="_blank">гл.2–4</a>: end-to-end,
+                                    href="https://amzn.to/4l4veCZ" target="_blank">гл.2&ndash;4</a>: end-to-end,
                                 Classification</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span>
-                                Chip Huyen 30:20–36:56</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M"
-                                    target="_blank">RAG секция</a> — смотреть до RAG</span></div>
-                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span
-                                    class="src-tag st-llm">LLM</span> HF LLM Course гл.5–6</b><span><a
-                                    href="https://huggingface.co/learn/llm-course" target="_blank">llm-course</a> —
-                                Datasets + Tokenizers (как устроены, читать)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> — Лек.2 на нед.6</span></div>
+                                Chip Huyen 30:20&ndash;36:56</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M"
+                                    target="_blank">RAG секция</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-stats">STATS</span> ШАД | A/B Week</b><span><a href="https://shad.yandex.ru/abweek" target="_blank">shad.yandex.ru/abweek</a> &mdash; Лек.2 на нед.6</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.1.2 на нед.6</span></div>
                     </div>
                 </td>
-                <td><span class="sp mastered">asyncio</span><span class="sp new">scikit-learn</span><span
+                <td><span class="sp mastered">ML курс</span><span class="sp new">asyncio</span><span
                         class="sp new">RAG/ChromaDB</span></td>
                 <td>
                     <div class="pb">
@@ -1274,13 +1256,14 @@
                         <li>Первый n8n-пайплайн: Schedule &rarr; HTTP Request (RSS) &rarr; Write to File</li>
                         <li>Ahillary YouTube ур.3: загрузка через sitemap, правильный chunking, embeddings для русского
                             текста</li>
-                        <li style="margin-top:8px"><b>&#128250; ШАД:</b>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (max 2 лекции):</b>
                             <ul class="clist" style="margin-top:4px">
-                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week — Лек.3 «AI Agent Workflow. Multi-Agent. Multimodality»</a> (~55 мин): прямо под тему ProGlib. Multi-agent — карта на нед.11 LangGraph</li>
-                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week — Лек.5.1 «Production Engineering for LLM Agents»</a> (~60 мин): Docker, деплой, мониторинг — карта на нед.13</li>
-                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week — Лек.5.2 «Production Engineering (продолжение)»</a> (~60 мин): разбить на 2 дня</li>
+                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.3 &laquo;AI Agent Workflow. Multi-Agent. Multimodality&raquo;</a> (~55 мин): прямо под тему ProGlib. Multi-agent &mdash; карта на нед.11 LangGraph</li>
+                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.2 &laquo;Memory and Guardrails&raquo;</a> (~1 час): как агент помнит контекст, guardrails</li>
                             </ul>
                         </li>
+                        <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим, 1 тема/нед):</b> Тема 7: Решающие деревья &mdash; ID3, CART, визуализация, гиперпараметры</li>
+                        <li><b>&#128218; Курс Математика AI (фоновый режим):</b> Занятие 6&ndash;7: Оптимизация и интегрирование + Матанализ: практика &mdash; реализация градиентного спуска с нуля</li>
                     </ul>
                     <div class="src">&#128218; SemolinaCode TG ур.14 (Docker) + docs.n8n.io + Ahillary YouTube ур.3 + shad.yandex.ru/agentsweek
                     </div>
@@ -1314,7 +1297,7 @@
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.5–6</a>: SVM, Decision
                                 Trees</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> — Лек.3+5.1+5.2 на нед.7</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.2+3 на нед.7</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">RAG</span><span class="sp new">Docker</span><span
@@ -1355,12 +1338,20 @@
                         <li>Ahillary YouTube ур.5: подключить LangSmith &rarr; трейсы каждого запроса</li>
                         <li>Ahillary архив ур.2 (Twitter/Pydantic): ТОЛЬКО раздел про Pydantic-модели и RootModel</li>
                         <li style="margin-top:8px"><b>&#128290; Математика (опц., 20 мин/день):</b> <a
-                                href="https://www.youtube.com/@statquest" target="_blank">StatQuest YouTube</a> — Neural
+                                href="https://www.youtube.com/@statquest" target="_blank">StatQuest YouTube</a> &mdash; Neural
                             Networks плейлист (Pt.1 + Backpropagation). Зачем: embeddings = выход нейросети, понимаешь
                             RAG и Qdrant глубже.</li>
+                        <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим):</b> Тема 8: Ансамблевые методы: бэггинг и случайный лес &mdash; важность признаков</li>
+                        <li><b>&#128218; Курс Математика AI:</b> Занятие 8&ndash;9: Введение в теорию вероятностей + Случайные величины &mdash; реализация Наивного Байеса</li>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (max 2 лекции, перенос с нед.7):</b>
+                            <ul class="clist" style="margin-top:4px">
+                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.5.1 &laquo;Production Engineering for LLM Agents&raquo;</a> (~60 мин): Docker, деплой, мониторинг</li>
+                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.5.2 &laquo;Production Engineering (продолжение)&raquo;</a> (~60 мин)</li>
+                            </ul>
+                        </li>
                     </ul>
                     <div class="src">&#128218; qdrant.tech/docs + Ahillary YouTube ур.5 + Ahillary архив ур.2 (только
-                        Pydantic-часть)</div>
+                        Pydantic-часть) + shad.yandex.ru/agentsweek</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> ChromaDB, базовый RAG.<br><b>Сейчас:</b> Qdrant &mdash; продакшн
@@ -1441,6 +1432,8 @@
                             dataclasses&raquo;</li>
                         <li>С этого дня: Claude Code = основная среда разработки</li>
                         <li>Playwright: скрипт &rarr; открыть сайт &rarr; взять заголовки &rarr; JSON</li>
+                        <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим):</b> Тема 9: Градиентный бустинг и современные реализации &mdash; XGBoost, CatBoost, LightGBM</li>
+                        <li><b>&#128218; Курс Математика AI:</b> Занятие 10: Основы статистики и проверки гипотез &mdash; t-тест, доверительные интервалы</li>
                     </ul>
                     <div class="src">&#128218; docs.anthropic.com/claude-code + playwright.dev/python</div>
                 </td>
@@ -1508,6 +1501,8 @@
                         <li>MCP 3: написать свой Python MCP-сервер get_news(topic) &rarr; 5 новостей из RSS</li>
                         <li>Прочитать ПОЛНЫЙ ГАЙД (файл проекта): разделы &laquo;CLI-агенты&raquo; и &laquo;MCP&raquo;
                             полностью</li>
+                        <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим):</b> Тема 10: Обучение без учителя: кластеризация &mdash; K-means, DBSCAN, дендрограммы</li>
+                        <li><b>&#128218; Курс Математика AI:</b> Финальный проект math-for-ds-express &mdash; градиентный спуск для предсказания цен</li>
                     </ul>
                     <div class="src">&#128218; modelcontextprotocol.io + ПОЛНЫЙ ГАЙД (файл проекта) +
                         github.com/modelcontextprotocol/servers</div>
@@ -1583,6 +1578,7 @@
                         <li>&rarr; evaluate() &mdash; LLM оценивает через PydanticAI &rarr; NewsItem</li>
                         <li>&rarr; human_review() &mdash; ПАУЗА, вопрос в Telegram</li>
                         <li>&rarr; store_or_reject() &mdash; пишет в Qdrant или отклоняет</li>
+                        <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим):</b> Тема 11: Понижение размерности и детектирование аномалий &mdash; PCA, t-SNE, Isolation Forest</li>
                     </ul>
                     <div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials</div>
                 </td>
@@ -1653,9 +1649,10 @@
                         <li>n8n: добавить LLM-ноду &rarr; пайплайн вызывает Claude для оценки</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД:</b>
                             <ul class="clist" style="margin-top:4px">
-                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week — Лек.4 «Agent Evaluation: From Metrics to Managed Quality»</a> (~1 час): теория оценки агентов от Яндекса — прямо под AgentOps-практику и RAGAS этой недели</li>
+                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.4 &laquo;Agent Evaluation: From Metrics to Managed Quality&raquo;</a> (~1 час): теория оценки агентов от Яндекса &mdash; прямо под AgentOps-практику и RAGAS этой недели</li>
                             </ul>
                         </li>
+                        <li style="margin-top:8px"><b>&#128218; Курс ML (финал):</b> Тема 12: Рекомендательные системы &mdash; коллаборативная фильтрация, matrix factorization. Финальная тема ML курса!</li>
                     </ul>
                     <div class="src">&#128218; langfuse.com/docs + docs.ragas.io/tutorials + docs.n8n.io + shad.yandex.ru/agentsweek</div>
                 </td>
