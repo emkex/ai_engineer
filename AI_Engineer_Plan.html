@@ -964,10 +964,10 @@
                     <span class="tag t1">ProGlib</span><br>
                     <b>pandas, NumPy, matplotlib</b>
                     <ul class="clist">
-                        <li>NumPy: массивы, векторные операции</li>
-                        <li>DataFrame: создание, фильтрация, groupby, merge</li>
-                        <li>matplotlib: линейный, гистограмма, scatter</li>
-                        <li>Чтение/запись CSV, Excel</li>
+                        <li class="skip">NumPy: массивы, векторные операции (&rarr; перенесено на нед.5)</li>
+                        <li class="skip">pandas DataFrame: создание, фильтрация, groupby, merge (&rarr; перенесено на нед.5)</li>
+                        <li class="skip">matplotlib: линейный, гистограмма, scatter (&rarr; перенесено на нед.6)</li>
+                        <li class="skip">Чтение/запись CSV, Excel (&rarr; перенесено на нед.5)</li>
                     </ul>
                     <div class="src">&#128218; ProGlib + pandas.pydata.org/docs/getting_started</div>
                 </td>
@@ -996,39 +996,36 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>pandas</b><span>Таблицы в Python. Любые данные: новости, котировки,
-                                химические измерения.</span></div>
-                        <div class="tcard"><b>HuggingFace Hub (браузер)</b><span>2.2 млн моделей. Сейчас &mdash; смотрим
-                                и понимаем структуру. Позже &mdash; запускаем.</span></div>
+                        <div class="tcard"><b>Ollama local API</b><span>HTTP-запросы к локальной модели. Понимаешь как работает LLM-сервер до перехода на облако.</span></div>
+                        <div class="tcard"><b>pandas (перенос на нед.5)</b><span>Таблицы в Python. Любые данные: новости, котировки, химические измерения.</span></div>
                     </div>
                 </td>
                 <td>
                     <ul class="clist">
-                        <li>yfinance &rarr; DataFrame &rarr; 2 графика (цена + объём)</li>
-                        <li>Объединить котировки + RSS в один DataFrame по дате</li>
+                        <li class="skip">yfinance &rarr; DataFrame &rarr; 2 графика (цена + объём)</li>
+                        <li class="skip">Объединить котировки + RSS в один DataFrame по дате</li>
                     </ul>
                 </td>
                 <td>
                     <div class="tcards">
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span
-                                    class="src-tag st-calc">CALC</span> 3B1B Calculus гл.1–5</b><span><a
+                                    class="src-tag st-calc">CALC</span> 3B1B Calculus гл.1&ndash;5</b><span><a
                                     href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-                                    target="_blank">Derivatives, Chain Rule</a> — 20 мин/день</span></div>
+                                    target="_blank">Derivatives, Chain Rule</a> &mdash; перенесено на нед.5</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
-                                    class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.1–3: ML
-                                Fundamentals, Cross Validation</span></div>
+                                    class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.1&ndash;3: ML
+                                Fundamentals &mdash; перенесено на нед.5</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
-                                    href="https://amzn.to/4l4veCZ" target="_blank">Géron</a> — гл.1: The ML
-                                Landscape</span></div>
+                                    href="https://amzn.to/4l4veCZ" target="_blank">G&eacute;ron</a> &mdash; гл.1: The ML
+                                Landscape &mdash; перенесено на нед.5</span></div>
                         <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span
-                                    class="src-tag st-llm">LLM</span> HF LLM Course гл.1–2</b><span><a
-                                    href="https://huggingface.co/learn/llm-course" target="_blank">llm-course</a> —
-                                pipeline API, трансформеры обзор (читать, не кодить)</span></div>
+                                    class="src-tag st-llm">LLM</span> HF NLP Course гл.1&ndash;2</b><span><a
+                                    href="https://huggingface.co/learn/nlp-course" target="_blank">nlp-course</a> &mdash;
+                                pipeline API, введение &mdash; перенесено на нед.5</span></div>
                     </div>
                 </td>
-                <td><span class="sp mastered">Anthropic API</span><span class="sp new">pandas</span><span
-                        class="sp new">HuggingFace</span></td>
+                <td><span class="sp mastered">Anthropic API</span><span class="sp mastered">Ollama</span></td>
                 <td>
                     <div class="pb">
                         <div class="pf" style="width:22%;background:#1565c0"></div>
@@ -1053,7 +1050,8 @@
                         <li>Занятие 1: Векторы и матрицы, операции с ними &mdash; применение в ML</li>
                         <li>Занятие 2: Линейная регрессия &mdash; реализация в NumPy vs sklearn</li>
                     </ul>
-                    <div class="src">&#128218; proglib.academy/machine-learning + proglib.academy/math-for-ds-express</div>
+                    <div class="note">&#128280; pandas: DataFrame, groupby, merge &mdash; нужен для практики ML курса. Разобрать попутно с зан.2.</div>
+                    <div class="src">&#128218; proglib.academy/machine-learning + proglib.academy/math-for-ds-express + pandas.pydata.org/docs/getting_started</div>
                 </td>
                 <td>
                     <span class="tag t2">Самост.</span><br>
@@ -1087,7 +1085,8 @@
                 <td>
                     <ul class="clist">
                         <li>Пройти темы 1&ndash;3 ML курса + занятия 1&ndash;2 математики</li>
-                        <li>HF sentiment-analysis &rarr; протестировать в браузере</li>
+                        <li>HF: sentiment-analysis модель &rarr; протестировать в браузере</li>
+                        <li>pandas: загрузить CSV с котировками &rarr; посчитать базовые метрики</li>
                     </ul>
                 </td>
                 <td>
@@ -1111,7 +1110,7 @@
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.1.1 на нед.5</span></div>
                     </div>
                 </td>
-                <td><span class="sp mastered">Anthropic API</span><span class="sp new">ML курс</span><span
+                <td><span class="sp mastered">Anthropic API</span><span class="sp new">pandas/NumPy</span><span class="sp new">ML курс</span><span
                         class="sp new">Математика AI</span></td>
                 <td>
                     <div class="pb">
@@ -1270,16 +1269,14 @@
                     <div class="warn">&#9888; Docker ставится впервые &mdash; начни с SemolinaCode ур.14!</div>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> RAG, scikit-learn.<br><b>Сейчас:</b> Docker нужен именно здесь &mdash;
-                        n8n и Qdrant требуют его. Ставить раньше было незачем. n8n &mdash; автоматизация визуально,
-                        понимаешь пайплайны до написания кода.</div>
+                    <div class="why"><b>Было:</b> RAG/ChromaDB, async, ML метрики.<br><b>Сейчас:</b> Docker нужен именно здесь &mdash; n8n и Qdrant требуют его. Ставить раньше было незачем. n8n &mdash; автоматизация визуально, понимаешь пайплайны до написания кода. ML курс уходит в фоновый режим: 1 тема/нед параллельно.</div>
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>Docker Desktop</b><span>Изолированные контейнеры. n8n, Qdrant, Langfuse
-                                &mdash; одной командой. Никаких конфликтов зависимостей.</span></div>
-                        <div class="tcard"><b>n8n</b><span>Визуальный конструктор пайплайнов. Блоки + стрелки: источник
-                                &rarr; обработка &rarr; выход.</span></div>
+                        <div class="tcard"><b>Docker Desktop</b><span>Изолированные контейнеры. n8n, Qdrant, Langfuse &mdash; одной командой. Никаких конфликтов зависимостей.</span></div>
+                        <div class="tcard"><b>n8n</b><span>Визуальный конструктор пайплайнов. Блоки + стрелки: источник &rarr; обработка &rarr; выход.</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML (фон)</b><span>Тема 7: Решающие деревья &mdash; фоновый режим, 1 тема/нед</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-calc">CALC</span> Математика AI (фон)</b><span>Зан.6&ndash;7: Оптимизация + Матанализ практика</span></div>
                     </div>
                 </td>
                 <td>
@@ -1360,12 +1357,11 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>Qdrant</b><span>Продакшн векторная БД. Ядро RAG в экономическом
-                                проекте.</span></div>
-                        <div class="tcard"><b>LangSmith</b><span>Мониторинг LLM. Каждый шаг: что отправлено &rarr;
-                                получено &rarr; стоимость.</span></div>
-                        <div class="tcard"><b>PydanticAI</b><span>Строгие типы для ответов LLM. Агент возвращает объект
-                                &mdash; не парсишь JSON руками.</span></div>
+                        <div class="tcard"><b>Qdrant</b><span>Продакшн векторная БД. Ядро RAG в экономическом проекте.</span></div>
+                        <div class="tcard"><b>LangSmith</b><span>Мониторинг LLM. Каждый шаг: что отправлено &rarr; получено &rarr; стоимость.</span></div>
+                        <div class="tcard"><b>PydanticAI</b><span>Строгие типы для ответов LLM. Агент возвращает объект &mdash; не парсишь JSON руками.</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML (фон)</b><span>Тема 8: Ансамблевые методы &mdash; бэггинг, Random Forest, важность признаков</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-calc">CALC</span> Математика AI (фон)</b><span>Зан.8&ndash;9: Теорвер + Случайные величины &mdash; Наивный Байес</span></div>
                     </div>
                 </td>
                 <td>
@@ -1390,8 +1386,9 @@
                                 spaces</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
-                                    href="https://amzn.to/4l4veCZ" target="_blank">гл.7–8</a>: Ensemble, Dimensionality
+                                    href="https://amzn.to/4l4veCZ" target="_blank">гл.7&ndash;8</a>: Ensemble, Dimensionality
                                 Reduction</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.5.1+5.2 на нед.8</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">n8n</span><span class="sp new">Qdrant</span><span
@@ -1444,10 +1441,10 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>Claude Code (CLI-агент)</b><span>Агент в терминале. Читает файлы, пишет
-                                код, запускает команды. Основной инструмент разработки. $20/мес.</span></div>
-                        <div class="tcard"><b>Playwright</b><span>Управляет реальным браузером из Python. Для сайтов без
-                                API.</span></div>
+                        <div class="tcard"><b>Claude Code (CLI-агент)</b><span>Агент в терминале. Читает файлы, пишет код, запускает команды. Основной инструмент разработки. $20/мес.</span></div>
+                        <div class="tcard"><b>Playwright</b><span>Управляет реальным браузером из Python. Для сайтов без API.</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML (фон)</b><span>Тема 9: Градиентный бустинг &mdash; XGBoost, CatBoost, LightGBM</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-calc">CALC</span> Математика AI (зан.10)</b><span>Статистика и проверка гипотез &mdash; t-тест, доверительные интервалы</span></div>
                     </div>
                 </td>
                 <td>
@@ -1514,11 +1511,10 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>MCP (Model Context Protocol)</b><span>Стандарт Anthropic. Написал
-                                MCP-сервер &mdash; агент работает с твоими данными как со встроенными функциями.</span>
-                        </div>
-                        <div class="tcard"><b>LangFlow</b><span>Drag-and-drop редактор. Не для прода &mdash; для
-                                понимания архитектуры визуально.</span></div>
+                        <div class="tcard"><b>MCP (Model Context Protocol)</b><span>Стандарт Anthropic. Написал MCP-сервер &mdash; агент работает с твоими данными как со встроенными функциями.</span></div>
+                        <div class="tcard"><b>LangFlow</b><span>Drag-and-drop редактор. Не для прода &mdash; для понимания архитектуры визуально.</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML (фон)</b><span>Тема 10: Кластеризация &mdash; K-means, DBSCAN, дендрограммы</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-calc">CALC</span> Математика AI (финал)</b><span>Финальный проект &mdash; градиентный спуск для предсказания цен</span></div>
                     </div>
                 </td>
                 <td>
@@ -1589,8 +1585,8 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>LangGraph</b><span>Граф состояний для агентов. Узлы (функции) + переходы.
-                                Полный контроль: паузы, повторы, ветвления, откат к любому состоянию.</span></div>
+                        <div class="tcard"><b>LangGraph</b><span>Граф состояний для агентов. Узлы (функции) + переходы. Полный контроль: паузы, повторы, ветвления, откат к любому состоянию.</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML (фон)</b><span>Тема 11: Понижение размерности + аномалии &mdash; PCA, t-SNE, Isolation Forest</span></div>
                     </div>
                 </td>
                 <td>
@@ -1663,10 +1659,9 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>Langfuse (self-hosted)</b><span>Мониторинг LLM. Каждый шаг агента: вход
-                                &rarr; выход &rarr; стоимость &rarr; ошибки. Бесплатно при self-hosted.</span></div>
-                        <div class="tcard"><b>RAGAS</b><span>Автооценка RAG: faithfulness (не галлюцинирует?),
-                                answer_relevancy (по делу?), context_precision.</span></div>
+                        <div class="tcard"><b>Langfuse (self-hosted)</b><span>Мониторинг LLM. Каждый шаг агента: вход &rarr; выход &rarr; стоимость &rarr; ошибки. Бесплатно при self-hosted.</span></div>
+                        <div class="tcard"><b>RAGAS</b><span>Автооценка RAG: faithfulness (не галлюцинирует?), answer_relevancy (по делу?), context_precision.</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML (финал)</b><span>Тема 12: Рекомендательные системы &mdash; 🎉 курс завершён!</span></div>
                     </div>
                 </td>
                 <td>
@@ -1685,7 +1680,8 @@
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.12–13</a>: Custom Models,
                                 Preprocessing</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> — Лек.4 на нед.12</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.4 на нед.12</span></div>
+                        <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML тема 12</b><span><a href="https://proglib.academy/machine-learning" target="_blank">proglib.academy/machine-learning</a> &mdash; Рекомендательные системы</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">LangGraph</span><span class="sp new">Langfuse</span><span
