@@ -1048,7 +1048,7 @@
                     <ul class="clist">
                         <li>Тема 1: Введение в машинное обучение &mdash; типы задач, supervised/unsupervised, метрики</li>
                         <li>Тема 2: Линейные модели: регрессия &mdash; МНК, MSE, MAE, R&sup2;, интерпретация коэффициентов</li>
-                        <li>Тема 3: Градиентный спуск и его модификации &mdash; SGD, Adam, RMSprop, L1/L2 регуляризация</li>
+                        <li>Тема 3: Градиентный спуск и его модификации &mdash; SGD, Adam, RMSprop, L1/L2 регуляризация <span style="color:#e65100;font-size:10px">[&#9888; Calculus гл.1&ndash;5 идёт параллельно на этой же неделе: понять алгоритм сейчас, математику (почему работает) увидишь в гл.6&ndash;9 на нед.6]</span></li>
                     </ul>
                     <span class="tag t1">ProGlib &mdash; Курс Математика AI</span><br>
                     <b>Старт: Векторы + Линейная регрессия через МНК</b>
@@ -1056,7 +1056,6 @@
                         <li>Занятие 1: Векторы и матрицы, операции с ними &mdash; применение в ML</li>
                         <li>Занятие 2: Линейная регрессия &mdash; реализация в NumPy vs sklearn</li>
                     </ul>
-                    <div class="note">&#128280; pandas: DataFrame, groupby, merge &mdash; нужен для практики ML курса. Разобрать попутно с зан.2.</div>
                     <div class="src">&#128218; proglib.academy/machine-learning + proglib.academy/math-for-ds-express + pandas.pydata.org/docs/getting_started</div>
                 </td>
                 <td>
@@ -1079,7 +1078,7 @@
                     <div class="src">&#128218; huggingface.co/learn/nlp-course (гл.1-2) + shad.yandex.ru/abweek + shad.yandex.ru/agentsweek</div>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> API, парсинг, Ollama.<br><b>Сейчас:</b> ProGlib выдал два полноценных курса (ML + математика) вместо отдельных уроков. Курс ML &mdash; фундамент sklearn и хроматографии. Математика AI &mdash; линалг и МНК для понимания моделей изнутри.</div>
+                    <div class="why"><b>Было:</b> API, парсинг, Ollama.<br><b>Сейчас:</b> ProGlib выдал два полноценных курса (ML + математика) вместо отдельных уроков. Курс ML &mdash; фундамент sklearn и хроматографии. Математика AI &mdash; линал, матан и МНК для понимания моделей изнутри.</div>
                 </td>
                 <td>
                     <div class="tcards">
@@ -1273,7 +1272,7 @@
                         </li>
                         <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим, 1 тема/нед):</b> Тема 7: Решающие деревья &mdash; ID3, CART, визуализация, гиперпараметры</li>
                         <li><b>&#128218; Курс Математика AI (фоновый режим):</b> Занятие 6&ndash;7: Оптимизация и интегрирование + Матанализ: практика &mdash; реализация градиентного спуска с нуля</li>
-                        <li style="margin-top:4px"><b>&#128290; 3B1B Calculus (финальный блок):</b> гл.11 «Integration + Fundamental Theorem» + гл.13 «Higher order derivatives» (~25 мин). Зачем: гл.11 = как суммируются градиенты через сеть; гл.13 = второй порядок = понимание momentum в Adam.</li>
+                        <li style="margin-top:4px"><b>&#128290; 3B1B Calculus (финальный блок):</b> гл.10 «What's so special about e?» + гл.11 «Integration + Fundamental Theorem» + гл.12 «Differentiation via limits» + гл.13 «Higher order derivatives» (~40 мин). Зачем: гл.10 = натуральный логарифм в функциях активации (sigmoid, softmax); гл.11 = как суммируются градиенты через сеть; гл.13 = второй порядок = понимание momentum в Adam.</li>
                     </ul>
                     <div class="src">&#128218; SemolinaCode TG ур.14 (Docker) + docs.n8n.io + Ahillary YouTube ур.3 + shad.yandex.ru/agentsweek
                     </div>
@@ -1305,7 +1304,7 @@
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.5&ndash;6</a>: SVM, Decision
                                 Trees</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-calc">CALC</span> 3B1B Calculus гл.11+13</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Integration + Higher derivatives</a> &mdash; 25 мин</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-calc">CALC</span> 3B1B Calculus гл.10&ndash;13</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">e + Integration + Limits + Higher derivatives</a> &mdash; 40 мин. Завершение Calculus-блока.</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.2+3 на нед.7</span></div>
                     </div>
                 </td>
@@ -1350,9 +1349,10 @@
                                 href="https://www.youtube.com/@statquest" target="_blank">StatQuest YouTube</a> &mdash; Neural
                             Networks плейлист (Pt.1 + Backpropagation). Зачем: embeddings = выход нейросети, понимаешь
                             RAG и Qdrant глубже.</li>
+                        <li style="margin-top:4px"><b>&#128290; Cross-entropy (15 мин, обязательно):</b> StatQuest YouTube &mdash; поиск «StatQuest Cross Entropy». Зачем: функция потерь classification = кросс-энтропия. LoRA fine-tuning в июле оптимизирует именно её. Понять сейчас — не быть в ступоре в июле.</li>
                         <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим):</b> Тема 8: Ансамблевые методы: бэггинг и случайный лес &mdash; важность признаков</li>
                         <li><b>&#128218; Курс Математика AI:</b> Занятие 8&ndash;9: Введение в теорию вероятностей + Случайные величины &mdash; реализация Наивного Байеса</li>
-                        <li style="margin-top:4px"><b>&#128290; 3B1B Calculus (финал):</b> гл.14 «Taylor series» (~20 мин). Зачем: функции активации (sigmoid, softmax) &mdash; это аппроксимации через ряды Тейлора. Понимаешь почему нейросеть «умеет» выражать нелинейные функции.</li>
+                        <li style="margin-top:4px"><b>&#128290; 3B1B Calculus (финал):</b> гл.14 «Taylor series» (~15 мин). Зачем: sigmoid и softmax = нелинейные функции, их аппроксимации через ряды Тейлора объясняют почему нейросеть выражает сложные отображения. После гл.14 весь Calculus-блок завершён.</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (max 2 лекции, перенос с нед.7):</b>
                             <ul class="clist" style="margin-top:4px">
                                 <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.5.1 &laquo;Production Engineering for LLM Agents&raquo;</a> (~60 мин): Docker, деплой, мониторинг</li>
@@ -1499,7 +1499,7 @@
                     </ul>
                     <span class="tag t1">ProGlib 14.05</span><br>
                     <b>RAG: parent retrieval, Redis-кэш</b>
-                    <div class="src">&#128218; modelcontextprotocol.io/docs + langflow.org</div>
+                    <div class="src">&#128218; modelcontextprotocol.io/docs + langflow.org + redis.io/docs/getting-started</div>
                 </td>
                 <td>
                     <span class="tag t2">Самост.</span><br>
@@ -1511,6 +1511,7 @@
                         <li>MCP 3: написать свой Python MCP-сервер get_news(topic) &rarr; 5 новостей из RSS</li>
                         <li>Прочитать ПОЛНЫЙ ГАЙД (файл проекта): разделы &laquo;CLI-агенты&raquo; и &laquo;MCP&raquo;
                             полностью</li>
+                        <li style="margin-top:8px"><b>&#128279; Redis (новый инструмент, 30 мин):</b> <code>pip install redis</code> &rarr; redis.io/docs/getting-started &rarr; понять get/set/expire как semantic cache. Зачем: ProGlib этой же недели преподаёт Redis-кэш в RAG &mdash; без базового понимания это будет магия.</li>
                         <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим):</b> Тема 10: Обучение без учителя: кластеризация &mdash; K-means, DBSCAN, дендрограммы</li>
                         <li><b>&#128218; Курс Математика AI:</b> Финальный проект math-for-ds-express &mdash; градиентный спуск для предсказания цен</li>
                     </ul>
@@ -1585,6 +1586,7 @@
                     <b>LangGraph граф для &laquo;Задумки по экономике&raquo; + Ahillary ур.6</b>
                     <ul class="clist">
                         <li>Ahillary YouTube ур.6: агент внутри RAG-цепочки &mdash; разобрать и запустить</li>
+                        <li style="margin-top:8px"><b>&#128241; Telegram Bot API (впервые, 1 час):</b> pip install aiogram&ge;3 &rarr; bot = Bot(token) &rarr; dp = Dispatcher() &rarr; @dp.message_handler &rarr; dp.start_polling(). Источник: docs.aiogram.dev/en/latest &rarr; Quick Start. Зачем: human_review() в графе ниже отправляет вопрос именно через Telegram-бота. Без этого шага Telegram &mdash; магия.</li>
                         <li>Написать LangGraph граф (4 узла):</li>
                         <li>&rarr; fetch_news() &mdash; тянет новость из RSS</li>
                         <li>&rarr; evaluate() &mdash; LLM оценивает через PydanticAI &rarr; NewsItem</li>
@@ -1593,7 +1595,7 @@
                         <li style="margin-top:8px"><b>&#128218; Курс ML (фоновый режим):</b> Тема 11: Понижение размерности и детектирование аномалий &mdash; PCA, t-SNE, Isolation Forest</li>
                         <li style="margin-top:4px"><b>&#128290; 3B1B LinAlg (финал):</b> гл.13 «Change of basis» + гл.14 «Eigenvectors and eigenvalues» (~25 мин). Зачем сейчас: PCA = нахождение собственных векторов ковариационной матрицы. Смотришь гл.14 и PCA перестаёт быть магией.</li>
                     </ul>
-                    <div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials</div>
+                    <div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials + docs.aiogram.dev/en/latest (Quick Start)</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> MCP, Qdrant, PydanticAI.<br><b>Сейчас:</b> все кирпичи готовы.
@@ -1849,7 +1851,12 @@
                         <li>Первый публичный кейс задокументирован</li>
                     </ul>
                 </td>
-                <td></td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-prog">PROG</span> aiogram — Telegram Bot</b><span><a href="https://docs.aiogram.dev/en/latest" target="_blank">docs.aiogram.dev</a> — Telegram интеграция уже нужна в v1.0</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-ai">AI</span> LangGraph docs</b><span><a href="https://langchain-ai.github.io/langgraph/tutorials" target="_blank">tutorials</a> — полный граф для диплома</span></div>
+                    </div>
+                </td>
                 <td><span class="sp mastered">VPS</span><span class="sp mastered">LangGraph</span><span
                         class="sp mastered">Qdrant</span></td>
                 <td>
@@ -1881,7 +1888,7 @@
             <tr>
                 <td><span class="pbl">19 июн&ndash;6 июл</span><span class="pls">Нед. 16&ndash;18</span></td>
                 <td>
-                    <span class="tag t1">ProGlib 27.07</span><br>
+                    <span class="tag t1">ProGlib (конец июня)</span><br>
                     <b>FinOps: оптимизация затрат</b>
                     <ul class="clist">
                         <li>Semantic cache / prefix caching</li>
@@ -1906,9 +1913,15 @@
                             дочитать то что читали в нед.5&ndash;6, теперь с пониманием практики
                         </li>
                         <li>Chemometrics PDF гл.1&ndash;3: базовая статистика для аналитической химии</li>
+                        <li style="margin-top:8px"><b>&#128293; PyTorch ПРАКТИКА (обязательно перед июльским LoRA!):</b>
+                            <ul class="clist" style="margin-top:4px">
+                                <li>StatQuest Neural Networks (B2) гл.4&ndash;7: <b>запускать код!</b> Tensor операции, forward pass, обратное распространение с autograd &mdash; не читать, а набирать и смотреть что происходит.</li>
+                                <li>Karpathy micrograd (github.com/karpathy/micrograd): 150 строк, автодифференцирование с нуля &mdash; читать и разбирать. Зачем: после этого LoRA в июле не магия.</li>
+                                <li>Цель: к концу нед.18 уметь написать простую нейросеть на PyTorch без помощи туториала.</li>
+                            </ul>
+                        </li>
                     </ul>
-                    <div class="src">&#128218; vllm.readthedocs.io + huggingface.co/learn/llm-course (гл.3-6 дочитать) +
-                        Chemometrics PDF (гл.1-3)</div>
+                    <div class="src">&#128218; vllm.readthedocs.io + huggingface.co/learn/llm-course (гл.3-6 дочитать) + Chemometrics PDF (гл.1-3) + github.com/karpathy/micrograd + StatQuest B2 (гл.4-7, запускать код)</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> диплом сдан, система на проде.<br><b>Сейчас:</b> оптимизируем
@@ -1961,7 +1974,7 @@
             <tr>
                 <td><span class="pbl">7&ndash;31 июл</span><span class="pls">Нед. 19&ndash;22</span></td>
                 <td>
-                    <span class="tag t1">ProGlib 30.07</span><br>
+                    <span class="tag t1">ProGlib (30 июл)</span><br>
                     <b>Security углублённо</b>
                     <ul class="clist">
                         <li>Prompt injection: типы атак, защиты</li>
@@ -1969,7 +1982,7 @@
                         <li>RBAC: scoped tokens, kill switch</li>
                         <li>Red teaming: атаковать своего агента</li>
                     </ul>
-                    <span class="tag t1">ProGlib 3.08</span><br>
+                    <span class="tag t1">ProGlib (нач. авг)</span><br>
                     <b>Infrastructure углублённо</b>
                     <ul class="clist">
                         <li>Streaming / WebSockets</li>
@@ -1986,7 +1999,7 @@
                         <li>Взять небольшую модель: gemma-2b или phi-3-mini</li>
                         <li>LoRA fine-tuning на 100&ndash;200 своих Q&A парах (химия или экономика)</li>
                         <li>Сравнить base vs fine-tuned на 10 тестовых вопросах &mdash; оформить как эксперимент</li>
-                        <li>Chemometrics гл.4&ndash;6: PCA, PLS, cluster analysis</li>
+                        <li>Chemometrics гл.4&ndash;6: PCA, PLS, cluster analysis. <b>PLS (Partial Least Squares):</b> читать как специальный случай регрессии &mdash; Y = X·β в пространстве латентных переменных. MML Book гл.10 (Dimensionality Reduction) &mdash; сначала понять PCA, затем PLS как его supervised-аналог. Без этого глава по PLS будет туманной.</li>
                         <li>sklearn Pipeline: PCA &rarr; классификатор на хроматографических данных CSV</li>
                         <li>MCP-инструмент: analyze_chromatogram(file_path) &rarr; интерпретация пиков</li>
                         <li>HF LLM Course гл.7 + гл.11: <a href="https://huggingface.co/learn/llm-course"
@@ -2058,7 +2071,7 @@
                     <span class="tag t2">Самост.</span><br>
                     <b>OpenClaw + финальный спринт портфолио</b>
                     <ul class="clist">
-                        <li>OpenClaw на VPS: установить, подключить к Telegram, написать первый skill.md</li>
+                        <li>OpenClaw на VPS: установить, подключить к Telegram, написать первый skill.md. Источник: openclaw.ai &rarr; Docs &rarr; Getting Started (убедиться что страница жива, иначе &mdash; github.com поиск openclaw)</li>
                         <li>Release Engineering: версионирование промптов через git tags</li>
                         <li>A/B тест промптов: 2 варианта оценки &rarr; выбрать лучший через RAGAS</li>
                         <li>Кастомный MCP-сервер для хроматографии &mdash; публичный GitHub</li>
@@ -2160,19 +2173,12 @@
             <h3>Сентябрь 2026 &mdash; Математика для ML + Продвинутый Fine-tuning</h3>
             <div class="mc">
                 <div>
-                    <div class="mh">Что изучаешь</div>
+                    <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
-                        <li>Stepik &laquo;Математика для анализа данных&raquo;: линейная алгебра, производные, теорвер
-                            &mdash; stepik.org/course/95</li>
-                        <li>fast.ai &laquo;Practical Deep Learning for Coders&raquo; (бесплатно, fast.ai/courses)
-                            &mdash; глубокое обучение, практика первой</li>
-                        <li>HuggingFace LLM Course гл.12: <a href="https://huggingface.co/learn/llm-course"
-                                target="_blank">Build Reasoning Models</a> &mdash; DeepSeek R1-style, GRPO. К сентябрю
-                            уже есть база LoRA из июля.</li>
-                        <li>QLoRA на Google Colab: дообучить Llama 3.1 8B на своих Q&A данных &rarr; опубликовать на
-                            HuggingFace Hub</li>
-                        <li>DPO (Direct Preference Optimization) &mdash; современная альтернатива RLHF: прочитать
-                            arxiv.org/abs/2305.18290</li>
+                        <li><b>Нед.1 (1–7 сент):</b> Stepik &laquo;Математика для анализа данных&raquo; — закрыть пробелы по линалу и теорверу: stepik.org/course/95. <span style="color:#888;font-size:10px">Внимание: к сентябрю 3B1B + Math AI уже пройдены — использовать Stepik как ревизию, не повтор. Если тема уже ясна — пропускать.</span></li>
+                        <li><b>Нед.2 (8–14 сент):</b> fast.ai &laquo;Practical Deep Learning for Coders&raquo; — урок 1&ndash;3 (fast.ai/courses). Практика первой — без этого LoRA и QLoRA не становятся интуитивными.</li>
+                        <li><b>Нед.3 (15–21 сент):</b> QLoRA на Google Colab: дообучить Llama 3.1 8B на своих Q&A данных (химия или экономика) &rarr; опубликовать на HuggingFace Hub. HF LLM Course гл.12: Build Reasoning Models (DeepSeek R1-style, GRPO) — к сентябрю есть база LoRA из июля.</li>
+                        <li><b>Нед.4 (22–30 сент):</b> DPO (Direct Preference Optimization) — прочитать arxiv.org/abs/2305.18290. Сравнение: base vs LoRA vs QLoRA — оформить как эксперимент/статью на GitHub. Начало Проекта 3: AI-агент для автоматизации лабораторной отчётности.</li>
                     </ul>
                     <div class="src">&#128218; stepik.org/course/95 + fast.ai + huggingface.co/learn/llm-course +
                         colab.research.google.com</div>
@@ -2200,18 +2206,14 @@
             <h3>Октябрь 2026 &mdash; Продвинутые паттерны + Первые коммерческие проекты</h3>
             <div class="mc">
                 <div>
-                    <div class="mh">Что изучаешь</div>
+                    <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
-                        <li>Udemy: &laquo;LangChain &amp; Vector Databases in Production&raquo; (Activeloop) &mdash;
-                            продакшн RAG с реальными кейсами</li>
-                        <li>Паттерны: Reflection, Plan-and-Execute, Corrective RAG, Self-RAG &mdash; stateful агенты
-                            нового уровня</li>
-                        <li>DeepEval, Phoenix (Arize) &mdash; сравнить с RAGAS, выбрать лучший оценочный инструмент</li>
-                        <li>Stepik &laquo;PostgreSQL для разработчиков&raquo; &mdash; переход с SQLite на Postgres для
-                            продакшн БД</li>
-                        <li>Kubernetes основы: Pod, Deployment, Service &mdash; понимание, не продакшн ещё</li>
+                        <li><b>Нед.1 (1–7 окт):</b> <b>SQL основы (2&ndash;3 часа, обязательно первым делом):</b> mode.com/sql-tutorial или Khan Academy SQL &mdash; SELECT, WHERE, JOIN, GROUP BY, CREATE/INSERT. Без этого &laquo;PostgreSQL для разработчиков&raquo; будет сложно. Один вечер, не курс. Затем: Stepik &laquo;PostgreSQL для разработчиков&raquo; — переход с SQLite на Postgres для продакшн БД.</li>
+                        <li><b>Нед.2 (8–14 окт):</b> Udemy: &laquo;LangChain &amp; Vector Databases in Production&raquo; (Activeloop) — продакшн RAG с реальными кейсами. Паттерны: Reflection, Plan-and-Execute, Corrective RAG, Self-RAG — stateful агенты нового уровня.</li>
+                        <li><b>Нед.3 (15–21 окт):</b> DeepEval, Phoenix (Arize) — сравнить с RAGAS, выбрать лучший оценочный инструмент. Corrective RAG поверх «Задумки по экономике» — агент сам проверяет качество своего ответа.</li>
+                        <li><b>Нед.4 (22–31 окт):</b> Kubernetes основы: Pod, Deployment, Service — понимание, не продакшн ещё (k8s.io/docs). <b>Первый коммерческий проект:</b> реальная компания (LinkedIn / знакомые) &rarr; автоматизация одного процесса &rarr; фикс-прайс $500&ndash;2000.</li>
                     </ul>
-                    <div class="src">&#128218; udemy.com + arxiv.org/abs/2310.11511 (Corrective RAG) + stepik.org +
+                    <div class="src">&#128218; mode.com/sql-tutorial + udemy.com + arxiv.org/abs/2310.11511 (Corrective RAG) + stepik.org +
                         k8s.io/docs</div>
                 </div>
                 <div>
@@ -2237,20 +2239,12 @@
             <h3>Ноябрь 2026 &mdash; Multimodal + MLOps + Второй коммерческий проект</h3>
             <div class="mc">
                 <div>
-                    <div class="mh">Что изучаешь</div>
+                    <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
-                        <li>HuggingFace Audio Course (huggingface.co/learn/audio-course) &mdash; обработка спектров в
-                            виде аудиоданных</li>
-                        <li>Multimodal агенты: Claude Vision &rarr; анализ изображений спектров и хроматограмм</li>
-                        <li>Stepik &laquo;MLOps: от модели к продукту&raquo; &mdash; CI/CD для ML, автоматическое
-                            переобучение</li>
-                        <li>&laquo;Designing Machine Learning Systems&raquo; (Chip Huyen) &mdash; читать онлайн
-                            бесплатно</li>
-                        <li>GraphRAG (Microsoft) &mdash; более мощный RAG для связанных сущностей (компании, персоны,
-                            события)</li>
-                        <li>User Feedback Integration: feedback loops, data flywheels, human-in-the-loop как осознанный
-                            паттерн &mdash; не просто кнопка, а continuous improvement pipeline (Chip Huyen гл. про
-                            feedback)</li>
+                        <li><b>Нед.1 (1–7 ноя):</b> Multimodal агенты: Claude Vision API &rarr; анализ изображений спектров и хроматограмм. HuggingFace Audio Course (huggingface.co/learn/audio-course) — обработка спектров в виде аудиоданных. Прототип: изображение хроматограммы &rarr; Claude Vision &rarr; интерпретация + числа.</li>
+                        <li><b>Нед.2 (8–14 ноя):</b> Stepik &laquo;MLOps: от модели к продукту&raquo; — CI/CD для ML, автоматическое переобучение. MLOps pipeline: автоматическое переобучение модели при новых данных.</li>
+                        <li><b>Нед.3 (15–21 ноя):</b> GraphRAG (Microsoft, github.com/microsoft/graphrag) — более мощный RAG для связанных сущностей (компании-персоны-события). Применить к экономическому агенту. &laquo;Designing Machine Learning Systems&raquo; (Chip Huyen) — читать онлайн бесплатно, по главе в неделю.</li>
+                        <li><b>Нед.4 (22–30 ноя):</b> User Feedback Integration: feedback loops, data flywheels, human-in-the-loop как осознанный паттерн (Chip Huyen гл. про feedback). Второй коммерческий проект (продолжение или новый клиент). LinkedIn: 3 поста о проделанной работе.</li>
                     </ul>
                     <div class="src">&#128218; huggingface.co/learn/audio-course + stepik.org +
                         github.com/microsoft/graphrag + huyenchip.com/book</div>
@@ -2278,14 +2272,12 @@
             <h3>Декабрь 2026 &mdash; Итоговые проекты + Позиционирование + План на 2027</h3>
             <div class="mc">
                 <div>
-                    <div class="mh">Что изучаешь</div>
+                    <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
-                        <li>Kubernetes продвинутый: автомасштабирование, rolling updates &mdash; для продакшн деплоя
-                        </li>
-                        <li>Anthropic API: все новые возможности вышедшие за осень &mdash; отслеживать
-                            docs.anthropic.com</li>
-                        <li>Habit навсегда: arxiv.org &mdash; 1 статья в неделю по агентам / fine-tuning / RAG</li>
-                        <li>AI Alignment: anthropic.com/research &mdash; понять позицию лидера рынка</li>
+                        <li><b>Нед.1 (1–7 дек):</b> Kubernetes продвинутый: автомасштабирование, rolling updates — для продакшн деплоя. Применить к одному из проектов.</li>
+                        <li><b>Нед.2 (8–14 дек):</b> Проект 4: полный MLOps pipeline — данные &rarr; fine-tuning &rarr; деплой &rarr; мониторинг &rarr; автообновление. Привязать к реальному клиентскому проекту если есть.</li>
+                        <li><b>Нед.3 (15–21 дек):</b> Anthropic API: новые возможности за осень — docs.anthropic.com. Habit навсегда: arxiv.org — 1 статья в неделю по агентам / fine-tuning / RAG (начало привычки). AI Alignment: anthropic.com/research — понять позицию лидера рынка.</li>
+                        <li><b>Нед.4 (22–31 дек):</b> Статья на Habr (рус.) или Medium (eng.) — «Как построил AI-систему для аналитической химии за 9 месяцев». GitHub: 4 публичных репозитория. LinkedIn: 10+ постов за осень, 500+ связей в нише. Список лидов на Q1 2027.</li>
                     </ul>
                 </div>
                 <div>
@@ -2407,8 +2399,7 @@
                 ДОБАВЛЕНО в v3)</b>, Pydantic (архив ур.2 &mdash; только Pydantic-раздел), RAG ур.2/3/5/6. <br><br>
             <b>HuggingFace LLM Course (<a href="https://huggingface.co/learn/llm-course"
                     target="_blank">huggingface.co/learn/llm-course</a>):</b> гл.1&ndash;2 (нед.4, читать) &rarr;
-            гл.3&ndash;4 (нед.5, читать) &rarr; гл.5&ndash;6 (нед.6, читать) &rarr; гл.7+11 (июль, <b>запускать
-                код!</b>) &rarr; гл.10 (август) &rarr; гл.12 (сентябрь). Гл.8 и 9 &mdash; пропустить.<br><br>
+            гл.3&ndash;4 (<b>нед.5&ndash;6</b>, читать при наличии времени &mdash; нед.5 перегружена, можно перенести на нед.6) &rarr; гл.5&ndash;6 (нед.6&ndash;7, читать) &rarr; гл.7+11 (июль, <b>запускать код!</b>) &rarr; гл.10 (август) &rarr; гл.12 (сентябрь). Гл.8 и 9 &mdash; пропустить.<br><br>
             <b>Математика (недели 2–8):</b> 20–30 мин/день — 3Blue1Brown (линал + calculus) и StatQuest YouTube
             (статистика).
             Не отдельным блоком — вечером перед сном или в перерыве. К неделе 6 у тебя будет концептуальная база для
@@ -2478,7 +2469,7 @@
                         Essence of Calculus</b>
                     12 видео, бесплатно, ~10–15 мин каждое.<br>
                     Нед.4: гл.1–5 (Derivatives, Chain Rule, Gradient интуиция) · Нед.5–6: гл.6–9 (<b>Gradient Descent →
-                        как учится LinearRegression</b>) · Нед.8+: гл.10–12 (Backprop через calculus)<br>
+                        как учится LinearRegression</b>) · Нед.7: гл.10 «e и натуральный логарифм» + гл.11 «Integration» + гл.12 «Differentiation через limits» · Нед.8: гл.13 «Higher derivatives» + гл.14 «Taylor series»<br>
                     <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">→
                         YouTube плейлист</a><br>
                     <span class="when">Сравнение: единственный нужный ресурс по calculus для ML. MML Book гл.5–7 — если
@@ -2666,8 +2657,8 @@
                     Переименован из "NLP Course" в "LLM Course" в 2025 — добавлены гл.10–12.<br>
                     <b>Когда читать по главам:</b><br>
                     Гл.1–2: нед.4 (читать, не кодить — нет базы DL)<br>
-                    Гл.3–4: нед.5 (читать теорию fine-tuning)<br>
-                    Гл.5–6: нед.6 (Datasets + Tokenizers — читать)<br>
+                    Гл.3–4: нед.5–6 (читать теорию fine-tuning — нед.5 перегружена, при нехватке времени сдвинуть на нед.6)<br>
+                    Гл.5–6: нед.6–7 (Datasets + Tokenizers — читать)<br>
                     Гл.7 + 11: нед.19–22 (июль) — <b>запускать код!</b> NLP tasks + LoRA/PEFT с trl<br>
                     Гл.10: нед.23–26 (август) — curate datasets для fine-tuning<br>
                     Гл.12: сентябрь — reasoning models (DeepSeek R1-style)<br>
