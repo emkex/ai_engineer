@@ -1044,11 +1044,11 @@
                         <li>pandas DataFrame: создание, фильтрация, groupby, merge</li>
                     </ul>
                     <span class="tag t1">ProGlib &mdash; Курс ML</span><br>
-                    <b>Старт: Введение в ML + Линейная регрессия + Градиентный спуск</b>
+                    <b>Старт: Введение в ML + Линейная регрессия</b>
                     <ul class="clist">
                         <li>Тема 1: Введение в машинное обучение &mdash; типы задач, supervised/unsupervised, метрики</li>
                         <li>Тема 2: Линейные модели: регрессия &mdash; МНК, MSE, MAE, R&sup2;, интерпретация коэффициентов</li>
-                        <li>Тема 3: Градиентный спуск и его модификации &mdash; SGD, Adam, RMSprop, L1/L2 регуляризация</li>
+                        <li><span style="color:#888;font-size:10px">Тема 3 (Градиентный спуск) &rarr; перенесена на нед.6: Calculus гл.6&ndash;9 (математика GD) будет пройден, тема встаёт осознанно</span></li>
                     </ul>
                     <span class="tag t1">ProGlib &mdash; Курс Математика AI</span><br>
                     <b>Старт: Векторы + Линейная регрессия через МНК</b>
@@ -1067,7 +1067,7 @@
                         <li>HuggingFace NLP Course гл.1&ndash;2: pipeline API, введение (читать, не кодить)</li>
                         <li style="margin-top:8px"><b>&#128290; Математика (20 мин/день):</b> 3B1B <a
                                 href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
-                                target="_blank">Calculus</a> гл.1&ndash;5 (Derivatives, Chain Rule) + <b>StatQuest Guide to ML</b> гл.1&ndash;3 (ML concepts, Cross Validation, Statistics basics)</li>
+                                target="_blank">Calculus</a> гл.1&ndash;5 (Derivatives, Chain Rule) + <b>StatQuest Guide to ML</b> гл.1&ndash;3 (ML concepts, Cross Validation, Statistics basics). <b>StatQuest Statistics Fundamentals YT</b> (<a href="https://www.youtube.com/@statquest" target="_blank">YouTube плейлист</a>) — смотреть параллельно по теме: Probability, Distributions, p-values. 2&ndash;3 видео/нед, ~10 мин каждое. Это плейлист, не книга.</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (max 2 лекции):</b>
                             <ul class="clist" style="margin-top:4px">
                                 <li><a href="https://shad.yandex.ru/abweek" target="_blank">A/B Week &mdash; Лек.1 &laquo;Статистика для A/B: распределения, t-тест&raquo;</a> (~1 час) &mdash; статбаза под ML метрики</li>
@@ -1129,8 +1129,9 @@
                 <td><span class="pbl">13&ndash;19 апр</span><span class="pls">Неделя 6</span></td>
                 <td>
                     <span class="tag t1">ProGlib &mdash; Курс ML (продолжение)</span><br>
-                    <b>Линейная классификация + SVM + Нелинейные методы</b>
+                    <b>Градиентный спуск + Классификация + SVM + Нелинейные методы</b>
                     <ul class="clist">
+                        <li>Тема 3: Градиентный спуск и его модификации &mdash; SGD, Adam, RMSprop, L1/L2 регуляризация <span style="color:#2e7d32;font-size:10px">[перенос с нед.5: теперь Calculus гл.6&ndash;9 (Backprop + GD) уже пройден &mdash; математика и алгоритм совпадают]</span></li>
                         <li>Тема 4: Линейные методы классификации &mdash; логистическая регрессия, sigmoid, precision/recall/F1/ROC-AUC</li>
                         <li>Тема 5: Методы опорных векторов (SVM) &mdash; максимизация отступа, ядра, кросс-валидация</li>
                         <li>Тема 6: Нелинейные методы классификации &mdash; полиномиальные признаки, регуляризация</li>
@@ -1300,6 +1301,8 @@
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span>
                                 Chip Huyen 36:56–43:02</b><span><a href="https://www.youtube.com/watch?v=JV3pL1_mn2M"
                                     target="_blank">Agents + Memory</a></span></div>
+                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
+                                    class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.7&ndash;10: Naive Bayes, Decision Trees, Regularization &mdash; под ML курс Тема 7 этой недели</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.5&ndash;6</a>: SVM, Decision
@@ -1761,12 +1764,11 @@
                         <li>Все секреты в .env &mdash; никаких ключей в коде</li>
                         <li>Задеплоить на VPS: Hetzner CX21 (&euro;3.9/мес) или DigitalOcean ($6/мес)</li>
                         <li>restart: always &mdash; автозапуск при падении</li>
-                        <li style="margin-top:8px"><b>&#128250; ШАД:</b>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (2 лекции, max):</b>
                             <ul class="clist" style="margin-top:4px">
                                 <li><a href="https://shad.yandex.ru/sreweek" target="_blank">SRE Week — Лек.1 «Как ломаются большие системы»</a> (~45 мин, начало недели): статистика поломок сервисов — контекст перед деплоем</li>
                                 <li><a href="https://shad.yandex.ru/sreweek" target="_blank">SRE Week — Лек.2 «CPU, память, диски и сеть»</a> (~45 мин): что читать в htop и iostat после деплоя на VPS</li>
-                                <li><a href="https://shad.yandex.ru/sreweek" target="_blank">SRE Week — Лек.3 «Утилиты диагностики Linux»</a> (~45 мин): htop, iostat, df, netstat — сразу нужны после деплоя</li>
-                                <li><a href="https://shad.yandex.ru/sreweek" target="_blank">SRE Week — Лек.5 «SLO, алерты, incident management»</a> (~45 мин): SLO = порог «система работает нормально» — прямо под guardrails и Telegram-алерты недели</li>
+                                <li><span style="color:#888;font-size:10px">Лек.3 + Лек.5 &rarr; перенесены на нед.14&ndash;15 (диплом-спринт, есть слоты для фонового просмотра)</span></li>
                             </ul>
                         </li>
                     </ul>
@@ -1832,6 +1834,12 @@
                         <li>Telegram: вопрос &rarr; ответ с источником и уверенностью</li>
                         <li>Langfuse: трейсы видны, стоимость под контролем</li>
                         <li>README на GitHub на английском: архитектура, как запустить</li>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (фоновый просмотр, перенос с нед.13):</b>
+                            <ul class="clist" style="margin-top:4px">
+                                <li><a href="https://shad.yandex.ru/sreweek" target="_blank">SRE Week — Лек.3 «Утилиты диагностики Linux»</a> (~45 мин): htop, iostat, df, netstat &mdash; полезно при отладке VPS</li>
+                                <li><a href="https://shad.yandex.ru/sreweek" target="_blank">SRE Week — Лек.5 «SLO, алерты, incident management»</a> (~45 мин): SLO и алерты &mdash; прямо под мониторинг в Langfuse</li>
+                            </ul>
+                        </li>
                     </ul>
                 </td>
                 <td>
@@ -1913,6 +1921,13 @@
                             дочитать то что читали в нед.5&ndash;6, теперь с пониманием практики
                         </li>
                         <li>Chemometrics PDF гл.1&ndash;3: базовая статистика для аналитической химии</li>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (3 лекции, растянуть на 3 недели):</b>
+                            <ul class="clist" style="margin-top:4px">
+                                <li><a href="https://shad.yandex.ru/llmscalingweek" target="_blank">LLM Scaling Week &mdash; Тема 1 «Арифметика глубокого обучения»</a> (~1 час): fp16, FLOPS, memory bandwidth. <b>Смотреть первой, до vLLM-экспериментов.</b> Объясняет почему GGUF/AWQ работают именно так.</li>
+                                <li><a href="https://shad.yandex.ru/llmscalingweek" target="_blank">LLM Scaling Week &mdash; Тема 5 «Inference challenges»</a> (~1.5 часа): KV-cache, batching, latency/throughput. Смотреть после первых экспериментов с vLLM.</li>
+                                <li><a href="https://shad.yandex.ru/gptweek" target="_blank">GPT Week &mdash; Лек.6 «Ускорение инференса LLM»</a> (~45 мин): KV-cache, батчинг, квантование &mdash; практическая сторона того что видел в Теме 1+5.</li>
+                            </ul>
+                        </li>
                         <li style="margin-top:8px"><b>&#128293; PyTorch ПРАКТИКА (обязательно перед июльским LoRA!):</b>
                             <ul class="clist" style="margin-top:4px">
                                 <li>StatQuest Neural Networks (B2) гл.4&ndash;7: <b>запускать код!</b> Tensor операции, forward pass, обратное распространение с autograd &mdash; не читать, а набирать и смотреть что происходит.</li>
@@ -1921,7 +1936,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="src">&#128218; vllm.readthedocs.io + huggingface.co/learn/llm-course (гл.3-6 дочитать) + Chemometrics PDF (гл.1-3) + github.com/karpathy/micrograd + StatQuest B2 (гл.4-7, запускать код)</div>
+                    <div class="src">&#128218; vllm.readthedocs.io + huggingface.co/learn/llm-course (гл.3-6 дочитать) + Chemometrics PDF (гл.1-3) + github.com/karpathy/micrograd + StatQuest B2 (гл.4-7, запускать код) + shad.yandex.ru/llmscalingweek (Тема 1+5) + shad.yandex.ru/gptweek (Лек.6)</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> диплом сдан, система на проде.<br><b>Сейчас:</b> оптимизируем
@@ -2035,6 +2050,7 @@
                                     class="src-tag st-dl">DL</span> Hands-On ML (C1)</b><span><a
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.15–17</a>: Sequences, Attention,
                                 Transformers</span></div>
+                        <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-prog">PROG</span> PyTorch Tutorials (официальные)</b><span><a href="https://pytorch.org/tutorials/beginner/basics/intro.html" target="_blank">pytorch.org/tutorials</a> — Basics: Tensors, Autograd, Training Loop. Справочник при ступоре в LoRA.</span></div>
                         <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span
                                     class="src-tag st-chem">CHEM</span> Chemometrics PDF</b><span>гл.4–6: PCA, PLS,
                                 Cluster Analysis (файл в проекте)</span></div>
@@ -2082,8 +2098,15 @@
                         <li>HF LLM Course гл.10: <a href="https://huggingface.co/learn/llm-course"
                                 target="_blank">Curate high-quality datasets</a> — как собрать и разметить данные для
                             fine-tuning. Прямо под A/B тест промптов и Release Engineering этих недель.</li>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (A/B Week финал):</b>
+                            <ul class="clist" style="margin-top:4px">
+                                <li><a href="https://shad.yandex.ru/abweek" target="_blank">A/B Week &mdash; Лек.3 «Множественное тестирование, FDR»</a> (~1 час): несколько вариантов промпта одновременно &mdash; прямо под A/B тест этих недель</li>
+                                <li><a href="https://shad.yandex.ru/abweek" target="_blank">A/B Week &mdash; Лек.4 «Метрики: кликабельность, конверсия, retention»</a> (~1 час): как выбрать правильную метрику для оценки промпта</li>
+                                <li><a href="https://shad.yandex.ru/abweek" target="_blank">A/B Week &mdash; Лек.5 «Стратификация, peeking, Байес»</a> (~1 час): как не смотреть на результат до конца теста</li>
+                            </ul>
+                        </li>
                     </ul>
-                    <div class="src">&#128218; openclaw.ai + docs.anthropic.com/claude-code + loom.com</div>
+                    <div class="src">&#128218; openclaw.ai + docs.anthropic.com/claude-code + loom.com + shad.yandex.ru/abweek (Лек.3+4+5)</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> оба проекта работают.<br><b>Сейчас:</b> упаковать в портфолио.
@@ -2115,6 +2138,7 @@
                                     class="src-tag st-ml">ML</span> 100-Page ML Book (C2)</b><span><a
                                     href="https://amzn.to/3FNAzzN" target="_blank">справочник</a> — быстрое
                                 освежение</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3Blue1Brown: Neural Networks</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">4 видео, ~1 час</a> — посмотреть до Karpathy: визуальная интуиция backprop перед кодом</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span>
                                 Andrej Karpathy: Let's build GPT</b><span><a
                                     href="https://www.youtube.com/@AndrejKarpathy" target="_blank">YouTube</a> — PyTorch
@@ -2209,7 +2233,7 @@
                     <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
                         <li><b>Нед.1 (1–7 окт):</b> <b>SQL основы (2&ndash;3 часа, обязательно первым делом):</b> mode.com/sql-tutorial или Khan Academy SQL &mdash; SELECT, WHERE, JOIN, GROUP BY, CREATE/INSERT. Без этого &laquo;PostgreSQL для разработчиков&raquo; будет сложно. Один вечер, не курс. Затем: Stepik &laquo;PostgreSQL для разработчиков&raquo; — переход с SQLite на Postgres для продакшн БД.</li>
-                        <li><b>Нед.2 (8–14 окт):</b> Udemy: &laquo;LangChain &amp; Vector Databases in Production&raquo; (Activeloop) — продакшн RAG с реальными кейсами. Паттерны: Reflection, Plan-and-Execute, Corrective RAG, Self-RAG — stateful агенты нового уровня.</li>
+                        <li><b>Нед.2 (8–14 окт):</b> Udemy: &laquo;LangChain &amp; Vector Databases in Production&raquo; (Activeloop) — продакшн RAG с реальными кейсами. Паттерны: Reflection, Plan-and-Execute, Corrective RAG, Self-RAG — stateful агенты нового уровня. <b>D2 «AI Engineering» (Chip Huyen книга)</b> — основная читка: по 1 главе в вечер параллельно с Udemy. Начать с гл.1 (системная архитектура) &rarr; гл.2 (evaluation) — прямо под паттерны этой недели.</li>
                         <li><b>Нед.3 (15–21 окт):</b> DeepEval, Phoenix (Arize) — сравнить с RAGAS, выбрать лучший оценочный инструмент. Corrective RAG поверх «Задумки по экономике» — агент сам проверяет качество своего ответа.</li>
                         <li><b>Нед.4 (22–31 окт):</b> Kubernetes основы: Pod, Deployment, Service — понимание, не продакшн ещё (k8s.io/docs). <b>Первый коммерческий проект:</b> реальная компания (LinkedIn / знакомые) &rarr; автоматизация одного процесса &rarr; фикс-прайс $500&ndash;2000.</li>
                     </ul>
@@ -2274,8 +2298,8 @@
                 <div>
                     <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
-                        <li><b>Нед.1 (1–7 дек):</b> Kubernetes продвинутый: автомасштабирование, rolling updates — для продакшн деплоя. Применить к одному из проектов.</li>
-                        <li><b>Нед.2 (8–14 дек):</b> Проект 4: полный MLOps pipeline — данные &rarr; fine-tuning &rarr; деплой &rarr; мониторинг &rarr; автообновление. Привязать к реальному клиентскому проекту если есть.</li>
+                        <li><b>Нед.1 (1–7 дек):</b> Kubernetes продвинутый: автомасштабирование, rolling updates — для продакшн деплоя. <b>D3 «GenAI System Design» (ByteByteGo)</b> — читать параллельно: как объяснять архитектуру систем на клиентских встречах. По 1 главе в день.</li>
+                        <li><b>Нед.2 (8–14 дек):</b> <b>D4 «Practical MLOps»</b> — читать ключевые главы: CI/CD для ML, model versioning, monitoring. Проект 4: полный MLOps pipeline — данные &rarr; fine-tuning &rarr; деплой &rarr; мониторинг &rarr; автообновление. D4 читается прямо под проект.</li>
                         <li><b>Нед.3 (15–21 дек):</b> Anthropic API: новые возможности за осень — docs.anthropic.com. Habit навсегда: arxiv.org — 1 статья в неделю по агентам / fine-tuning / RAG (начало привычки). AI Alignment: anthropic.com/research — понять позицию лидера рынка.</li>
                         <li><b>Нед.4 (22–31 дек):</b> Статья на Habr (рус.) или Medium (eng.) — «Как построил AI-систему для аналитической химии за 9 месяцев». GitHub: 4 публичных репозитория. LinkedIn: 10+ постов за осень, 500+ связей в нише. Список лидов на Q1 2027.</li>
                     </ul>
@@ -2765,7 +2789,7 @@
                     <b>Нед.5:</b> Лек.1.2 «Tools. MCP» (~50 мин) — инструменты и MCP концептуально<br>
                     <b>Нед.6:</b> Лек.2 «Memory and Guardrails» (~1 час) — память агента, ограничители поведения<br>
                     <b>Нед.7:</b> Лек.3 «AI Agent Workflow. Multi-Agent. Multimodality» (~55 мин) — оркестрация<br>
-                    <b>Нед.7:</b> Лек.5.1+5.2 «Production Engineering for LLM Agents» (~2 часа) — Docker, деплой, мониторинг<br>
+                    <b>Нед.8:</b> Лек.5.1+5.2 «Production Engineering for LLM Agents» (~2 часа) — Docker, деплой, мониторинг<br>
                     <b>Нед.12:</b> Лек.4 «Agent Evaluation: From Metrics to Managed Quality» (~1 час) — перед RAGAS<br>
                     <a href="https://shad.yandex.ru/agentsweek" target="_blank">→ shad.yandex.ru/agentsweek</a><br>
                     <span class="when">Сравнение: Chip Huyen 76 мин (Agents секция) — обзор с высоты птичьего полёта. Agents Week — детали реализации от людей, которые запустили агентов в Яндекс Лавке и Алисе. Смотреть после Chip Huyen как углубление.</span>
@@ -2775,8 +2799,8 @@
                     Инфраструктура высоконагруженных систем. Нед.13 — прямо перед и во время деплоя на VPS.<br>
                     <b>Нед.13:</b> Лек.1 «Как ломаются большие системы» (~45 мин) — статистика поломок, что мониторить<br>
                     <b>Нед.13:</b> Лек.2 «CPU, память, диски и сеть» (~45 мин) — что читать в htop и iostat<br>
-                    <b>Нед.13:</b> Лек.3 «Утилиты диагностики Linux» (~45 мин) — htop, iostat, df, netstat<br>
-                    <b>Нед.13:</b> Лек.5 «SLO, алерты, incident management» (~45 мин) — SLO под guardrails и Telegram-алерты<br>
+                    <b>Нед.14&ndash;15:</b> Лек.3 «Утилиты диагностики Linux» (~45 мин) — htop, iostat, df, netstat<br>
+                    <b>Нед.14&ndash;15:</b> Лек.5 «SLO, алерты, incident management» (~45 мин) — SLO под Langfuse-мониторинг<br>
                     Пропустить: Лек.4 (распределённые системы — у тебя один VPS), оба семинара.<br>
                     <a href="https://shad.yandex.ru/sreweek" target="_blank">→ shad.yandex.ru/sreweek</a><br>
                     <span class="when">Сравнение: Ahillary бонус ур.4 — как настроить сервер (SSH, nginx). SRE Week — как понимать что происходит на сервере после запуска. Ahillary = установка, SRE = эксплуатация.</span>
