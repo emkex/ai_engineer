@@ -331,3 +331,193 @@ mx = data.max(axis=0)
 print(mx)
 scaled = (data - mn) / (mx - mn)
 print(f"\nMin-Max:\n{np.round(scaled, 2)}")
+
+# -------------------------------
+
+# === СКАЛЯРНОЕ ПРОИЗВЕДЕНИЕ ===
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a @ b)           # 32 = 1×4 + 2×5 + 3×6
+print(np.dot(a, b))    # то же самое
+print((a * b).sum())   # то же самое
+
+# === КОСИНУСНОЕ СХОДСТВО ===
+def cosine_sim(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+king  = np.array([0.9, 0.2, 0.8, 0.1])
+queen = np.array([0.85, 0.25, 0.75, 0.15])
+apple = np.array([0.1, 0.9, 0.05, 0.8])
+
+print(cosine_sim(king, queen).round(3))  # 0.998 — похожи
+print(cosine_sim(king, apple).round(3))  # 0.263  — не похожи
+
+# === МАТРИЦА СХОДСТВА (каждый с каждым) ===
+embeddings = np.array([king, queen, apple])       # (3, 4)
+norms = np.linalg.norm(embeddings, axis=1, keepdims=True)  # (3, 1)
+normed = embeddings / norms                        # (3, 4)
+sim_matrix = normed @ normed.T                     # (3, 3)
+print(np.round(sim_matrix, 3))
+import numpy as np
+
+# === СКАЛЯРНОЕ ПРОИЗВЕДЕНИЕ ===
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a @ b)           # 32 = 1×4 + 2×5 + 3×6
+print(np.dot(a, b))    # то же самое
+print((a * b).sum())   # то же самое
+
+# === КОСИНУСНОЕ СХОДСТВО ===
+def cosine_sim(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+king  = np.array([0.9, 0.2, 0.8, 0.1])
+queen = np.array([0.85, 0.25, 0.75, 0.15])
+apple = np.array([0.1, 0.9, 0.05, 0.8])
+
+print(cosine_sim(king, queen).round(3))  # 0.998 — похожи
+print(cosine_sim(king, apple).round(3))  # 0.36  — не похожи
+
+# === МАТРИЦА СХОДСТВА (каждый с каждым) ===
+embeddings = np.array([king, queen, apple])       # (3, 4)
+norms = np.linalg.norm(embeddings, axis=1, keepdims=True)  # (3, 1)
+normed = embeddings / norms                        # (3, 4)
+sim_matrix = normed @ normed.T                     # (3, 3)
+print(np.round(sim_matrix, 3))
+import numpy as np
+
+# === СКАЛЯРНОЕ ПРОИЗВЕДЕНИЕ ===
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a @ b)           # 32 = 1×4 + 2×5 + 3×6
+print(np.dot(a, b))    # то же самое
+print((a * b).sum())   # то же самое
+
+# === КОСИНУСНОЕ СХОДСТВО ===
+def cosine_sim(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+king  = np.array([0.9, 0.2, 0.8, 0.1])
+queen = np.array([0.85, 0.25, 0.75, 0.15])
+apple = np.array([0.1, 0.9, 0.05, 0.8])
+
+print(cosine_sim(king, queen).round(3))  # 0.998 — похожи
+print(cosine_sim(king, apple).round(3))  # 0.36  — не похожи
+
+# === МАТРИЦА СХОДСТВА (каждый с каждым) ===
+embeddings = np.array([king, queen, apple])       # (3, 4)
+norms = np.linalg.norm(embeddings, axis=1, keepdims=True)  # (3, 1)
+normed = embeddings / norms                        # (3, 4)
+sim_matrix = normed @ normed.T                     # (3, 3)
+print(np.round(sim_matrix, 3))
+import numpy as np
+
+# === СКАЛЯРНОЕ ПРОИЗВЕДЕНИЕ ===
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a @ b)           # 32 = 1×4 + 2×5 + 3×6
+print(np.dot(a, b))    # то же самое
+print((a * b).sum())   # то же самое
+
+# === КОСИНУСНОЕ СХОДСТВО ===
+def cosine_sim(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+king  = np.array([0.9, 0.2, 0.8, 0.1])
+queen = np.array([0.85, 0.25, 0.75, 0.15])
+apple = np.array([0.1, 0.9, 0.05, 0.8])
+
+print(cosine_sim(king, queen).round(3))  # 0.998 — похожи
+print(cosine_sim(king, apple).round(3))  # 0.36  — не похожи
+
+# === МАТРИЦА СХОДСТВА (каждый с каждым) ===
+embeddings = np.array([king, queen, apple])       # (3, 4)
+norms = np.linalg.norm(embeddings, axis=1, keepdims=True)  # (3, 1)
+normed = embeddings / norms                        # (3, 4)
+sim_matrix = normed @ normed.T                     # (3, 3)
+print(np.round(sim_matrix, 3))
+import numpy as np
+
+# === СКАЛЯРНОЕ ПРОИЗВЕДЕНИЕ ===
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a @ b)           # 32 = 1×4 + 2×5 + 3×6
+print(np.dot(a, b))    # то же самое
+print((a * b).sum())   # то же самое
+
+# === КОСИНУСНОЕ СХОДСТВО ===
+def cosine_sim(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+king  = np.array([0.9, 0.2, 0.8, 0.1])
+queen = np.array([0.85, 0.25, 0.75, 0.15])
+apple = np.array([0.1, 0.9, 0.05, 0.8])
+
+print(cosine_sim(king, queen).round(3))  # 0.998 — похожи
+print(cosine_sim(king, apple).round(3))  # 0.36  — не похожи
+
+# === МАТРИЦА СХОДСТВА (каждый с каждым) ===
+embeddings = np.array([king, queen, apple])       # (3, 4)
+norms = np.linalg.norm(embeddings, axis=1, keepdims=True)  # (3, 1)
+normed = embeddings / norms                        # (3, 4)
+sim_matrix = normed @ normed.T                     # (3, 3)
+print(np.round(sim_matrix, 3))
+# [[1.    0.998 0.263 ]
+#  [0.998 1.    0.33 ]
+#  [0.263  0.33  1.   ]]
+
+"""
+По диагонали всегда 1.0 — каждый вектор идеально совпадает сам с собой. Да, это именно корреляция направлений — независимо от длины векторов. Именно это делает Qdrant когда ищет похожие документы по твоему запросу.
+"""
+
+# --------------------------------
+
+# Данные: 5 примеров, 3 признака каждый
+X = np.array([
+    [0.6, 0.3, 0.1],
+    [0.8, 0.25, 0.14],
+    [0.9, 0.3, 0.06],
+    [0.8, 0.4, 0.1],
+    [0.7, 0.4, 0.12],
+])  # Форма: (5, 3)
+
+# Веса первого слоя: 3 входа → 4 нейрона
+rng = np.random.default_rng(42)
+W1 = rng.standard_normal((3, 4)) * 0.1  # (3, 4)
+b1 = np.zeros(4)                          # (4,)
+
+# Веса второго слоя: 4 нейрона → 2 выхода
+W2 = rng.standard_normal((4, 2)) * 0.1  # (4, 2)
+b2 = np.zeros(2)                          # (2,)
+
+# Функция активации ReLU
+def relu(x):
+    return np.maximum(0, x)
+
+# Функция softmax (для вероятностей на выходе)
+def softmax(x):
+    e = np.exp(x - x.max(axis=1, keepdims=True))
+    return e / e.sum(axis=1, keepdims=True)
+
+# === Прямой проход (forward pass) ===
+
+# Слой 1: линейное преобразование + активация
+z1 = X @ W1 + b1    # (5,3) @ (3,4) + (4,) = (5,4)
+a1 = relu(z1)        # (5, 4) — активации скрытого слоя
+
+# Слой 2: линейное преобразование + softmax
+z2 = a1 @ W2 + b2   # (5,4) @ (4,2) + (2,) = (5,2)
+probs = softmax(z2)  # (5, 2) — вероятности двух классов
+
+print("Вероятности классов для 5 примеров:")
+print(np.round(probs, 4)) # получается около 0.5, так как веса рандомные и маленькие.
+print(f"\nСумма по строкам (должна быть 1.0): {probs.sum(axis=1)}")
+print(f"Предсказанные классы: {probs.argmax(axis=1)}")
+
+# -------------------------------
+

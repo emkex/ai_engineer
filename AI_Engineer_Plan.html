@@ -1040,7 +1040,7 @@
                     <span class="tag t1">ProGlib</span><br>
                     <b>pandas, NumPy</b>
                     <ul class="clist">
-                        <li>NumPy: массивы, векторные операции</li>
+                        <li class="done">NumPy: массивы, векторные операции</li>
                         <li>pandas DataFrame: создание, фильтрация, groupby, merge</li>
                     </ul>
                     <span class="tag t1">ProGlib &mdash; Курс ML</span><br>
@@ -1053,7 +1053,7 @@
                     <span class="tag t1">ProGlib &mdash; Курс Математика AI</span><br>
                     <b>Старт: Векторы + Линейная регрессия через МНК</b>
                     <ul class="clist">
-                        <li>Занятие 1: Векторы и матрицы, операции с ними &mdash; применение в ML</li>
+                        <li class="done">Занятие 1: Векторы и матрицы, операции с ними &mdash; применение в ML</li>
                         <li>Занятие 2: Линейная регрессия &mdash; реализация в NumPy vs sklearn</li>
                     </ul>
                     <div class="src">&#128218; proglib.academy/machine-learning + proglib.academy/math-for-ds-express + pandas.pydata.org/docs/getting_started</div>
@@ -1390,6 +1390,7 @@
                 </td>
                 <td>
                     <div class="tcards">
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: LLMs explained briefly</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~8 мин</a> — карта LLM перед углублённым RAG/Qdrant</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span>
                                 StatQuest: Neural Networks</b><span><a href="https://www.youtube.com/@statquest"
                                     target="_blank">YouTube</a> — Pt.1 + Backprop (embeddings = нейросеть)</span></div>
@@ -1624,6 +1625,7 @@
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-dl">DL</span> StatQuest Neural Networks (B2)</b><span>гл.7&ndash;10:
                                 Attention, Transformers</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: Transformers + Attention (гл.5&ndash;6)</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~54 мин</a> — под LangGraph + StatQuest B2 гл.7&ndash;10</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span
                                     class="src-tag st-llm">LLM</span> Chip Huyen 43:02&ndash;52:40</b><span><a
                                     href="https://www.youtube.com/watch?v=JV3pL1_mn2M" target="_blank">Fine-tuning +
@@ -1974,6 +1976,7 @@
                                     class="src-tag st-linal">LINAL</span> MML Book гл.10–12</b><span><a
                                     href="https://mml-book.github.io" target="_blank">mml-book.github.io</a> —
                                 Dimensionality Reduction</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: How LLMs store facts (гл.7)</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~23 мин</a> — перед LoRA fine-tuning: понимание механики MLP как key-value хранилища</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">LangGraph</span><span class="sp new">vLLM</span><span
@@ -2138,7 +2141,7 @@
                                     class="src-tag st-ml">ML</span> 100-Page ML Book (C2)</b><span><a
                                     href="https://amzn.to/3FNAzzN" target="_blank">справочник</a> — быстрое
                                 освежение</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3Blue1Brown: Neural Networks</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">4 видео, ~1 час</a> — посмотреть до Karpathy: визуальная интуиция backprop перед кодом</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B Neural Networks гл.1&ndash;4 (~63 мин)</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">нед.23&ndash;24</a> — backprop до Karpathy. Гл.5&ndash;7 и «LLMs briefly» расставлены по нед.8/11/16&ndash;18</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span>
                                 Andrej Karpathy: Let's build GPT</b><span><a
                                     href="https://www.youtube.com/@AndrejKarpathy" target="_blank">YouTube</a> — PyTorch
@@ -2612,12 +2615,15 @@
                 <div class="src-entry">
                     <b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3Blue1Brown — Neural
                         Networks плейлист</b>
-                    4 видео. "But what is a neural network?" + "Gradient descent" + "Backpropagation".<br>
-                    Смотреть в августе перед Karpathy.<br>
+                    8 видео. Расставлены по неделям — не смотреть подряд.<br>
+                    <b>Нед.8:</b> «Large Language Models explained briefly» (~8 мин) — карта LLM перед углублённым RAG/Qdrant<br>
+                    <b>Нед.11:</b> Гл.5 «Transformers, the tech behind LLMs» (~27 мин) + Гл.6 «Attention in transformers, step-by-step» (~27 мин) — под LangGraph + StatQuest B2 гл.7-10<br>
+                    <b>Нед.16&ndash;18:</b> Гл.7 «How might LLMs store facts» (~23 мин) — перед fine-tuning теорией, понимание механики LoRA<br>
+                    <b>Нед.23&ndash;24:</b> Гл.1 «But what is a neural network?» (~19 мин) + Гл.2 «Gradient descent» (~21 мин) + Гл.3 «Backpropagation, intuitively» (~13 мин) + Гл.4 «Backpropagation calculus» (~10 мин) — до Karpathy<br>
+                    Пропустить: Guest video Welch Labs (генерация изображений) — не в специализации.<br>
                     <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">→
                         Neural Networks плейлист</a><br>
-                    <span class="when">Сравнение: самое чистое визуальное объяснение backprop. Короче StatQuest.
-                        Дополняет, не заменяет B2.</span>
+                    <span class="when">Сравнение: самое чистое визуальное объяснение backprop и трансформеров. Короче StatQuest. Расставлен по неделям чтобы каждое видео попадало точно в тему момента.</span>
                 </div>
                 <div class="src-entry">
                     <b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> PyTorch Tutorials
