@@ -1199,7 +1199,7 @@
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.2&ndash;4</a>: end-to-end,
                                 Classification</span></div>
 
-                        <div class="done" class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3B1B LinAlg гл.7+9</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Inverse matrices + Dot products</a> &mdash; 25 мин, фундамент RAG</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3B1B LinAlg гл.7+9</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Inverse matrices + Dot products</a> &mdash; 25 мин, фундамент RAG</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">ML курс</span><span class="sp new">asyncio</span><span
@@ -1260,14 +1260,14 @@
                     <ul class="clist">
                         <li>SemolinaCode ур.14 (Docker): Docker Desktop, образы/контейнеры/volume &mdash; начать отсюда
                         </li>
-                        <li>seaborn: heatmap, distribution &mdash; базово (перенос с нед.5)</li>
+                        <li>matplotlib базовый (30 мин): линейный график, гистограмма, scatter &mdash; <code>df.plot()</code> и <code>plt.show()</code>. Закрываем пробел с нед.4. <span style="color:#888;font-size:10px">seaborn: heatmap по желанию после, не обязательно сейчас.</span></li>
                         <li>Ahillary ур.9 (async): GIL, asyncio, coroutines, gather &mdash; конспект Notion</li>
                         <li>Понять: синхронный vs асинхронный &mdash; почему агенты требуют async</li>
+                        <li style="color:#c0392b;font-weight:700">&#9888;&#65039; Docker должен быть установлен и запущен ПЕРЕД этим шагом. Сначала SemolinaCode ур.14 &mdash; только потом n8n.</li>
                         <li>Поднять n8n: docker run -p 5678:5678 n8nio/n8n &rarr; localhost:5678</li>
                         <li>Первый n8n-пайплайн: Schedule &rarr; HTTP Request (RSS) &rarr; Write to File</li>
                         <li>Ahillary YouTube ур.3: загрузка через sitemap, правильный chunking, embeddings для русского
                             текста</li>
-                        <li style="margin-top:4px"><b>&#128290; 3B1B Calculus (финальный блок):</b> гл.10 «What's so special about e?» + гл.11 «Integration + Fundamental Theorem» + гл.12 «Differentiation via limits» + гл.13 «Higher order derivatives» + гл.14 «Taylor series» (~15 мин, финал Calculus-блока) (~55 мин). Зачем: гл.10 = натуральный логарифм в функциях активации (sigmoid, softmax); гл.11 = как суммируются градиенты через сеть; гл.13 = второй порядок = понимание momentum в Adam; гл.14 = аппроксимации через ряды Тейлора объясняют нелинейность нейросети.</li>
                     </ul>
                     <div class="src">&#128218; SemolinaCode TG ур.14 (Docker) + docs.n8n.io + Ahillary YouTube ур.3
                     </div>
@@ -1291,8 +1291,6 @@
                 </td>
                 <td>
                     <div class="tcards">
-
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-calc">CALC</span> 3B1B Calculus гл.10&ndash;14</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">e + Integration + Limits + Higher derivatives + Taylor series</a> &mdash; 55 мин. Завершение Calculus-блока (включая гл.14). Прямо под Занятие 6 Математики AI этой недели.</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-ml">ML</span> StatQuest Guide to ML (B1)</b><span>гл.7&ndash;10: Naive Bayes, Decision Trees, Regularization &mdash; читать фоном, темы придут на нед.9&ndash;10</span></div>
                     </div>
                 </td>
@@ -1327,8 +1325,8 @@
                     <b>Тема 5: Методы опорных векторов (SVM)</b>
                     <ul class="clist">
                         <li>Максимизация отступа, ядра (kernel trick), кросс-валидация</li>
-                        <li><span style="color:#888;font-size:12px">Зачем: Qdrant = векторные расстояния, SVM = геометрия разделения — одна математика</span></li>
                     </ul>
+                    <div style="background:rgba(136,136,136,0.08);border-left:2px solid #ccc;padding:3px 8px;margin:-4px 0 6px 20px;font-size:10px;color:#888;line-height:1.5">Зачем: Qdrant = векторные расстояния, SVM = геометрия разделения — одна математика</div>
                     <span class="tag t1">ProGlib &mdash; Курс Математика AI</span><br>
                     <b>Занятие 7: Матанализ практика &mdash; градиентный спуск с нуля</b>
                     <ul class="clist">
@@ -1344,6 +1342,7 @@
                         <li>Переписать RAG с ChromaDB на Qdrant + метаданные (источник, дата, тема)</li>
                         <li>Ahillary YouTube ур.5: подключить LangSmith &rarr; трейсы каждого запроса</li>
                         <li>Ahillary архив ур.2 (Twitter/Pydantic): ТОЛЬКО раздел про Pydantic-модели и RootModel</li>
+                        <li>seaborn (30 мин): <code>sns.heatmap()</code> для корреляционной матрицы DataFrame из новостей. <code>sns.pairplot()</code> на котировках. Закрывает seaborn из финального стека.</li>
                         <li style="margin-top:4px"><b>&#128290; Cross-entropy (15 мин, обязательно):</b> StatQuest YouTube &mdash; поиск «StatQuest Cross Entropy». Зачем: функция потерь classification = кросс-энтропия. LoRA fine-tuning в июле оптимизирует именно её. Понять сейчас — не быть в ступоре в июле.</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (1 лекция):</b>
                             <ul class="clist" style="margin-top:4px">
@@ -1378,13 +1377,6 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: LLMs explained briefly</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~8 мин</a> — карта LLM перед углублённым RAG/Qdrant</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span>
-                                StatQuest: Neural Networks</b><span><a href="https://www.youtube.com/@statquest"
-                                    target="_blank">YouTube</a> — Pt.1 + Backprop (embeddings = нейросеть)</span></div>
-                        <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
-                                    class="src-tag st-dl">DL</span> StatQuest Neural Networks (B2)</b><span>начать
-                                гл.1–3: основы, PyTorch intro</span></div>
                         <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span
                                     class="src-tag st-linal">LINAL</span> MML Book гл.5–6</b><span><a
                                     href="https://mml-book.github.io" target="_blank">mml-book.github.io</a> — Vector
@@ -1426,14 +1418,14 @@
                     <b>Тема 6: Нелинейные методы классификации</b>
                     <ul class="clist">
                         <li>Полиномиальные признаки, регуляризация L1/L2</li>
-                        <li><span style="color:#888;font-size:12px">Зачем: нелинейность решений агента = та же нелинейная классификация</span></li>
                     </ul>
+                    <div style="background:rgba(136,136,136,0.08);border-left:2px solid #ccc;padding:3px 8px;margin:-4px 0 6px 20px;font-size:10px;color:#888;line-height:1.5">Зачем: нелинейность решений агента = та же нелинейная классификация</div>
                     <span class="tag t1">ProGlib &mdash; Курс Математика AI</span><br>
                     <b>Занятие 8: Введение в теорию вероятностей</b>
                     <ul class="clist">
                         <li>Распределения, условная вероятность, формула Байеса</li>
-                        <li><span style="color:#888;font-size:12px">Зачем: LLM = вероятностная модель, embeddings = вероятностная геометрия</span></li>
                     </ul>
+                    <div style="background:rgba(136,136,136,0.08);border-left:2px solid #ccc;padding:3px 8px;margin:-4px 0 6px 20px;font-size:10px;color:#888;line-height:1.5">Зачем: LLM = вероятностная модель, embeddings = вероятностная геометрия</div>
                     <div class="src">&#128218; ProGlib + playwright.dev/python/docs/intro</div>
                 </td>
                 <td>
@@ -1441,13 +1433,16 @@
                     <b>Claude Code &mdash; установка и ежедневный инструмент</b>
                     <ul class="clist">
                         <li>Установить Node.js &rarr; npm install -g @anthropic-ai/claude-code</li>
+                        <li>Codex (OpenAI): как альтернативный CLI-агент &mdash; уже используешь. Сравни поведение с Claude Code на одной задаче. Вывод в дневник.</li>
                         <li>Запустить в папке проекта: claude &rarr; объяснить любой скрипт построчно</li>
                         <li>Написать CLAUDE.md: &laquo;Python 3.10+, комментарии на русском, использовать
                             dataclasses&raquo;</li>
                         <li>С этого дня: Claude Code = основная среда разработки</li>
                         <li>Playwright: скрипт &rarr; открыть сайт &rarr; взять заголовки &rarr; JSON</li>
-                        <li style="margin-top:8px"><b>&#128250; ШАД (1 лекция):</b>
+                        <li style="margin-top:4px"><b>&#128290; 3B1B Calculus (финальный блок, ~55 мин):</b> гл.10 «e и натуральный логарифм» + гл.11 «Integration» + гл.12 «Differentiation via limits» + гл.13 «Higher derivatives» + гл.14 «Taylor series». Смотреть по 1–2 в вечер. Гл.10 = sigmoid/softmax; гл.14 = аппроксимации в нейросетях.</li>
+                        <li style="margin-top:8px"><b>&#128250; ШАД (2 лекции):</b>
                             <ul class="clist" style="margin-top:4px">
+                                <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.2 &laquo;Memory and Guardrails&raquo;</a> (~60 мин): память агента, ограничители поведения &mdash; начало недели</li>
                                 <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.3 &laquo;AI Agent Workflow. Multi-Agent. Multimodality&raquo;</a> (~55 мин): прямо под первый ReAct-агент этой недели. Multi-agent &mdash; карта на нед.11 LangGraph</li>
                             </ul>
                         </li>
@@ -1482,7 +1477,8 @@
                                     class="src-tag st-prog">PROG</span> Claude Code docs</b><span><a
                                     href="https://docs.anthropic.com/claude-code"
                                     target="_blank">docs.anthropic.com</a></span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.3: AI Agent Workflow на нед.9</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | Agents Week</b><span><a href="https://shad.yandex.ru/agentsweek" target="_blank">shad.yandex.ru/agentsweek</a> &mdash; Лек.2: Memory + Лек.3: Workflow на нед.9</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-calc">CALC</span> 3B1B Calculus гл.10–14</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">e + Integration + Higher derivatives + Taylor series</a> — финал Calculus-блока (~55 мин)</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">Qdrant</span><span class="sp new">Claude Code</span><span
@@ -1511,8 +1507,8 @@
                     <b>Тема 7: Решающие деревья</b>
                     <ul class="clist">
                         <li>ID3, CART, гиперпараметры, визуализация</li>
-                        <li><span style="color:#888;font-size:12px">Зачем: дерево = структурированная маршрутизация, аналог agent routing</span></li>
                     </ul>
+                    <div style="background:rgba(136,136,136,0.08);border-left:2px solid #ccc;padding:3px 8px;margin:-4px 0 6px 20px;font-size:10px;color:#888;line-height:1.5">Зачем: дерево = структурированная маршрутизация, аналог agent routing</div>
                     <span class="tag t1">ProGlib &mdash; Курс Математика AI</span><br>
                     <b>Занятие 9: Случайные величины &mdash; реализация Наивного Байеса</b>
                     <ul class="clist">
@@ -1532,6 +1528,7 @@
                         <li>Прочитать ПОЛНЫЙ ГАЙД (файл проекта): разделы &laquo;CLI-агенты&raquo; и &laquo;MCP&raquo;
                             полностью</li>
                         <li style="margin-top:8px"><b>&#128279; Redis (новый инструмент, 30 мин):</b> <code>pip install redis</code> &rarr; redis.io/docs/getting-started &rarr; понять get/set/expire как semantic cache. Зачем: ProGlib этой же недели преподаёт Redis-кэш в RAG &mdash; без базового понимания это будет магия.</li>
+                        <li style="margin-top:4px"><b>&#128290; 3B1B: LLMs explained briefly (~8 мин):</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">Neural Networks плейлист</a> — карта LLM перед тем как строишь MCP-серверы и агентные цепочки. 8 минут, обязательно.</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (1 лекция):</b>
                             <ul class="clist" style="margin-top:4px">
                                 <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.5.1 &laquo;Production Engineering for LLM Agents&raquo;</a> (~60 мин): Docker, деплой, мониторинг &mdash; прямо под MCP-серверы этой недели</li>
@@ -1539,7 +1536,7 @@
                         </li>
                     </ul>
                     <div class="src">&#128218; modelcontextprotocol.io + ПОЛНЫЙ ГАЙД (файл проекта) +
-                        github.com/modelcontextprotocol/servers + shad.yandex.ru/agentsweek</div>
+                        github.com/modelcontextprotocol/servers + shad.yandex.ru/agentsweek + 3B1B Neural Networks</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> Claude Code работает.<br><b>Сейчас:</b> MCP = стандарт подключения
@@ -1550,6 +1547,7 @@
                     <div class="tcards">
                         <div class="tcard"><b>MCP (Model Context Protocol)</b><span>Стандарт Anthropic. Написал MCP-сервер &mdash; агент работает с твоими данными как со встроенными функциями.</span></div>
                         <div class="tcard"><b>LangFlow</b><span>Drag-and-drop редактор. Не для прода &mdash; для понимания архитектуры визуально.</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: LLMs explained briefly</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~8 мин</a> — карта LLM перед агентными цепочками</span></div>
                         <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML</b><span>Тема 7: Решающие деревья &mdash; ID3, CART. Аналог agent routing в структуре данных</span></div>
                         <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-calc">CALC</span> ProGlib Математика AI</b><span>Занятие 9: Случайные величины + Наивный Байес в NumPy</span></div>
                     </div>
@@ -1609,8 +1607,8 @@
                     <b>Занятие 10: Основы статистики и проверки гипотез</b>
                     <ul class="clist">
                         <li>t-тест, доверительные интервалы</li>
-                        <li><span style="color:#888;font-size:12px">Зачем: оценка качества агента = статистическая задача; RAGAS через неделю</span></li>
                     </ul>
+                    <div style="background:rgba(136,136,136,0.08);border-left:2px solid #ccc;padding:3px 8px;margin:-4px 0 6px 20px;font-size:10px;color:#888;line-height:1.5">Зачем: оценка качества агента = статистическая задача; RAGAS через неделю</div>
                     <div class="src">&#128218; langchain-ai.github.io/langgraph/tutorials</div>
                 </td>
                 <td>
@@ -1625,13 +1623,14 @@
                         <li>&rarr; human_review() &mdash; ПАУЗА, вопрос в Telegram</li>
                         <li>&rarr; store_or_reject() &mdash; пишет в Qdrant или отклоняет</li>
                         <li style="margin-top:4px"><b>&#128290; 3B1B LinAlg (финал):</b> гл.13 «Change of basis» + гл.14 «Eigenvectors and eigenvalues» (~25 мин). Зачем: PCA = нахождение собственных векторов ковариационной матрицы. Смотришь гл.14 и PCA перестаёт быть магией.</li>
+                        <li style="margin-top:4px"><b>&#128290; StatQuest Neural Networks YT:</b> поиск «StatQuest Neural Networks Pt.1» + «StatQuest Backpropagation» (~30 мин суммарно). Зачем: нейросеть = трансформер без attention; понять прямо перед Гл.5–6 3B1B Transformers. embeddings = нейросеть без выходного слоя.</li>
                     </ul>
-                    <div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials + docs.aiogram.dev/en/latest (Quick Start)</div>
+                    <div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials + docs.aiogram.dev/en/latest (Quick Start) + StatQuest YouTube (Neural Networks)</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> MCP, Qdrant, PydanticAI.<br><b>Сейчас:</b> все кирпичи готовы.
                         LangGraph = момент сборки. Граф строим именно для &laquo;Задумки&raquo; &mdash; реальный целевой
-                        проект, не абстрактный пример.</div>
+                        проект, не абстрактный пример.<br><b>Про LangChain:</b> LangGraph используется напрямую с PydanticAI &mdash; знание классического LangChain не требуется. LCEL (Runnable, chain) понятны из контекста RAG-пайплайна нед.6.</div>
                 </td>
                 <td>
                     <div class="tcards">
@@ -1650,10 +1649,10 @@
                 <td>
                     <div class="tcards">
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3B1B LinAlg гл.13&ndash;14</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Change of basis + Eigenvectors</a> &mdash; 25 мин, ключ к PCA</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> StatQuest: Neural Networks YT</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — «Neural Networks Pt.1» + «Backpropagation» (~30 мин). Зачем: база перед трансформерами и Karpathy</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-dl">DL</span> StatQuest Neural Networks (B2)</b><span>гл.7&ndash;10:
                                 Attention, Transformers</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: Transformers + Attention (гл.5&ndash;6)</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~54 мин</a> — под LangGraph + StatQuest B2 гл.7&ndash;10</span></div>
 
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-dl">DL</span> Hands-On ML (C1)</b><span><a
@@ -1700,6 +1699,7 @@
                     <span class="tag t2">Самост.</span><br>
                     <b>Langfuse self-hosted + RAGAS первый отчёт</b>
                     <ul class="clist">
+                        <li style="margin-top:0"><b>3B1B Neural Networks</b> гл.5–6: «Transformers, the tech behind LLMs» (~27 мин) + «Attention in transformers» (~27 мин). Смотреть ДО RAGAS — механика attention = механика embeddings в RAG.</li>
                         <li>Поднять Langfuse через docker-compose (langfuse.com/docs/deployment/self-host)</li>
                         <li>Подключить к LangGraph &mdash; трейсы каждого запуска в дашборде</li>
                         <li>RAGAS: оценить RAG на 10 вопросах &mdash; faithfulness, answer_relevancy</li>
@@ -1736,7 +1736,7 @@
                 </td>
                 <td>
                     <div class="tcards">
-
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: Transformers + Attention (гл.5–6)</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~54 мин</a> — смотреть ДО RAGAS: трансформеры = механика attention в embeddings</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.12–13</a>: Custom Models,
@@ -1910,8 +1910,7 @@
                         <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-ai">AI</span> LangGraph docs</b><span><a href="https://langchain-ai.github.io/langgraph/tutorials" target="_blank">tutorials</a> — полный граф для диплома</span></div>
                     </div>
                 </td>
-                <td><span class="sp mastered">VPS</span><span class="sp mastered">LangGraph</span><span
-                        class="sp mastered">Qdrant</span></td>
+                <td><span class="sp mastered">VPS</span></td>
                 <td>
                     <div class="pb">
                         <div class="pf" style="width:84%;background:#6a1b9a"></div>
@@ -1956,6 +1955,7 @@
                     <b>vLLM (local inference) + Fine-tuning ТЕОРИЯ (читать)</b>
                     <ul class="clist">
                         <li>pip install vllm &rarr; запустить Mistral 7B или Qwen2.5 7B локально</li>
+                        <li style="color:#888;font-size:10px">&#9888; vLLM требует NVIDIA GPU. Без GPU &mdash; использовать Ollama как fallback: те же эксперименты с качеством/latency, другой сервер.</li>
                         <li>Подключить к LangGraph вместо Claude API для тестов</li>
                         <li>Замерить: качество vs стоимость vs latency &mdash; записать в таблицу</li>
                         <li>GGUF (CPU-квантование) vs AWQ (GPU-квантование) &mdash; разобрать разницу. Numerical
@@ -2022,8 +2022,7 @@
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: How LLMs store facts (гл.7)</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~23 мин</a> — перед LoRA fine-tuning: понимание механики MLP как key-value хранилища</span></div>
                     </div>
                 </td>
-                <td><span class="sp mastered">LangGraph</span><span class="sp new">vLLM</span><span
-                        class="sp new">Semantic Cache</span></td>
+                <td><span class="sp new">vLLM</span><span class="sp new">Semantic Cache</span></td>
                 <td>
                     <div class="pb">
                         <div class="pf" style="width:87%;background:#e65100"></div>
@@ -2142,6 +2141,7 @@
                     <b>OpenClaw + финальный спринт портфолио</b>
                     <ul class="clist">
                         <li>OpenClaw на VPS: установить, подключить к Telegram, написать первый skill.md. Источник: openclaw.ai &rarr; Docs &rarr; Getting Started (убедиться что страница жива, иначе &mdash; github.com поиск openclaw)</li>
+                        <li style="color:#888;font-size:10px">Fallback если openclaw.ai недоступен: Claude Code + systemd cron + Telegram webhook &mdash; аналогичный результат персонального агента 24/7.</li>
                         <li>Release Engineering: версионирование промптов через git tags</li>
                         <li>A/B тест промптов: 2 варианта оценки &rarr; выбрать лучший через RAGAS</li>
                         <li>Кастомный MCP-сервер для хроматографии &mdash; публичный GitHub</li>
@@ -2227,7 +2227,12 @@
                     <div class="note"><b>&#9989; К 1 сентября:</b> AI Engineer &mdash; рабочие кейсы, fine-tuning
                         понимание, специализация, GitHub, LinkedIn. Готов к коммерции.</div>
                 </td>
-                <td></td>
+                <td>
+                    <div class="tcards">
+                        <div class="tcard"><b><span class="src-tag st-prog">PROG</span> Upwork Getting Started</b><span><a href="https://www.upwork.com/resources/how-to-get-started-on-upwork" target="_blank">upwork.com</a> &mdash; оформление профиля AI Engineer</span></div>
+                        <div class="tcard"><b><span class="src-tag st-prog">PROG</span> LinkedIn profile guide</b><span>linkedin.com/help &mdash; оптимизация профиля для найма в AI/ML нише</span></div>
+                    </div>
+                </td>
                 <td><span class="sp mastered">Весь стек</span></td>
                 <td>
                     <div class="pb">
@@ -2824,10 +2829,10 @@
                     Практики Яндекс Лавки, Алисы, Yandex Cloud. 5 лекционных дней. Самый важный ШАД-курс для AI Engineer.<br>
                     <b>Нед.5:</b> Лек.1.1 «Intro to AI Agents LLM» (~50 мин) — ReAct loop, архитектура агентов<br>
                     <b>Нед.5:</b> Лек.1.2 «Tools. MCP» (~50 мин) — инструменты и MCP концептуально<br>
-                    <b>Нед.6:</b> Лек.2 «Memory and Guardrails» (~1 час) — память агента, ограничители поведения<br>
-                    <b>Нед.7:</b> Лек.3 «AI Agent Workflow. Multi-Agent. Multimodality» (~55 мин) — оркестрация<br>
-                    <b>Нед.8:</b> Лек.5.1+5.2 «Production Engineering for LLM Agents» (~2 часа) — Docker, деплой, мониторинг<br>
-                    <b>Нед.12:</b> Лек.4 «Agent Evaluation: From Metrics to Managed Quality» (~1 час) — перед RAGAS<br>
+                    <b>Нед.9:</b> Лек.2 «Memory and Guardrails» (~1 час) — память агента, ограничители поведения<br>
+                    <b>Нед.9:</b> Лек.3 «AI Agent Workflow. Multi-Agent. Multimodality» (~55 мин) — оркестрация<br>
+                    <b>Нед.10:</b> Лек.5.1 «Production Engineering for LLM Agents» (~60 мин) — Docker, деплой, мониторинг<br>
+                    <b>Нед.12:</b> Лек.4 «Agent Evaluation» (~1 час) + Лек.5.2 «Production Engineering (продолжение)» (~60 мин)<br>
                     <a href="https://shad.yandex.ru/agentsweek" target="_blank">→ shad.yandex.ru/agentsweek</a><br>
                     <span class="when">Сравнение: Chip Huyen 76 мин (Agents секция) — обзор с высоты птичьего полёта. Agents Week — детали реализации от людей, которые запустили агентов в Яндекс Лавке и Алисе. Смотреть после Chip Huyen как углубление.</span>
                 </div>
