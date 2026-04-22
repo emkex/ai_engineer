@@ -8,7 +8,7 @@
 
 10-месячный путь от исследователя, далёкого от программирования, до AI Engineer — с практическими проектами на каждом этапе.
 Старт: март 2026. Финиш: январь 2027.
-Основной план: [AI_Engineer_Plan.html](AI_Engineer_Plan.html) · [Portfolio](https://emkex.github.io/ai_engineer/AI_Engineer_Plan.html)
+Основной план: [Portfolio](https://emkex.github.io/ai_engineer/AI_Engineer_Plan.html)
 
 ---
 
