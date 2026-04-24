@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Разбор Parser: RabbitMQ, MongoDB, Docker, Архитектура</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --panel: #1a1d27;
+    --panel2: #222638;
+    --accent: #7c6af7;
+    --accent2: #4fc3f7;
+    --green: #66bb6a;
+    --orange: #ffa726;
+    --red: #ef5350;
+    --yellow: #ffee58;
+    --text: #e0e0e0;
+    --muted: #9e9e9e;
+    --border: #2e3250;
+    --code-bg: #12151f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .wrapper { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  h1 { font-size: 2rem; color: var(--accent); margin-bottom: 8px; }
+  h2 { font-size: 1.5rem; color: var(--accent2); margin: 48px 0 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h3 { font-size: 1.15rem; color: var(--orange); margin: 28px 0 10px; }
+  h4 { font-size: 1rem; color: var(--yellow); margin: 18px 0 6px; }
+  p { margin-bottom: 12px; }
+  ul, ol { padding-left: 24px; margin-bottom: 12px; }
+  li { margin-bottom: 6px; }
+
+  code {
+    font-family: 'Fira Code', 'Cascadia Code', monospace;
+    background: var(--code-bg);
+    color: #ce9178;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 12px 0 20px;
+    font-size: 0.88em;
+    line-height: 1.6;
+  }
+  pre code { background: none; padding: 0; color: var(--text); }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .card.green { border-left: 4px solid var(--green); }
+  .card.orange { border-left: 4px solid var(--orange); }
+  .card.red { border-left: 4px solid var(--red); }
+  .card.blue { border-left: 4px solid var(--accent2); }
+  .card.purple { border-left: 4px solid var(--accent); }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.78em;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-green { background: #1b3a1d; color: var(--green); }
+  .badge-red { background: #3a1b1b; color: var(--red); }
+  .badge-blue { background: #1b2e3a; color: var(--accent2); }
+  .badge-orange { background: #3a2a1b; color: var(--orange); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+    font-size: 0.92em;
+  }
+  .flow-box {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    text-align: center;
+    min-width: 100px;
+  }
+  .flow-box.main { border-color: var(--accent); color: var(--accent); }
+  .flow-box.rabbit { border-color: var(--orange); color: var(--orange); }
+  .flow-box.mongo { border-color: var(--green); color: var(--green); }
+  .arrow { color: var(--muted); font-size: 1.2em; }
+
+  .kw { color: #569cd6; }
+  .str { color: #ce9178; }
+  .cmt { color: #6a9955; }
+  .fn { color: #dcdcaa; }
+  .cls { color: #4ec9b0; }
+  .num { color: #b5cea8; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  th { background: var(--panel2); color: var(--accent2); padding: 10px 14px; text-align: left; }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--panel2); }
+
+  .toc { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 24px 0; }
+  .toc a { color: var(--accent2); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .toc li { margin-bottom: 4px; }
+  .toc ol { counter-reset: item; }
+
+  .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 32px; }
+  .note { font-size: 0.88em; color: var(--muted); font-style: italic; }
+
+  .solid-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .solid-letter { font-size: 1.5em; font-weight: 700; color: var(--accent); margin-right: 8px; }
+
+  .dockerfile-line { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .dockerfile-line:last-child { border-bottom: none; }
+  .dkr-cmd { min-width: 90px; color: var(--accent); font-weight: 700; font-family: monospace; }
+  .dkr-desc { flex: 1; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<h1>Разбор Parser: всё от A до Z</h1>
+<p class="subtitle">RabbitMQ · MongoDB · Docker · Архитектура · SOLID — на примере реального проекта</p>
+
+<div class="toc">
+  <strong>Содержание:</strong>
+  <ol style="margin-top:10px;">
+    <li><a href="#s1">Что делает парсер — общий поток данных</a></li>
+    <li><a href="#s2">RabbitMQ — брокер сообщений</a></li>
+    <li><a href="#s3">pika — Python-клиент для RabbitMQ</a></li>
+    <li><a href="#s4">MongoDB — документоориентированная БД</a></li>
+    <li><a href="#s5">AsyncIOMotorClient — асинхронный драйвер</a></li>
+    <li><a href="#s6">Dockerfile — образ и контейнер подробно</a></li>
+    <li><a href="#s7">docker-compose.yml — оркестрация трёх контейнеров</a></li>
+    <li><a href="#s8">Порты, тома (volumes), сети (networks)</a></li>
+    <li><a href="#s85">.env файл — как конфигурация попадает в контейнеры</a></li>
+    <li><a href="#s9">Архитектура + SOLID — что хорошо и что плохо</a></li>
+  </ol>
+</div>
+
+<!-- ===================== SECTION 1 ===================== -->
+<h2 id="s1">1. Что делает парсер — общий поток данных</h2>
+
+<p>Парсер каждые N секунд заходит на <strong>benzinga.com/markets</strong>, собирает ссылки на статьи, читает каждую статью и делает две вещи одновременно:</p>
+
+<div class="flow">
+  <div class="flow-box" style="border-color:#7c6af7;color:#7c6af7">benzinga.com<br><small>HTTP GET</small></div>
+  <span class="arrow">→</span>
+  <div class="flow-box main">Parser<br><small>BeautifulSoup</small></div>
+  <span class="arrow">→</span>
+  <div class="flow-box rabbit">RabbitMQ<br><small>очередь сообщений</small></div>
+  <span class="arrow" style="color:#555">←(другие потребители)</span>
+  <br>
+  <div class="flow-box main" style="position:relative;margin-top:-40px;margin-left:180px">Parser</div>
+  <span class="arrow" style="margin-top:-40px">↓</span>
+  <div class="flow-box mongo" style="margin-top:-40px">MongoDB<br><small>история статей</small></div>
+</div>
+
+<div class="card blue">
+  <strong>Зачем два хранилища?</strong><br><br>
+  <strong>MongoDB</strong> — долгосрочная история. Чтобы не парсить одну статью дважды (есть <code>find_news</code>) и хранить всё для анализа.<br><br>
+  <strong>RabbitMQ</strong> — очередь для <em>реального времени</em>. Другой сервис (ML-модель, уведомления, торговый бот) подписывается и получает новости мгновенно, не опрашивая БД.
+</div>
+
+<!-- ===================== SECTION 2 ===================== -->
+<h2 id="s2">2. RabbitMQ — что это и зачем</h2>
+
+<h3>Аналогия: почтовое отделение</h3>
+<p>Представь, что парсер — это курьер, который приносит письма (новости). MongoDB — это ящик, куда он сам кладёт копию каждого письма. А RabbitMQ — это <strong>почтовое отделение с сортировкой</strong>: курьер оставляет письмо там, и дальше оно само расходится по адресатам (другим программам).</p>
+
+<div class="grid2">
+  <div class="card green">
+    <h4>Без RabbitMQ</h4>
+    <ul>
+      <li>Парсер должен сам знать про всех потребителей</li>
+      <li>Если потребитель упал — данные теряются</li>
+      <li>Парсер ждёт пока потребитель обработает</li>
+    </ul>
+  </div>
+  <div class="card green">
+    <h4>С RabbitMQ</h4>
+    <ul>
+      <li>Парсер кладёт в очередь и сразу идёт дальше</li>
+      <li>Потребитель поднялся — заберёт накопившееся</li>
+      <li>Можно добавить нового потребителя без правки парсера</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Ключевые понятия RabbitMQ</h3>
+<table>
+  <tr><th>Понятие</th><th>Что это</th><th>В коде</th></tr>
+  <tr><td><strong>Exchange</strong></td><td>Точка входа сообщений. Решает, в какую очередь отправить</td><td><code>exchange=''</code> — default exchange, напрямую в очередь</td></tr>
+  <tr><td><strong>Queue (очередь)</strong></td><td>Список сообщений, ждущих обработки</td><td><code>queue_name = 'news'</code></td></tr>
+  <tr><td><strong>Producer</strong></td><td>Кто кладёт сообщения</td><td><code>RabbitSender.send()</code></td></tr>
+  <tr><td><strong>Consumer</strong></td><td>Кто забирает и обрабатывает</td><td>Отдельный сервис (в этом проекте не написан)</td></tr>
+  <tr><td><strong>durable=True</strong></td><td>Очередь выживет при перезапуске RabbitMQ</td><td><code>channel.queue_declare(durable=True)</code></td></tr>
+  <tr><td><strong>delivery_mode=2</strong></td><td>Сообщение сохраняется на диск (не теряется)</td><td><code>pika.BasicProperties(delivery_mode=2)</code></td></tr>
+</table>
+
+<h3>Реальный RabbitMQ — это реальный сервер</h3>
+<div class="card orange">
+  <strong>Да, это реальный брокер!</strong> Это отдельная программа (написана на Erlang), которая запускается как сервис — в этом проекте в отдельном Docker-контейнере. У него есть веб-интерфейс на порту <code>15672</code> (http://localhost:15672), где можно наглядно видеть очереди, сообщения, потребителей.
+</div>
+
+<!-- ===================== SECTION 3 ===================== -->
+<h2 id="s3">3. pika — Python-клиент для RabbitMQ</h2>
+
+<p><code>pika</code> — это просто Python-библиотека, которая умеет разговаривать с RabbitMQ по протоколу AMQP. Это как <code>requests</code> для HTTP, только для RabbitMQ.</p>
+
+<pre><code><span class="cmt"># rabbit_sender.py — разбираем строку за строкой</span>
+
+<span class="kw">import</span> pika  <span class="cmt"># Python-клиент для RabbitMQ</span>
+
+<span class="cmt"># 1. Описываем параметры подключения — адрес, логин, пароль</span>
+self.rabbitmq_params = pika.ConnectionParameters(
+    host=host,       <span class="cmt"># "rabbitmq" — имя контейнера в docker-compose (это как hostname)</span>
+    port=port,       <span class="cmt"># 5672 — стандартный порт AMQP</span>
+    credentials=pika.PlainCredentials(username=username, password=password)
+)
+
+<span class="kw">def</span> <span class="fn">send</span>(self, message):
+    <span class="cmt"># 2. Открываем соединение (TCP-соединение с RabbitMQ)</span>
+    connection = pika.BlockingConnection(self.rabbitmq_params)
+
+    <span class="cmt"># 3. Канал — логический поток внутри соединения</span>
+    channel = connection.channel()
+
+    <span class="cmt"># 4. Объявляем очередь (создаёт если нет, ничего не делает если есть)</span>
+    channel.queue_declare(queue=self.queue_name, durable=True)
+
+    <span class="cmt"># 5. Публикуем сообщение</span>
+    channel.basic_publish(
+        exchange='',                    <span class="cmt"># default exchange</span>
+        routing_key=self.queue_name,    <span class="cmt"># имя очереди-получателя</span>
+        body=message,                   <span class="cmt"># JSON строка с новостью</span>
+        properties=pika.BasicProperties(
+            delivery_mode=2             <span class="cmt"># persistent — не теряется при рестарте</span>
+        )
+    )
+    connection.close()  <span class="cmt"># закрываем соединение после каждого сообщения</span></code></pre>
+
+<div class="card red">
+  <span class="badge badge-red">Недостаток</span> <strong>Соединение открывается и закрывается для каждого сообщения.</strong> Это медленно — лучше было бы держать одно постоянное соединение. Но для учебного проекта — нормально.
+</div>
+
+<!-- ===================== SECTION 4 ===================== -->
+<h2 id="s4">4. MongoDB — что это и чем отличается от SQL</h2>
+
+<h3>Ты знаешь pandas + CSV — объяснение через это</h3>
+
+<div class="grid2">
+  <div class="card blue">
+    <h4>CSV / pandas (что ты знаешь)</h4>
+    <ul>
+      <li>Данные — строки и столбцы</li>
+      <li>Все строки одинаковой формы</li>
+      <li>Хранится в файле на диске</li>
+      <li>Нет встроенной защиты от двух одновременных записей</li>
+      <li>Нет индексов — поиск медленный</li>
+    </ul>
+  </div>
+  <div class="card green">
+    <h4>MongoDB (что здесь используется)</h4>
+    <ul>
+      <li>Данные — JSON-документы (dict в Python)</li>
+      <li>Каждый документ может иметь разную структуру</li>
+      <li>Хранится на сервере, поддерживает тысячи запросов в секунду</li>
+      <li>Конкурентная запись безопасна</li>
+      <li>Индексы — поиск быстрый</li>
+    </ul>
+  </div>
+</div>
+
+<h3>MongoDB vs SQL (PostgreSQL)</h3>
+<table>
+  <tr><th></th><th>SQL (PostgreSQL)</th><th>MongoDB</th></tr>
+  <tr><td>Структура</td><td>Таблицы со строгой схемой</td><td>Коллекции JSON-документов</td></tr>
+  <tr><td>Схема</td><td>Нужно заранее создать таблицу с типами</td><td>Схемы нет — пишешь что хочешь</td></tr>
+  <tr><td>Запросы</td><td>SQL язык</td><td>Python-методы: <code>find()</code>, <code>insert_one()</code></td></tr>
+  <tr><td>Связи</td><td>JOIN между таблицами</td><td>Всё в одном документе (обычно)</td></tr>
+  <tr><td>Когда лучше</td><td>Структурированные данные, транзакции</td><td>Гибкие данные, быстрый старт</td></tr>
+  <tr><td>Аналогия</td><td>Excel-таблица с жёсткими столбцами</td><td>Папка с заметками, каждая своя</td></tr>
+</table>
+
+<h3>Как MongoDB устроена внутри</h3>
+
+<pre><code><span class="cmt"># Вот что сохраняется в MongoDB при парсинге одной новости:</span>
+{
+    <span class="str">"_id"</span>: ObjectId(<span class="str">"..."</span>),              <span class="cmt"># auto-generated unique ID</span>
+    <span class="str">"reference"</span>: <span class="str">"https://www.benzinga.com/..."</span>,
+    <span class="str">"title"</span>: <span class="str">"Bitcoin surges 10% on news..."</span>,
+    <span class="str">"body"</span>: <span class="str">"The cryptocurrency market..."</span>
+}
+</code></pre>
+
+<p>MongoDB: <strong>Database</strong> → <strong>Collection</strong> → <strong>Document</strong><br>
+Аналог SQL:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Database</strong> → <strong>Table</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → <strong>Row</strong></p>
+
+<div class="card purple">
+  <strong>Почему MongoDB здесь?</strong> Новость — это JSON. В MongoDB она ложится напрямую без маппинга на таблицы. Поле <code>reference</code> легко индексировать для быстрой проверки «была ли эта новость уже»?
+</div>
+
+<!-- ===================== SECTION 5 ===================== -->
+<h2 id="s5">5. AsyncIOMotorClient — асинхронный драйвер</h2>
+
+<p><strong>motor</strong> — это Python-библиотека. Название Motor = Mon<em>go</em> + <em>asy</em>nc<em>io</em> + <em>dri</em>ver. Она нужна, чтобы работать с MongoDB через <code>async/await</code>.</p>
+
+<div class="grid2">
+  <div class="card orange">
+    <h4>pymongo (синхронный)</h4>
+    <pre style="font-size:0.82em;margin:8px 0"><code>client = MongoClient(uri)
+result = collection.find_one(...)
+<span class="cmt"># программа ЖДЁТ здесь</span></code></pre>
+    Пока MongoDB отвечает — весь парсер стоит
+  </div>
+  <div class="card green">
+    <h4>motor (асинхронный)</h4>
+    <pre style="font-size:0.82em;margin:8px 0"><code>client = AsyncIOMotorClient(uri)
+result = await collection.find_one(...)
+<span class="cmt"># программа ПРОДОЛЖАЕТ другие задачи</span></code></pre>
+    Пока MongoDB отвечает — парсер качает другие статьи
+  </div>
+</div>
+
+<pre><code><span class="cmt"># mongo_storage.py — разбираем строку за строкой</span>
+
+<span class="kw">from</span> motor.motor_asyncio <span class="kw">import</span> AsyncIOMotorClient
+
+<span class="kw">async def</span> <span class="fn">connect</span>(self):
+    <span class="cmt"># Создаём async клиент — не блокирует event loop</span>
+    client = AsyncIOMotorClient(self.mongo_uri)
+    db = client.get_database(self.db_name)  <span class="cmt"># db = "parser_db"</span>
+    <span class="kw">return</span> db
+
+<span class="kw">async def</span> <span class="fn">save</span>(self, news_entry):
+    db = <span class="kw">await</span> self.connect()
+    collection = db.get_collection(self.collection_name)  <span class="cmt"># коллекция "news"</span>
+    <span class="kw">await</span> collection.insert_one(news_entry)  <span class="cmt"># вставляем документ</span>
+
+<span class="kw">async def</span> <span class="fn">find_news</span>(self, reference):
+    db = <span class="kw">await</span> self.connect()
+    collection = db.get_collection(self.collection_name)
+    <span class="cmt"># count_documents({поиск}) > 0 — проверяем: была ли уже такая ссылка?</span>
+    <span class="kw">return await</span> collection.count_documents({<span class="str">"reference"</span>: reference}) > <span class="num">0</span></code></pre>
+
+<div class="card red">
+  <span class="badge badge-red">Недостаток</span> <code>connect()</code> создаёт нового клиента при каждом вызове. Лучше создать клиент один раз в <code>__init__</code> и переиспользовать. Но для учебного проекта — работает.
+</div>
+
+<!-- ===================== SECTION 6 ===================== -->
+<h2 id="s6">6. Dockerfile — образ и контейнер подробно</h2>
+
+<h3>Главная аналогия: рецепт и блюдо</h3>
+<div class="card blue">
+  <strong>Dockerfile</strong> = кулинарный рецепт (инструкция что и как делать)<br>
+  <strong>Image (образ)</strong> = приготовленное блюдо в вакуумной упаковке (можно хранить, копировать)<br>
+  <strong>Container (контейнер)</strong> = блюдо, которое вынули из упаковки и едят (работающий процесс)
+</div>
+
+<h3>Что такое образ технически</h3>
+<p>Образ — это <strong>набор слоёв (layers)</strong>. Каждая инструкция Dockerfile создаёт один слой. Слои кэшируются — если ничего не изменилось, Docker не пересобирает слой заново.</p>
+
+<h3>Полный разбор Dockerfile проекта</h3>
+
+<pre><code><span class="kw">FROM</span> python:3.11-slim
+<span class="kw">WORKDIR</span> /app
+<span class="kw">COPY</span> requirements.txt .
+<span class="kw">RUN</span> pip install --no-cache-dir -r requirements.txt
+<span class="kw">COPY</span> . .
+<span class="kw">CMD</span> ["python", "src/app.py"]</code></pre>
+
+<div class="card" style="padding: 0; overflow: hidden;">
+  <div class="dockerfile-line" style="padding: 16px 20px; background: var(--panel2);">
+    <div class="dkr-cmd">FROM</div>
+    <div class="dkr-desc">
+      <code>FROM python:3.11-slim</code><br>
+      <strong>Берём базовый образ.</strong> Docker скачивает готовый образ с Linux + Python 3.11. <code>slim</code> — урезанная версия без лишних инструментов (меньше весит, более безопасна).<br>
+      <span class="note">Аналог: берёшь чистую ОС с уже установленным Python</span>
+    </div>
+  </div>
+  <div class="dockerfile-line" style="padding: 16px 20px;">
+    <div class="dkr-cmd">WORKDIR</div>
+    <div class="dkr-desc">
+      <code>WORKDIR /app</code><br>
+      <strong>Устанавливаем рабочую директорию внутри контейнера.</strong> Все последующие команды (COPY, RUN, CMD) выполняются относительно этого пути. Если папки нет — создаётся автоматически.<br><br>
+      <strong>Почему <code>/app</code>, а не <code>/usr/src/myapp</code>?</strong> Чисто соглашение. <code>/app</code> — современный стандарт, коротко и понятно. <code>/usr/src/myapp</code> — тоже валидно, но устарело. Главное — быть последовательным.<br>
+      <span class="note">Это директория ВНУТРИ контейнера, не на твоём компьютере</span>
+    </div>
+  </div>
+  <div class="dockerfile-line" style="padding: 16px 20px; background: var(--panel2);">
+    <div class="dkr-cmd">COPY</div>
+    <div class="dkr-desc">
+      <code>COPY requirements.txt .</code><br>
+      <strong>Копирует файл(ы) с твоего компьютера (хоста) в образ.</strong><br>
+      Синтаксис: <code>COPY &lt;откуда_на_хосте&gt; &lt;куда_в_образе&gt;</code><br>
+      Точка <code>.</code> означает «в текущую директорию» = в <code>/app</code> (потому что WORKDIR /app).<br><br>
+      <strong>Почему сначала только requirements.txt, а не всё сразу?</strong><br>
+      <span class="badge badge-blue">Кэширование слоёв!</span> Docker кэширует каждый слой. Если ты изменил код (app.py), но не изменил requirements.txt — Docker не будет переустанавливать пакеты, возьмёт из кэша. Это экономит минуты при каждой пересборке.
+    </div>
+  </div>
+  <div class="dockerfile-line" style="padding: 16px 20px;">
+    <div class="dkr-cmd">RUN</div>
+    <div class="dkr-desc">
+      <code>RUN pip install --no-cache-dir -r requirements.txt</code><br>
+      <strong>Выполняет команду при сборке образа</strong> (не при запуске).<br><br>
+      <code>--no-cache-dir</code> — не сохранять кэш pip <em>внутри образа</em>. Пакеты уже установлены, кэш больше не нужен → образ меньше весит. Это НЕ про кэш Docker-слоёв — это про pip-кэш внутри контейнера.<br><br>
+      <span class="note">Слой с пакетами создаётся один раз. Пока requirements.txt не меняется — Docker берёт этот слой из кэша при каждой пересборке.</span>
+    </div>
+  </div>
+  <div class="dockerfile-line" style="padding: 16px 20px; background: var(--panel2);">
+    <div class="dkr-cmd">COPY . .</div>
+    <div class="dkr-desc">
+      <code>COPY . .</code><br>
+      <strong>Копирует всё остальное</strong> — весь код проекта (src/, Dockerfile, etc.) в <code>/app</code>.<br>
+      Первая точка — корень проекта на хосте (там где Dockerfile).<br>
+      Вторая точка — <code>/app</code> в образе.<br><br>
+      Этот слой пересоздаётся каждый раз при изменении кода — это нормально и быстро.
+    </div>
+  </div>
+  <div class="dockerfile-line" style="padding: 16px 20px;">
+    <div class="dkr-cmd">CMD</div>
+    <div class="dkr-desc">
+      <code>CMD ["python", "src/app.py"]</code><br>
+      <strong>Команда, которая запустится при старте контейнера.</strong><br>
+      Это не выполняется при сборке образа — только при <code>docker run</code>.<br>
+      Формат JSON-массива предпочтителен (не <code>CMD python src/app.py</code>) — он не использует shell, процесс стартует напрямую.<br><br>
+      <span class="note">Итог: контейнер запускается → Python запускает src/app.py → парсер работает</span>
+    </div>
+  </div>
+</div>
+
+<h3>EXPOSE — почему его нет здесь?</h3>
+<div class="card orange">
+  <code>EXPOSE 8080</code> — документационная инструкция. Она говорит "этот контейнер слушает порт 8080", но <strong>ничего не открывает сама по себе</strong>. Реально открывают порты флаги <code>-p</code> в <code>docker run</code> или секция <code>ports</code> в docker-compose.<br><br>
+  Парсеру не нужно принимать входящие запросы — он сам ходит в интернет. Поэтому EXPOSE не нужен.
+</div>
+
+<h3>Образ vs контейнер — финальное понимание</h3>
+<table>
+  <tr><th>Действие</th><th>Команда</th><th>Что происходит</th></tr>
+  <tr><td>Собрать образ</td><td><code>docker build -t parser_app .</code></td><td>Dockerfile выполняется строка за строкой, создаётся image</td></tr>
+  <tr><td>Запустить контейнер</td><td><code>docker run parser_app</code></td><td>Из image создаётся рабочий контейнер, запускается CMD</td></tr>
+  <tr><td>docker-compose up</td><td><code>docker-compose up -d</code></td><td>Собирает образы (если надо) + запускает все контейнеры</td></tr>
+</table>
+
+<div class="card green">
+  <strong>Твоё понимание верное:</strong> Dockerfile = рецепт всего. Он объединяет: базовый образ + установку пакетов + копирование кода + команду запуска. Без него пришлось бы делать всё по шагам вручную через <code>docker exec</code>.
+</div>
+
+<!-- ===================== SECTION 7 ===================== -->
+<h2 id="s7">7. docker-compose.yml — оркестрация трёх контейнеров</h2>
+
+<p><strong>docker-compose</strong> — инструмент для запуска нескольких контейнеров как одного приложения. Вместо трёх команд <code>docker run</code> — один файл и одна команда.</p>
+
+<h3>Полный разбор docker-compose.yml</h3>
+
+<pre><code><span class="kw">version</span>: <span class="str">'3'</span>  <span class="cmt"># версия формата файла (не версия docker-compose)</span>
+
+<span class="kw">services</span>:   <span class="cmt"># список контейнеров которые будут созданы</span>
+
+  <span class="cls">web_app</span>:                 <span class="cmt"># имя сервиса (придуманное нами)</span>
+    <span class="kw">build</span>:
+      <span class="kw">context</span>: .           <span class="cmt"># папка, которую передать Docker при сборке</span>
+      <span class="kw">dockerfile</span>: Dockerfile <span class="cmt"># какой Dockerfile использовать</span>
+    <span class="kw">depends_on</span>:
+      - mongo               <span class="cmt"># запустить mongo ПЕРЕД web_app</span>
+      - rabbitmq            <span class="cmt"># запустить rabbitmq ПЕРЕД web_app</span>
+    <span class="kw">networks</span>:
+      - parser_network      <span class="cmt"># подключить к внутренней сети</span>
+    <span class="kw">env_file</span>:
+      - .env                <span class="cmt"># передать переменные окружения из .env</span>
+
+  <span class="cls">mongo</span>:                   <span class="cmt"># MongoDB сервис</span>
+    <span class="kw">image</span>: mongo:7.0.4-jammy <span class="cmt"># готовый образ с Docker Hub (не собираем сами)</span>
+    <span class="kw">container_name</span>: mongo-container
+    <span class="kw">ports</span>:
+      - <span class="str">"27017:27017"</span>        <span class="cmt"># хост:контейнер — открываем для внешнего доступа</span>
+    <span class="kw">environment</span>:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: user
+    <span class="kw">volumes</span>:
+      - mongo_data:/data/db  <span class="cmt"># сохраняем данные за пределами контейнера</span>
+    <span class="kw">networks</span>:
+      - parser_network
+
+  <span class="cls">rabbitmq</span>:
+    <span class="kw">image</span>: rabbitmq:management <span class="cmt"># готовый образ с веб-интерфейсом</span>
+    <span class="kw">container_name</span>: rabbitmq-container
+    <span class="kw">ports</span>:
+      - <span class="str">"5672:5672"</span>          <span class="cmt"># AMQP порт — для подключения pika</span>
+      - <span class="str">"15672:15672"</span>        <span class="cmt"># HTTP UI — http://localhost:15672</span>
+    <span class="kw">environment</span>:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: user
+    <span class="kw">networks</span>:
+      - parser_network
+
+<span class="kw">networks</span>:
+  <span class="cls">parser_network</span>:
+    <span class="kw">driver</span>: bridge          <span class="cmt"># тип сети: изолированная внутренняя сеть</span>
+
+<span class="kw">volumes</span>:
+  <span class="cls">mongo_data</span>:              <span class="cmt"># именованный том — Docker управляет сам</span></code></pre>
+
+<h3>build vs image — в чём разница</h3>
+<div class="grid2">
+  <div class="card blue">
+    <h4><code>build:</code></h4>
+    Говорит: "собери образ сам из Dockerfile"<br>
+    Используется для <strong>твоего кода</strong><br>
+    <code>context: .</code> — отдай всю текущую папку
+  </div>
+  <div class="card blue">
+    <h4><code>image:</code></h4>
+    Говорит: "скачай готовый образ с Docker Hub"<br>
+    Используется для <strong>сторонних сервисов</strong><br>
+    <code>image: mongo:7.0.4-jammy</code> — официальный образ MongoDB
+  </div>
+</div>
+
+<h3>Оптимально ли 3 контейнера для парсера?</h3>
+<div class="card orange">
+  <strong>Да, это стандартная и правильная архитектура.</strong> Каждый контейнер — одна ответственность (Single Responsibility на уровне инфраструктуры):<br><br>
+  <ul>
+    <li>Обновить версию MongoDB? Меняешь только mongo-контейнер</li>
+    <li>Парсер упал? MongoDB и RabbitMQ продолжают работать, данные не теряются</li>
+    <li>Хочешь добавить второй парсер? Запускаешь ещё один web_app контейнер</li>
+    <li>Масштабируешь MongoDB отдельно? Легко</li>
+  </ul>
+  Альтернатива — один монолитный контейнер со всем. Проще, но теряешь всё вышеперечисленное.
+</div>
+
+<!-- ===================== SECTION 8 ===================== -->
+<h2 id="s8">8. Порты, тома (volumes), сети (networks) — подробно</h2>
+
+<h3>🔌 Порты</h3>
+
+<p>Каждый контейнер живёт в своей изоляции. По умолчанию снаружи к нему не достучаться. Порты — это "дыры" в этой изоляции.</p>
+
+<pre><code><span class="kw">ports</span>:
+  - <span class="str">"27017:27017"</span>
+<span class="cmt">#   ↑        ↑
+#   |        └── порт ВНУТРИ контейнера (слушает MongoDB)
+#   └─────────── порт на ТВОЁМ компьютере (хосте)</span>
+
+<span class="kw">ports</span>:
+  - <span class="str">"15672:15672"</span>  <span class="cmt"># http://localhost:15672 — веб-интерфейс RabbitMQ</span>
+  - <span class="str">"5672:5672"</span>   <span class="cmt"># pika подключается: host="localhost", port=5672</span></code></pre>
+
+<div class="card blue">
+  <strong>Внутри docker-сети (parser_network) порты открывать не нужно!</strong><br>
+  Контейнеры в одной сети общаются напрямую по имени сервиса:<br><br>
+  <code>parser → rabbitmq:5672</code> (внутри сети, без проброса портов)<br>
+  <code>ты → localhost:5672</code> (снаружи, через проброс портов)<br><br>
+  Вот почему в .env пишут <code>RABBITMQ_HOST=rabbitmq</code> — это имя сервиса в compose, оно работает как DNS-имя внутри сети.
+</div>
+
+<h3>💾 Volumes (тома)</h3>
+
+<p>Контейнер — ephemeral (временный). Если удалить контейнер MongoDB — все данные исчезнут. Том решает это.</p>
+
+<pre><code><span class="cmt"># Именованный том (named volume) — Docker сам управляет</span>
+<span class="kw">volumes</span>:
+  - mongo_data:/data/db
+<span class="cmt">#   ↑           ↑
+#   |           └── где MongoDB хранит данные ВНУТРИ контейнера
+#   └─────────────── имя тома на хосте (Docker управляет расположением)</span>
+
+<span class="cmt"># Объявление тома в конце файла:</span>
+<span class="kw">volumes</span>:
+  <span class="cls">mongo_data</span>:  <span class="cmt"># создаёт управляемое хранилище</span></code></pre>
+
+<div class="grid2">
+  <div class="card green">
+    <h4>Named Volume (здесь)</h4>
+    <code>mongo_data:/data/db</code><br>
+    Docker сам выбирает где на хосте хранить<br>
+    Живёт между пересозданиями контейнера<br>
+    <span class="note">Обычно в /var/lib/docker/volumes/</span>
+  </div>
+  <div class="card orange">
+    <h4>Bind Mount (альтернатива)</h4>
+    <code>/home/user/data:/data/db</code><br>
+    Ты указываешь конкретную папку на хосте<br>
+    Удобно для разработки (видишь файлы напрямую)
+  </div>
+</div>
+
+<p><strong>Вывод:</strong> удали контейнер <code>mongo</code>, запусти снова — все новости на месте, потому что данные в томе <code>mongo_data</code>, а не в контейнере.</p>
+
+<h3>🌐 Networks (сети)</h3>
+
+<p>Без явной сети контейнеры не видят друг друга по имени. Сеть создаёт изолированное виртуальное пространство.</p>
+
+<pre><code><span class="kw">networks</span>:
+  <span class="cls">parser_network</span>:
+    <span class="kw">driver</span>: bridge
+<span class="cmt"># bridge = стандартная изолированная сеть
+# Все контейнеры в ней видят друг друга по имени сервиса</span></code></pre>
+
+<div class="card blue">
+  <strong>Как работает DNS внутри сети:</strong><br>
+  Когда парсер подключается к RabbitMQ, он использует хост <code>rabbitmq</code> (имя сервиса).<br>
+  Docker автоматически резолвит <code>rabbitmq</code> → IP-адрес контейнера.<br>
+  Это как /etc/hosts, но автоматически.
+</div>
+
+<h3>Итоговая схема сетевого взаимодействия</h3>
+<pre><code><span class="cmt">┌─────────────────────────────────────────────────┐
+│  parser_network (Docker bridge network)          │
+│                                                   │
+│  ┌──────────┐  rabbitmq:5672  ┌───────────────┐  │
+│  │ web_app  │ ─────────────→  │   rabbitmq    │  │
+│  │ (parser) │                 │ (контейнер)   │  │
+│  │          │  mongo:27017    └───────────────┘  │
+│  │          │ ─────────────→  ┌───────────────┐  │
+│  └──────────┘                 │     mongo     │  │
+│                               │ (контейнер)   │  │
+└───────────────────────────────└───────────────┘──┘
+        ↑                              ↑
+        │                    localhost:27017 (снаружи)
+   benzinga.com              localhost:5672 (снаружи)
+   (интернет)                localhost:15672 (веб UI)</span></code></pre>
+
+<!-- ===================== SECTION 8.5 ===================== -->
+<h2 id="s85">8.5. .env файл — как конфигурация попадает в контейнеры</h2>
+
+<p>Вот полный <code>.env</code> этого проекта:</p>
+
+<pre><code><span class="cmt"># RabbitMQ</span>
+RABBITMQ_HOST=<span class="str">"rabbitmq-container"</span>   <span class="cmt"># имя контейнера из docker-compose</span>
+RABBITMQ_PORT=<span class="str">"5672"</span>
+RABBITMQ_USERNAME=<span class="str">"&lt;your_username&gt;"</span>
+RABBITMQ_PASSWORD=<span class="str">"&lt;your_password&gt;"</span>
+RABBITMQ_QUEUE_NAME=<span class="str">"news_queue"</span>
+
+<span class="cmt"># MongoDB</span>
+MONGO_USER=<span class="str">"&lt;your_username&gt;"</span>
+MONGO_PASSWORD=<span class="str">"&lt;your_password&gt;"</span>
+MONGO_HOST=<span class="str">"mongo-container"</span>           <span class="cmt"># имя контейнера из docker-compose</span>
+MONGO_PORT=<span class="str">"27017"</span>
+MONGO_DB_NAME=<span class="str">"&lt;your_db_name&gt;"</span>
+MONGO_COLLECTION_NAME=<span class="str">"&lt;your_collection&gt;"</span>
+
+DELAY_TIME=<span class="str">"5"</span></code></pre>
+
+<h3>Разбор каждой переменной</h3>
+<table>
+  <tr><th>Переменная</th><th>Значение</th><th>Почему именно так</th></tr>
+  <tr>
+    <td><code>RABBITMQ_HOST</code></td>
+    <td><code>rabbitmq-container</code></td>
+    <td>Это <code>container_name</code> из docker-compose. Внутри docker-сети контейнеры находят друг друга по этому имени. <strong>Не</strong> <code>localhost</code> — парсер и RabbitMQ в разных контейнерах.</td>
+  </tr>
+  <tr>
+    <td><code>RABBITMQ_PORT</code></td>
+    <td><code>5672</code></td>
+    <td>Стандартный AMQP порт. Внутри docker-сети пробрасывать не нужно — порт открыт между контейнерами напрямую.</td>
+  </tr>
+  <tr>
+    <td><code>RABBITMQ_QUEUE_NAME</code></td>
+    <td><code>news_queue</code></td>
+    <td>Придуманное нами имя очереди. Должно совпадать у producer (парсер) и consumer (любой читатель очереди).</td>
+  </tr>
+  <tr>
+    <td><code>MONGO_HOST</code></td>
+    <td><code>mongo-container</code></td>
+    <td>Аналогично — <code>container_name</code> MongoDB в docker-compose. Из него строится URI: <code>mongodb://user:user@mongo-container:27017</code></td>
+  </tr>
+  <tr>
+    <td><code>MONGO_DB_NAME</code></td>
+    <td><code>Storage</code></td>
+    <td>Название базы данных. MongoDB создаст её автоматически при первой записи.</td>
+  </tr>
+  <tr>
+    <td><code>MONGO_COLLECTION_NAME</code></td>
+    <td><code>News</code></td>
+    <td>Название коллекции (≈ таблица в SQL). Тоже создаётся автоматически.</td>
+  </tr>
+  <tr>
+    <td><code>DELAY_TIME</code></td>
+    <td><code>5</code></td>
+    <td>Пауза между итерациями парсинга в секундах. В <code>config.py</code>: <code>int(os.getenv('DELAY_TIME'))</code> — конвертируется из строки в число.</td>
+  </tr>
+</table>
+
+<h3>Как .env попадает в контейнер — цепочка</h3>
+
+<pre><code><span class="cmt"># Шаг 1 — docker-compose.yml читает .env и передаёт в контейнер:</span>
+<span class="kw">env_file</span>:
+  - .env   <span class="cmt"># все KEY=VALUE из файла становятся переменными окружения контейнера</span>
+
+<span class="cmt"># Шаг 2 — config.py читает переменные окружения:</span>
+<span class="kw">from</span> dotenv <span class="kw">import</span> load_dotenv
+load_dotenv()  <span class="cmt"># нужно если запускаешь БЕЗ docker (локально)</span>
+
+RABBITMQ_HOST = os.getenv(<span class="str">'RABBITMQ_HOST'</span>)  <span class="cmt"># → "rabbitmq-container"</span>
+MONGO_URI = <span class="fn">f</span><span class="str">"mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}"</span>
+<span class="cmt"># → "mongodb://user:user@mongo-container:27017"</span>
+
+<span class="cmt"># Шаг 3 — app.py использует константы из config:</span>
+rabbit = RabbitSender(host=config.RABBITMQ_HOST, ...)  <span class="cmt"># host="rabbitmq-container"</span>
+mongo  = MongoStorage(mongo_uri=config.MONGO_URI, ...)  <span class="cmt"># uri собран из частей</span></code></pre>
+
+<div class="card orange">
+  <strong>Зачем нужен <code>load_dotenv()</code> если docker-compose уже передаёт переменные?</strong><br><br>
+  Если запускаешь <strong>через docker-compose</strong> — <code>load_dotenv()</code> не нужен, переменные уже в окружении контейнера.<br>
+  Если запускаешь <strong>локально</strong> без Docker (<code>python src/app.py</code>) — нужен, чтобы прочитать .env файл.<br><br>
+  Библиотека <code>python-dotenv</code> умная: если переменная уже есть в окружении — не перезаписывает. Поэтому код работает в обоих сценариях.
+</div>
+
+<div class="card red">
+  <span class="badge badge-red">Безопасность</span>
+  <strong>.env должен быть в .gitignore!</strong><br><br>
+  Этот репо публичный. Если закоммитить .env с реальными паролями — они попадут в интернет навсегда (даже если потом удалишь коммит, история сохраняется).<br><br>
+  В репо кладут <code>.env.example</code> с заглушками:
+  <pre style="margin-top:10px"><code>RABBITMQ_HOST=your_container_name
+RABBITMQ_PASSWORD=your_password
+...</code></pre>
+  А <code>.env</code> с реальными значениями — только локально.
+</div>
+
+<h3>Итог: .env связывает docker-compose ↔ Python код</h3>
+<pre><code><span class="cmt">docker-compose.yml              .env                     config.py
+──────────────────             ──────────────────        ──────────────────
+container_name:            →   RABBITMQ_HOST=         →  os.getenv(...)
+  rabbitmq-container             rabbitmq-container
+
+ports: "5672:5672"         →   RABBITMQ_PORT=5672     →  pika.ConnectionParameters(
+                                                            host=RABBITMQ_HOST,
+environment:               →   RABBITMQ_USERNAME=***      port=RABBITMQ_PORT,
+  RABBITMQ_DEFAULT_USER:         RABBITMQ_PASSWORD=***     credentials=...
+    ***                                                   )</span></code></pre>
+
+<!-- ===================== SECTION 9 ===================== -->
+<h2 id="s9">9. Архитектура + SOLID — что хорошо и что плохо</h2>
+
+<h3>Принципы SOLID</h3>
+
+<div class="solid-card">
+  <span class="solid-letter">S</span><strong>ingle Responsibility</strong> — каждый класс делает одно дело<br>
+  <span class="note">Parser парсит. RabbitSender отправляет. MongoStorage сохраняет. Они не смешаны.</span>
+</div>
+<div class="solid-card">
+  <span class="solid-letter">O</span><strong>pen/Closed</strong> — открыт для расширения, закрыт для изменения<br>
+  <span class="note">Чтобы добавить PostgreSQL — создаёшь PostgresStorage, не трогаешь Parser</span>
+</div>
+<div class="solid-card">
+  <span class="solid-letter">L</span><strong>iskov Substitution</strong> — подкласс заменяем без поломки<br>
+  <span class="note">MongoStorage и любой другой DatabaseStorage взаимозаменяемы для Parser</span>
+</div>
+<div class="solid-card">
+  <span class="solid-letter">I</span><strong>nterface Segregation</strong> — интерфейс не должен быть жирным<br>
+  <span class="note">MessageBroker имеет только send(). DatabaseStorage — connect/save/find_news. Минимально необходимое.</span>
+</div>
+<div class="solid-card">
+  <span class="solid-letter">D</span><strong>ependency Inversion</strong> — зависи от абстракций, не от конкретных классов<br>
+  <span class="badge badge-green">Главный принцип здесь!</span><br>
+  Parser не импортирует RabbitSender или MongoStorage. Он работает с интерфейсами MessageBroker и DatabaseStorage.
+</div>
+
+<h3>Dependency Injection на примере</h3>
+
+<pre><code><span class="cmt"># ❌ БЕЗ DI — Parser сам создаёт зависимости (плохо)</span>
+<span class="kw">class</span> <span class="cls">Parser</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self.broker = RabbitSender(...)   <span class="cmt"># жёсткая зависимость</span>
+        self.storage = MongoStorage(...)  <span class="cmt"># не заменишь без правки Parser</span>
+
+<span class="cmt"># ✅ С DI — зависимости передаются снаружи (хорошо)</span>
+<span class="kw">class</span> <span class="cls">Parser</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, *, message_broker: <span class="cls">MessageBroker</span>, database_storage: <span class="cls">DatabaseStorage</span>):
+        self.message_broker = message_broker    <span class="cmt"># любой MessageBroker</span>
+        self.database_storage = database_storage <span class="cmt"># любой DatabaseStorage</span>
+
+<span class="cmt"># В тестах можно передать Mock-объекты вместо реальных</span>
+<span class="cmt"># В продакшне передаётся реальный RabbitSender и MongoStorage</span></code></pre>
+
+<h3>Что сделано хорошо</h3>
+<div class="card green">
+  <ul>
+    <li><span class="badge badge-green">✓</span> <strong>Интерфейсы (Interfaces.py)</strong> — чёткие контракты для брокера и хранилища</li>
+    <li><span class="badge badge-green">✓</span> <strong>Dependency Injection</strong> — Parser не знает о MongoDB/RabbitMQ конкретно</li>
+    <li><span class="badge badge-green">✓</span> <strong>async/await</strong> — параллельная загрузка статей через <code>asyncio.gather()</code></li>
+    <li><span class="badge badge-green">✓</span> <strong>Config через env</strong> — все настройки в .env, нет хардкода</li>
+    <li><span class="badge badge-green">✓</span> <strong>durable=True + delivery_mode=2</strong> — сообщения не теряются при рестарте</li>
+    <li><span class="badge badge-green">✓</span> <strong>Дедупликация</strong> — <code>find_news()</code> проверяет, была ли уже эта статья</li>
+  </ul>
+</div>
+
+<h3>Что сделано плохо / можно улучшить</h3>
+<div class="card red">
+  <ul>
+    <li><span class="badge badge-red">✗</span> <strong><code>time.sleep()</code> в async коде</strong> — блокирует event loop. Нужно <code>await asyncio.sleep()</code></li>
+    <li><span class="badge badge-red">✗</span> <strong>Соединение с RabbitMQ при каждом сообщении</strong> — медленно. Лучше переиспользовать соединение</li>
+    <li><span class="badge badge-red">✗</span> <strong>Новый клиент MongoDB при каждом вызове <code>connect()</code></strong> — лишние ресурсы. Один клиент в <code>__init__</code></li>
+    <li><span class="badge badge-red">✗</span> <strong><code>depends_on</code> не ждёт готовности сервиса</strong> — только запуска контейнера. Поэтому в app.py есть <code>time.sleep(5)</code> — костыль. Правильно: healthcheck</li>
+    <li><span class="badge badge-red">✗</span> <strong>MessageBroker.send() — синхронный в async коде</strong> — интерфейс не согласован с <code>async def run()</code></li>
+  </ul>
+</div>
+
+<h3>Итоговая карта проекта</h3>
+<pre><code><span class="cmt">📁 Parser/
+│
+├── 🐳 Dockerfile          ← рецепт образа для web_app
+├── 🐳 docker-compose.yml  ← оркестрация: web_app + mongo + rabbitmq
+├── 📄 requirements.txt    ← зависимости Python
+├── 🔐 .env                ← секреты (не в git!)
+│
+└── 📁 src/
+    ├── config.py          ← читает .env, создаёт logger
+    ├── Interfaces.py      ← абстрактные классы (контракты)
+    ├── parser.py          ← ядро: HTTP → HTML → BeautifulSoup → данные
+    ├── rabbit_sender.py   ← реализация MessageBroker через pika
+    ├── mongo_storage.py   ← реализация DatabaseStorage через motor
+    └── app.py             ← точка входа: собирает всё вместе, запускает цикл</span></code></pre>
+
+<div class="card purple" style="margin-top: 32px; padding: 20px 24px;">
+  <strong>Главный паттерн проекта:</strong><br><br>
+  <code>Интерфейсы.py</code> → определяют контракт<br>
+  <code>rabbit_sender.py / mongo_storage.py</code> → реализуют контракт<br>
+  <code>app.py</code> → создаёт реализации и передаёт в Parser<br>
+  <code>parser.py</code> → работает только с контрактами, ничего не знает о RabbitMQ/MongoDB<br><br>
+  Это <strong>Dependency Inversion + Dependency Injection</strong> — самый важный паттерн из SOLID для подобных систем.
+</div>
+
+</div>
+
+<!-- ===================== SECTION 10 ===================== -->
+<div class="wrapper" style="padding-top: 0;">
+<h2 id="s10">10. Проверка понимания — что верно, что нужно уточнить</h2>
+
+<p>Разбор твоих слов по пунктам:</p>
+
+<h3>✅ Образ — скачали, наполнили, готов</h3>
+<div class="card green">
+  <strong>Верно.</strong> Процесс такой:<br><br>
+  <ol>
+    <li><code>FROM python:3.11-slim</code> — Docker скачивает базовый образ с Docker Hub (один раз, кэшируется)</li>
+    <li>Каждая инструкция Dockerfile добавляет слой поверх</li>
+    <li><code>docker build -t parser_app .</code> — собирается финальный образ и живёт на твоём компьютере</li>
+  </ol>
+  Образ — это <strong>неизменяемый снапшот</strong>. Его можно запускать сколько угодно раз, он не меняется.
+</div>
+
+<h3>✅ При запуске контейнера всё уже загружено, запускается только программа</h3>
+<div class="card green">
+  <strong>Верно.</strong> Когда делаешь <code>docker run</code> (или <code>docker-compose up</code>):<br><br>
+  <ul>
+    <li>Docker берёт готовый образ (пакеты уже установлены)</li>
+    <li>Создаёт из него контейнер (изолированный процесс)</li>
+    <li>Запускает <code>CMD ["python", "src/app.py"]</code></li>
+  </ul>
+  Никакой установки пакетов при старте — всё уже внутри образа. Контейнер стартует быстро.
+</div>
+
+<h3>✅ Образ кэшируется, не надо пересобирать если ничего не менялось</h3>
+<div class="card green">
+  <strong>Верно, и это важно понять точнее:</strong> Docker кэширует <em>слои</em>. Каждая строка Dockerfile — слой.<br><br>
+  <pre><code><span class="kw">FROM</span> python:3.11-slim        <span class="cmt">← слой 1 (кэш: скачан один раз)</span>
+<span class="kw">WORKDIR</span> /app                 <span class="cmt">← слой 2 (кэш)</span>
+<span class="kw">COPY</span> requirements.txt .      <span class="cmt">← слой 3 (кэш: пока requirements.txt не изменился)</span>
+<span class="kw">RUN</span> pip install ...          <span class="cmt">← слой 4 (кэш: самый долгий — пакеты)</span>
+<span class="kw">COPY</span> . .                     <span class="cmt">← слой 5 (ПЕРЕСОБИРАЕТСЯ при каждом изменении кода)</span>
+<span class="kw">CMD</span> [...]                    <span class="cmt">← слой 6</span></code></pre>
+  Изменил <code>parser.py</code>? Пересобираются только слои 5–6. Слои 1–4 берутся из кэша за секунды.
+</div>
+
+<h3>✅ docker-compose — не нужно руками запускать каждый контейнер</h3>
+<div class="card green">
+  <strong>Верно.</strong> Без compose пришлось бы:<br><br>
+  <pre><code><span class="cmt"># Вручную — боль</span>
+docker network create parser_network
+docker volume create mongo_data
+docker run -d --name mongo-container --network parser_network \
+  -e MONGO_INITDB_ROOT_USERNAME=user -e MONGO_INITDB_ROOT_PASSWORD=user \
+  -p 27017:27017 -v mongo_data:/data/db mongo:7.0.4-jammy
+docker run -d --name rabbitmq-container --network parser_network \
+  -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=user \
+  -p 5672:5672 -p 15672:15672 rabbitmq:management
+docker build -t parser_app .
+docker run -d --network parser_network --env-file .env parser_app
+
+<span class="cmt"># С compose — одна команда</span>
+docker-compose up -d</code></pre>
+</div>
+
+<h3>✅ Контейнеры общаются через порты и сеть</h3>
+<div class="card green">
+  <strong>Верно.</strong> Контейнер — изолированный процесс. Два способа связи:<br><br>
+  <strong>Внутри docker-сети</strong> — по имени сервиса, без явного открытия портов:<br>
+  <code>web_app → rabbitmq:5672</code> (работает внутри parser_network)<br><br>
+  <strong>Снаружи</strong> — только через проброс портов (<code>ports:</code> в compose):<br>
+  <code>ты → localhost:5672</code> (ты на хосте заходишь в RabbitMQ)
+</div>
+
+<h3>⚠️ Про порты на сервере — небольшое уточнение</h3>
+<div class="card orange">
+  Ты написал: <em>"подключаюсь к серверу... localhost:portnumber"</em><br><br>
+  <strong>Точнее так:</strong><br><br>
+  <table>
+    <tr><th>Сценарий</th><th>Адрес</th></tr>
+    <tr><td>Ты на том же сервере (через SSH)</td><td><code>localhost:27017</code> ✓</td></tr>
+    <tr><td>Ты со своего компьютера к серверу</td><td><code>123.45.67.89:27017</code> (IP сервера)</td></tr>
+    <tr><td>Внутри docker-сети (контейнер→контейнер)</td><td><code>mongo:27017</code> (имя сервиса)</td></tr>
+  </table>
+  <br>
+  <strong>Важно:</strong> если ты открыл порт <code>27017</code> на сервере — он торчит в интернет. MongoDB без пароля + открытый порт = катастрофа. В проекте пароль есть (<code>MONGO_INITDB_ROOT_PASSWORD</code>) — хорошо. В продакшне порты БД обычно <em>не открывают</em> наружу — только приложение внутри docker-сети имеет доступ.
+</div>
+
+<h3>✅ Volumes — данные живут вне контейнера</h3>
+<div class="card green">
+  <strong>Верно.</strong> Ключевая идея: контейнер — <strong>одноразовый</strong>. Можно удалить, пересоздать, обновить — не страшно.<br><br>
+  <pre><code><span class="cmt"># Без volume — данные в контейнере:</span>
+docker rm mongo-container → все данные MongoDB исчезли навсегда
+
+<span class="cmt"># С volume:</span>
+<span class="kw">volumes</span>:
+  - mongo_data:/data/db
+<span class="cmt"># /data/db (внутри контейнера) = mongo_data (том на хосте)
+# docker rm mongo-container → данные остались в томе mongo_data
+# docker-compose up → новый контейнер подключился к тому → все данные на месте</span></code></pre>
+  <br>
+  <strong>Путь внутри контейнера</strong> <code>/data/db</code> — это стандарт MongoDB, она всегда пишет туда.<br>
+  <strong>Том <code>mongo_data</code></strong> — Docker сам решает где хранить на хосте (обычно <code>/var/lib/docker/volumes/mongo_data/</code>).
+</div>
+
+<h3>Итоговая схема жизненного цикла</h3>
+<pre><code><span class="cmt">СБОРКА (один раз, или при изменении кода):
+  Dockerfile → docker build → Image (лежит на диске, неизменяем)
+
+ЗАПУСК (каждый раз):
+  Image → docker run / docker-compose up → Container (живой процесс)
+
+ДАННЫЕ:
+  Container (ephemeral) ←→ Volume (persistent, на хосте)
+
+СВЯЗЬ МЕЖДУ КОНТЕЙНЕРАМИ:
+  Все в одной network → видят друг друга по имени сервиса
+
+СВЯЗЬ СНАРУЖИ:
+  ports: "HOST:CONTAINER" → localhost:PORT (локально) или IP:PORT (сервер)</span></code></pre>
+
+</div>
+</body>
+</html>
