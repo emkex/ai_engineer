@@ -1303,7 +1303,7 @@
                     <span class="tag t1">ProGlib &mdash; Курс ML</span><br>
                     <b>Тема 5: Методы опорных векторов (SVM) (пн)</b>
                     <ul class="clist">
-                        <li>Максимизация отступа, ядра (kernel trick), кросс-валидация</li>
+                        <li class="done">Максимизация отступа, ядра (kernel trick), кросс-валидация</li>
                     </ul>
                     <div style="background:rgba(136,136,136,0.08);border-left:2px solid #ccc;padding:3px 8px;margin:-4px 0 6px 20px;font-size:10px;color:#888;line-height:1.5">Зачем: Qdrant = векторные расстояния, SVM = геометрия разделения — одна математика</div>
                     <span class="tag t1">ProGlib 27.04</span><br>
@@ -1331,9 +1331,10 @@
                     <span class="tag t2">Самост.</span><br>
                     <b>Qdrant + LangSmith + Pydantic (Ahillary архив ур.2)</b>
                     <ul class="clist">
-                        <li style="margin-top:8px"><b>&#128290; Математика (<b>(пн)</b>):</b> 3B1B <a
+                        <li class="done" style="margin-top:8px"><b>&#128290; Математика (<b>(пн)</b>):</b> 3B1B <a
                         href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
                         target="_blank">Calculus</a> гл.6&ndash;9 (Backprop интуиция) + <b>StatQuest Guide to ML</b> гл.4&ndash;6 (Linear/<b>Logistic Regression (BEFORE PL ML 5) + Cross-entropy (StatQuest)</b>, Gradient Descent)</li>
+                        <li style="margin-top:4px"><b>&#128250; 3B1B: LLMs explained briefly (~8 мин):</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">Neural Networks плейлист</a> — карта LLM: токены → attention → трансформеры. 8 минут. Смотреть до PydanticAI-агентов этой недели.</li>
                         <li>Ahillary YouTube ур.3: загрузка через sitemap, правильный chunking, embeddings для русского текста <b>(вт)</b></li>
                         <li>Ahillary YouTube ур.4 <b>(ср + n8n in docker (refresh) from last week)</b></li>
                         <li>Ahillary YouTube ур.5: подключить LangSmith &rarr; трейсы каждого запроса <b>(чт)</b></li>
@@ -1347,7 +1348,7 @@
                         </li>
                     </ul>
                     <div class="src">&#128218; qdrant.tech/docs + Ahillary YouTube ур.5 + Ahillary архив ур.2 (только
-                        Pydantic-часть) + shad.yandex.ru/abweek</div>
+                        Pydantic-часть) + shad.yandex.ru/abweek + 3B1B Neural Networks</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> ChromaDB, базовый RAG.<br><b>Сейчас:</b> Qdrant &mdash; продакшн
@@ -1382,6 +1383,7 @@
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.7&ndash;8</a>: Ensemble, Dimensionality
                                 Reduction</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-stats">STATS</span> ШАД | A/B Week</b><span><a href="https://shad.yandex.ru/abweek" target="_blank">shad.yandex.ru/abweek</a> &mdash; Лек.2: Ошибки I/II рода, MDE на нед.8</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: LLMs explained briefly</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~8 мин</a> — карта LLM перед агентами и PydanticAI</span></div>
                     </div>
                 </td>
                 <td><span class="sp mastered">n8n</span><span class="sp new">Qdrant</span><span
@@ -1524,7 +1526,6 @@
                         <li>Прочитать ПОЛНЫЙ ГАЙД (файл проекта): разделы &laquo;CLI-агенты&raquo; и &laquo;MCP&raquo;
                             полностью</li>
                         <li style="margin-top:8px"><b>&#128279; Redis (новый инструмент, 30 мин):</b> <code>pip install redis</code> &rarr; redis.io/docs/getting-started &rarr; понять get/set/expire как semantic cache. Зачем: ProGlib этой же недели преподаёт Redis-кэш в RAG &mdash; без базового понимания это будет магия.</li>
-                        <li style="margin-top:4px"><b>&#128290; 3B1B: LLMs explained briefly (~8 мин):</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">Neural Networks плейлист</a> — карта LLM перед тем как строишь MCP-серверы и агентные цепочки. 8 минут, обязательно.</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (1 лекция):</b>
                             <ul class="clist" style="margin-top:4px">
                                 <li><a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.5.1 &laquo;Production Engineering for LLM Agents&raquo;</a> (~60 мин): Docker, деплой, мониторинг &mdash; прямо под MCP-серверы этой недели</li>
@@ -1532,7 +1533,7 @@
                         </li>
                     </ul>
                     <div class="src">&#128218; modelcontextprotocol.io + ПОЛНЫЙ ГАЙД (файл проекта) +
-                        github.com/modelcontextprotocol/servers + shad.yandex.ru/agentsweek + 3B1B Neural Networks</div>
+                        github.com/modelcontextprotocol/servers + shad.yandex.ru/agentsweek</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> Claude Code работает.<br><b>Сейчас:</b> MCP = стандарт подключения
@@ -1543,7 +1544,6 @@
                     <div class="tcards">
                         <div class="tcard"><b>MCP (Model Context Protocol)</b><span>Стандарт Anthropic. Написал MCP-сервер &mdash; агент работает с твоими данными как со встроенными функциями.</span></div>
                         <div class="tcard"><b>LangFlow</b><span>Drag-and-drop редактор. Не для прода &mdash; для понимания архитектуры визуально.</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: LLMs explained briefly</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~8 мин</a> — карта LLM перед агентными цепочками</span></div>
                         <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-ml">ML</span> ProGlib ML</b><span>Тема 7: Решающие деревья &mdash; ID3, CART. Аналог agent routing в структуре данных</span></div>
                         <div class="tcard"><b><span class="src-tag st-course">КУРС</span><span class="src-tag st-calc">CALC</span> ProGlib Математика AI</b><span>Занятие 9: Случайные величины + Наивный Байес в NumPy</span></div>
                     </div>
@@ -1620,8 +1620,9 @@
                         <li>&rarr; store_or_reject() &mdash; пишет в Qdrant или отклоняет</li>
                         <li style="margin-top:4px"><b>&#128290; 3B1B LinAlg (финал):</b> гл.13 «Change of basis» + гл.14 «Eigenvectors and eigenvalues» (~25 мин). Зачем: PCA = нахождение собственных векторов ковариационной матрицы. Смотришь гл.14 и PCA перестаёт быть магией.</li>
                         <li style="margin-top:4px"><b>&#128290; StatQuest Neural Networks YT:</b> поиск «StatQuest Neural Networks Pt.1» + «StatQuest Backpropagation» (~30 мин суммарно). Зачем: нейросеть = трансформер без attention; понять прямо перед Гл.5–6 3B1B Transformers. embeddings = нейросеть без выходного слоя.</li>
+                        <li style="margin-top:4px"><b>&#128250; 3B1B Neural Networks гл.5–6 (~54 мин):</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">«Transformers, the tech behind LLMs»</a> (~27 мин) + «Attention in transformers, step-by-step» (~27 мин). Смотреть после StatQuest NN, до нед.12. Attention = механика embeddings в RAG — RAGAS на следующей неделе станет понятен изнутри.</li>
                     </ul>
-                    <div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials + docs.aiogram.dev/en/latest (Quick Start) + StatQuest YouTube (Neural Networks)</div>
+                    <div class="src">&#128218; Ahillary YouTube ур.6 + langchain-ai.github.io/langgraph/tutorials + docs.aiogram.dev/en/latest (Quick Start) + StatQuest YouTube (Neural Networks) + 3B1B Neural Networks (гл.5–6)</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> MCP, Qdrant, PydanticAI.<br><b>Сейчас:</b> все кирпичи готовы.
@@ -1646,6 +1647,7 @@
                     <div class="tcards">
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-linal">LINAL</span> 3B1B LinAlg гл.13&ndash;14</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">Change of basis + Eigenvectors</a> &mdash; 25 мин, ключ к PCA</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> StatQuest: Neural Networks YT</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> — «Neural Networks Pt.1» + «Backpropagation» (~30 мин). Зачем: база перед трансформерами и Karpathy</span></div>
+                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: Transformers + Attention (гл.5–6)</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~54 мин</a> — после StatQuest NN: attention = механика embeddings, до RAGAS нед.12</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-dl">DL</span> StatQuest Neural Networks (B2)</b><span>гл.7&ndash;10:
                                 Attention, Transformers</span></div>
@@ -1695,7 +1697,6 @@
                     <span class="tag t2">Самост.</span><br>
                     <b>Langfuse self-hosted + RAGAS первый отчёт</b>
                     <ul class="clist">
-                        <li style="margin-top:0"><b>3B1B Neural Networks</b> гл.5–6: «Transformers, the tech behind LLMs» (~27 мин) + «Attention in transformers» (~27 мин). Смотреть ДО RAGAS — механика attention = механика embeddings в RAG.</li>
                         <li>Поднять Langfuse через docker-compose (langfuse.com/docs/deployment/self-host)</li>
                         <li>Подключить к LangGraph &mdash; трейсы каждого запуска в дашборде</li>
                         <li>RAGAS: оценить RAG на 10 вопросах &mdash; faithfulness, answer_relevancy</li>
@@ -1732,7 +1733,6 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> 3B1B: Transformers + Attention (гл.5–6)</b><span><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">~54 мин</a> — смотреть ДО RAGAS: трансформеры = механика attention в embeddings</span></div>
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span
                                     class="src-tag st-ml">ML</span> Hands-On ML (C1)</b><span><a
                                     href="https://amzn.to/4l4veCZ" target="_blank">гл.12–13</a>: Custom Models,
