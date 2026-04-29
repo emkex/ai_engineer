@@ -3,6 +3,7 @@
 # ============================================================
 .env
 .env.*
+*_cookies.json
 .env.local
 .env.production
 .env.staging
@@ -210,3 +211,4 @@ test.py
 3_week/data/
 
 .fin_advisor/
+final_cl/
