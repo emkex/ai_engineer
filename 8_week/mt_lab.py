@@ -1,71 +1,44 @@
-# Загрузка документов (1)
 import os
-from langchain_community.document_loaders import SitemapLoader, RecursiveUrlLoader
+from pathlib import Path
+
+# -------------------------
+# Загрузка документов
+
+from langchain_community.document_loaders import RecursiveUrlLoader
 
 os.environ["USER_AGENT"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
 
 ROOT_URL = "https://mt-lab.su/"
-SITEMAP_URL = f"{ROOT_URL}/sitemap-part-categories-chunk-0.xml" # один из sitemap, который точно существует
+PERSIST_DIR = Path(__file__).parent / "chroma_db_mt_lab"
 
-# # 1) Загружаем все страницы из sitemap
-# sitemap_loader = SitemapLoader(
-#     web_path=SITEMAP_URL,
-#     filter_urls=[ROOT_URL],  # на всякий случай ограничиваем доменом
-# )
-
-# sitemap_docs = sitemap_loader.load()
-
-# only one page in sitemap
-# Total documents: 18
-# Total characters: 26043
-
-# 2) Дополнительно рекурсивно обходим сайт от корня
 recursive_loader = RecursiveUrlLoader(
     url=ROOT_URL,
-    max_depth=1,          # глубину при желании можно увеличить
-    prevent_outside=True  # не выходим за пределы домена
+    max_depth=3,
+    prevent_outside=True,
 )
 docs = recursive_loader.load()
-
-# depth=2
-# Total documents: 29
-# Total characters: 2808801
-
-# depth=3
-# Total documents: 34
-# Total characters: 3160292
-
-
-# # 3) Объединяем всё в один список документов для RAG
-# # docs = sitemap_docs + recursive_docs
-# docs = recursive_docs
-
 print(f"Total documents: {len(docs)}")
-print(f"Total characters: {sum(len(doc.page_content) for doc in docs)}")
+print(f"Total characters: {sum(len(d.page_content) for d in docs)}")
 
-# ----------------------
-# Подготовка эмбеддингов
+# -------------------------
+# Сплиттер
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter, Language
 
 text_splitter = RecursiveCharacterTextSplitter.from_language(
-    language=Language.HTML,   # учитываем структуру HTML
-    chunk_size=1200,          # немного больше, т.к. структура сохраняется лучше
+    language=Language.HTML,
+    chunk_size=1200,
     chunk_overlap=200,
 )
-
 splits = text_splitter.split_documents(docs)
 
-# -----------------------
-# Подготовка текстов с префиксами, чтобы из них сделать эмбеддинги, которые передадим в модель для лучшего понимания, откуда текст – для запрос или из документа
+# -------------------------
+# Embeddings
 
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.embeddings import Embeddings
 
-# Базовая модель
-base_embeddings = HuggingFaceEmbeddings(
-    model_name="ai-forever/ru-en-RoSBERTa"
-)
+base_embeddings = HuggingFaceEmbeddings(model_name="ai-forever/ru-en-RoSBERTa")
 
 class PrefixedEmbeddings(Embeddings):
     def __init__(self, base, query_prefix="", doc_prefix=""):
@@ -74,8 +47,7 @@ class PrefixedEmbeddings(Embeddings):
         self.doc_prefix = doc_prefix
 
     def embed_documents(self, texts):
-        texts_prefixed = [self.doc_prefix + t for t in texts]
-        return self.base.embed_documents(texts_prefixed)
+        return self.base.embed_documents([self.doc_prefix + t for t in texts])
 
     def embed_query(self, text):
         return self.base.embed_query(self.query_prefix + text)
@@ -87,80 +59,143 @@ embeddings = PrefixedEmbeddings(
 )
 
 # -------------------------
-# Создание и сохранение векторной базы данных для того, чтобы иметь место для хранения эмбеддингов и возможности быстро их загружать при последующих запусках, не тратя время на пересоздание
+# Vector store (загружаем существующий или создаём новый)
 
-from pathlib import Path
 from langchain_community.vectorstores import Chroma
 
-persist_directory = "./chroma_db_mt_lab"
-
-if Path(persist_directory).exists():
-    # Индекс уже есть – просто загружаем
+if PERSIST_DIR.exists():
     vectorstore = Chroma(
         embedding_function=embeddings,
-        persist_directory=persist_directory,
+        persist_directory=str(PERSIST_DIR),
     )
+    # Добавляем только те чанки, чей source ещё не в базе
+    existing_sources = set(
+        m["source"]
+        for m in vectorstore.get(include=["metadatas"])["metadatas"]
+        if m and "source" in m
+    )
+    new_splits = [s for s in splits if s.metadata.get("source") not in existing_sources]
+    if new_splits:
+        print(f"Добавляем {len(new_splits)} новых чанков из {len(set(s.metadata.get('source') for s in new_splits))} URL")
+        vectorstore.add_documents(new_splits)
+    else:
+        print("Новых документов нет, база актуальна")
 else:
-    # Первый запуск – создаём индекс
     vectorstore = Chroma.from_documents(
         documents=splits,
         embedding=embeddings,
-        persist_directory=persist_directory,
+        persist_directory=str(PERSIST_DIR),
     )
 
-
 # -------------------------
-# Создание retriever'а с порогом релевантности для более строгого отбора документов при поиске
+# Retriever с MMR
 
-strict_retriever = vectorstore.as_retriever(
-    search_type="similarity_score_threshold",  # similarity_score_threshold – это режим поиска, при котором retriever возвращает только те документы, чья семантическая близость к запросу выше заданного порога, отсекая слабые и нерелевантные совпадения.
-    search_kwargs={
-        "score_threshold": 0.4,  # score_threshold – это порог релевантности (число от 0 до 1), который определяет минимальную допустимую степень семантической близости документа к запросу: чем выше значение, тем строже отбор, но более точные результаты.
-        "k": 8,                 # максимум кандидатов, которые вообще рассматриваем
-    },
+retriever = vectorstore.as_retriever(
+    search_type="mmr",
+    search_kwargs={"k": 8, "fetch_k": 32, "lambda_mult": 0.8},
 )
 
 # -------------------------
-# Форматирование найденных документов для передачи в модель с префиксами и ограничением общего количества символов, чтобы не раздувать контекст слишком сильно
+# Post-processing
 
 MAX_CHARS = 10_000
 
 def format_docs(docs):
     formatted = []
     total_len = 0
-
     for doc in docs:
         source = doc.metadata.get("source", "unknown_source")
         page = doc.metadata.get("page", None)
-
-        header = f"Source: {source}"
-        if page is not None:
-            header += f" | Page: {page}"
-
-        text = doc.page_content.strip()
-        block = f"{header}\n{text}"
-
-        # если следующий блок слишком раздует контекст – останавливаемся
+        header = f"Source: {source}" + (f" | Page: {page}" if page is not None else "")
+        block = f"{header}\n{doc.page_content.strip()}"
         if total_len + len(block) > MAX_CHARS:
             break
-
         formatted.append(block)
         total_len += len(block)
-
     return "\n\n---\n\n".join(formatted)
 
 # -------------------------
-# Настройка LLM для генерации ответов на основе найденных документов
+# Промпт
+
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+
+prompt = ChatPromptTemplate.from_messages([
+    (
+        "system",
+        "You are a precise analytical assistant specializing in laboratory equipment of MT-LAB. "
+        "Always respond in the same language the user used in their question. "
+        "Rules:\n"
+        "- Answer ONLY based on the provided context\n"
+        "- If the answer is not in the context, say so directly — do not guess\n"
+        "- Do not use external knowledge or make assumptions\n"
+        "- Be concise but complete — include formulas, steps, or examples if present in context\n"
+        "- If context contains contradictions, point them out\n"
+        "- Always end your answer with: Sources: [filename, page X] for each chunk used"
+    ),
+    MessagesPlaceholder("history"),
+    ("human", "Context:\n{context}\n\nQuestion: {question}"),
+])
+
+# -------------------------
+# LLM
 
 from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
 
-llm = ChatOpenAI(
-api_key="None",
-base_url="http://127.0.0.1:11434/v1",
-model="gemma3:4b",
+# Выбор провайдера: "ollama" или "anthropic"
+LLM_PROVIDER = "anthropic"
 
-# важные параметры для RAG
-temperature=0.2,      # меньше фантазии
-max_tokens=1024,       # контролируем длину ответа
-top_p=0.8,            # отключаем сэмплирование для более точных ответов (можно поиграться с этим параметром для баланса точности и разнообразия)
-)
+def llm_part(provider: str = LLM_PROVIDER):
+    if provider == "anthropic":
+        from dotenv import load_dotenv
+        load_dotenv()
+        return ChatAnthropic(
+            model="claude-haiku-4-5",
+            temperature=0.2,
+            max_tokens=1024,
+        )
+    try:
+        llm = ChatOpenAI(
+            api_key="None",
+            base_url="http://127.0.0.1:11434/v1",
+            model="gemma3:4b",
+            temperature=0.2,
+            max_tokens=1024,
+            top_p=0.8,
+        )
+        return llm
+    except Exception as e:
+        print(f"Ollama недоступна, переключаемся на Anthropic: {e}")
+        return llm_part("anthropic")
+
+# -------------------------
+# RAG-цепочка
+
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough, RunnableLambda
+
+def ensure_context(input_dict: dict) -> dict:
+    if not input_dict.get("context", "").strip():
+        input_dict["context"] = (
+            "Контекст пуст: ретривер не нашёл ни одного подходящего фрагмента. "
+            "Сообщи пользователю об этом и предложи связаться напрямую по телефону или другим способом."
+        )
+    return input_dict
+
+rag_lab_chain = (
+    {
+        "context": retriever | format_docs,
+        "question": RunnablePassthrough(),
+        "history": lambda _: [],
+    }
+    | RunnableLambda(ensure_context)
+    | prompt
+    | llm_part()
+    | StrOutputParser()
+).with_config(run_name="rag_lab_chain")
+
+# -------------------------
+
+print(rag_lab_chain.invoke("Что такое MT-LAB?"))
+print(rag_lab_chain.invoke("Какую мебель продают в MT-LAB?"))
+print(rag_lab_chain.invoke("Способы связи?"))
