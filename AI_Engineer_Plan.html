@@ -1330,14 +1330,7 @@
                             <ul class="clist" style="margin-top:4px">
                                 <li>Практика 1: Hybrid Search (BM25+Vector, RRF) + Recursive Chunking + Single-stage Reranking &rarr; метрики Hit Rate, NDCG</li>
                                 <li>Практика 2: Multi-stage Reranking + Parent Doc Retrieval + Query Expansion (HyDE &mdash; осторожно, шум в узких доменах!)</li>
-                            </ul>
-                        </li>
-                        <li style="margin-top:8px"><b>&#128218; RAG Roadmap (ProGlib 2026) &mdash; изучить структуру (пт):</b>
-                            <ul class="clist" style="margin-top:4px">
-                                <li>Baseline: Hybrid Search + Reranking &rarr; Hit Rate &ge;0.85, MRR &ge;0.75, NDCG &ge;0.70</li>
-                                <li>Optimization: Multi-stage Reranking + Parent Doc Retrieval &rarr; Faithfulness &ge;0.85, Answer Relevancy &ge;0.80</li>
-                                <li>Advanced: Contextual Retrieval (+15&ndash;20% Hit Rate) + Context Compression (&minus;35&ndash;50% токенов) + Late Chunking (Jina 2024, +10&ndash;12%)</li>
-                                <li>Enterprise: Agentic RAG (LangGraph, &minus;78% ошибок) + GraphRAG + Multi-hop &rarr; нед.11+</li>
+                                <li class="done">Практика 3: pydantic</li>
                             </ul>
                         </li>
                     </ul>
@@ -1358,10 +1351,9 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li>NewsItem: title, source, date, importance(1&ndash;5), topic, confirmed(bool) &mdash; схема
+                        <li class="skip">NewsItem: title, source, date, importance(1&ndash;5), topic, confirmed(bool) &mdash; схема
                             работает</li>
-                        <li>Claude API возвращает именно эту схему при оценке новости</li>
-                        <li>RAGAS baseline: Hit Rate и Faithfulness замерены на 1_rag_pdf</li>
+                        <li class="done">Claude API возвращает именно эту схему при оценке новости</li>
                     </ul>
                 </td>
                 <td>
@@ -1425,16 +1417,6 @@
                     <ul class="clist">
                         <li>Playwright: скрипт &rarr; открыть сайт &rarr; взять заголовки &rarr; JSON</li>
                         <li style="margin-top:4px"><b>&#128290; Математика (нед.9):</b> <b><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B Neural Networks</a> гл.2</b> «Gradient descent, how neural networks learn» (~21 мин) (ср) + <b>гл.3</b> «What is backpropagation really doing?» (~13 мин) (чт) <b><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">3B1B Calculus</a> финал гл.10&ndash;12 (пт)</b> (~15 мин): «e + natural log» + «Integration» + «Differentiation via limits» &mdash; гл.10 = sigmoid/softmax, этого достаточно; гл.13&ndash;14 пропустить. <b><a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> Decision Trees Part 1</b> («Classification Trees»): ~18 мин, опережающий просмотр &mdash; тема ProGlib придёт на нед.10. (сб)</li>
-                        <li style="margin-top:8px"><b>&#128218; RAG Advanced (из ProGlib Roadmap &mdash; после практик нед.8) (сб):</b>
-                            <ul class="clist" style="margin-top:4px">
-                                <li>Contextual Retrieval (Anthropic): добавить контекст каждого чанка перед индексацией (+15&ndash;20% Hit Rate)</li>
-                                <li>Context Compression: убрать шум из retrieved docs (&minus;35&ndash;50% токенов, CohereRerank)</li>
-                                <li>Late Chunking (Jina 2024): embeddings с учётом соседних чанков (+10&ndash;12%)</li>
-                                <li>Оценить через RAGAS: Noise Robustness &ge;0.90, Latency P95 &lt;3s</li>
-                            </ul>
-                        </li>
-                        <li style="margin-top:8px"><b>&#128250; 5-Day Gen AI Intensive (Google/Kaggle):</b> <a href="https://github.com/sauravkumar8178/5-Day-Gen-AI-Intensive-Course-with-Google" target="_blank">github.com/sauravkumar8178/5-Day-Gen-AI-Intensive-Course-with-Google</a> &mdash; Day 1&ndash;3: embeddings, RAG architecture, agents. Параллельно с RAG Advanced этой недели.</li>
-                        <li style="margin-top:4px"><b>&#128250; NirDiamant/Prompt_Engineering:</b> SGR (Structured Generation Refinement) + SO (Self-Optimization) техники &mdash; применить к RAG промптам нед.8&ndash;9</li>
                         <li style="margin-top:8px;color:#888;font-size:11px">&#128250; <i>ШАД Agents Week Лек.2+3 &rarr; перенесены на нед.11 (LangGraph + Multi-Agent: максимальная синергия)</i></li>
                     </ul>
                     <div class="src">&#128218; playwright.dev/python + github.com/sauravkumar8178/5-Day-Gen-AI-Intensive-Course-with-Google + github.com/NirDiamant/Prompt_Engineering + <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">3B1B Calculus</a> гл.10&ndash;14</div>
@@ -1454,6 +1436,8 @@
                     <ul class="clist">
                         <li>Claude Code переписывает RSS-парсер с sync на async &mdash; попросить его</li>
                         <li>Playwright: заголовки с сайта &rarr; JSON &rarr; в Qdrant</li>
+                        <li>RAGAS baseline: Hit Rate и Faithfulness замерены на 1_rag_pdf</li>
+
                     </ul>
                 </td>
                 <td>
