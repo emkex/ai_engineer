@@ -1324,12 +1324,10 @@
                         <li class="done" style="margin-top:8px"><b>&#128290; Математика (пн):</b> 3B1B <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">Calculus</a> гл.6&ndash;9 (Backprop интуиция). <b><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B Neural Networks</a> гл.1</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">«But what is a neural network?»</a> (~19 мин). <b><a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> SVM:</b> Part 1 «Main Ideas» + Part 2 «Polynomial Kernel» + Part 3 «Radial Kernel» + Cosine Similarity (~30 мин суммарно, 4 видео &mdash; прямо под тему SVM нед.8).</li>
                         <li class="done">Ahillary YouTube ур.3: SitemapLoader, RecursiveURLLoader, HTML-aware chunking, RuBERT embeddings (PrefixEmbeddings) &mdash; индексация <b>(ср)</b></li>
                         <li class="done">Ahillary YouTube ур.4: MMR retriever, фильтры по метаданным, улучшение postprocessing и промпта &mdash; пройти <b>(ср)</b>, фокус на коде</li>
-                        <li>Ahillary YouTube ур.5: концепция трейсинга (LangSmith) &mdash; @traceable, spans, LLM-as-a-judge <b>(чт)</b>; инструмент prod: LangFuse (нед.12)</li>
-                        <li>Ahillary YouTube ур.6: ReAct-агент над RAG &mdash; rewrite_question + run_rag, агент решает когда делать retrieval <b>(чт)</b></li>
-                        <li style="margin-top:8px"><b>&#128218; ProGlib практики RAG <b>(ср)</b>:</b>
+                        <li class="done" style="margin-top:8px"><b>&#128218; ProGlib практики RAG <b>(ср)</b>:</b>
                             <ul class="clist" style="margin-top:4px">
-                                <li>Практика 1: Hybrid Search (BM25+Vector, RRF) + Recursive Chunking + Single-stage Reranking &rarr; метрики Hit Rate, NDCG</li>
-                                <li>Практика 2: Multi-stage Reranking + Parent Doc Retrieval + Query Expansion (HyDE &mdash; осторожно, шум в узких доменах!)</li>
+                                <li class="done">Практика 1: Hybrid Search (BM25+Vector, RRF) + Recursive Chunking + Single-stage Reranking &rarr; метрики Hit Rate, NDCG</li>
+                                <li class="done">Практика 2: Multi-stage Reranking + Parent Doc Retrieval + Query Expansion (HyDE &mdash; осторожно, шум в узких доменах!)</li>
                                 <li class="done">Практика 3: pydantic</li>
                             </ul>
                         </li>
@@ -1387,9 +1385,9 @@
                     <span class="tag t1">ProGlib 4.05</span><br>
                     <b>Browser/Desktop automation (пт)</b>
                     <ul class="clist">
-                        <li>Playwright &mdash; браузер из Python</li>
-                        <li>Sandbox, минимальные права</li>
-                        <li>Подтверждение перед рискованными действиями</li>
+                        <li class="done">Playwright &mdash; браузер из Python</li>
+                        <li class="done">Sandbox, минимальные права</li>
+                        <li class="done">Подтверждение перед рискованными действиями</li>
                     </ul>
                     <span class="tag t1">ProGlib 7.05</span><br>
                     <b>Первый ИИ-агент (вс)</b>
@@ -1434,7 +1432,7 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li>Claude Code переписывает RSS-парсер с sync на async &mdash; попросить его</li>
+                        <li class="done">Claude Code переписывает RSS-парсер с sync на async &mdash; попросить его</li>
                         <li>Playwright: заголовки с сайта &rarr; JSON &rarr; в Qdrant</li>
                         <li>RAGAS baseline: Hit Rate и Faithfulness замерены на 1_rag_pdf</li>
 
@@ -1588,6 +1586,8 @@
                     <span class="tag t2">Самост.</span><br>
                     <b>LangGraph граф для &laquo;Задумки по экономике&raquo;</b>
                     <ul class="clist">
+                        <li>Ahillary YouTube ур.5: концепция трейсинга (LangSmith) &mdash; @traceable, spans, LLM-as-a-judge <b>(чт)</b>; инструмент prod: LangFuse (нед.12)</li>
+                        <li>Ahillary YouTube ур.6: ReAct-агент над RAG &mdash; rewrite_question + run_rag, агент решает когда делать retrieval <b>(чт)</b></li>
                         <li style="margin-top:8px"><b>&#128241; Telegram Bot API (впервые, 1 час):</b> pip install aiogram&ge;3 &rarr; bot = Bot(token) &rarr; dp = Dispatcher() &rarr; @dp.message_handler &rarr; dp.start_polling(). Источник: docs.aiogram.dev/en/latest &rarr; Quick Start. Зачем: human_review() в графе ниже отправляет вопрос именно через Telegram-бота. Без этого шага Telegram &mdash; магия.</li>
                         <li>Написать LangGraph граф (4 узла):</li>
                         <li>&rarr; fetch_news() &mdash; тянет новость из RSS</li>
