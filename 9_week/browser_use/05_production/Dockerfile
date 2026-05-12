@@ -6,17 +6,19 @@ RUN apt-get update -qq && apt-get install -y -qq \
     && rm -rf /var/lib/apt/lists/*
 
 # Python-зависимости
-COPY requirements.txt /tmp/requirements.txt
+COPY 05_production/requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Chromium через playwright (не системный — контролируемая версия)
-RUN playwright install chromium --with-deps
+# Chromium в общую папку — доступна всем пользователям, не только root
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+RUN playwright install chromium --with-deps && chmod -R 755 /ms-playwright
 
 # Рабочая директория — только /workspace будет доступна агенту
 # В docker-compose она bind-mounted с хоста (read-write)
 WORKDIR /workspace
 
-COPY agent.py /app/agent.py
+COPY 05_production/agent.py /app/agent.py
+COPY 05_production/log_utils.py /app/log_utils.py
 
 # Запускаем от непривилегированного пользователя
 RUN useradd -m -u 1000 agent

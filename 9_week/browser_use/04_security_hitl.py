@@ -191,6 +191,7 @@ async def demo_hitl():
     profile = BrowserProfile(
         headless=False,
         wait_for_network_idle_page_load_time=3.0,
+        save_conversation_path="./conversation_log.json",
         allowed_domains=ALLOWED_DOMAINS,
         user_agent=BROWSER_UA,
     )

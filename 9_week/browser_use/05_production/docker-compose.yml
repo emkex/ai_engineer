@@ -2,21 +2,20 @@ version: "3.9"
 
 services:
   agent:
-    build: .
+    build:
+      context: ..
+      dockerfile: 05_production/Dockerfile
     # Секреты с хоста — НИКОГДА не хардкодим в образ
     # .env лежит в корне проекта, не внутри контейнера
     env_file:
-      - ../../.env
+      - ../.env
     environment:
-      # Переключение модели без пересборки образа
-      - USE_LOCAL_MODEL=false
-      # Если Ollama на хосте:
-      - OLLAMA_HOST=http://host.docker.internal:11434
-      # Задача для агента (можно менять)
-      - AGENT_TASK=Зайди на coinmarketcap.com и верни топ-5 криптовалют по капитализации
-      # Прокси (опционально — раскомментировать если нужен)
-      # - HTTPS_PROXY=http://squid-proxy:3128
-      # - HTTP_PROXY=http://squid-proxy:3128
+    - USE_LOCAL_MODEL=false
+    - OLLAMA_HOST=http://host.docker.internal:11434
+    - AGENT_TASK=Зайди на coinmarketcap.com и верни топ-5 криптовалют по капитализации
+    - HTTPS_PROXY=http://squid-proxy:3128
+    - HTTP_PROXY=http://squid-proxy:3128
+    - NO_PROXY=localhost,127.0.0.1,::1
     volumes:
       # Только workspace доступен агенту (read-write)
       - ./workspace:/workspace:rw
@@ -30,21 +29,22 @@ services:
       # Нужен для Chrome sandbox внутри контейнера
       - SYS_ADMIN
     # Ограничение ресурсов
-    mem_limit: 2g
-    cpus: "1.0"
+    mem_limit: 3g
+    cpus: "2.0"
+    shm_size: "512m"
     networks:
       - agent-net
 
   # Опциональный прокси для контроля исходящих запросов агента
-  # squid-proxy:
-  #   image: ubuntu/squid
-  #   volumes:
-  #     - ./squid.conf:/etc/squid/squid.conf:ro
-  #   networks:
-  #     - agent-net
+  squid-proxy:
+    image: ubuntu/squid
+    volumes:
+      - ./squid.conf:/etc/squid/squid.conf:ro
+    networks:
+      - agent-net
 
 networks:
   agent-net:
     driver: bridge
-    # Изоляция от других docker-сетей
-    internal: false  # true если нужно полностью отрезать от интернета
+    enable_ipv6: false
+    # internal: true — раскомментировать чтобы полностью отрезать от интернета

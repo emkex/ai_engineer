@@ -26,7 +26,7 @@ from browser_use.browser.profile import BrowserProfile
 from log_utils import setup_logging, make_step_callback, save_run_summary
 
 # Секреты с хоста: docker-compose передаёт через env_file, не внутри образа
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../../.env"))
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env"))
 
 BROWSER_UA = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:150.0) Gecko/20100101 Firefox/150.0'
 BROWSER_HEADERS: dict[str, str] = {
@@ -91,8 +91,15 @@ def build_browser_profile() -> BrowserProfile:
 
     return BrowserProfile(
         headless=True,
+        args=[
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",           # нет дисплея — GPU pipeline не нужен
+            "--no-zygote",             # без zygote-процесса (лучше в Docker)
+            "--no-first-run",
+        ],
         proxy=proxy_config,
-        wait_for_network_idle_page_load_time=3.0,
+        wait_for_network_idle_page_load_time=5.0,  # coinmarketcap — тяжёлый SPA
         user_agent=BROWSER_UA,
         allowed_domains=ALLOWED_DOMAINS,
     )
