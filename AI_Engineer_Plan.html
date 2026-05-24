@@ -723,13 +723,13 @@
 </head>
 
 <body>
-    <h1>AI Engineer / AI Integrator &mdash; Master Plan v5 &mdash; <span>реалистичный</span>
+    <h1>AI Engineer / AI Integrator &mdash; Master Plan v5.1 &mdash; <span>реалистичный</span>
         <br>9 марта 2026 &rarr; 1 января 2027
         <small>
             Фаза 0 (март&ndash;апр): Фундамент &nbsp;|&nbsp; Фаза 1 (апр&ndash;июн): Агентский стек &nbsp;|&nbsp;
             Фаза 2 (июн): Безопасность+Деплой+Диплом &nbsp;|&nbsp; Фаза 3 (июл&ndash;сен): Fine-tuning+Специализация &nbsp;|&nbsp;
             Осень&ndash;декабрь: Добивка+Коммерция<br>
-            v5: после 3-недельного сдвига нагона + интеграция mlroadmap + удаление столбца «Проект» + расстановка ★ на опциональных пунктах.
+            v5.1: нед.11 тоже не закрыта → итого 4 недели нагона. ProGlib ML и Math AI равномерно распределены по нед.12–15. Фаза 3 сдвинута на 1 неделю (нед.17 → 6 июл).
         </small>
     </h1>
 
@@ -1478,7 +1478,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">18&ndash;24 май</span><span class="pls">Неделя 11</span></td>
+                <td><span class="pbl">18&ndash;24 май</span><span class="pls">Неделя 11</span><br><span style="font-size:10px;color:#888">(в процессе — перенос на нед.12)</span></td>
                 <td>
                     <span class="tag t1">ProGlib 12.05 (догон)</span><br>
                     <b>MCP + LangFlow</b>
@@ -1563,7 +1563,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">25&ndash;31 май</span><span class="pls">Неделя 12</span><br><span style="font-size:10px;color:#e65100;font-weight:700">ДОГОН A</span></td>
+                <td><span class="pbl">25&ndash;31 май</span><span class="pls">Неделя 12</span><br><span style="font-size:10px;color:#e65100;font-weight:600">Нагон A — долги нед.11</span></td>
                 <td>
                     <span class="tag t1">ProGlib 21.05 (догон, в записи)</span><br>
                     <b>Мультиагентные системы &mdash; теория</b>
@@ -1616,6 +1616,7 @@
                         <li><a href="mlroadmap/llm-engineering/13-orchestration.md" target="_blank"><b>llm-engineering/13-orchestration</b></a> &mdash; LangGraph conditional edges, checkpointer SQLite, kill/restart test</li>
                         <li><a href="mlroadmap/llm-engineering/14-mcp.md" target="_blank"><b>llm-engineering/14-mcp</b></a> &mdash; read/write разделение, логирование вызовов</li>
                         <li class="opt"><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a> &mdash; блокировка rm -rf, DROP TABLE, автоформат <span class="opt-tag">*</span></li>
+                        <li class="opt"><a href="mlroadmap/data-science/10-statistics.md" target="_blank"><b>data-science/10-statistics</b></a> &mdash; статистические основы под L1/L2 регуляризацию <span class="opt-tag">*</span></li>
                     </ul>
                 </td>
                 <td>
@@ -1644,7 +1645,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">1&ndash;7 июн</span><span class="pls">Неделя 13</span><br><span style="font-size:10px;color:#e65100;font-weight:700">ДОГОН B</span></td>
+                <td><span class="pbl">1&ndash;7 июн</span><span class="pls">Неделя 13</span><br><span style="font-size:10px;color:#e65100;font-weight:600">Нагон B — AgentOps + Eval</span></td>
                 <td>
                     <span class="tag t1">ProGlib 1.06</span><br>
                     <b>Безопасность агентов</b>
@@ -1677,6 +1678,7 @@
                         <li>RAGAS: faithfulness ≥0.7 на 5&ndash;10 вопросах</li>
                         <li>sklearn DecisionTreeClassifier на учебном датасете, визуализация, feature_importance</li>
                         <li style="margin-top:8px"><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">Decision Trees Pt.1</a> (~18 мин) + Pt.2 Regression Trees (~15 мин) + Naive Bayes (~10 мин)</li>
+                        <li><b>ProGlib Math AI Зан.8</b> (1 вечер, фоном): распределения, условная вероятность, формула Байеса &mdash; теория без глубокого погружения</li>
                         <li class="opt">3B1B NN гл.5 «Transformers» (~27 мин) &mdash; под Multi-Agent <span class="opt-tag">*</span></li>
                         <li class="opt">Multi-agent учебный пример: CrewAI или AutoGen, 2 агента + одна задача <span class="opt-tag">*</span></li>
                     </ul>
@@ -1882,7 +1884,7 @@
         </table>
 
         <!-- ====== ФАЗА 3 ====== -->
-        <div class="ph">ФАЗА 3 &mdash; FINE-TUNING + СПЕЦИАЛИЗАЦИЯ <span>29 июня &rarr; 13 сентября (11 недель)</span>
+        <div class="ph">ФАЗА 3 &mdash; FINE-TUNING + СПЕЦИАЛИЗАЦИЯ <span>6 июля &rarr; 20 сентября (11 недель)</span>
             <div class="ph-pct">84 &rarr; 100%</div>
         </div>
         <table>
@@ -1899,7 +1901,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">29 июн&ndash;5 июл</span><span class="pls">Неделя 17</span></td>
+                <td><span class="pbl">6&ndash;12 июл</span><span class="pls">Неделя 17</span></td>
                 <td>
                     <span class="tag t1">ProGlib (конец июня)</span><br>
                     <b>FinOps: оптимизация затрат</b>
@@ -1968,7 +1970,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">6&ndash;12 июл</span><span class="pls">Неделя 18</span></td>
+                <td><span class="pbl">13&ndash;19 июл</span><span class="pls">Неделя 18</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 10</span><br>
                     <b>Кластеризация (K-means, DBSCAN)</b>
@@ -2029,7 +2031,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">13&ndash;19 июл</span><span class="pls">Неделя 19</span></td>
+                <td><span class="pbl">20&ndash;26 июл</span><span class="pls">Неделя 19</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 11</span><br>
                     <b>PCA, t-SNE, Isolation Forest</b>
@@ -2091,7 +2093,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">20 июл&ndash;16 авг</span><span class="pls">Нед. 20&ndash;23</span></td>
+                <td><span class="pbl">27 июл&ndash;23 авг</span><span class="pls">Нед. 20&ndash;23</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 12 (финал)</span><br>
                     <b>Рекомендательные системы &mdash; &#127881; ML курс завершён!</b>
@@ -2168,7 +2170,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">17 авг&ndash;6 сен</span><span class="pls">Нед. 24&ndash;26</span></td>
+                <td><span class="pbl">24 авг&ndash;13 сен</span><span class="pls">Нед. 24&ndash;26</span></td>
                 <td>
                     <span class="tag t1">ProGlib 6.08</span> Local Inference углублённо<br>
                     <span class="tag t1">ProGlib 10.08</span> Governance &amp; Compliance<br>
@@ -2233,7 +2235,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">7&ndash;13 сен</span><span class="pls">Неделя 27</span><br><span style="font-size:10px;color:#b71c1c;font-weight:700">ФИНАЛ</span></td>
+                <td><span class="pbl">14&ndash;20 сен</span><span class="pls">Неделя 27</span><br><span style="font-size:10px;color:#b71c1c;font-weight:700">ФИНАЛ</span></td>
                 <td>
                     <span class="tag t1">ProGlib 31.08 (или 7 сен)</span><br>
                     <b>&#127891; Capstone ProGlib &mdash; защита</b>
