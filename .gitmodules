@@ -1,3 +1,3 @@
-[submodule "MachineLearningRoadmap"]
-	path = MachineLearningRoadmap
+[submodule "mlroadmap"]
+	path = mlroadmap
 	url = https://github.com/justxor/MachineLearningRoadmap
