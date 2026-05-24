@@ -1478,7 +1478,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">18&ndash;24 май</span><span class="pls">Неделя 11</span><br><span style="font-size:10px;color:#888">(в процессе — перенос на нед.12)</span></td>
+                <td><span class="pbl">18&ndash;24 май</span><span class="pls">Неделя 11</span><br><span style="font-size:10px;color:#b71c1c;font-weight:700">БОЛЕЗНЬ</span></td>
                 <td>
                     <span class="tag t1">ProGlib 12.05 (догон)</span><br>
                     <b>MCP + LangFlow</b>
@@ -1501,7 +1501,7 @@
                         <li>Human-in-the-loop: пауза, ожидание</li>
                         <li>Time-travel дебаг &mdash; откат к любому состоянию</li>
                     </ul>
-                    <div class="warn">&#9888; Догон долгов нед.9&ndash;10. ML/Математика AI &mdash; пропуск на этой неделе, возврат на нед.12.</div>
+                    <div class="warn">&#9888;&#65039; БОЛЕЗНЬ. Неделя пропущена полностью. Всё содержимое перенесено на нед.12&ndash;13. Порядок сохранён.</div>
                     <div class="src">&#128218; ProGlib + modelcontextprotocol.io + langflow.org + langchain-ai.github.io/langgraph/tutorials</div>
                 </td>
                 <td>
@@ -1535,8 +1535,7 @@
                     </ul>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> Нед.9 недоделана, нед.10 болезнь.<br><b>Сейчас:</b> Догон. 3 урока ProGlib + 4 практики (включая «Первый ИИ-агент» с нед.9). MCP-сервер свой = ключевая компетенция. LangGraph &mdash; начало сборки агентов. ML/Математика AI &mdash; пропуск на 1 неделю.</div>
-                    <div class="pipeline"><b>Pipeline:</b> Ahillary ур.6 (понимание ReAct) &rarr; практика ProGlib 7.05 &rarr; ProGlib 12.05 MCP теория &rarr; MCP-серверы на практике &rarr; ProGlib 14.05 архитектура агента &rarr; LangGraph как оркестратор. Логичная цепочка от «понимаю агента» к «строю агентную систему».</div>
+                    <div class="why"><b>Было:</b> Нед.9 недоделана, нед.10 болезнь.<br><b>Сейчас:</b> Болезнь вторую неделю подряд. Всё содержимое переходит на нед.12. Нед.12 насыщенная: 4 урока ProGlib в записи + MCP-серверы + LangGraph на практике.</div>
                 </td>
                 <td>
                     <div class="tcards">
@@ -1563,31 +1562,33 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">25&ndash;31 май</span><span class="pls">Неделя 12</span><br><span style="font-size:10px;color:#e65100;font-weight:600">Нагон A — долги нед.11</span></td>
+                <td><span class="pbl">25&ndash;31 май</span><span class="pls">Неделя 12</span></td>
                 <td>
-                    <span class="tag t1">ProGlib 21.05 (догон, в записи)</span><br>
+                    <span class="tag t1">ProGlib 12.05 + 14.05 + 18.05 (болезнь нед.10+11, в записи)</span><br>
+                    <b>MCP + LangFlow &rarr; Архитектура ИИ-агента &rarr; LangGraph</b>
+                    <ul class="clist">
+                        <li>Model Context Protocol &mdash; стандарт интеграций, FastMCP</li>
+                        <li>LangFlow: визуальный прототипинг (обзорно)</li>
+                        <li>Архитектура агента: восприятие &rarr; план &rarr; действие &rarr; рефлексия</li>
+                        <li>Parent retrieval, Redis-кэш как semantic cache</li>
+                        <li>LangGraph: state machine, checkpoint SQLite, human-in-the-loop</li>
+                        <li>Time-travel debug &mdash; откат к любому состоянию</li>
+                    </ul>
+                    <span class="tag t1">ProGlib 21.05 (по плану)</span><br>
                     <b>Мультиагентные системы &mdash; теория</b>
                     <ul class="clist">
                         <li>CrewAI/AutoGen: роли, коллаборация &mdash; концепция</li>
                         <li>Long-term memory между сессиями</li>
-                    </ul>
-                    <span class="tag t1">ProGlib 25.05 (по графику)</span><br>
-                    <b>AgentOps + Cost control</b>
-                    <ul class="clist">
-                        <li>Langfuse/LangSmith: трейсинг, дашборды</li>
-                        <li>RAGAS/DeepEval: автооценка RAG</li>
-                        <li>Semantic cache &mdash; экономия токенов</li>
-                        <li>SLA-алерты при деградации</li>
                     </ul>
                     <span class="tag t1">ProGlib ML Тема 6</span><br>
                     <b>Нелинейные методы классификации</b>
                     <ul class="clist">
                         <li>Полиномиальные признаки, регуляризация L1/L2</li>
                     </ul>
-                    <div class="src">&#128218; ProGlib + modelcontextprotocol.io + langfuse.com/docs + docs.ragas.io</div>
+                    <div class="src">&#128218; ProGlib + modelcontextprotocol.io + langchain-ai.github.io/langgraph/tutorials + langfuse.com/docs</div>
                 </td>
                 <td>
-                    <span class="tag t2">Самост. &mdash; добиваем долги нед.11</span><br>
+                    <span class="tag t2">Самост. &mdash; MCP-серверы + LangGraph + агентный цикл</span><br>
                     <ul class="clist">
                         <li>Ahillary YouTube ур.6: ReAct-агент над RAG &mdash; добить (rewrite_question + run_rag)</li>
                         <li><b>Практика к ProGlib 7.05 «Первый ИИ-агент»:</b> разобрать supply_chain_agent_student_template_colab.ipynb, заполнить недостающие части</li>
@@ -1600,9 +1601,9 @@
                         <li>&#128250; ШАД Agents Week Лек.1.2 Tools+MCP (~50 мин) &mdash; единственный ШАД на неделе</li>
                         <li><b>Практика к ML Теме 6:</b> sklearn &mdash; PolynomialFeatures + Ridge/Lasso, разобрать L1 vs L2</li>
                         <li style="margin-top:8px"><b>&#128290; Математика:</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B NN</a> гл.4 «Backpropagation calculus» (~10 мин) + <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">3B1B Calculus</a> финал гл.10&ndash;12 если не пройдено</li>
-                        <li class="opt">Redis (30 мин): get/set/expire как semantic cache. Уровень «знаю что есть» <span class="opt-tag">*</span></li>
-                        <li class="opt">LangFlow: визуальный пайплайн Schedule &rarr; HTTP &rarr; LLM <span class="opt-tag">*</span></li>
-                        <li class="opt">Практика к ProGlib 14.05 «Архитектура агента»: цикл восприятие&rarr;план&rarr;действие&rarr;рефлексия <span class="opt-tag">*</span></li>
+                        <li class="opt">Redis (30 мин): get/set/expire как semantic cache. Уровень «знаю что есть»</li>
+                        <li class="opt">LangFlow: визуальный пайплайн Schedule &rarr; HTTP &rarr; LLM</li>
+                        <li class="opt">Практика к ProGlib 14.05 «Архитектура агента»: цикл восприятие&rarr;план&rarr;действие&rarr;рефлексия</li>
                     </ul>
                     <div class="src">&#128218; Ahillary ур.6 + supply_chain_agent ноутбуки + modelcontextprotocol.io + github.com/modelcontextprotocol/servers + redis.io + shad.yandex.ru/agentsweek</div>
                 </td>
@@ -1615,18 +1616,20 @@
                         <li><a href="mlroadmap/llm-engineering/12-agents-react.md" target="_blank"><b>llm-engineering/12-agents-react</b></a> &mdash; max_steps, max_cost, same-action detector</li>
                         <li><a href="mlroadmap/llm-engineering/13-orchestration.md" target="_blank"><b>llm-engineering/13-orchestration</b></a> &mdash; LangGraph conditional edges, checkpointer SQLite, kill/restart test</li>
                         <li><a href="mlroadmap/llm-engineering/14-mcp.md" target="_blank"><b>llm-engineering/14-mcp</b></a> &mdash; read/write разделение, логирование вызовов</li>
-                        <li class="opt"><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a> &mdash; блокировка rm -rf, DROP TABLE, автоформат <span class="opt-tag">*</span></li>
-                        <li class="opt"><a href="mlroadmap/data-science/10-statistics.md" target="_blank"><b>data-science/10-statistics</b></a> &mdash; статистические основы под L1/L2 регуляризацию <span class="opt-tag">*</span></li>
+                        <li class="opt"><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a> &mdash; блокировка rm -rf, DROP TABLE, автоформат</li>
+                        <li class="opt"><a href="mlroadmap/data-science/10-statistics.md" target="_blank"><b>data-science/10-statistics</b></a> &mdash; статистические основы под L1/L2 регуляризацию</li>
                     </ul>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> нед.11 в процессе, долги по MCP-серверу, LangGraph, CLAUDE.md.<br><b>Сейчас:</b> Добиваем все долги нед.11 + ProGlib идёт по графику. Без этого фундамента нельзя идти на AgentOps и диплом.</div>
+                    <div class="why"><b>Было:</b> нед.10 + нед.11 болезнь &mdash; две недели потеряны.<br><b>Сейчас:</b> Возврат к плану. Главное за неделю: написать собственный MCP-сервер + LangGraph с checkpointer. Без этих двух навыков нельзя двигаться к multi-agent и диплому.</div>
+                    <div class="pipeline"><b>Pipeline нед.12:</b> Ahillary ур.6 (добить ReAct) &rarr; ProGlib 12.05 MCP теория &rarr; MCP серверы 1/2/3 на практике &rarr; ProGlib 14.05 архитектура агента &rarr; supply_chain_agent разобрать &rarr; ProGlib 18.05 LangGraph &rarr; LangGraph hello-world с kill/restart &rarr; ProGlib 21.05 multi-agent обзор &rarr; ML Тема 6 фоном в выходные.</div>
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>FastMCP</b><span>Python-фреймворк для быстрой сборки MCP-серверов. Декоратор @mcp.tool() = готовый инструмент для агента.</span></div>
-                        <div class="tcard"><b>LangGraph checkpointer</b><span>SQLite/Redis-бэкенд для персистентного состояния. Kill процесса &rarr; рестарт &rarr; продолжение с правильного узла.</span></div>
-                        <div class="tcard"><b>ProGlib ML Тема 6</b><span>Нелинейные методы: PolynomialFeatures + Ridge/Lasso. L1 выбирает признаки, L2 уменьшает все.</span></div>
+                        <div class="tcard"><b>FastMCP</b><span>Python-фреймворк для MCP-серверов. @mcp.tool() = готовый инструмент агента. Написал сервер get_news() &mdash; агент сам его вызывает.</span></div>
+                        <div class="tcard"><b>LangGraph checkpointer</b><span>SQLite/Redis-бэкенд: kill процесса &rarr; рестарт &rarr; продолжение с правильного узла. Критично для production.</span></div>
+                        <div class="tcard"><b>Агентный цикл</b><span>Восприятие &rarr; план &rarr; действие &rarr; рефлексия. supply_chain_agent = учебный пример со всеми компонентами.</span></div>
+                        <div class="tcard"><b>ML Тема 6 (фоном)</b><span>PolynomialFeatures + Ridge/Lasso. L1 выбирает признаки (sparse), L2 уменьшает все равномерно.</span></div>
                     </div>
                 </td>
                 <td>
@@ -1645,13 +1648,21 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">1&ndash;7 июн</span><span class="pls">Неделя 13</span><br><span style="font-size:10px;color:#e65100;font-weight:600">Нагон B — AgentOps + Eval</span></td>
+                <td><span class="pbl">1&ndash;7 июн</span><span class="pls">Неделя 13</span></td>
                 <td>
+                    <span class="tag t1">ProGlib 25.05 (сдвиг с нед.12)</span><br>
+                    <b>AgentOps + Cost control</b>
+                    <ul class="clist">
+                        <li>Langfuse/LangSmith: трейсинг, дашборды, trace_id</li>
+                        <li>RAGAS/DeepEval: автооценка RAG</li>
+                        <li>Semantic cache &mdash; экономия токенов</li>
+                        <li>SLA-алерты при деградации качества</li>
+                    </ul>
                     <span class="tag t1">ProGlib 1.06</span><br>
                     <b>Безопасность агентов</b>
                     <ul class="clist">
                         <li>Prompt injection, input validation</li>
-                        <li>Изоляция внешнего контента</li>
+                        <li>Изоляция внешнего контента (XML-теги)</li>
                     </ul>
                     <span class="tag t1">ProGlib 4.06</span><br>
                     <b>A2A &mdash; агент-агент коммуникация</b>
@@ -1667,7 +1678,7 @@
                     <div class="src">&#128218; ProGlib + langfuse.com/docs + docs.ragas.io + sklearn.org</div>
                 </td>
                 <td>
-                    <span class="tag t2">Самост. &mdash; AgentOps + Eval + Multi-Agent ADR</span><br>
+                    <span class="tag t2">Самост. &mdash; Langfuse + golden set + eval + безопасность</span><br>
                     <ul class="clist">
                         <li>Langfuse self-hosted через docker-compose: трейсы каждого запроса в дашборде</li>
                         <li>Golden set ≥30 примеров к «Задумке по экономике» (input + reference + теги easy/hard) &mdash; в git</li>
@@ -1679,22 +1690,24 @@
                         <li>sklearn DecisionTreeClassifier на учебном датасете, визуализация, feature_importance</li>
                         <li style="margin-top:8px"><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">Decision Trees Pt.1</a> (~18 мин) + Pt.2 Regression Trees (~15 мин) + Naive Bayes (~10 мин)</li>
                         <li><b>ProGlib Math AI Зан.8</b> (1 вечер, фоном): распределения, условная вероятность, формула Байеса &mdash; теория без глубокого погружения</li>
-                        <li class="opt">3B1B NN гл.5 «Transformers» (~27 мин) &mdash; под Multi-Agent <span class="opt-tag">*</span></li>
-                        <li class="opt">Multi-agent учебный пример: CrewAI или AutoGen, 2 агента + одна задача <span class="opt-tag">*</span></li>
+                        <li class="opt">3B1B NN гл.5 «Transformers» (~27 мин) &mdash; под Multi-Agent</li>
+                        <li class="opt">Multi-agent учебный пример: CrewAI или AutoGen, 2 агента + одна задача</li>
                     </ul>
                     <div class="src">&#128218; langfuse.com/docs + docs.ragas.io/tutorials + sklearn.org + StatQuest + 3B1B NN</div>
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/llm-engineering/15-multi-agent.md" target="_blank"><b>llm-engineering/15-multi-agent</b></a> &mdash; когда multi-agent НЕ нужен, ADR research&rarr;write&rarr;review</li>
                         <li><a href="mlroadmap/llm-engineering/16-evals-offline.md" target="_blank"><b>llm-engineering/16-evals-offline</b></a> &mdash; golden set, eval в CI</li>
-                        <li><a href="mlroadmap/practice-labs/16-llm-eval.md" target="_blank"><b>practice-labs/16-llm-eval</b></a> &mdash; реализация eval-скрипта</li>
+                        <li><a href="mlroadmap/practice-labs/16-llm-eval.md" target="_blank"><b>practice-labs/16-llm-eval</b></a> &mdash; реализация eval-скрипта с diff vs previous</li>
                         <li><a href="mlroadmap/llm-engineering/17-llm-as-judge.md" target="_blank"><b>llm-engineering/17-llm-as-judge</b></a> &mdash; judge-промпт, Cohen kappa, swap-test</li>
                         <li><a href="mlroadmap/llm-engineering/23-monitoring.md" target="_blank"><b>llm-engineering/23-monitoring</b></a> &mdash; Langfuse trace_id, метрики, алёрты</li>
+                        <li><a href="mlroadmap/llm-engineering/19-security.md" target="_blank"><b>llm-engineering/19-security</b></a> &mdash; OWASP LLM Top-10, XML-теги для изоляции контента</li>
+                        <li class="opt"><a href="mlroadmap/llm-engineering/15-multi-agent.md" target="_blank"><b>llm-engineering/15-multi-agent</b></a> &mdash; когда multi-agent НЕ нужен, ADR research&rarr;write&rarr;review</li>
                     </ul>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> нед.12 Multi-Agent, AgentOps были запланированы, но сдвинулись.<br><b>Сейчас:</b> Eval-инфраструктура &mdash; фундамент на весь оставшийся план. Без golden set и LLM-judge не увидишь регрессий. Langfuse + trace_id нужны уже на нед.15 для диплома.</div>
+                    <div class="why"><b>Было:</b> нед.12 закрыла MCP + LangGraph + агентный цикл.<br><b>Сейчас:</b> AgentOps (ProGlib 25.05) + eval-инфраструктура = фундамент на весь план. Без golden set и LLM-judge не увидишь регрессий при изменениях. Langfuse + trace_id нужны уже на нед.15 для диплома.</div>
+                    <div class="pipeline"><b>Pipeline нед.13:</b> ProGlib 25.05 AgentOps &rarr; поднять Langfuse self-hosted (docker compose) &rarr; golden set ≥30 примеров &rarr; eval-скрипт + diff vs previous &rarr; LLM-as-judge калибровка &rarr; ProGlib 1.06 безопасность &rarr; OWASP чек-лист &rarr; ProGlib 4.06 A2A &rarr; ML Тема 7 + Math AI Зан.8 (вечером).</div>
                 </td>
                 <td>
                     <div class="tcards">
@@ -1770,21 +1783,21 @@
                         <li>Собрать 20 jailbreak-попыток из открытых источников &rarr; прогнать на своей системе</li>
                         <li><b>Практика к ML Теме 8:</b> sklearn RandomForestClassifier, feature_importances_, сравнение с одним деревом</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">Random Forest Pt.1</a> (~10 мин) &mdash; под ML Тему 8</li>
-                        <li class="opt">A2A учебный пример: два агента через MCP передают сообщение <span class="opt-tag">*</span></li>
-                        <li class="opt">&#128250; ШАД SRE Week Лек.1+2 (~1.5 ч) <span class="opt-tag">*</span></li>
+                        <li class="opt">A2A учебный пример: два агента через MCP передают сообщение</li>
+                        <li class="opt">&#128250; ШАД SRE Week Лек.1+2 (~1.5 ч)</li>
                     </ul>
                     <div class="src">&#128218; Ahillary бонус ур.4 + docs.aiogram.dev + docs.docker.com/compose + github.com/microsoft/presidio + hetzner.com/cloud + StatQuest</div>
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/llm-engineering/19-security.md" target="_blank"><b>llm-engineering/19-security</b></a> &mdash; OWASP LLM Top-10, PII-redactor через presidio, XML-теги для внешнего контента</li>
+                        <li><a href="mlroadmap/llm-engineering/19-security.md" target="_blank"><b>llm-engineering/19-security</b></a> &mdash; углублённо: PII-redactor через presidio, jailbreak 20 примеров, rate-limit guard</li>
                         <li><a href="mlroadmap/practice-labs/17-ml-service.md" target="_blank"><b>practice-labs/17-ml-service</b></a> &mdash; multi-stage Dockerfile, /healthz, /readyz, Prometheus</li>
                         <li><a href="mlroadmap/data-science/18-productionization.md" target="_blank"><b>data-science/18-productionization</b></a> &mdash; GitHub Actions: lint+test+build+push ghcr.io</li>
                         <li><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a> &mdash; PreToolUse блокировка rm -rf, DROP TABLE; PostToolUse автоформат ruff</li>
                     </ul>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> Eval-инфраструктура из нед.13 готова.<br><b>Сейчас:</b> Деплой + безопасность. Telegram = интерфейс к «Задумке» (уже нужен для диплома нед.15). OWASP + PII перед публикацией обязательны.</div>
+                    <div class="why"><b>Было:</b> нед.13: eval-инфраструктура + безопасность теория готовы.<br><b>Сейчас:</b> Деплой на VPS + Telegram + PII-защита на практике. Telegram = интерфейс к «Задумке» (нужен уже для диплома нед.15). Presidio + jailbreak-тесты перед публикацией обязательны.</div>
                 </td>
                 <td>
                     <div class="tcards">
@@ -1842,8 +1855,8 @@
                         <li>README на английском: архитектура (Mermaid-схема), как запустить</li>
                         <li><b>Практика к Математике AI Зан.9:</b> Naive Bayes в NumPy с нуля, сравнить со sklearn GaussianNB</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">Random Forest Pt.1</a> (~10 мин) если не закрыто на нед.14</li>
-                        <li class="opt">Naive Bayes в NumPy + сравнение со sklearn GaussianNB (полная практика) <span class="opt-tag">*</span></li>
-                        <li class="opt">3B1B NN гл.6 «Attention» (~27 мин) &mdash; в свободный вечер <span class="opt-tag">*</span></li>
+                        <li class="opt">Naive Bayes в NumPy + сравнение со sklearn GaussianNB (полная практика)</li>
+                        <li class="opt">3B1B NN гл.6 «Attention» (~27 мин) &mdash; в свободный вечер</li>
                     </ul>
                     <div class="src">&#128218; langchain-ai.github.io/langgraph + StatQuest + 3B1B NN</div>
                 </td>
@@ -1932,8 +1945,8 @@
                         <li>t-тест + доверительные интервалы через scipy.stats</li>
                         <li><code>ccusage</code> (community CLI) &mdash; расход Claude Code, пересмотреть CLAUDE.md (срезать до 50&ndash;80 строк), отключить ненужные MCP, привычка /clear</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">AdaBoost</a> (~22 мин) + Gradient Boost Pt.1 (~15 мин) + XGBoost Pt.1 (~20 мин) &mdash; под ML Тему 9</li>
-                        <li class="opt">vLLM локально (без NVIDIA GPU не запустится &mdash; Ollama закрывает кейс) <span class="opt-tag">*</span></li>
-                        <li class="opt">&#128250; ШАД LLM Scaling Week Тема 1 «Арифметика DL» (~1 ч) <span class="opt-tag">*</span></li>
+                        <li class="opt">vLLM локально (без NVIDIA GPU не запустится &mdash; Ollama закрывает кейс)</li>
+                        <li class="opt">&#128250; ШАД LLM Scaling Week Тема 1 «Арифметика DL» (~1 ч)</li>
                     </ul>
                     <div class="src">&#128218; ollama.ai + StatQuest + shad.yandex.ru/llmscalingweek</div>
                 </td>
@@ -1993,8 +2006,8 @@
                         <li>PyTorch старт: <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> «PyTorch for Deep Learning» intro (~22 мин) + «Coding NN in PyTorch» (~25 мин)</li>
                         <li>3B1B NN гл.7 «How LLMs store facts» (~23 мин) &mdash; перед LoRA, понимание механики</li>
                         <li><b>&#128290; StatQuest:</b> K-means (~8 мин) + DBSCAN (~7 мин) &mdash; под ML Тему 10</li>
-                        <li class="opt">Karpathy micrograd &mdash; разобрать 150 строк автодиф (если не успеваешь &mdash; перенести на нед.19) <span class="opt-tag">*</span></li>
-                        <li class="opt">&#128250; ШАД LLM Scaling Week Тема 5 Inference challenges (~1.5 ч) <span class="opt-tag">*</span></li>
+                        <li class="opt">Karpathy micrograd &mdash; разобрать 150 строк автодиф (если не успеваешь &mdash; перенести на нед.19)</li>
+                        <li class="opt">&#128250; ШАД LLM Scaling Week Тема 5 Inference challenges (~1.5 ч)</li>
                     </ul>
                     <div class="src">&#128218; HF LLM Course (гл.3-6) + Chemometrics PDF + StatQuest + shad.yandex.ru/llmscalingweek</div>
                 </td>
@@ -2058,7 +2071,7 @@
                         <li>Karpathy micrograd (если не закрыто на нед.18)</li>
                         <li>Refactor legacy: characterization-тесты на RAG-код из нед.13, потом extraction слоёв domain/service/repository, итерации по 200&ndash;300 строк</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">PCA Step-by-Step</a> (~22 мин) + t-SNE (~12 мин) &mdash; под ML Тему 11</li>
-                        <li class="opt">&#128250; ШАД GPT Week Лек.6 «Ускорение инференса» (~45 мин) <span class="opt-tag">*</span></li>
+                        <li class="opt">&#128250; ШАД GPT Week Лек.6 «Ускорение инференса» (~45 мин)</li>
                     </ul>
                     <div class="src">&#128218; StatQuest B2 + Chemometrics PDF + sklearn.decomposition</div>
                 </td>
@@ -2130,7 +2143,7 @@
                         <li>matrix factorization на MovieLens или surprise library (под ML Тему 12)</li>
                         <li>2 subagent'а в .claude/agents/: <code>security-reviewer</code> + <code>chemistry-data-validator</code></li>
                         <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B NN</a> гл.8&ndash;9 (Attention + GPT from scratch) &mdash; под Karpathy</li>
-                        <li class="opt">DPO теоретически &mdash; только «Зачем alignment» + «DPO без RL» (для статьи в сентябре) <span class="opt-tag">*</span></li>
+                        <li class="opt">DPO теоретически &mdash; только «Зачем alignment» + «DPO без RL» (для статьи в сентябре)</li>
                     </ul>
                     <div class="src">&#128218; huggingface.co/docs/peft + Chemometrics PDF (гл.4-6) + huggingface.co/learn/llm-course + StatQuest Coding Transformer + Karpathy YouTube</div>
                 </td>
@@ -2140,7 +2153,7 @@
                         <li><a href="mlroadmap/llm-engineering/capstone-3-finetune.md" target="_blank"><b>llm-engineering/capstone-3-finetune</b></a> &mdash; ТЗ хроматографического проекта: датасет ≥500, 2 конфиг LoRA, vLLM, Makefile</li>
                         <li><a href="mlroadmap/practice-labs/25-multimodal-rag.md" target="_blank"><b>practice-labs/25-multimodal-rag</b></a> &mdash; ColPali: PNG хроматограмм &rarr; embedding &rarr; VLM</li>
                         <li><a href="mlroadmap/claude-code/14-subagents.md" target="_blank"><b>claude-code/14-subagents</b></a> &mdash; 2 subagent'а: security-reviewer + chemistry-data-validator</li>
-                        <li class="opt"><a href="mlroadmap/neural-networks/15-rlhf-dpo.md" target="_blank"><b>neural-networks/15-rlhf-dpo</b></a> &mdash; только «Зачем alignment» + «DPO без RL» <span class="opt-tag">*</span></li>
+                        <li class="opt"><a href="mlroadmap/neural-networks/15-rlhf-dpo.md" target="_blank"><b>neural-networks/15-rlhf-dpo</b></a> &mdash; только «Зачем alignment» + «DPO без RL»</li>
                     </ul>
                 </td>
                 <td>
@@ -2197,7 +2210,7 @@
                         <li>Upwork профиль: AI Engineer for Scientific Analytics</li>
                         <li>Статья-черновик «9 месяцев с AI: что я понял» по антипаттернам</li>
                         <li>&#128250; ШАД A/B Week: <a href="https://shad.yandex.ru/abweek" target="_blank">Лек.3</a> «Множественное тестирование» + <a href="https://shad.yandex.ru/abweek" target="_blank">Лек.4</a> «Метрики» + <a href="https://shad.yandex.ru/abweek" target="_blank">Лек.5</a> «Стратификация, peeking, Байес» &mdash; прямо под A/B тест промптов</li>
-                        <li class="opt">OpenClaw на VPS &mdash; Claude Code + systemd cron + Telegram webhook = аналогичный результат без iOS-зависимости <span class="opt-tag">*</span></li>
+                        <li class="opt">OpenClaw на VPS &mdash; Claude Code + systemd cron + Telegram webhook = аналогичный результат без iOS-зависимости</li>
                     </ul>
                     <div class="src">&#128218; docs.anthropic.com/claude-code + loom.com + shad.yandex.ru/abweek</div>
                 </td>
@@ -2288,8 +2301,8 @@
                         <li><b>Нед.1 (1–7 сент):</b> Math гэпы &mdash; при ступоре открывать MML Book гл.X (mml-book.github.io) — не курс, а справочник по запросу. 3B1B + Math AI уже пройдены. Если тема ясна &mdash; пропускать.</li>
                         <li><b>Нед.2–3 (8–21 сент):</b> QLoRA на Google Colab: дообучить Llama 3.1 8B на своих Q&A данных (химия или экономика) &rarr; опубликовать на HuggingFace Hub. HF LLM Course гл.12: Build Reasoning Models (DeepSeek R1-style, GRPO) — к сентябрю есть база LoRA из июля.</li>
                         <li><b>Нед.4 (22–30 сент):</b> Сравнение: base vs LoRA vs QLoRA — оформить как эксперимент/статью на GitHub. Начало Проекта 3: AI-агент для автоматизации лабораторной отчётности.</li>
-                        <li class="opt"><b>Нед.1 доп:</b> fast.ai &laquo;Practical Deep Learning for Coders&raquo; — урок 1&ndash;3 (fast.ai/courses). Альтернативный путь если StatQuest не зашёл. <span class="opt-tag">*</span></li>
-                        <li class="opt">DPO (Direct Preference Optimization) — arxiv.org/abs/2305.18290 — для статьи <span class="opt-tag">*</span></li>
+                        <li class="opt"><b>Нед.1 доп:</b> fast.ai &laquo;Practical Deep Learning for Coders&raquo; — урок 1&ndash;3 (fast.ai/courses). Альтернативный путь если StatQuest не зашёл.</li>
+                        <li class="opt">DPO (Direct Preference Optimization) — arxiv.org/abs/2305.18290 — для статьи</li>
                     </ul>
                     <div class="src">&#128218; mml-book.github.io + fast.ai + huggingface.co/learn/llm-course +
                         colab.research.google.com</div>
@@ -2323,8 +2336,8 @@
                         <li><b>Нед.2 (8–14 окт):</b> <b>D2 «AI Engineering» (Chip Huyen)</b> — по 1 главе в вечер. Начать с гл.1 (системная архитектура) &rarr; гл.2 (evaluation). DeepEval/Phoenix (Arize) — сравнить с RAGAS, выбрать лучший инструмент. Corrective RAG поверх «Задумки по экономике» — агент сам проверяет качество ответа.</li>
                         <li><b>Нед.3 (15–21 окт):</b> Corrective RAG — закончить интеграцию. Паттерны: Reflection, Self-RAG — stateful агенты нового уровня. <b>Первый коммерческий проект:</b> реальная компания (LinkedIn / знакомые / холодные обращения) &rarr; автоматизация одного процесса &rarr; коммерческий договор.</li>
                         <li><b>Нед.4 (22–31 окт):</b> Продолжение Проекта 3. Продолжение коммерческого проекта.</li>
-                        <li class="opt">Udemy: «LangChain &amp; Vector Databases in Production» (Activeloop) — продакшн RAG &mdash; есть mlroadmap llm-engineering целиком <span class="opt-tag">*</span></li>
-                        <li class="opt">Kubernetes основы: Pod, Deployment, Service — декабрь лучше <span class="opt-tag">*</span></li>
+                        <li class="opt">Udemy: «LangChain &amp; Vector Databases in Production» (Activeloop) — продакшн RAG &mdash; есть mlroadmap llm-engineering целиком</li>
+                        <li class="opt">Kubernetes основы: Pod, Deployment, Service — декабрь лучше</li>
                     </ul>
                     <div class="src">&#128218; mode.com/sql-tutorial + udemy.com + arxiv.org/abs/2310.11511 (Corrective RAG) + stepik.org +
                         k8s.io/docs</div>
@@ -2355,9 +2368,9 @@
                         <li><b>Нед.1 (1–7 ноя):</b> Multimodal агенты: Claude Vision API &rarr; анализ изображений спектров и хроматограмм. Прототип: изображение хроматограммы &rarr; Claude Vision &rarr; интерпретация + числа.</li>
                         <li><b>Нед.2 (8–14 ноя):</b> MLOps: mlroadmap data-science/19-mlops + 20-monitoring + practice-labs/19-drift-monitoring покрывают MLOps. CI/CD для ML, автоматическое переобучение при новых данных.</li>
                         <li><b>Нед.3–4 (15–30 ноя):</b> Второй коммерческий проект (продолжение или новый клиент). LinkedIn: 10+ постов за осень о проделанной работе, специализации, lessons learned.</li>
-                        <li class="opt">HuggingFace Audio Course (huggingface.co/learn/audio-course) — обработка спектров как аудиоданных <span class="opt-tag">*</span></li>
-                        <li class="opt">GraphRAG (Microsoft, github.com/microsoft/graphrag) — RAG для связанных сущностей <span class="opt-tag">*</span></li>
-                        <li class="opt">«Designing Machine Learning Systems» (Chip Huyen) — читать онлайн, по главе в неделю <span class="opt-tag">*</span></li>
+                        <li class="opt">HuggingFace Audio Course (huggingface.co/learn/audio-course) — обработка спектров как аудиоданных</li>
+                        <li class="opt">GraphRAG (Microsoft, github.com/microsoft/graphrag) — RAG для связанных сущностей</li>
+                        <li class="opt">«Designing Machine Learning Systems» (Chip Huyen) — читать онлайн, по главе в неделю</li>
                     </ul>
                     <div class="src">&#128218; mlroadmap data-science/19-mlops + practice-labs/19-drift-monitoring + huggingface.co/learn/audio-course + github.com/microsoft/graphrag</div>
                 </div>
@@ -2389,8 +2402,8 @@
                         <li><b>Нед.1 (1–7 дек):</b> <b>D4 «Practical MLOps»</b> — ключевые главы: CI/CD для ML, model versioning, monitoring. Проект 4: полный MLOps pipeline — данные &rarr; fine-tuning &rarr; деплой &rarr; мониторинг &rarr; автообновление. D4 читается прямо под проект.</li>
                         <li><b>Нед.2–3 (8–21 дек):</b> Anthropic API: новые возможности за осень — docs.anthropic.com. Habit навсегда: arxiv.org — 1 статья в неделю по агентам / fine-tuning / RAG (начало привычки).</li>
                         <li><b>Нед.4 (22–31 дек):</b> Статья на Habr (рус.) или Medium (eng.) — «Как построил AI-систему для аналитической химии за 9 месяцев». GitHub: 4 публичных репозитория. LinkedIn: 500+ связей, 10+ постов. Список потенциальных клиентов на Q1 2027.</li>
-                        <li class="opt">Kubernetes продвинутый: автомасштабирование, rolling updates <span class="opt-tag">*</span></li>
-                        <li class="opt">D3 «GenAI System Design» (ByteByteGo) — для архитектурных разговоров с клиентом <span class="opt-tag">*</span></li>
+                        <li class="opt">Kubernetes продвинутый: автомасштабирование, rolling updates</li>
+                        <li class="opt">D3 «GenAI System Design» (ByteByteGo) — для архитектурных разговоров с клиентом</li>
                     </ul>
                 </div>
                 <div>
@@ -2518,7 +2531,7 @@
             <ul style="margin:6px 0 10px 18px;font-size:inherit;line-height:1.8">
                 <li><b>4 видео/нед — норма, 6 — максимум.</b> Не превышать: лучше посмотреть меньше и понять, чем прокрутить и забыть.</li>
                 <li>Смотреть по расписанию недели, не наперёд. Каждое видео привязано к теме курса — это намеренно.</li>
-                <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B Neural Networks</a> гл.1–9 по новому плану после перекройки: нед.8→гл.1 (done), нед.9→гл.2-3 (done), нед.10→болезнь, нед.11→гл.4 (Backprop calculus), нед.12→гл.5 (Transformers), нед.14-15→гл.6 (Attention), нед.17→гл.7 (How LLMs store facts), нед.19-22→гл.8-9 (Attention visualization + GPT from scratch). Не смотреть вперёд.</li>
+                <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B Neural Networks</a> гл.1–9 по новому плану после перекройки: нед.8→гл.1 (done), нед.9→гл.2-3 (done), нед.10→болезнь, нед.11→болезнь, нед.12→гл.4 (Backprop calculus), нед.13→гл.5 (Transformers), нед.14-15→гл.6 (Attention), нед.17→гл.7 (How LLMs store facts), нед.19-22→гл.8-9 (Attention visualization + GPT from scratch). Не смотреть вперёд.</li>
                 <li><a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> ML (SVM, Decision Trees, RF, XGBoost) — параллельно с ProGlib темой недели. <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> DL (Transformer, BERT) — параллельно с нед.12-13.</li>
                 <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">3B1B LinAlg</a> / Calculus добиваем в нед.10–11 (гл.15–16 LinAlg), потом закрыты.</li>
             </ul>
