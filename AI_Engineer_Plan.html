@@ -719,6 +719,72 @@
             background: #eceff1;
             color: #37474f
         }
+
+        /* ===== EXP тултипы (нед.11+) ===== */
+        .exp {
+            cursor: help;
+            border-bottom: 1px dashed rgba(79, 195, 247, .65)
+        }
+
+        .exp:hover {
+            border-bottom-color: #4fc3f7
+        }
+
+        .exp-card {
+            display: none
+        }
+
+        #exp-float {
+            position: fixed;
+            z-index: 9999;
+            width: 340px;
+            max-width: 92vw;
+            background: #0d1b2a;
+            color: #e8eef5;
+            border: 1px solid #1b3a57;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 11px;
+            line-height: 1.55;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .45);
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity .15s ease, transform .15s ease;
+            pointer-events: none
+        }
+
+        #exp-float.show {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        #exp-float .ef {
+            display: block;
+            margin-bottom: 8px
+        }
+
+        #exp-float .ef:last-child {
+            margin-bottom: 0
+        }
+
+        #exp-float .ef b {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 10px;
+            letter-spacing: .3px
+        }
+
+        #exp-float .ef-em b {
+            color: #4fc3f7
+        }
+
+        #exp-float .ef-chem b {
+            color: #a5d6a7
+        }
+
+        #exp-float .ef-sell b {
+            color: #ffcc80
+        }
     </style>
 </head>
 
@@ -1481,20 +1547,20 @@
                 <td><span class="pbl">18&ndash;24 май</span><span class="pls">Неделя 11</span><br><span style="font-size:10px;color:#b71c1c;font-weight:700">БОЛЕЗНЬ</span></td>
                 <td>
                     <span class="tag t1">ProGlib 12.05 (догон)</span><br>
-                    <b>MCP + LangFlow</b>
+                    <span class="exp"><b>MCP + LangFlow</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>MCP — стандарт, которым агент EM получает инструменты; LangFlow — визуально собрать прототип пайплайна fetch→evaluate до написания кода.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>LangFlow drag-and-drop удобен показать не-программисту (лаборанту) логику обработки данных прибора.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>MCP-интеграции + быстрый визуальный прототип = демо заказчику за день, до прод-кода.</span></span></span>
                     <ul class="clist">
-                        <li>Model Context Protocol &mdash; стандарт интеграций</li>
-                        <li>LangFlow: визуальный прототипинг</li>
-                        <li>Webhooks, триггеры, schedule</li>
+                        <li class="done">Model Context Protocol &mdash; стандарт интеграций</li>
+                        <li class="done">LangFlow: визуальный прототипинг</li>
+                        <li class="done">Webhooks, триггеры, schedule</li>
                     </ul>
                     <span class="tag t1">ProGlib 14.05 (догон)</span><br>
-                    <b>Архитектура ИИ-агента: собираем агентный цикл на Python</b>
+                    <span class="exp"><b>Архитектура ИИ-агента: собираем агентный цикл на Python</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Цикл восприятие→план→действие→рефлексия + parent retrieval + Redis-кэш = скелет агента EM, на который потом ложатся инструменты.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же цикл — агент-ассистент анализа: воспринял данные → спланировал шаги → посчитал → отрефлексировал результат.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание агента как цикла (а не «обёртка над API») — база, без которой не построить надёжного агента под заказ.</span></span></span>
                     <ul class="clist">
                         <li>Parent retrieval, Redis-кэш</li>
                         <li>Сборка цикла: восприятие &rarr; план &rarr; действие &rarr; рефлексия</li>
                     </ul>
                     <span class="tag t1">ProGlib 18.05 (новый)</span><br>
-                    <b>LangGraph: профессиональная оркестрация</b>
+                    <span class="exp"><b>LangGraph: профессиональная оркестрация</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>State machine с checkpoint и human-in-the-loop — именно так в EM реализуется пауза на верификацию новости человеком и откат при ошибке.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Граф с паузами оркеструет анализ, где человек подтверждает критический шаг (как human-in-the-loop в верификации результата).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>LangGraph с checkpointing и time-travel debug — production-навык; заказчику нужен агент, не теряющий состояние и отлаживаемый.</span></span></span>
                     <ul class="clist">
                         <li>State machine: состояния, ветвления, retries</li>
                         <li>Checkpoint: сохранение и восстановление</li>
@@ -1511,12 +1577,12 @@
                         <li class="done">Ahillary YouTube ур.6: ReAct-агент над RAG &mdash; добить (rewrite_question + run_rag), допроход с нед.10</li>
                         <li><b>Практика к ProGlib 7.05 «Первый ИИ-агент»:</b> разобрать supply_chain_agent_student_template_colab.ipynb (файл в проекте) &mdash; заполнить недостающие части по примеру full_colab. Понять PydanticAI + tools + ReAct цикл. Объяснить себе вслух за 2 мин.</li>
                         <li><b>Практика к ProGlib 12.05 «MCP + LangFlow»:</b> запустить LangFlow локально (docker), собрать визуально простой пайплайн (Schedule &rarr; HTTP &rarr; LLM)</li>
-                        <li><b>MCP-сервер №1 (filesystem):</b> убедиться что встроен в Claude Code, попробовать команды (чтение/запись файлов из агента)</li>
-                        <li><b>MCP-сервер №2 (Brave Search):</b> подключить из github.com/modelcontextprotocol/servers</li>
-                        <li><b>MCP-сервер №3 (свой):</b> написать Python MCP-сервер get_news(topic) &rarr; 5 новостей из RSS &rarr; подключить к Claude Code, проверить что агент сам вызывает</li>
+                        <li><span class="exp"><b>MCP-сервер №1 (filesystem):</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Встроенный filesystem-MCP даёт агенту EM чтение/запись локальных файлов корпуса знаний — первый практический MCP без своего кода.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Агент читает папку с экспортами данных прибора напрямую.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Знание готовых MCP-серверов (filesystem, Postgres, GitHub) = быстрая интеграция без разработки с нуля.</span></span></span> убедиться что встроен в Claude Code, попробовать команды (чтение/запись файлов из агента)</li>
+                        <li><span class="exp"><b>MCP-сервер №2 (Brave Search):</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Готовый Brave Search MCP даёт агенту EM веб-поиск свежих данных вне базы знаний — дополняет RSS-источники.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; веб-поиск как источник для агента.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Подключение готовых MCP из реестра modelcontextprotocol/servers — быстрый способ расширить агента под нужды заказчика.</span></span></span> подключить из github.com/modelcontextprotocol/servers</li>
+                        <li><span class="exp"><b>MCP-сервер №3 (свой):</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Первый собственный инструмент агента EM: get_news(topic) на FastMCP → 5 новостей из RSS → агент сам вызывает и оценивает важность 1-5. Без него агент видит только базу знаний, не мир.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же паттерн — get_hplc_run(sample_id) тянет данные прогона с сервера прибора прямо в агента.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Писать свои MCP-серверы под источники заказчика — редкий навык 2025-2026; большинство знают только function calling.</span></span></span> написать Python MCP-сервер get_news(topic) &rarr; 5 новостей из RSS &rarr; подключить к Claude Code, проверить что агент сам вызывает</li>
                         <li><b>Практика к ProGlib 14.05 «Архитектура ИИ-агента»:</b> собрать минимальный агентный цикл на Python (восприятие&rarr;план&rarr;действие&rarr;рефлексия) на 1 простой задаче (например &laquo;найти новость по теме &rarr; оценить важность 1-5&raquo;)</li>
                         <li><b>Практика к ProGlib 18.05 «LangGraph»:</b> запустить базовый пример из tutorials &mdash; 2&ndash;3 узла + state. Hello-world уровень, без своего проекта</li>
-                        <li><b>Redis (30 мин):</b> <code>pip install redis</code> &rarr; redis.io/docs/getting-started &rarr; get/set/expire как semantic cache. Уровень &laquo;знаю что есть&raquo;.</li>
+                        <li><span class="exp"><b>Redis (30 мин):</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Semantic cache в EM: повторный/похожий вопрос → ответ из Redis без повторного вызова LLM. Экономия токенов и latency.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; кэш переносится на любой дорогой повторяющийся расчёт.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Semantic cache — конкретный рычаг снижения счёта за LLM, легко показать экономию заказчику.</span></span></span> <code>pip install redis</code> &rarr; redis.io/docs/getting-started &rarr; get/set/expire как semantic cache. Уровень &laquo;знаю что есть&raquo;.</li>
                         <li>Прочитать ПОЛНЫЙ ГАЙД (файл проекта): разделы &laquo;CLI-агенты&raquo; и &laquo;MCP&raquo; обзорно</li>
                         <li style="margin-top:8px"><b>&#128290; Математика (мини, по теме):</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B Neural Networks</a> гл.4 «Backpropagation calculus» (~10 мин) &mdash; финал backprop. <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">3B1B Calculus</a> финал гл.10&ndash;12 (~15 мин) если ещё не пройдено. Без StatQuest на этой неделе &mdash; перегрузка.</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (1 лекция):</b> <a href="https://shad.yandex.ru/agentsweek" target="_blank">Agents Week &mdash; Лек.1.2 «Tools. MCP»</a> (~50 мин) &mdash; прямо под ProGlib 12.05. Остальные ШАД-лекции &rarr; Фаза 3 как фон.</li>
@@ -1525,13 +1591,13 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/claude-code/11-mcp-basics.md" target="_blank"><b>claude-code/11-mcp-basics</b></a> &mdash; MCP теория + FastMCP пример</li>
-                        <li><a href="mlroadmap/claude-code/12-mcp-servers.md" target="_blank"><b>claude-code/12-mcp-servers</b></a> &mdash; filesystem-сервер через npx, /mcp, claude mcp list</li>
-                        <li><a href="mlroadmap/llm-engineering/12-agents-react.md" target="_blank"><b>llm-engineering/12-agents-react</b></a> &mdash; max_steps, max_cost, same-action detector</li>
-                        <li><a href="mlroadmap/llm-engineering/13-orchestration.md" target="_blank"><b>llm-engineering/13-orchestration</b></a> &mdash; LangGraph conditional edges, checkpointer SQLite, kill/restart test</li>
-                        <li><a href="mlroadmap/llm-engineering/14-mcp.md" target="_blank"><b>llm-engineering/14-mcp</b></a> &mdash; read/write прав разделение, логирование вызовов</li>
-                        <li><a href="mlroadmap/claude-code/02-claude-md.md" target="_blank"><b>claude-code/02-claude-md</b></a> &mdash; создать CLAUDE.md в проекте</li>
-                        <li><a href="mlroadmap/claude-code/13-custom-commands.md" target="_blank"><b>claude-code/13-custom-commands</b></a> &mdash; /commit и /review в .claude/commands/</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/11-mcp-basics.md" target="_blank"><b>claude-code/11-mcp-basics</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Базовый протокол для инструментов агента EM. По FastMCP-примеру пишется первый tool get_news(topic) — без MCP агент EM ограничен встроенными функциями и не дотянется до RSS/котировок.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же паттерн @mcp.tool() оборачивает get_hplc_run(sample_id) — агент тянет данные хроматографа как встроенную функцию для интерпретации.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>MCP-разработчики редки в 2025-2026: большинство знают только function calling. Нужно любой компании с внутренними источниками данных, желающей LLM поверх них.</span></span></span> &mdash; MCP теория + FastMCP пример</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/12-mcp-servers.md" target="_blank"><b>claude-code/12-mcp-servers</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>claude mcp add + права mcp__server__tool: так EM подключает Postgres (read-only) с базой новостей/оценок и filesystem к корпусу экономики. Read-only роль = агент не испортит базу знаний.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Postgres MCP с read-only доступом к LIMS-базе лаборатории — агент читает результаты анализов, но физически не может в них писать.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Безопасная интеграция LLM с боевой БД (read-only роль, granular permissions) — то, что enterprise требует до запуска агента в прод.</span></span></span> &mdash; filesystem-сервер через npx, /mcp, claude mcp list</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/12-agents-react.md" target="_blank"><b>llm-engineering/12-agents-react</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Защита агента EM от зацикливания: max_steps, max_cost, детектор повтора действий. Без них агент крутится на одной новости и сжигает бюджет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; общий каркас агента. Применим к агенту-интерпретатору данных прибора.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Агент с жёсткими лимитами стоимости/шагов — обязательное требование прода; runaway-агента никто в прод не пустит.</span></span></span> &mdash; max_steps, max_cost, same-action detector</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/13-orchestration.md" target="_blank"><b>llm-engineering/13-orchestration</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Ядро EM — граф fetch→evaluate→human_review→store с checkpointer SQLite: kill процесса → рестарт → продолжение с нужного узла. Без этого долгий human-in-the-loop теряет состояние.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же граф оркеструет многостадийный анализ: загрузка→препроцессинг→модель→отчёт с точками паузы.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Production-оркестрация с восстановлением состояния отличает «демо в ноутбуке» от системы, которую можно сдать заказчику.</span></span></span> &mdash; LangGraph conditional edges, checkpointer SQLite, kill/restart test</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/14-mcp.md" target="_blank"><b>llm-engineering/14-mcp</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Разделение прав MCP в EM: новостные источники — read-only, запись в базу знаний — только после human_review. Логирование каждого вызова инструмента для аудита.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>read-only MCP к данным прибора + аудит-лог = соответствие лабораторным требованиям прослеживаемости.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Аудируемые, разграниченные по правам интеграции LLM — прямое требование регулируемых отраслей (фарма, метрология).</span></span></span> &mdash; read/write прав разделение, логирование вызовов</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/02-claude-md.md" target="_blank"><b>claude-code/02-claude-md</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>CLAUDE.md в корне EM фиксирует стек, конвенции и блок «что нельзя» — агент держит архитектуру EM в голове каждую сессию, не переобъясняешь заново.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; организационный навык. Аналог — README-контракт для воспроизводимости хим. пайплайна.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Часть услуги «онбординг Claude Code в репозиторий заказчика». Грамотный мини-CLAUDE.md (30-50 строк) экономит токены и ускоряет всю команду.</span></span></span> &mdash; создать CLAUDE.md в проекте</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/13-custom-commands.md" target="_blank"><b>claude-code/13-custom-commands</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>/commit и /review автоматизируют ежедневную фиксацию работы над EM; повторяющийся промпт ревью кода узлов LangGraph — одной командой.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет. Та же идея сохранённого промпта = /analyze_spectrum как шаблон интерпретации спектра под рукой.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Кастомные команды + CLAUDE.md продаются как «настройка Claude Code под процессы заказчика» — ускорение его команды разработки.</span></span></span> &mdash; /commit и /review в .claude/commands/</li>
                     </ul>
                 </td>
                 <td>
@@ -1565,7 +1631,7 @@
                 <td><span class="pbl">25&ndash;31 май</span><span class="pls">Неделя 12</span></td>
                 <td>
                     <span class="tag t1">ProGlib 12.05 + 14.05 + 18.05 (болезнь нед.10+11, в записи)</span><br>
-                    <b>MCP + LangFlow &rarr; Архитектура ИИ-агента &rarr; LangGraph</b>
+                    <span class="exp"><b>MCP + LangFlow &rarr; Архитектура ИИ-агента &rarr; LangGraph</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Синтез догона за болезнь: MCP-инструменты + агентный цикл + LangGraph-оркестрация собираются в единый работающий каркас агента EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же каркас под агент анализа данных прибора.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Связка MCP+цикл+LangGraph — минимальный production-стек агента, который уже можно показать заказчику.</span></span></span>
                     <ul class="clist">
                         <li>Model Context Protocol &mdash; стандарт интеграций, FastMCP</li>
                         <li>LangFlow: визуальный прототипинг (обзорно)</li>
@@ -1575,13 +1641,13 @@
                         <li>Time-travel debug &mdash; откат к любому состоянию</li>
                     </ul>
                     <span class="tag t1">ProGlib 21.05 (по плану)</span><br>
-                    <b>Мультиагентные системы &mdash; теория</b>
+                    <span class="exp"><b>Мультиагентные системы &mdash; теория</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Решение для EM: нужен ли отдельный агент-исследователь + агент-писатель, или хватит одного. CrewAI/AutoGen роли, long-term memory между сессиями.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; обзорно. Роли агентов переносятся на разделение «сбор данных / интерпретация».</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание когда multi-agent оправдан (а чаще нет) экономит заказчику бюджет — частая ошибка переусложнения.</span></span></span>
                     <ul class="clist">
                         <li>CrewAI/AutoGen: роли, коллаборация &mdash; концепция</li>
                         <li>Long-term memory между сессиями</li>
                     </ul>
                     <span class="tag t1">ProGlib ML Тема 6</span><br>
-                    <b>Нелинейные методы классификации</b>
+                    <span class="exp"><b>Нелинейные методы классификации</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Полиномиальные признаки + L1/L2 регуляризация — база для табличных моделей оценки сигналов EM (классификация важности).</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: регуляризованная классификация на спектральных признаках (много коррелированных переменных — L2 спасает).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>L1 (отбор признаков) на широких спектральных данных — стандартный приём хемометрики; понятен промышленным аналитикам.</span></span></span>
                     <ul class="clist">
                         <li>Полиномиальные признаки, регуляризация L1/L2</li>
                     </ul>
@@ -1599,7 +1665,7 @@
                         <li>CLAUDE.md в корне основного проекта</li>
                         <li>2 кастомные slash-команды <code>/commit</code> и <code>/review</code> в .claude/commands/</li>
                         <li>&#128250; ШАД Agents Week Лек.1.2 Tools+MCP (~50 мин) &mdash; единственный ШАД на неделе</li>
-                        <li><b>Практика к ML Теме 6:</b> sklearn &mdash; PolynomialFeatures + Ridge/Lasso, разобрать L1 vs L2</li>
+                        <li><span class="exp"><b>Практика к ML Теме 6:</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>PolynomialFeatures + Ridge/Lasso на учебных данных — практика регуляризации, переносимая на табличные фичи EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>L1 vs L2 на коррелированных хим. признаках: L1 отбирает значимые длины волн/пики, L2 усредняет.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Регуляризация против переобучения на малых выборках — частая боль научных данных (мало образцов, много признаков).</span></span></span> sklearn &mdash; PolynomialFeatures + Ridge/Lasso, разобрать L1 vs L2</li>
                         <li style="margin-top:8px"><b>&#128290; Математика:</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B NN</a> гл.4 «Backpropagation calculus» (~10 мин) + <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">3B1B Calculus</a> финал гл.10&ndash;12 если не пройдено</li>
                         <li style="margin-top:4px"><b>&#128290; StatQuest (опережающий):</b> <a href="https://www.youtube.com/@statquest" target="_blank">Decision Trees Part 1</a> (~18 мин) &mdash; <b>превью к ML Теме 7 нед.13</b>.</li>
                         <li class="opt">Redis (30 мин): get/set/expire как semantic cache. Уровень «знаю что есть»</li>
@@ -1617,8 +1683,8 @@
                         <li><a href="mlroadmap/llm-engineering/12-agents-react.md" target="_blank"><b>llm-engineering/12-agents-react</b></a> &mdash; max_steps, max_cost, same-action detector</li>
                         <li><a href="mlroadmap/llm-engineering/13-orchestration.md" target="_blank"><b>llm-engineering/13-orchestration</b></a> &mdash; LangGraph conditional edges, checkpointer SQLite, kill/restart test</li>
                         <li><a href="mlroadmap/llm-engineering/14-mcp.md" target="_blank"><b>llm-engineering/14-mcp</b></a> &mdash; read/write разделение, логирование вызовов</li>
-                        <li class="opt"><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a> &mdash; блокировка rm -rf, DROP TABLE, автоформат</li>
-                        <li class="opt"><a href="mlroadmap/data-science/10-statistics.md" target="_blank"><b>data-science/10-statistics</b></a> &mdash; статистические основы под L1/L2 регуляризацию</li>
+                        <li class="opt"><span class="exp"><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>PreToolUse-хук блокирует rm -rf / DROP TABLE по базе знаний EM; PostToolUse гоняет ruff. Защита агента от собственных деструктивных действий над боевыми данными.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Хук-guard критичен где агент трогает данные приборов: блокировать перезапись сырых файлов хроматограмм и калибровок.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Агент, который физически не может удалить прод» — обязательный пункт enterprise-чеклиста перед допуском LLM к инфраструктуре.</span></span></span> &mdash; блокировка rm -rf, DROP TABLE, автоформат</li>
+                        <li class="opt"><span class="exp"><a href="mlroadmap/data-science/10-statistics.md" target="_blank"><b>data-science/10-statistics</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Статбаза под eval EM: bootstrap-доверительные интервалы для метрик, поправки на множественные сравнения при A/B промптов, размер эффекта vs значимость.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание в твою метрологию: CI, t-тесты, ошибки I/II рода — язык калибровок и сертифицированных стандартных образцов.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Корректная статистика — то, чего не хватает многим ML-практикам; в связке с метрологией = редкое преимущество для промышленной аналитики.</span></span></span> &mdash; статистические основы под L1/L2 регуляризацию</li>
                     </ul>
                 </td>
                 <td>
@@ -1653,7 +1719,7 @@
                 <td><span class="pbl">1&ndash;7 июн</span><span class="pls">Неделя 13</span></td>
                 <td>
                     <span class="tag t1">ProGlib 25.05 (сдвиг с нед.12)</span><br>
-                    <b>AgentOps + Cost control</b>
+                    <span class="exp"><b>AgentOps + Cost control</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Трейсинг (Langfuse), автооценка RAG (RAGAS/DeepEval), semantic cache, SLA-алёрты при деградации — операционный слой EM. Без него не увидишь, что качество поехало.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; операционная дисциплина. Алёрты деградации = как контрольные пределы метода.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>AgentOps (наблюдаемость + автооценка + алёрты) превращает агента в обслуживаемый сервис под SLA заказчика.</span></span></span>
                     <ul class="clist">
                         <li>Langfuse/LangSmith: трейсинг, дашборды, trace_id</li>
                         <li>RAGAS/DeepEval: автооценка RAG</li>
@@ -1661,19 +1727,19 @@
                         <li>SLA-алерты при деградации качества</li>
                     </ul>
                     <span class="tag t1">ProGlib 1.06</span><br>
-                    <b>Безопасность агентов</b>
+                    <span class="exp"><b>Безопасность агентов</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>EM принимает внешний контент (новости) — изоляция в XML-тегах + input validation защищают от prompt injection через подсунутую новость.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Изоляция внешнего контента = не дать «грязным» входным данным управлять логикой анализа.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Базовая защита от injection — обязательный минимум; без неё агента нельзя выпускать к пользователям.</span></span></span>
                     <ul class="clist">
                         <li>Prompt injection, input validation</li>
                         <li>Изоляция внешнего контента (XML-теги)</li>
                     </ul>
                     <span class="tag t1">ProGlib 4.06</span><br>
-                    <b>A2A &mdash; агент-агент коммуникация</b>
+                    <span class="exp"><b>A2A &mdash; агент-агент коммуникация</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Google A2A-протокол: передача контекста между агентами EM (исследователь → верификатор). Обзорно — фундамент, если EM вырастет в multi-agent.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>A2A — новый стандарт; знание протоколов взаимодействия агентов — сигнал, что следишь за экосистемой.</span></span></span>
                     <ul class="clist">
                         <li>Google A2A протокол</li>
                         <li>Передача контекста между агентами</li>
                     </ul>
                     <span class="tag t1">ProGlib ML Тема 7</span><br>
-                    <b>Решающие деревья</b>
+                    <span class="exp"><b>Решающие деревья</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>DecisionTreeClassifier + feature_importance на табличных фичах EM: видно, какие признаки новости двигают оценку важности. База под Random Forest нед.14.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Дерево интерпретируемо: на хим. данных показывает «если пик X &gt; порог → класс Y» — близко к экспертным правилам аналитика.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Интерпретируемые модели ценятся там, где нужно объяснить решение регулятору/заказчику, а не «чёрный ящик».</span></span></span>
                     <ul class="clist">
                         <li>DecisionTreeClassifier, feature_importance, визуализация</li>
                     </ul>
@@ -1700,12 +1766,12 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/llm-engineering/16-evals-offline.md" target="_blank"><b>llm-engineering/16-evals-offline</b></a> &mdash; golden set, eval в CI</li>
-                        <li><a href="mlroadmap/practice-labs/16-llm-eval.md" target="_blank"><b>practice-labs/16-llm-eval</b></a> &mdash; реализация eval-скрипта с diff vs previous</li>
-                        <li><a href="mlroadmap/llm-engineering/17-llm-as-judge.md" target="_blank"><b>llm-engineering/17-llm-as-judge</b></a> &mdash; judge-промпт, Cohen kappa, swap-test</li>
-                        <li><a href="mlroadmap/llm-engineering/23-monitoring.md" target="_blank"><b>llm-engineering/23-monitoring</b></a> &mdash; Langfuse trace_id, метрики, алёрты</li>
-                        <li><a href="mlroadmap/llm-engineering/19-security.md" target="_blank"><b>llm-engineering/19-security</b></a> &mdash; OWASP LLM Top-10, XML-теги для изоляции контента</li>
-                        <li class="opt"><a href="mlroadmap/llm-engineering/15-multi-agent.md" target="_blank"><b>llm-engineering/15-multi-agent</b></a> &mdash; когда multi-agent НЕ нужен, ADR research&rarr;write&rarr;review</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/16-evals-offline.md" target="_blank"><b>llm-engineering/16-evals-offline</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Golden set ≥30 пар вопрос-ответ по экономике + автопрогон в CI с блокировкой регрессии. Без этого любое изменение промпта/RAG в EM — вслепую.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Eval-датасет = валидационная выборка метода: фиксированный набор образцов, на котором проверяешь, не «поехал» ли пайплайн.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Eval-харнесс в CI — то, что заказчик требует для доверия: «как докажете, что новая версия не хуже?».</span></span></span> &mdash; golden set, eval в CI</li>
+                        <li><span class="exp"><a href="mlroadmap/practice-labs/16-llm-eval.md" target="_blank"><b>practice-labs/16-llm-eval</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Eval-скрипт EM: история метрик, judge с chain-of-thought rubric, CI падает если score упал &gt;2%, judge-промпт версионируется в git.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Регрессионный контроль качества = контрольная карта Шухарта для метода: вышел за контрольный предел → стоп.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Готовая воспроизводимая система оценки LLM с дашбордом — отдельный продаваемый артефакт для команд без MLOps.</span></span></span> &mdash; реализация eval-скрипта с diff vs previous</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/17-llm-as-judge.md" target="_blank"><b>llm-engineering/17-llm-as-judge</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>LLM-as-judge оценивает faithfulness ответов EM; калибровка на 30 ручных парах до Cohen's kappa ≥0.7 + swap-test против position bias. Честно: 2-3 итерации промптинга + статистика, за вечер не делается.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Калибровка судьи = калибровка прибора по стандартным образцам: пока не согласуется с эталоном (человеком), измерениям судьи нельзя верить.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Откалиброванный авто-оценщик заменяет ручную проверку — экономит человеко-часы; навык метрологии тут прямое преимущество.</span></span></span> &mdash; judge-промпт, Cohen kappa, swap-test</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/23-monitoring.md" target="_blank"><b>llm-engineering/23-monitoring</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Langfuse self-hosted трейсит каждый запрос EM: trace_id, latency p50/p95/p99, cost/день, % failed retrieval, алёрты при деградации. Иначе «агент молча сломался» узнаешь от пользователя.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Дашборд метрик = непрерывный мониторинг состояния прибора: видишь дрейф раньше, чем он испортит партию анализов.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Наблюдаемость LLM (трейсы+алёрты) обязательна для SLA; продаётся как «видим, что система жива и не деградирует».</span></span></span> &mdash; Langfuse trace_id, метрики, алёрты</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/19-security.md" target="_blank"><b>llm-engineering/19-security</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>EM тянет внешние новости — главный вектор indirect prompt injection. Изоляция контента в XML-тегах, PII-redaction через presidio, прогон 20 jailbreak до публикации Telegram-бота.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Перед отправкой в облачный LLM presidio маскирует чувствительное (имена пациентов в био-анализах ЭЛИСА, коды проектов).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Пройденный OWASP LLM Top-10 + jailbreak-тесты = пропуск в любой enterprise; без этого агента не пустят к данным.</span></span></span> &mdash; OWASP LLM Top-10, XML-теги для изоляции контента</li>
+                        <li class="opt"><span class="exp"><a href="mlroadmap/llm-engineering/15-multi-agent.md" target="_blank"><b>llm-engineering/15-multi-agent</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>ADR-решение для EM: research→write→review в multi-agent vs single, замер quality/cost/latency. Часто single дешевле — урок «не усложнять».</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; архитектурное решение, переносимое на любой пайплайн.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Обосновать (ADR) когда multi-agent оправдан, а когда лишние затраты — экономит заказчику деньги, признак зрелого инженера.</span></span></span> &mdash; когда multi-agent НЕ нужен, ADR research&rarr;write&rarr;review</li>
                     </ul>
                 </td>
                 <td>
@@ -1756,13 +1822,13 @@
                 <td><span class="pbl">8&ndash;14 июн</span><span class="pls">Неделя 14</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 8</span><br>
-                    <b>Random Forest</b>
+                    <span class="exp"><b>Random Forest</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Ансамбль деревьев (бэггинг) для оценки сигналов EM — устойчивее одного дерева, даёт важность признаков: какие факторы новости реально влияют на оценку важности.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>RF на хим. дескрипторах — рабочая лошадь QSAR/классификации образцов; importance показывает значимые признаки.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>RF — дефолтный сильный бейзлайн для табличных задач промышленной аналитики; быстро даёт результат заказчику.</span></span></span>
                     <ul class="clist">
                         <li>Бэггинг, ансамбли, важность признаков</li>
                         <li>Сравнение с одним деревом</li>
                     </ul>
                     <span class="tag t1">ProGlib Математика AI Зан.8</span><br>
-                    <b>Теория вероятностей</b>
+                    <span class="exp"><b>Теория вероятностей</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Распределения, условная вероятность, Байес — фундамент под оценку уверенности EM (ответ + confidence) и под Naive Bayes.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание в метрологию: вероятностный язык неопределённости измерения, условные вероятности в диагностике.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Прямого товара нет, но без вероятностной базы не объяснить «уверенность модели» — то, что заказчик всегда спрашивает.</span></span></span>
                     <ul class="clist">
                         <li>Распределения, условная вероятность, Байес (фоном)</li>
                     </ul>
@@ -1775,16 +1841,16 @@
                         <li>Dockerfile multi-stage для Python-агента</li>
                         <li>Docker Compose: агент + Qdrant + Langfuse &mdash; один файл, одна команда</li>
                         <li>Все секреты в .env &mdash; никаких ключей в коде</li>
-                        <li>Задеплоить на VPS: Hetzner CX21 (&euro;3.9/мес) или DigitalOcean ($6/мес) с restart: always</li>
-                        <li>aiogram&ge;3: bot + Dispatcher + @dp.message_handler + polling, отвечает на /start</li>
+                        <li><span class="exp">Задеплоить на VPS<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Деплой EM на Hetzner/DO с restart:always — агент живёт 24/7, а не только когда открыт ноутбук. LangGraph(нед.11)+Langfuse(нед.13)+VPS = агент, который живёт и мониторится.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; инфраструктура.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Поднял вашего агента на сервере 24/7 с автоперезапуском» — конкретная сдаваемая работа; €4-6/мес инфраструктуры.</span></span></span>: Hetzner CX21 (&euro;3.9/мес) или DigitalOcean ($6/мес) с restart: always</li>
+                        <li><span class="exp">aiogram&ge;3<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>aiogram≥3 — асинхронный интерфейс EM в Telegram: вопрос → ответ с источником и уверенностью. Это «лицо» системы для пользователя.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же бот — интерфейс к лабораторному ассистенту: запрос по образцу → ответ.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Telegram-бот как UI к LLM-агенту — дешёвый и быстрый способ отдать заказчику рабочий продукт без веб-фронта.</span></span></span>: bot + Dispatcher + @dp.message_handler + polling, отвечает на /start</li>
                         <li>Prompt injection &mdash; попробовать на своём агенте, добавить простой guardrail</li>
-                        <li>PII-redactor через <code>presidio</code> перед отправкой в API на 50 тестовых примерах</li>
+                        <li><span class="exp">PII-redactor через <code>presidio</code><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>presidio маскирует PII в данных до отправки в API EM — защита персональных данных в новостях/запросах пользователей.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: маскировать имена пациентов/коды в био-аналитических данных (ЭЛИСА) перед облачным LLM.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>PII-redaction — требование GDPR/комплаенса; обязательно для фармы и любых персональных данных.</span></span></span> перед отправкой в API на 50 тестовых примерах</li>
                         <li>Guardrail: &gt;5 запросов/мин &rarr; стоп + алёрт в Telegram</li>
                         <li>OWASP LLM Top-10 &mdash; пройти чек-лист по своему агенту, записать статус в README</li>
                         <li>GitHub Actions: lint + test + build + push в ghcr.io на каждый PR</li>
                         <li>Endpoints /healthz, /readyz, Prometheus метрики (счётчики, latency histogram)</li>
                         <li>Собрать 20 jailbreak-попыток из открытых источников &rarr; прогнать на своей системе</li>
-                        <li><b>Практика к ML Теме 8:</b> sklearn RandomForestClassifier, feature_importances_, сравнение с одним деревом</li>
+                        <li><span class="exp"><b>Практика к ML Теме 8:</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>RandomForestClassifier + feature_importances_, сравнение с одним деревом — навык переносится на табличные фичи EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Та же практика на хроматографических/спектральных таблицах: какие пики важны для классификации.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Быстро поднять RF-бейзлайн и объяснить importance — базовый платный навык табличного ML.</span></span></span> sklearn RandomForestClassifier, feature_importances_, сравнение с одним деревом</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">Random Forest Pt.1</a> (~10 мин) &mdash; под ML Тему 8</li>
                         <li style="margin-top:4px"><b>&#128290; 3B1B NN гл.6</b> <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">«Attention in transformers, step-by-step»</a> (~27 мин) &mdash; в свободный вечер диплом-спринта.</li>
                         <li class="opt">A2A учебный пример: два агента через MCP передают сообщение</li>
@@ -1794,10 +1860,10 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/llm-engineering/19-security.md" target="_blank"><b>llm-engineering/19-security</b></a> &mdash; углублённо: PII-redactor через presidio, jailbreak 20 примеров, rate-limit guard</li>
-                        <li><a href="mlroadmap/practice-labs/17-ml-service.md" target="_blank"><b>practice-labs/17-ml-service</b></a> &mdash; multi-stage Dockerfile, /healthz, /readyz, Prometheus</li>
-                        <li><a href="mlroadmap/data-science/18-productionization.md" target="_blank"><b>data-science/18-productionization</b></a> &mdash; GitHub Actions: lint+test+build+push ghcr.io</li>
-                        <li><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a> &mdash; PreToolUse блокировка rm -rf, DROP TABLE; PostToolUse автоформат ruff</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/19-security.md" target="_blank"><b>llm-engineering/19-security</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>EM тянет внешние новости — главный вектор indirect prompt injection. Изоляция контента в XML-тегах, PII-redaction через presidio, прогон 20 jailbreak до публикации Telegram-бота.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Перед отправкой в облачный LLM presidio маскирует чувствительное (имена пациентов в био-анализах ЭЛИСА, коды проектов).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Пройденный OWASP LLM Top-10 + jailbreak-тесты = пропуск в любой enterprise; без этого агента не пустят к данным.</span></span></span> &mdash; углублённо: PII-redactor через presidio, jailbreak 20 примеров, rate-limit guard</li>
+                        <li><span class="exp"><a href="mlroadmap/practice-labs/17-ml-service.md" target="_blank"><b>practice-labs/17-ml-service</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Модель оценки важности EM упаковывается в FastAPI /predict, multi-stage Docker (&lt;500МБ), /healthz /readyz, Prometheus-метрики. Из ноутбука — в сервис на VPS.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же шаблон превращает хемометрическую модель (PCA→классификатор хроматограмм) в REST-сервис для лаборатории.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Упаковка любой ML-модели в production REST API с health-check и метриками — базовый платный навык MLOps; p95&lt;200мс.</span></span></span> &mdash; multi-stage Dockerfile, /healthz, /readyz, Prometheus</li>
+                        <li><span class="exp"><a href="mlroadmap/data-science/18-productionization.md" target="_blank"><b>data-science/18-productionization</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Перенос моделей EM из ноутбука в прод: Pydantic-валидация входа, joblib/ONNX, graceful shutdown, логирование без PII. GitHub Actions: lint+test+build+push в ghcr.io.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Хемометрическая модель из ноутбука → версионированный сервис для рутинного анализа в лаборатории.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Превращаю ваш research-ноутбук в надёжный сервис» — конкретная услуга для научных команд без инженеров.</span></span></span> &mdash; GitHub Actions: lint+test+build+push ghcr.io</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>PreToolUse-хук блокирует rm -rf / DROP TABLE по базе знаний EM; PostToolUse гоняет ruff. Защита агента от собственных деструктивных действий над боевыми данными.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Хук-guard критичен где агент трогает данные приборов: блокировать перезапись сырых файлов хроматограмм и калибровок.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Агент, который физически не может удалить прод» — обязательный пункт enterprise-чеклиста перед допуском LLM к инфраструктуре.</span></span></span> &mdash; PreToolUse блокировка rm -rf, DROP TABLE; PostToolUse автоформат ruff</li>
                     </ul>
                 </td>
                 <td>
@@ -1831,13 +1897,13 @@
                 <td><span class="pbl">15&ndash;28 июн</span><span class="pls">Нед. 15&ndash;16</span><br><span style="font-size:10px;color:#6a1b9a;font-weight:700">ДИПЛОМ-СПРИНТ</span></td>
                 <td>
                     <span class="tag t1">ProGlib 8.06</span><br>
-                    <b>Дипломный проект ProGlib v1</b>
+                    <span class="exp"><b>Дипломный проект ProGlib v1</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Момент синтеза: RAG + LangGraph + MCP + Telegram + VPS + Langfuse в одном проекте «как в проде» (метрики, бюджеты, воспроизводимость). «Задумка» = диплом = первый кейс портфолио.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же сквозной проект переносится на хим. домен (RAG по нормативам + агент-ассистент).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Готовый end-to-end кейс с метриками и README — главный аргумент на рынке; три в одном (диплом, портфолио, продукт).</span></span></span>
                     <ul class="clist">
                         <li>MCP + LangGraph + AgentOps + security &mdash; всё вместе</li>
                         <li>«Как в проде»: метрики, бюджеты, воспроизводимость</li>
                     </ul>
                     <span class="tag t1">ProGlib Математика AI Зан.9</span><br>
-                    <b>Случайные величины &mdash; Naive Bayes в NumPy</b>
+                    <span class="exp"><b>Случайные величины &mdash; Naive Bayes в NumPy</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Мат. ожидание, дисперсия, Naive Bayes с нуля — понимание вероятностного классификатора под оценку важности/уверенности EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: Naive Bayes — классика классификации спектров; реализация с нуля = понимание, а не «вызов sklearn».</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Реализовать алгоритм с нуля (а не только импортировать) — сигнал глубины на собеседовании middle+.</span></span></span>
                     <ul class="clist">
                         <li>Мат. ожидание, дисперсия, Naive Bayes</li>
                     </ul>
@@ -1858,7 +1924,7 @@
                         <li>Метрики приёмки: Recall@5 ≥0.8 + Faithfulness ≥0.9 (RAGAS) на golden set, p95 latency &lt;5s</li>
                         <li>Стоимость на 1000 запросов задокументирована</li>
                         <li>README на английском: архитектура (Mermaid-схема), как запустить</li>
-                        <li><b>Практика к Математике AI Зан.9:</b> Naive Bayes в NumPy с нуля, сравнить со sklearn GaussianNB</li>
+                        <li><span class="exp"><b>Практика к Математике AI Зан.9:</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Naive Bayes в NumPy с нуля + сравнение со sklearn GaussianNB — проверка, что понимаешь механику, а не магию библиотеки.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же классификатор на спектральных признаках; понимание допущения независимости критично (в спектрах признаки коррелируют!).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание когда Naive Bayes врёт из-за корреляций — отличает инженера от «вызывателя fit/predict».</span></span></span> Naive Bayes в NumPy с нуля, сравнить со sklearn GaussianNB</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">Random Forest Pt.1</a> (~10 мин) если не закрыто на нед.14</li>
                         <li class="opt">Naive Bayes в NumPy + сравнение со sklearn GaussianNB (полная практика)</li>
                         <li class="opt">3B1B NN гл.6 «Attention» (~27 мин) &mdash; в свободный вечер</li>
@@ -1867,12 +1933,12 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/llm-engineering/capstone-1-rag.md" target="_blank"><b>llm-engineering/capstone-1-rag</b></a> &mdash; ТЗ production RAG: SLA, архитектура, структура репо, 5 этапов</li>
-                        <li><a href="mlroadmap/practice-labs/13-rag-pdf.md" target="_blank"><b>practice-labs/13-rag-pdf</b></a> &mdash; код парсинга PDF, Recall@5 &gt;0.8, Faithfulness &gt;0.9</li>
-                        <li><a href="mlroadmap/llm-engineering/09-hybrid-search.md" target="_blank"><b>llm-engineering/09-hybrid-search</b></a> &mdash; BM25 + dense + RRF + reranker, замер до/после</li>
-                        <li><a href="mlroadmap/llm-engineering/10-advanced-rag.md" target="_blank"><b>llm-engineering/10-advanced-rag</b></a> &mdash; только Contextual Retrieval; HyDE/multi-hop отложить</li>
-                        <li><a href="mlroadmap/claude-code/06-feature-development.md" target="_blank"><b>claude-code/06-feature-development</b></a> &mdash; Explore&rarr;Plan&rarr;Code&rarr;Test&rarr;PR для каждого узла LangGraph</li>
-                        <li><a href="mlroadmap/claude-code/08-testing-tdd.md" target="_blank"><b>claude-code/08-testing-tdd</b></a> &mdash; TDD-цикл для retrieval-функций</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/capstone-1-rag.md" target="_blank"><b>llm-engineering/capstone-1-rag</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>ТЗ под дипломный RAG EM: Recall≥0.80, faithfulness≥0.85, p95&lt;5s, дашборд cost/latency/% thumbs-down, Docker Compose. Превращает «Задумку» в продакшн-систему с SLA.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>То же ТЗ переносится на RAG поверх PDF-отчётов лаборатории/нормативов — с теми же метриками приёмки.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Готовое ТЗ production-RAG = шаблон коммерческого проекта; «RAG поверх ваших PDF с гарантированным Recall/Faithfulness» продаётся напрямую.</span></span></span> &mdash; ТЗ production RAG: SLA, архитектура, структура репо, 5 этапов</li>
+                        <li><span class="exp"><a href="mlroadmap/practice-labs/13-rag-pdf.md" target="_blank"><b>practice-labs/13-rag-pdf</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Парсинг 10+ PDF по экономике в EM с номерами страниц → ответ с точной ссылкой «источник, стр.N». Recall@5&gt;0.8, Faithfulness&gt;0.9. Цитируемость = доверие к аналитике.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>RAG поверх фарм/нормативной документации (ГОСТ, валидационные отчёты ВЭЖХ) с цитатой на страницу — аналитик мгновенно проверяет источник.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«RAG поверх ваших PDF с цитатами по страницам» — самый частый запрос аналитических стартапов и R&amp;D-отделов.</span></span></span> &mdash; код парсинга PDF, Recall@5 &gt;0.8, Faithfulness &gt;0.9</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/09-hybrid-search.md" target="_blank"><b>llm-engineering/09-hybrid-search</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Гибридный поиск EM: BM25 ловит точные термины (тикеры, «ФРС»), dense — смысл, RRF их сливает, bge-reranker уточняет топ. Замер Recall@5 до/после показывает прирост.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; но RRF — общий приём слияния ранжирований, как комбинирование нескольких детекторов в единый рейтинг пиков.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Hybrid search с reranking — стандарт production-RAG; чистый vector search заказчику уже мало.</span></span></span> &mdash; BM25 + dense + RRF + reranker, замер до/после</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/10-advanced-rag.md" target="_blank"><b>llm-engineering/10-advanced-rag</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Для EM берём Contextual Retrieval (каждый чанк + LLM-контекст из документа) — резко поднимает Recall на узких экономических чанках. HyDE/multi-hop отложены.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; техника обогащения чанков контекстом переносится на любой корпус узких технических документов.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Contextual Retrieval (технология Anthropic) на узкой документации заказчика — измеримый прирост качества RAG, конкретный кейс для продажи.</span></span></span> &mdash; только Contextual Retrieval; HyDE/multi-hop отложить</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/06-feature-development.md" target="_blank"><b>claude-code/06-feature-development</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Каждый узел графа EM (fetch_news, evaluate, store) разрабатывается по циклу бриф→plan→код→тест→PR с критериями приёмки — управляемо, а не «агент написал всё сразу».</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; инженерная дисциплина, переносимая на любой аналитический скрипт.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Вести фичу агентом до PR с Conventional Commits — базовый рабочий навык, который ждут на любом контракте AI-инженера.</span></span></span> &mdash; Explore&rarr;Plan&rarr;Code&rarr;Test&rarr;PR для каждого узла LangGraph</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/08-testing-tdd.md" target="_blank"><b>claude-code/08-testing-tdd</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>TDD для retrieval-функций EM: сначала падающий тест «вернёт чанк с источником», потом код. Без тестов регрессии в RAG не видны.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>TDD на функции расчёта (нормировка пиков, площади) = доверие к числам, как метрологическая поверка кода перед боевым прогоном.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Заказчики платят за проверяемый код. Property-based тесты + coverage threshold — то, что отделяет прототип от продукта.</span></span></span> &mdash; TDD-цикл для retrieval-функций</li>
                     </ul>
                 </td>
                 <td>
@@ -1922,18 +1988,18 @@
                 <td><span class="pbl">6&ndash;12 июл</span><span class="pls">Неделя 17</span></td>
                 <td>
                     <span class="tag t1">ProGlib (конец июня)</span><br>
-                    <b>FinOps: оптимизация затрат</b>
+                    <span class="exp"><b>FinOps: оптимизация затрат</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Semantic/prefix caching + model routing (дешёвая→дорогая) = прямое снижение счёта EM за API. Routing ≥30% экономии без потери качества.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; экономика инференса.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>FinOps для LLM — измеримая ценность; «срезал ваш счёт за API на треть» легко превращается в инвойс.</span></span></span>
                     <ul class="clist">
                         <li>Semantic cache / prefix caching</li>
                         <li>Model routing: дешёвая&rarr;дорогая модель</li>
                     </ul>
                     <span class="tag t1">ProGlib ML Тема 9</span><br>
-                    <b>Бустинг (XGBoost, CatBoost, LightGBM)</b>
+                    <span class="exp"><b>Бустинг (XGBoost, CatBoost, LightGBM)</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Итеративная коррекция ошибок + важность признаков на табличных фичах EM — сильнее RF на структурированных сигналах.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Бустинг — топ-метод для табличных хим. данных (дескрипторы→свойство); CatBoost хорош на категориальных (тип колонки, растворитель).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Градиентный бустинг — рабочая лошадь промышленной табличной аналитики; самый частый запрос на табличный ML.</span></span></span>
                     <ul class="clist">
                         <li>Итеративная коррекция ошибок, важность признаков</li>
                     </ul>
                     <span class="tag t1">ProGlib Математика AI Зан.10</span><br>
-                    <b>Статистика и проверка гипотез</b>
+                    <span class="exp"><b>Статистика и проверка гипотез</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>t-тест + доверительные интервалы для A/B промптов EM: доказать, что новая версия реально лучше, а не шум.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание в метрологию: проверка гипотез о различии методов/партий, доверительные интервалы измерений.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Корректная проверка гипотез + метрология = редкое преимущество для R&amp;D-заказчиков.</span></span></span>
                     <ul class="clist">
                         <li>t-тест, доверительные интервалы</li>
                     </ul>
@@ -1958,10 +2024,10 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/llm-engineering/20-cost-latency.md" target="_blank"><b>llm-engineering/20-cost-latency</b></a> &mdash; routing + prompt caching + streaming + Langfuse замер</li>
-                        <li><a href="mlroadmap/llm-engineering/22-local-inference.md" target="_blank"><b>llm-engineering/22-local-inference</b></a> &mdash; таблица VRAM, Ollama Qwen2.5-7B Q4_K_M, OpenAI-compatible endpoint</li>
-                        <li><a href="mlroadmap/data-science/16-boosting.md" target="_blank"><b>data-science/16-boosting</b></a> &mdash; LightGBM: early_stopping, Optuna TPE, порядок настройки</li>
-                        <li><a href="mlroadmap/claude-code/17-cost-context.md" target="_blank"><b>claude-code/17-cost-context</b></a> &mdash; ccusage, что съедает токены, оптимизация CLAUDE.md</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/20-cost-latency.md" target="_blank"><b>llm-engineering/20-cost-latency</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Снижение стоимости EM: простые запросы на haiku, сложные на sonnet (routing ≥30% экономии), prompt caching системного промпта (-50-90% input cost), streaming в Telegram.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; экономика инференса.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Срезал счёт за LLM на 30-90% без потери качества» — самый лёгкий для обоснования инвойс; routing+caching — конкретные рычаги.</span></span></span> &mdash; routing + prompt caching + streaming + Langfuse замер</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/22-local-inference.md" target="_blank"><b>llm-engineering/22-local-inference</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Локальный fallback EM: Ollama Qwen2.5-7B Q4_K_M (~5 ГБ) через OpenAI-совместимый endpoint, замер quality vs Claude на golden set. Приватность + отказоустойчивость.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Локальный инференс = обработка чувствительных хим/мед данных без отправки в облако (требование лабораторий и фармы по конфиденциальности).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>On-premise LLM — прямой запрос отраслей, которым нельзя в облако (фарма, регулируемое производство).</span></span></span> &mdash; таблица VRAM, Ollama Qwen2.5-7B Q4_K_M, OpenAI-compatible endpoint</li>
+                        <li><span class="exp"><a href="mlroadmap/data-science/16-boosting.md" target="_blank"><b>data-science/16-boosting</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Бустинг для табличных сигналов EM (числовые фичи новости/рынка → важность): LightGBM + early_stopping + Optuna TPE, SHAP объясняет почему оценка такая.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Бустинг на табличных хим. данных (дескрипторы → свойство), SHAP-водопады = интерпретируемость, критичная для научной защиты результата.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Табличный ML с интерпретацией (SHAP) — хлеб промышленной аналитики (фарма QSAR, контроль качества); понятен бизнесу.</span></span></span> &mdash; LightGBM: early_stopping, Optuna TPE, порядок настройки</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/17-cost-context.md" target="_blank"><b>claude-code/17-cost-context</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Контроль расходов Claude Code при долгой разработке EM: ccusage, срезать CLAUDE.md, /clear между задачами. Прямая экономия бюджета.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; финансовая дисциплина проекта.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Снизить счёт за API/Claude Code заказчику на десятки процентов — measurable ценность, легко обосновать инвойс.</span></span></span> &mdash; ccusage, что съедает токены, оптимизация CLAUDE.md</li>
                     </ul>
                 </td>
                 <td>
@@ -1993,7 +2059,7 @@
                 <td><span class="pbl">13&ndash;19 июл</span><span class="pls">Неделя 18</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 10</span><br>
-                    <b>Кластеризация (K-means, DBSCAN)</b>
+                    <span class="exp"><b>Кластеризация (K-means, DBSCAN)</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Unsupervised-группировка embedding'ов новостей EM: автоматически находить кластеры тем (нефть, ФРС, Китай) без разметки.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: кластеризация хроматограмм/спектров для группировки похожих образцов; DBSCAN ловит выбросы (аномальные пробы).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Кластеризация без разметки — частый первый шаг анализа данных заказчика, когда меток ещё нет.</span></span></span>
                     <ul class="clist">
                         <li>Unsupervised, метрики качества кластеров</li>
                     </ul>
@@ -2002,11 +2068,11 @@
                 <td>
                     <span class="tag t2">Самост. &mdash; Fine-tuning теория + Chemometrics</span><br>
                     <ul class="clist">
-                        <li>GGUF vs AWQ &mdash; разобрать разницу. Numerical precision: fp16, bf16, int8, int4</li>
+                        <li><span class="exp">GGUF vs AWQ<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Форматы и квантование под локальный fallback EM (Ollama): GGUF для CPU/Mac, понимание int4/int8 — сколько RAM нужно модели.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; навык локального деплоя для приватных данных.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание квантования = умение запустить модель на скромном железе заказчика; ключ к on-prem без дорогого GPU.</span></span></span> &mdash; разобрать разницу. Numerical precision: fp16, bf16, int8, int4</li>
                         <li>Inference Optimization: TTFT, TPOT, batching стратегии</li>
                         <li>HuggingFace LLM Course гл.3&ndash;4: fine-tuning теория</li>
                         <li>HF LLM Course гл.5&ndash;6: Datasets + Tokenizers</li>
-                        <li>Chemometrics PDF гл.1&ndash;3: базовая статистика для аналитической химии</li>
+                        <li><span class="exp">Chemometrics PDF гл.1&ndash;3<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Базовая статистика аналитической химии — мост между твоим опытом (ВЭЖХ, метрология) и ML; фундамент под PCA/PLS нед.19-20.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Язык хемометрики + ML = редкая комбинация; именно она открывает фарму/нефтехимию.</span></span></span>: базовая статистика для аналитической химии</li>
                         <li>sklearn K-means + DBSCAN на embeddings из «Задумки», визуализация в 2D</li>
                         <li>Дневник: зафиксировать причину «зачем fine-tuning именно нам» (доменная химия / экономика &mdash; 20% случаев)</li>
                         <li>PCA через SVD на NumPy за 15 строк. На MNIST: сжать 784&rarr;50, замерить kNN до и после</li>
@@ -2021,10 +2087,10 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/llm-engineering/21-fine-tuning.md" target="_blank"><b>llm-engineering/21-fine-tuning</b></a> &mdash; когда fine-tuning НЕ нужен &mdash; 80% решается промпт+RAG. Дневник: кейс в 20%</li>
-                        <li><a href="mlroadmap/neural-networks/11-finetuning.md" target="_blank"><b>neural-networks/11-finetuning</b></a> &mdash; математика LoRA: W_new = W_frozen + B·A, 4 вида transfer learning</li>
-                        <li><a href="mlroadmap/math-for-ml/03-eigen-svd.md" target="_blank"><b>math-for-ml/03-eigen-svd</b></a> &mdash; PCA через SVD на NumPy, MNIST 784&rarr;50</li>
-                        <li><a href="mlroadmap/claude-code/07-debugging.md" target="_blank"><b>claude-code/07-debugging</b></a> &mdash; Sherlock-mode: стектрейс + 3 гипотезы, код после выбора</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/21-fine-tuning.md" target="_blank"><b>llm-engineering/21-fine-tuning</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Главный урок для EM: 80% задач решаются промптом+RAG, fine-tuning не нужен. Дневник фиксирует тот самый 20%-кейс (доменный стиль/формат), где LoRA оправдан.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот самый 20% — узкий хим. домен: дообучить модель на интерпретации спектров, где общие модели слабы.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Сказать заказчику «вам не нужен fine-tuning, хватит RAG» экономит ему десятки тысяч — и повышает доверие к рекомендациям.</span></span></span> &mdash; когда fine-tuning НЕ нужен &mdash; 80% решается промпт+RAG. Дневник: кейс в 20%</li>
+                        <li><span class="exp"><a href="mlroadmap/neural-networks/11-finetuning.md" target="_blank"><b>neural-networks/11-finetuning</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого применения в EM мало (RAG достаточно). Понимание LoRA (W_new=W_frozen+B·A, ~0.15% параметров) нужно для осознанного решения «дообучать или нет».</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Основа доменной адаптации: дообучить модель на узкой хим. задаче малым адаптером (5-200 МБ) на бесплатном Colab.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>LoRA/QLoRA-специалист, дообучающий 7-8B модель под домен заказчика без дорогого GPU-кластера — востребован и редок.</span></span></span> &mdash; математика LoRA: W_new = W_frozen + B·A, 4 вида transfer learning</li>
+                        <li><span class="exp"><a href="mlroadmap/math-for-ml/03-eigen-svd.md" target="_blank"><b>math-for-ml/03-eigen-svd</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого в EM нет; SVD под капотом PCA для визуализации embedding-пространства новостей и кластеризации тем.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: SVD = математика PCA-биплота спектральных/хроматографических данных. Понимая SVD, читаешь биплот прямо на экране прибора — видишь какие пики коррелируют, без кода.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>SVD/PCA — фундамент хемометрики; «AI-инженер, понимающий PCA спектров» говорит на языке лаборатории, а не только кода.</span></span></span> &mdash; PCA через SVD на NumPy, MNIST 784&rarr;50</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/07-debugging.md" target="_blank"><b>claude-code/07-debugging</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Отладка зацикливаний и неверных оценок агента EM: сформулировать баг в 3 строки, потребовать доказательство гипотезы, написать падающий тест перед фиксом.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Метод бисекции (git bisect) = ровно как поиск источника систематической ошибки в серии измерений: дели интервал пополам, локализуй причину.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Структурная отладка LLM-систем (а не «перепишем промпт наугад») — то, за что держат сеньора на контракте.</span></span></span> &mdash; Sherlock-mode: стектрейс + 3 гипотезы, код после выбора</li>
                     </ul>
                 </td>
                 <td>
@@ -2056,12 +2122,12 @@
                 <td><span class="pbl">20&ndash;26 июл</span><span class="pls">Неделя 19</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 11</span><br>
-                    <b>PCA, t-SNE, Isolation Forest</b>
+                    <span class="exp"><b>PCA, t-SNE, Isolation Forest</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Снижение размерности + визуализация embedding'ов EM, Isolation Forest для аномалий (нетипичная новость/выброс).</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: PCA-биплот спектральных/хроматографических данных, t-SNE для визуализации кластеров проб, IsolationForest для аномальных образцов.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>PCA/аномалии на спектрах — базовый инструмент QC в фарме/промышленности; понятен лаборантам и аудиторам.</span></span></span>
                     <ul class="clist">
                         <li>Снижение размерности, визуализация embeddings, аномалии</li>
                     </ul>
                     <span class="tag t1">ProGlib Математика AI (финал)</span><br>
-                    <b>Финальный проект: GD для предсказания цен</b>
+                    <span class="exp"><b>Финальный проект: GD для предсказания цен</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Градиентный спуск руками на задаче предсказания — понимание, как обучаются модели под капотом оценок EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же GD = основа калибровочных моделей (регрессия отклик↔концентрация).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание оптимизации изнутри — фундамент для fine-tuning и объяснения «как модель учится» заказчику.</span></span></span>
                     <ul class="clist">
                         <li>&#127881; <b>Математика AI завершена!</b></li>
                     </ul>
@@ -2075,7 +2141,7 @@
                         <li>PCA + t-SNE на embeddings «Задумки», визуализация</li>
                         <li>IsolationForest на хвостовых данных</li>
                         <li>Финальный проект Math AI довести до конца, README с объяснением</li>
-                        <li>Первые PCA-эксперименты на хроматографических данных (sklearn)</li>
+                        <li><span class="exp">Первые PCA-эксперименты на хроматографических данных<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: PCA на реальных хроматографических данных (sklearn) — связка твоего ВЭЖХ-опыта с ML; видно какие компоненты разделяют образцы.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Демо «PCA на ваших хроматограммах» — конкретный артефакт для разговора с лабораторией/фармой.</span></span></span> (sklearn)</li>
                         <li>Self-attention руками на NumPy: Attention(Q,K,V) = softmax(QK&#7488;/√d_k) &middot; V в 10 строк &mdash; пререквизит к Karpathy</li>
                         <li>Karpathy micrograd (если не закрыто на нед.18)</li>
                         <li>Refactor legacy: characterization-тесты на RAG-код из нед.13, потом extraction слоёв domain/service/repository, итерации по 200&ndash;300 строк</li>
@@ -2086,8 +2152,8 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/math-for-ml/12-transformer-math.md" target="_blank"><b>math-for-ml/12-transformer-math</b></a> &mdash; self-attention на NumPy в 10 строк, пререквизит к Karpathy</li>
-                        <li><a href="mlroadmap/claude-code/09-refactoring.md" target="_blank"><b>claude-code/09-refactoring</b></a> &mdash; characterization-тесты + extraction слоёв на RAG-коде из нед.13</li>
+                        <li><span class="exp"><a href="mlroadmap/math-for-ml/12-transformer-math.md" target="_blank"><b>math-for-ml/12-transformer-math</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого в EM нет; понимание attention (softmax(QKᵀ/√d)·V) объясняет почему модель «видит» одни части контекста сильнее — помогает чинить промпты EM осознанно.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; фундамент архитектуры.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание трансформера изнутри (а не «чёрный ящик») отличает инженера от пользователя API — нужно для fine-tuning и собеседований middle+.</span></span></span> &mdash; self-attention на NumPy в 10 строк, пререквизит к Karpathy</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/09-refactoring.md" target="_blank"><b>claude-code/09-refactoring</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>RAG-код из нед.13 покрывается characterization-тестами, затем извлекаются слои domain/service/repository — EM из прототипа становится поддерживаемым.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; инженерия. Strangler-паттерн = постепенная замена legacy без остановки работы.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Безопасный рефакторинг с backfill+rollback на боевой БД — высокооплачиваемая работа; большинство боятся трогать legacy.</span></span></span> &mdash; characterization-тесты + extraction слоёв на RAG-коде из нед.13</li>
                     </ul>
                 </td>
                 <td>
@@ -2119,17 +2185,17 @@
                 <td><span class="pbl">27 июл&ndash;23 авг</span><span class="pls">Нед. 20&ndash;23</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 12 (финал)</span><br>
-                    <b>Рекомендательные системы &mdash; &#127881; ML курс завершён!</b>
+                    <span class="exp"><b>Рекомендательные системы &mdash; &#127881; ML курс завершён!</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Matrix factorization / collaborative filtering — обзорно. Идея латентных факторов = то же, что эмбеддинги тем/источников в EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; матричная факторизация — родственник PCA/SVD на разреженных данных.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Рекомендательные системы — отдельный большой рынок; даже обзорное владение расширяет круг проектов.</span></span></span>
                     <ul class="clist">
                         <li>Matrix factorization, collaborative filtering</li>
                     </ul>
                     <span class="tag t1">ProGlib 30 июл</span><br>
-                    <b>Security углублённо</b>
+                    <span class="exp"><b>Security углублённо</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Типы prompt injection, DLP, RBAC, red teaming — углублённая защита EM перед допуском к реальным пользователям и данным.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>RBAC = разграничение, кто из лаборатории что может запросить у агента; DLP против утечки сырых данных.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Red teaming + RBAC + DLP — enterprise-уровень; именно это спрашивают на security-ревью перед контрактом.</span></span></span>
                     <ul class="clist">
                         <li>Prompt injection: типы атак, защиты; DLP; RBAC; red teaming</li>
                     </ul>
                     <span class="tag t1">ProGlib нач. авг</span><br>
-                    <b>Infrastructure углублённо</b>
+                    <span class="exp"><b>Infrastructure углублённо</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Streaming, queue-based обработка, code sandboxing (E2B) — масштабирование EM под нагрузку и безопасное исполнение кода агентом.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; инфраструктура масштабирования.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Очереди + sandbox + streaming = production-готовность под трафик; отличает MVP от системы под реальную нагрузку.</span></span></span>
                     <ul class="clist">
                         <li>Streaming, queue-based, code sandboxing E2B</li>
                     </ul>
@@ -2139,13 +2205,13 @@
                     <span class="tag t2">Самост. &mdash; LoRA/QLoRA + AI для хроматографии + Karpathy</span><br>
                     <ul class="clist">
                         <li><code>pip install peft transformers datasets accelerate</code></li>
-                        <li>LoRA fine-tuning Llama-3-8B на 100&ndash;200 Q&A парах (химия или экономика): r=16, alpha=32, target=q/k/v_proj, lr=2e-4, 2 epochs, bs=1 grad_accum=8, bf16</li>
+                        <li><span class="exp">LoRA fine-tuning Llama-3-8B<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Первый реальный LoRA-эксперимент (можно на Q&amp;A по экономике): r=16, alpha=32, 4-bit. Решает тот самый 20%-кейс, где RAG мало.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же запуск на 100-200 хим. Q&amp;A (интерпретация хроматограмм) — твой уникальный датасет из практики ВЭЖХ.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Доведённый LoRA на бесплатном Colab = доказуемый навык доменной адаптации без GPU-кластера.</span></span></span> на 100&ndash;200 Q&A парах (химия или экономика): r=16, alpha=32, target=q/k/v_proj, lr=2e-4, 2 epochs, bs=1 grad_accum=8, bf16</li>
                         <li><code>trl.SFTTrainer</code> + <code>bitsandbytes</code> 4-bit</li>
                         <li>Критерии приёмки: ≥1% pairwise win vs base, нет catastrophic forgetting (MMLU-subset), hallucination rate ниже бейзлайна</li>
                         <li>Сравнить base vs fine-tuned на 10 тестовых вопросах, оформить как эксперимент в README</li>
-                        <li>Chemometrics PDF гл.4&ndash;6: PCA, PLS, Cluster Analysis. PLS как supervised-аналог PCA. MML Book гл.10 (Dimensionality Reduction)</li>
+                        <li><span class="exp">Chemometrics PDF гл.4&ndash;6<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: PCA, PLS, Cluster Analysis — ядро хемометрики. PLS (supervised PCA) — стандарт калибровки в спектроскопии/ВЭЖХ.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>PLS-калибровка + ML = именно то, что нужно фарме/нефтехимии для спектральных методов; редкая связка.</span></span></span>: PCA, PLS, Cluster Analysis. PLS как supervised-аналог PCA. MML Book гл.10 (Dimensionality Reduction)</li>
                         <li>sklearn Pipeline: PCA &rarr; классификатор на хроматографических данных CSV</li>
-                        <li>MCP-инструмент <code>analyze_chromatogram(file_path)</code> &rarr; интерпретация пиков</li>
+                        <li><span class="exp">MCP-инструмент <code>analyze_chromatogram(file_path)</code><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет; перенос MCP-паттерна EM на химию.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: собственный MCP-инструмент тянет файл хроматограммы → агент интерпретирует пики. Объединяет твой ВЭЖХ-опыт с агентами.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Доменный MCP-инструмент для хроматографии — публичная витрина для фарм/аналитических заказчиков.</span></span></span> &rarr; интерпретация пиков</li>
                         <li>HF LLM Course гл.7 + гл.11: NLP tasks + LoRA/PEFT с trl &mdash; запускать код</li>
                         <li><a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: «Coding a ChatGPT-Like Transformer from Scratch» (~31 мин) &mdash; перед Karpathy</li>
                         <li><a href="https://www.youtube.com/@AndrejKarpathy" target="_blank">Andrej Karpathy</a>: Let&rsquo;s build GPT &mdash; PyTorch с нуля</li>
@@ -2160,11 +2226,11 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/practice-labs/15-llm-finetune.md" target="_blank"><b>practice-labs/15-llm-finetune</b></a> &mdash; рецепт LoRA Llama-3-8B: r=16, alpha=32, SFTTrainer, 4-bit, критерии приёмки</li>
-                        <li><a href="mlroadmap/llm-engineering/capstone-3-finetune.md" target="_blank"><b>llm-engineering/capstone-3-finetune</b></a> &mdash; ТЗ хроматографического проекта: датасет ≥500, 2 конфиг LoRA, vLLM, Makefile</li>
-                        <li><a href="mlroadmap/practice-labs/25-multimodal-rag.md" target="_blank"><b>practice-labs/25-multimodal-rag</b></a> &mdash; ColPali: PNG хроматограмм &rarr; embedding &rarr; VLM</li>
-                        <li><a href="mlroadmap/claude-code/14-subagents.md" target="_blank"><b>claude-code/14-subagents</b></a> &mdash; 2 subagent'а: security-reviewer + chemistry-data-validator</li>
-                        <li class="opt"><a href="mlroadmap/neural-networks/15-rlhf-dpo.md" target="_blank"><b>neural-networks/15-rlhf-dpo</b></a> &mdash; только «Зачем alignment» + «DPO без RL»</li>
+                        <li><span class="exp"><a href="mlroadmap/practice-labs/15-llm-finetune.md" target="_blank"><b>practice-labs/15-llm-finetune</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Рецепт первого LoRA-эксперимента (на Q&amp;A по экономике): r=16, alpha=32, 4-bit, ≥1% pairwise win vs base, адаптер 5-200 МБ на HF Hub.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же рецепт дообучает модель на 100-200 хим. Q&amp;A (интерпретация хроматограмм) — твой уникальный датасет из практики.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>LoRA-эксперимент, доведённый до критериев приёмки в публичном репо = доказательство навыка fine-tuning для заказчика.</span></span></span> &mdash; рецепт LoRA Llama-3-8B: r=16, alpha=32, SFTTrainer, 4-bit, критерии приёмки</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/capstone-3-finetune.md" target="_blank"><b>llm-engineering/capstone-3-finetune</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>ТЗ fine-tune+деплой: датасет ≥500, 2 конфига LoRA, vLLM в Docker, Prometheus+Grafana, расчёт экономии на 1M запросов. Адаптируется под доменную модель EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямо хроматографический кейс: дообученная модель интерпретации + локальный vLLM-деплой + TCO vs облако. Уникальный портфолио-проект химия×AI.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Кейс «доменная модель + on-prem деплой + расчёт TCO» — именно то, что покупают фарма/промышленность, которым нельзя в облако.</span></span></span> &mdash; ТЗ хроматографического проекта: датасет ≥500, 2 конфиг LoRA, vLLM, Makefile</li>
+                        <li><span class="exp"><a href="mlroadmap/practice-labs/25-multimodal-rag.md" target="_blank"><b>practice-labs/25-multimodal-rag</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Мультимодальный RAG для EM: индексировать графики/таблицы из отчётов BlackRock/JPMorgan как изображения, VLM отвечает с цитатой на страницу+картинку. Recall@5&gt;0.75.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: ColPali на PNG хроматограмм → embedding → retrieval → Claude Vision описывает пики. Картинка прибора становится запрашиваемой.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Мультимодальный RAG поверх документов с графиками/спектрами — острый запрос там, где знание «зашито» в картинки.</span></span></span> &mdash; ColPali: PNG хроматограмм &rarr; embedding &rarr; VLM</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/14-subagents.md" target="_blank"><b>claude-code/14-subagents</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Субагенты в .claude/agents: security-reviewer проверяет узлы EM на prompt injection, отдельный валидирует структуру NewsItem. Параллельная специализация с ограниченными инструментами.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>chemistry-data-validator — субагент, проверяющий что хроматографические CSV корректны до запуска анализа.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Настройка специализированных субагентов под домен заказчика (security, валидация данных) — продаваемая услуга кастомизации.</span></span></span> &mdash; 2 subagent'а: security-reviewer + chemistry-data-validator</li>
+                        <li class="opt"><span class="exp"><a href="mlroadmap/neural-networks/15-rlhf-dpo.md" target="_blank"><b>neural-networks/15-rlhf-dpo</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого в EM нет (читается обзорно «зачем alignment» + «DPO без RL»). Объясняет почему модели отвечают определённым образом — фон для статьи.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание DPO (обучается как supervised, стабильнее PPO) — продвинутая тема для статьи/собеседования; сигнал «слежу за фронтиром alignment».</span></span></span> &mdash; только «Зачем alignment» + «DPO без RL»</li>
                     </ul>
                 </td>
                 <td>
@@ -2198,10 +2264,10 @@
             <tr>
                 <td><span class="pbl">24 авг&ndash;13 сен</span><span class="pls">Нед. 24&ndash;26</span></td>
                 <td>
-                    <span class="tag t1">ProGlib 6.08</span> Local Inference углублённо<br>
-                    <span class="tag t1">ProGlib 10.08</span> Governance &amp; Compliance<br>
-                    <span class="tag t1">ProGlib 17.08</span> Enterprise MCP + Human approvals<br>
-                    <span class="tag t1">ProGlib 20.08</span> Capstone: нагрузочное тест., red teaming, Go/No-Go<br>
+                    <span class="tag t1">ProGlib 6.08</span> <span class="exp">Local Inference углублённо<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Углублённый локальный инференс для приватного/отказоустойчивого контура EM (vLLM, квантование, мониторинг GPU).</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>On-prem инференс хим/мед данных без облака.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>On-premise LLM — прямой запрос регулируемых отраслей: «работает без интернета на вашем железе».</span></span></span><br>
+                    <span class="tag t1">ProGlib 10.08</span> <span class="exp">Governance &amp; Compliance<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Управление доступом, аудит, политики — что можно/нельзя агенту EM, журналирование решений (важность, верификация).</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: GxP/ISO-требования фармы и метрологии к прослеживаемости и аудиту решений.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Compliance-готовность (аудит, governance) — пропуск в фарму/регулируемое производство; без неё к данным не пустят.</span></span></span><br>
+                    <span class="tag t1">ProGlib 17.08</span> <span class="exp">Enterprise MCP + Human approvals<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>MCP корпоративного уровня + обязательное подтверждение человеком критических действий — расширение human-in-the-loop EM на enterprise.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Human approval перед записью результата = цифровой аналог подписи аналитика под протоколом.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Human-approval workflow — требование там, где цена ошибки высока (фарма, финансы); «безопасный агент с контролем человека».</span></span></span><br>
+                    <span class="tag t1">ProGlib 20.08</span> <span class="exp">Capstone: нагрузочное тест., red teaming, Go/No-Go<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Финальная проверка EM перед «продом»: locust-нагрузка, red teaming, формальное решение Go/No-Go по метрикам.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; валидация готовности = как финальная валидация метода перед вводом в рутину.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Нагрузочный тест + red team + Go/No-Go отчёт — то, что заказчик хочет видеть перед запуском; сдаваемый артефакт.</span></span></span><br>
                     <b>&#127891; Capstone ProGlib защита 31.08</b>
                     <div class="src">&#128218; ProGlib + locust.io + evidently.ai</div>
                 </td>
@@ -2210,15 +2276,15 @@
                     <ul class="clist">
                         <li>A/B тест промптов: 2 варианта оценки &rarr; выбрать лучший через RAGAS</li>
                         <li>Release Engineering: версионирование промптов через git tags</li>
-                        <li>Кастомный MCP-сервер для хроматографии &mdash; публичный GitHub репо</li>
+                        <li><span class="exp">Кастомный MCP-сервер для хроматографии<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет; перенос MCP-навыка EM на химию.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: публичный MCP-сервер для хроматографических данных — витрина уникальной связки химия×AI.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Публичный доменный MCP в GitHub = магнит для фарм/аналитических заказчиков; доказательство ниши.</span></span></span> &mdash; публичный GitHub репо</li>
                         <li>GitHub: 2 публичных репо + README на английском + Mermaid схема + демо-видео Loom</li>
-                        <li>LinkedIn на английском: «AI Engineer | AI Integration for Analytical Chemistry»</li>
+                        <li><span class="exp">LinkedIn на английском<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет; позиционирование.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: позиционирование «AI для аналитической химии» — уникальное пересечение, не «ещё один AI-инженер».</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Узкое позиционирование (химия+AI) снижает конкуренцию и повышает ставку; заказчик из фармы ищет специалиста домена.</span></span></span>: «AI Engineer | AI Integration for Analytical Chemistry»</li>
                         <li>2 кейса «проблема &rarr; решение &rarr; результат» &rarr; LinkedIn post</li>
                         <li>HF LLM Course гл.10: Curate datasets для fine-tuning</li>
                         <li>GitHub Actions на свои репо: Claude Code в headless режиме авто-ревью на каждый PR (security, edge cases, тесты), комментирует в PR</li>
                         <li>Evidently + Prometheus + Grafana по «Задумке»: PSI per feature, KS-test, alert rules (PSI &gt;0.25 warning, &gt;0.5 critical)</li>
                         <li>Reference dataset = golden из нед.13, current = production logs за неделю</li>
-                        <li>Список компаний: фарма, нефтехимия, промышленная аналитика &mdash; кто платит за AI</li>
+                        <li><span class="exp">Список компаний: фарма, нефтехимия, промышленная аналитика<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет; выход на рынок.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: целевые отрасли — фарма, нефтехимия, промышленная аналитика, где хим. бэкграунд = преимущество.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Конкретный список «кто платит за AI» в твоих отраслях = карта первых холодных контактов и оффера.</span></span></span> &mdash; кто платит за AI</li>
                         <li>Первые холодные контакты в LinkedIn (на английском)</li>
                         <li>Upwork профиль: AI Engineer for Scientific Analytics</li>
                         <li>Статья-черновик «9 месяцев с AI: что я понял» по антипаттернам</li>
@@ -2235,11 +2301,11 @@
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><a href="mlroadmap/llm-engineering/capstone-2-agent.md" target="_blank"><b>llm-engineering/capstone-2-agent</b></a> &mdash; ТЗ хроматографического кейса: ≥4 инструмента, ReAct+trace, max_steps/cost/duration</li>
-                        <li><a href="mlroadmap/practice-labs/19-drift-monitoring.md" target="_blank"><b>practice-labs/19-drift-monitoring</b></a> &mdash; Evidently + Prometheus + Grafana, PSI, KS-test, alert rules</li>
-                        <li><a href="mlroadmap/claude-code/16-headless-ci.md" target="_blank"><b>claude-code/16-headless-ci</b></a> &mdash; GitHub Action: Claude Code headless, авто-ревью на PR</li>
-                        <li><a href="mlroadmap/claude-code/18-antipatterns.md" target="_blank"><b>claude-code/18-antipatterns</b></a> &mdash; 14 антипаттернов: отметить какие делал, материал для статьи</li>
-                        <li><a href="mlroadmap/llm-engineering/18-online-metrics.md" target="_blank"><b>llm-engineering/18-online-metrics</b></a> &mdash; thumbs, CSAT, % fallback, shadow&rarr;canary&rarr;SRM</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/capstone-2-agent.md" target="_blank"><b>llm-engineering/capstone-2-agent</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>ТЗ боевого агента: ≥4 инструмента, ReAct+trace, max_steps/cost/duration, success≥0.80 на 120 сценариях, 0 взломов injection. Это финальная форма агента EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>То же ТЗ под хроматографический агент-ассистент (≥4 инструмента: загрузка, анализ, поиск по нормативам, отчёт).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Готовое ТЗ production-агента с метриками успеха и тестами безопасности = шаблон коммерческого кейса под любой домен.</span></span></span> &mdash; ТЗ хроматографического кейса: ≥4 инструмента, ReAct+trace, max_steps/cost/duration</li>
+                        <li><span class="exp"><a href="mlroadmap/practice-labs/19-drift-monitoring.md" target="_blank"><b>practice-labs/19-drift-monitoring</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Дрейф в EM: распределение запросов меняется (новые темы), метрики падают без правок кода. Evidently+Prometheus+Grafana, PSI&gt;0.25 warning / &gt;0.5 critical, reference=golden нед.13, current=prod-логи.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: drift-мониторинг = контроль стабильности метода во времени (PSI/KS ≈ контрольные карты), runbook на каждый тип алёрта.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Мониторинг дрейфа — обязателен для долгоживущих прод-систем; в промышленности это прямой аналог SPC, понятный заказчику.</span></span></span> &mdash; Evidently + Prometheus + Grafana, PSI, KS-test, alert rules</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/16-headless-ci.md" target="_blank"><b>claude-code/16-headless-ci</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>headless Claude Code (claude -p) в GitHub Actions = авто-ревью каждого PR в репо EM + контроль стоимости (exit при cost&gt;$0.5). Агент в CI без REPL.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; DevOps-навык. Тот же workflow гоняет проверки на репо хим. инструмента.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«AI-ревьюер в CI заказчика» — конкретная автоматизация под инвойс; headless-режим — редкий навык.</span></span></span> &mdash; GitHub Action: Claude Code headless, авто-ревью на PR</li>
+                        <li><span class="exp"><a href="mlroadmap/claude-code/18-antipatterns.md" target="_blank"><b>claude-code/18-antipatterns</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Чек-лист против собственных ошибок при разработке EM: не сливать огромные PR, не доверять без diff, не миксить рефактор и фичи, ловить признаки фальшивого фикса.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; материал для статьи «9 месяцев с AI».</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Личный чек-лист антипаттернов = контент для LinkedIn/статьи → видимость на рынке и доверие заказчиков.</span></span></span> &mdash; 14 антипаттернов: отметить какие делал, материал для статьи</li>
+                        <li><span class="exp"><a href="mlroadmap/llm-engineering/18-online-metrics.md" target="_blank"><b>llm-engineering/18-online-metrics</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Онлайн-метрики EM: thumbs up/down в Telegram, дашборд latency/cost/% thumbs-down, A/B двух промптов 1-2 недели, shadow-деплой новой версии на 1000 запросов, негатив → в eval-датасет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; идея «сравнить новую версию в тени на тех же образцах» переносится на валидацию метода.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Замыкание петли «прод-фидбек → eval» и грамотный A/B (sample size, stratification) отличает поддерживаемый продукт; редко делают правильно.</span></span></span> &mdash; thumbs, CSAT, % fallback, shadow&rarr;canary&rarr;SRM</li>
                     </ul>
                 </td>
                 <td>
@@ -2270,17 +2336,17 @@
                 <td><span class="pbl">14&ndash;20 сен</span><span class="pls">Неделя 27</span><br><span style="font-size:10px;color:#b71c1c;font-weight:700">ФИНАЛ</span></td>
                 <td>
                     <span class="tag t1">ProGlib 31.08 (или 7 сен)</span><br>
-                    <b>&#127891; Capstone ProGlib &mdash; защита</b>
+                    <span class="exp"><b>&#127891; Capstone ProGlib &mdash; защита</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Финальная защита Capstone — публичная презентация системы; для EM это репетиция продажи архитектуры заказчику.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Защищённый Capstone = верифицированный кейс в портфолио; «прошёл review экспертов» усиливает доверие.</span></span></span>
                     <div class="src">&#128218; ProGlib</div>
                 </td>
                 <td>
                     <span class="tag t2">Самост. &mdash; Выход на рынок</span><br>
                     <ul class="clist">
-                        <li>Список компаний: фарма, нефтехимия, промышленная аналитика &mdash; кто платит за AI</li>
+                        <li><span class="exp">Список компаний: фарма, нефтехимия, промышленная аналитика<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет; выход на рынок.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: целевые отрасли — фарма, нефтехимия, промышленная аналитика, где хим. бэкграунд = преимущество.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Конкретный список «кто платит за AI» в твоих отраслях = карта первых холодных контактов и оффера.</span></span></span> &mdash; кто платит за AI</li>
                         <li>Первые холодные контакты в LinkedIn (на английском) &mdash; если не начато на нед.24&ndash;26</li>
-                        <li>Upwork профиль финализировать: AI Engineer for Scientific Analytics</li>
+                        <li><span class="exp">Upwork профиль финализировать<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет; канал продаж.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: позиционирование «AI для научной аналитики» = твоя ниша химия+данные.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Нишевый профиль на Upwork (Scientific Analytics) — меньше конкуренции, выше ставка, чем у generic «AI Engineer».</span></span></span>: AI Engineer for Scientific Analytics</li>
                         <li>LinkedIn 500+ связей, 10+ постов</li>
-                        <li>4 публичных репо в GitHub</li>
+                        <li><span class="exp">4 публичных репо в GitHub<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>EM/диплом среди публичных репо — доказательство сквозного навыка (RAG+агент+деплой).</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Хроматографические MCP/LoRA-репо демонстрируют доменную нишу.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>4 рабочих публичных репо = видимость и доказательство; «AI-инженер без публичного кода — невидимка».</span></span></span>
                     </ul>
                 </td>
                 <td>
@@ -2993,6 +3059,56 @@
     checkWeekDone(tr);
   });
 
+})();
+</script>
+<script>
+(function() {
+  // Плавающая карточка EXP (нед.11+): hover на десктопе, тап на мобильном.
+  var float = document.createElement('div');
+  float.id = 'exp-float';
+  document.body.appendChild(float);
+  var active = null, hideT = null;
+
+  function place(el) {
+    var r = el.getBoundingClientRect();
+    var fw = float.offsetWidth, fh = float.offsetHeight;
+    var left = r.left;
+    if (left + fw > window.innerWidth - 8) left = window.innerWidth - fw - 8;
+    if (left < 8) left = 8;
+    var top = r.bottom + 8;
+    if (top + fh > window.innerHeight - 8) top = r.top - fh - 8;
+    if (top < 8) top = 8;
+    float.style.left = left + 'px';
+    float.style.top = top + 'px';
+  }
+
+  function show(el) {
+    var card = el.querySelector('.exp-card');
+    if (!card) return;
+    clearTimeout(hideT);
+    float.innerHTML = card.innerHTML;
+    float.classList.add('show');
+    place(el);
+    active = el;
+  }
+
+  function hide() {
+    float.classList.remove('show');
+    active = null;
+  }
+
+  document.querySelectorAll('.exp').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { show(el); });
+    el.addEventListener('mouseleave', function() { hideT = setTimeout(hide, 120); });
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (active === el) { hide(); } else { show(el); }
+    });
+  });
+  float.addEventListener('mouseenter', function() { clearTimeout(hideT); });
+  float.addEventListener('mouseleave', function() { hideT = setTimeout(hide, 120); });
+  document.addEventListener('click', hide);
+  window.addEventListener('scroll', function() { if (active) hide(); }, true);
 })();
 </script>
 </body>

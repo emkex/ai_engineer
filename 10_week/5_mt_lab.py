@@ -154,11 +154,8 @@ def llm_part(provider: str = LLM_PROVIDER):
     if provider == "anthropic":
         from dotenv import load_dotenv
         load_dotenv()
-        return ChatAnthropic(
-            model="claude-haiku-4-5",
-            temperature=0.2,
-            max_tokens=1024
-            )
+        return ChatAnthropic(model="claude-haiku-4-5", temperature=0.2, max_tokens=1024)
+    
     try:
         llm = ChatOpenAI(
             api_key="None",
