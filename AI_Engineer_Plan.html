@@ -2057,39 +2057,32 @@
                     <div class="src">&#128218; ProGlib + HF LLM Course + Chemometrics PDF</div>
                 </td>
                 <td>
-                    <span class="tag t2">Самост. &mdash; Fine-tuning теория + Chemometrics</span><br>
+                    <span class="tag t2">Самост. &mdash; Qdrant advanced + production RAG + SQL + Chemometrics</span><br>
                     <ul class="clist">
-                        <li><span class="exp">GGUF vs AWQ<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Форматы и квантование под локальный fallback EM (Ollama): GGUF для CPU/Mac, понимание int4/int8 — сколько RAM нужно модели.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; навык локального деплоя для приватных данных.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание квантования = умение запустить модель на скромном железе заказчика; ключ к on-prem без дорогого GPU.</span></span></span> &mdash; разобрать разницу. Numerical precision: fp16, bf16, int8, int4</li>
-                        <li>Inference Optimization: TTFT, TPOT, batching стратегии</li>
-                        <li>HuggingFace LLM Course гл.3&ndash;4: fine-tuning теория</li>
-                        <li>HF LLM Course гл.5&ndash;6: Datasets + Tokenizers</li>
+                        <li>Qdrant advanced filtering: payload indexing, sparse vectors &mdash; production-ready поиск с фильтрами</li>
+                        <li>Production-ready RAG: метаданные, фильтрация по источнику, hybrid search (dense + sparse)</li>
+                        <li>SQL основы: SELECT, WHERE, JOIN, GROUP BY &mdash; mode.com/sql-tutorial (2&ndash;3 вечера)</li>
                         <li><span class="exp">Chemometrics PDF гл.1&ndash;3<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Базовая статистика аналитической химии — мост между твоим опытом (ВЭЖХ, метрология) и ML; фундамент под PCA/PLS нед.19-20.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Язык хемометрики + ML = редкая комбинация; именно она открывает фарму/нефтехимию.</span></span></span>: базовая статистика для аналитической химии</li>
                         <li>sklearn K-means + DBSCAN на embeddings из «Задумки», визуализация в 2D</li>
-                        <li>Дневник: зафиксировать причину «зачем fine-tuning именно нам» (доменная химия / экономика &mdash; 20% случаев)</li>
                         <li>PCA через SVD на NumPy за 15 строк. На MNIST: сжать 784&rarr;50, замерить kNN до и после</li>
-                        <li>PyTorch старт: <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> «PyTorch for Deep Learning» intro (~22 мин) + «Coding NN in PyTorch» (~25 мин)</li>
-                        <li>3B1B NN гл.7 «How LLMs store facts» (~23 мин) &mdash; перед LoRA, понимание механики</li>
                         <li><b>&#128290; StatQuest:</b> K-means (~8 мин) + DBSCAN (~7 мин) &mdash; под ML Тему 10</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (фоном):</b> <a href="https://shad.yandex.ru/llmscalingweek" target="_blank">LLM Scaling Week &mdash; Тема 5 «Inference challenges»</a> (~1.5 ч).</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (по теме):</b> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: K-means (~8 мин) + DBSCAN (~7 мин). <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B NN</a> гл.7 «How LLMs store facts» (~23 мин) &mdash; перед LoRA в нед.19+.</li>
-                        <li class="opt">Karpathy micrograd &mdash; разобрать 150 строк автодиф (если не успеваешь &mdash; перенести на нед.19)</li>
+                        <li style="margin-top:8px"><b>&#128290; Математика (по теме):</b> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: K-means (~8 мин) + DBSCAN (~7 мин). <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B NN</a> гл.7 «How LLMs store facts» (~23 мин) &mdash; понимание механики LLM.</li>
                     </ul>
-                    <div class="src">&#128218; HF LLM Course (гл.3-6) + Chemometrics PDF + StatQuest + shad.yandex.ru/llmscalingweek</div>
+                    <div class="src">&#128218; qdrant.tech/documentation + Chemometrics PDF + StatQuest + shad.yandex.ru/llmscalingweek + mode.com/sql-tutorial</div>
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><span class="exp"><a href="mlroadmap/llm-engineering/21-fine-tuning.md" target="_blank"><b>llm-engineering/21-fine-tuning</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Главный урок для EM: 80% задач решаются промптом+RAG, fine-tuning не нужен. Дневник фиксирует тот самый 20%-кейс (доменный стиль/формат), где LoRA оправдан.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот самый 20% — узкий хим. домен: дообучить модель на интерпретации спектров, где общие модели слабы.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Сказать заказчику «вам не нужен fine-tuning, хватит RAG» экономит ему десятки тысяч — и повышает доверие к рекомендациям.</span></span></span> &mdash; когда fine-tuning НЕ нужен &mdash; 80% решается промпт+RAG. Дневник: кейс в 20%</li>
-                        <li><span class="exp"><a href="mlroadmap/neural-networks/11-finetuning.md" target="_blank"><b>neural-networks/11-finetuning</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого применения в EM мало (RAG достаточно). Понимание LoRA (W_new=W_frozen+B·A, ~0.15% параметров) нужно для осознанного решения «дообучать или нет».</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Основа доменной адаптации: дообучить модель на узкой хим. задаче малым адаптером (5-200 МБ) на бесплатном Colab.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>LoRA/QLoRA-специалист, дообучающий 7-8B модель под домен заказчика без дорогого GPU-кластера — востребован и редок.</span></span></span> &mdash; математика LoRA: W_new = W_frozen + B·A, 4 вида transfer learning</li>
                         <li><span class="exp"><a href="mlroadmap/math-for-ml/03-eigen-svd.md" target="_blank"><b>math-for-ml/03-eigen-svd</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого в EM нет; SVD под капотом PCA для визуализации embedding-пространства новостей и кластеризации тем.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: SVD = математика PCA-биплота спектральных/хроматографических данных. Понимая SVD, читаешь биплот прямо на экране прибора — видишь какие пики коррелируют, без кода.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>SVD/PCA — фундамент хемометрики; «AI-инженер, понимающий PCA спектров» говорит на языке лаборатории, а не только кода.</span></span></span> &mdash; PCA через SVD на NumPy, MNIST 784&rarr;50</li>
                         <li><span class="exp"><a href="mlroadmap/claude-code/07-debugging.md" target="_blank"><b>claude-code/07-debugging</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Отладка зацикливаний и неверных оценок агента EM: сформулировать баг в 3 строки, потребовать доказательство гипотезы, написать падающий тест перед фиксом.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Метод бисекции (git bisect) = ровно как поиск источника систематической ошибки в серии измерений: дели интервал пополам, локализуй причину.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Структурная отладка LLM-систем (а не «перепишем промпт наугад») — то, за что держат сеньора на контракте.</span></span></span> &mdash; Sherlock-mode: стектрейс + 3 гипотезы, код после выбора</li>
                     </ul>
                 </td>
                 <td>
-                    <div class="why"><b>Сейчас:</b> Fine-tuning теория читается до практики в нед.20. ML Тема 10: кластеризация (на нед.19 закрываем PCA). Chemometrics &mdash; специализация AI для химии.</div>
+                    <div class="why"><b>Сейчас:</b> Qdrant углубляется до production-уровня (payload indexing, hybrid search). SQL закрывается за 2–3 вечера. ML Тема 10: кластеризация. Chemometrics &mdash; специализация AI для химии.</div>
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>PyTorch (старт)</b><span>Обязательно перед LoRA в нед.20+. StatQuest tutorials &mdash; запускать код.</span></div>
+                        <div class="tcard"><b>Qdrant advanced</b><span>Payload indexing + sparse vectors + hybrid search: production-ready поиск для RAG.</span></div>
                         <div class="tcard"><b>Chemometrics PDF гл.1&ndash;3</b><span>Базовая статистика для хим. данных. Фундамент для PCA на хроматограммах.</span></div>
                     </div>
                 </td>
@@ -2100,7 +2093,7 @@
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ai">AI</span> ШАД | LLM Scaling Week Тема 5</b><span><a href="https://shad.yandex.ru/llmscalingweek" target="_blank">«Inference challenges»</a> &mdash; ~1.5 ч, фоном</span></div>
                     </div>
                 </td>
-                <td><span class="sp new">PyTorch (intro)</span><span class="sp new">Chemometrics ML</span></td>
+                <td><span class="sp new">Qdrant advanced</span><span class="sp new">SQL basics</span><span class="sp new">Chemometrics ML</span></td>
                 <td>
                     <div class="pb">
                         <div class="pf" style="width:90%;background:#e65100"></div>
@@ -2193,17 +2186,14 @@
                     <div class="src">&#128218; ProGlib + e2b.dev/docs + huggingface.co/docs/peft</div>
                 </td>
                 <td>
-                    <span class="tag t2">Самост. &mdash; LoRA/QLoRA + AI для хроматографии + Karpathy</span><br>
+                    <span class="tag t2">Самост. &mdash; PostgreSQL + Corrective RAG + AI для хроматографии + Karpathy</span><br>
                     <ul class="clist">
-                        <li><code>pip install peft transformers datasets accelerate</code></li>
-                        <li><span class="exp">LoRA fine-tuning Llama-3-8B<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Первый реальный LoRA-эксперимент (можно на Q&amp;A по экономике): r=16, alpha=32, 4-bit. Решает тот самый 20%-кейс, где RAG мало.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же запуск на 100-200 хим. Q&amp;A (интерпретация хроматограмм) — твой уникальный датасет из практики ВЭЖХ.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Доведённый LoRA на бесплатном Colab = доказуемый навык доменной адаптации без GPU-кластера.</span></span></span> на 100&ndash;200 Q&A парах (химия или экономика): r=16, alpha=32, target=q/k/v_proj, lr=2e-4, 2 epochs, bs=1 grad_accum=8, bf16</li>
-                        <li><code>trl.SFTTrainer</code> + <code>bitsandbytes</code> 4-bit</li>
-                        <li>Критерии приёмки: ≥1% pairwise win vs base, нет catastrophic forgetting (MMLU-subset), hallucination rate ниже бейзлайна</li>
-                        <li>Сравнить base vs fine-tuned на 10 тестовых вопросах, оформить как эксперимент в README</li>
+                        <li>PostgreSQL: перевести SQLite-хранилище на Postgres (миграция схемы, psycopg2, connection pool)</li>
+                        <li><span class="exp">Corrective RAG<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Агент EM проверяет качество собственного ответа: если confidence низкий — повторно ищет с другим запросом. Закрывает основной провал RAG без fine-tuning.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>То же для хим. агента: если интерпретация хроматограммы неуверенная — ищет дополнительный контекст в базе методик.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Self-correcting RAG» — маркетинговый аргумент и реальное снижение hallucination rate; заказчики платят за надёжность.</span></span></span>: агент проверяет качество собственного ответа и повторно ищет если не уверен</li>
+                        <li>Langfuse A/B тест двух версий промпта на golden set &mdash; оценить метрики, зафиксировать победителя</li>
                         <li><span class="exp">Chemometrics PDF гл.4&ndash;6<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: PCA, PLS, Cluster Analysis — ядро хемометрики. PLS (supervised PCA) — стандарт калибровки в спектроскопии/ВЭЖХ.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>PLS-калибровка + ML = именно то, что нужно фарме/нефтехимии для спектральных методов; редкая связка.</span></span></span>: PCA, PLS, Cluster Analysis. PLS как supervised-аналог PCA. MML Book гл.10 (Dimensionality Reduction)</li>
                         <li>sklearn Pipeline: PCA &rarr; классификатор на хроматографических данных CSV</li>
                         <li><span class="exp">MCP-инструмент <code>analyze_chromatogram(file_path)</code><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет; перенос MCP-паттерна EM на химию.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: собственный MCP-инструмент тянет файл хроматограммы → агент интерпретирует пики. Объединяет твой ВЭЖХ-опыт с агентами.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Доменный MCP-инструмент для хроматографии — публичная витрина для фарм/аналитических заказчиков.</span></span></span> &rarr; интерпретация пиков</li>
-                        <li>HF LLM Course гл.7 + гл.11: NLP tasks + LoRA/PEFT с trl &mdash; запускать код</li>
                         <li><a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: «Coding a ChatGPT-Like Transformer from Scratch» (~31 мин) &mdash; перед Karpathy</li>
                         <li><a href="https://www.youtube.com/@AndrejKarpathy" target="_blank">Andrej Karpathy</a>: Let&rsquo;s build GPT &mdash; PyTorch с нуля</li>
                         <li>Multimodal-прототип ColPali: 5&ndash;10 хроматограмм (PNG) &rarr; embedding &rarr; retrieval &rarr; VLM (Claude 3.5 Sonnet Vision) &rarr; описание пиков</li>
@@ -2211,27 +2201,26 @@
                         <li>2 subagent'а в .claude/agents/: <code>security-reviewer</code> + <code>chemistry-data-validator</code></li>
                         <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B NN</a> гл.8&ndash;9 (Attention + GPT from scratch) &mdash; под Karpathy</li>
                         <li style="margin-top:8px"><b>&#128290; Математика (по теме):</b> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: PCA Step-by-Step (~22 мин) + t-SNE (~12 мин) &mdash; прямо под ML Тему 11.</li>
-                        <li class="opt">DPO теоретически &mdash; только «Зачем alignment» + «DPO без RL» (для статьи в сентябре)</li>
+                        <li class="opt">DPO теоретически &mdash; только «Зачем alignment» + «DPO без RL» (для статьи в октябре)</li>
                     </ul>
-                    <div class="src">&#128218; huggingface.co/docs/peft + Chemometrics PDF (гл.4-6) + huggingface.co/learn/llm-course + StatQuest Coding Transformer + Karpathy YouTube</div>
+                    <div class="src">&#128218; postgresql.org/docs + qdrant.tech/documentation + Chemometrics PDF (гл.4-6) + StatQuest Coding Transformer + Karpathy YouTube</div>
                 </td>
                 <td>
                     <ul class="clist">
-                        <li><span class="exp"><a href="mlroadmap/practice-labs/15-llm-finetune.md" target="_blank"><b>practice-labs/15-llm-finetune</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Рецепт первого LoRA-эксперимента (на Q&amp;A по экономике): r=16, alpha=32, 4-bit, ≥1% pairwise win vs base, адаптер 5-200 МБ на HF Hub.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же рецепт дообучает модель на 100-200 хим. Q&amp;A (интерпретация хроматограмм) — твой уникальный датасет из практики.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>LoRA-эксперимент, доведённый до критериев приёмки в публичном репо = доказательство навыка fine-tuning для заказчика.</span></span></span> &mdash; рецепт LoRA Llama-3-8B: r=16, alpha=32, SFTTrainer, 4-bit, критерии приёмки</li>
-                        <li><span class="exp"><a href="mlroadmap/llm-engineering/capstone-3-finetune.md" target="_blank"><b>llm-engineering/capstone-3-finetune</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>ТЗ fine-tune+деплой: датасет ≥500, 2 конфига LoRA, vLLM в Docker, Prometheus+Grafana, расчёт экономии на 1M запросов. Адаптируется под доменную модель EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямо хроматографический кейс: дообученная модель интерпретации + локальный vLLM-деплой + TCO vs облако. Уникальный портфолио-проект химия×AI.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Кейс «доменная модель + on-prem деплой + расчёт TCO» — именно то, что покупают фарма/промышленность, которым нельзя в облако.</span></span></span> &mdash; ТЗ хроматографического проекта: датасет ≥500, 2 конфиг LoRA, vLLM, Makefile</li>
                         <li><span class="exp"><a href="mlroadmap/practice-labs/25-multimodal-rag.md" target="_blank"><b>practice-labs/25-multimodal-rag</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Мультимодальный RAG для EM: индексировать графики/таблицы из отчётов BlackRock/JPMorgan как изображения, VLM отвечает с цитатой на страницу+картинку. Recall@5&gt;0.75.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: ColPali на PNG хроматограмм → embedding → retrieval → Claude Vision описывает пики. Картинка прибора становится запрашиваемой.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Мультимодальный RAG поверх документов с графиками/спектрами — острый запрос там, где знание «зашито» в картинки.</span></span></span> &mdash; ColPali: PNG хроматограмм &rarr; embedding &rarr; VLM</li>
                         <li><span class="exp"><a href="mlroadmap/claude-code/14-subagents.md" target="_blank"><b>claude-code/14-subagents</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Субагенты в .claude/agents: security-reviewer проверяет узлы EM на prompt injection, отдельный валидирует структуру NewsItem. Параллельная специализация с ограниченными инструментами.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>chemistry-data-validator — субагент, проверяющий что хроматографические CSV корректны до запуска анализа.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Настройка специализированных субагентов под домен заказчика (security, валидация данных) — продаваемая услуга кастомизации.</span></span></span> &mdash; 2 subagent'а: security-reviewer + chemistry-data-validator</li>
                         <li class="opt"><span class="exp"><a href="mlroadmap/neural-networks/15-rlhf-dpo.md" target="_blank"><b>neural-networks/15-rlhf-dpo</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого в EM нет (читается обзорно «зачем alignment» + «DPO без RL»). Объясняет почему модели отвечают определённым образом — фон для статьи.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание DPO (обучается как supervised, стабильнее PPO) — продвинутая тема для статьи/собеседования; сигнал «слежу за фронтиром alignment».</span></span></span> &mdash; только «Зачем alignment» + «DPO без RL»</li>
                     </ul>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> fine-tuning теория прочитана, PyTorch введение пройдено.<br><b>Сейчас:</b> первый LoRA-эксперимент. Специализация по химии = уникальное конкурентное преимущество. Karpathy = трансформер изнутри.</div>
+                    <div class="why"><b>Было:</b> Qdrant production-ready, SQL база заложена.<br><b>Сейчас:</b> PostgreSQL — реальный production-навык для 80% проектов. Corrective RAG закрывает основной провал RAG без fine-tuning. Karpathy = трансформер изнутри. Химия + ColPali — уникальная ниша.</div>
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>PEFT / LoRA</b><span>Fine-tuning с минимальными ресурсами: адаптерные матрицы W_new = W_frozen + B·A. Colab бесплатно.</span></div>
+                        <div class="tcard"><b>PostgreSQL</b><span>Миграция с SQLite: production-хранилище, psycopg2, connection pool. Нужен в 80% проектов.</span></div>
+                        <div class="tcard"><b>Corrective RAG</b><span>Агент оценивает качество ответа → если неуверен, повторно ищет. Снижает hallucination без fine-tuning.</span></div>
                         <div class="tcard"><b>ColPali</b><span>Multimodal RAG: embedding из страниц PDF как изображений. Хроматограмма PNG &rarr; интерпретация пиков.</span></div>
-                        <div class="tcard"><b>Karpathy GPT from scratch</b><span>PyTorch с нуля: понимание трансформера изнутри до LoRA.</span></div>
+                        <div class="tcard"><b>Karpathy GPT from scratch</b><span>PyTorch с нуля: понимание трансформера изнутри.</span></div>
                     </div>
                 </td>
                 <td>
@@ -2243,7 +2232,7 @@
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ml">ML</span> StatQuest: PCA + t-SNE</b><span>Прямо под ML Тему 11 &mdash; ~34 мин</span></div>
                     </div>
                 </td>
-                <td><span class="sp new">PEFT/LoRA</span><span class="sp new">transformers</span><span class="sp new">Chemometrics ML</span><span class="sp new">ColPali</span></td>
+                <td><span class="sp new">PostgreSQL</span><span class="sp new">Corrective RAG</span><span class="sp new">Chemometrics ML</span><span class="sp new">ColPali</span></td>
                 <td>
                     <div class="pb">
                         <div class="pf" style="width:97%;background:#e65100"></div>
@@ -2369,35 +2358,29 @@
                 января 2027</span></div>
 
         <div class="mblock">
-            <h3>Сентябрь 2026 &mdash; Математика для ML + Продвинутый Fine-tuning</h3>
+            <h3>Сентябрь 2026 &mdash; Математика для ML + Реальный прикладной проект</h3>
             <div class="mc">
                 <div>
                     <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
                         <li><b>Нед.1 (1–7 сент):</b> Math гэпы &mdash; при ступоре открывать MML Book гл.X (mml-book.github.io) — не курс, а справочник по запросу. 3B1B + Math AI уже пройдены. Если тема ясна &mdash; пропускать.</li>
-                        <li><b>Нед.2–3 (8–21 сент):</b> QLoRA на Google Colab: дообучить Llama 3.1 8B на своих Q&A данных (химия или экономика) &rarr; опубликовать на HuggingFace Hub. HF LLM Course гл.12: Build Reasoning Models (DeepSeek R1-style, GRPO) — к сентябрю есть база LoRA из июля.</li>
-                        <li><b>Нед.4 (22–30 сент):</b> Сравнение: base vs LoRA vs QLoRA — оформить как эксперимент/статью на GitHub. Начало Проекта 3: AI-агент для автоматизации лабораторной отчётности.</li>
+                        <li><b>Нед.2–3 (8–21 сент):</b> Первый реальный прикладной проект &mdash; выбрать конкретную задачу из области хим. данных или экономики которую RAG+промпт не закрывает. Corrective RAG + Self-RAG поверх «Задумки по экономике» &mdash; практика которая в 80% случаев заменяет fine-tuning.</li>
+                        <li><b>Нед.4 (22–30 сент):</b> A/B тест промптов с корректной статистикой (ШАД A/B Week нед.3–5) &mdash; golden set, bootstrap CI, оформить как эксперимент. Начало Проекта 3: AI-агент для автоматизации лабораторной отчётности.</li>
                         <li class="opt"><b>Нед.1 доп:</b> fast.ai &laquo;Practical Deep Learning for Coders&raquo; — урок 1&ndash;3 (fast.ai/courses). Альтернативный путь если StatQuest не зашёл.</li>
-                        <li class="opt">DPO (Direct Preference Optimization) — arxiv.org/abs/2305.18290 — для статьи</li>
                     </ul>
-                    <div class="src">&#128218; mml-book.github.io + fast.ai + huggingface.co/learn/llm-course +
-                        colab.research.google.com</div>
+                    <div class="src">&#128218; mml-book.github.io + fast.ai + shad.yandex.ru/abweek + arxiv.org/abs/2310.11511 (Corrective RAG)</div>
                 </div>
                 <div>
                     <div class="mh">Что строишь</div>
                     <ul class="clist">
-                        <li>Дообученная модель для классификации химических соединений &rarr; опубликовать на
-                            HuggingFace Hub</li>
-                        <li>Сравнение: base vs LoRA vs QLoRA &mdash; оформить как эксперимент/статью на GitHub</li>
+                        <li>Первый реальный прикладной проект: конкретная задача + Corrective/Self-RAG &mdash; оформить как эксперимент с метриками на GitHub</li>
+                        <li>A/B тест двух промптов на golden set &mdash; статистически корректный результат с bootstrap CI</li>
                         <li>Начало Проекта 3: AI-агент для автоматизации лабораторной отчётности</li>
                     </ul>
                 </div>
                 <div>
                     <div class="mh">Почему сейчас</div>
-                    <div class="why">После августа &mdash; фундамент AI-систем есть. Сентябрь &mdash; закрываем
-                        математические пробелы и переходим от &laquo;запускаю fine-tuning&raquo; к &laquo;понимаю что
-                        происходит внутри&raquo;. Публикация модели на HF Hub = первый вклад в open-source = репутация в
-                        сообществе.</div>
+                    <div class="why">После августа &mdash; фундамент AI-систем есть. Сентябрь &mdash; закрываем математические пробелы и строим первый реальный прикладной проект. Corrective/Self-RAG закрывают 80% задач без fine-tuning. A/B тест с корректной статистикой &mdash; навык который отличает инженера от экспериментатора наугад.</div>
                 </div>
             </div>
         </div>
@@ -2530,8 +2513,7 @@
                 OpenClaw (персональный агент)
             </div>
             <div class="box or">
-                <h3>Fine-tuning (август&ndash;осень)</h3>PEFT/LoRA, QLoRA (Colab), HuggingFace transformers + datasets +
-                accelerate, DPO (теория), публикация на HF Hub
+                <h3>Fine-tuning (осень&ndash;зима, по готовности данных)</h3>⏸ Отложено до появления реального доменного датасета ≥200–500 примеров и конкретной задачи которую RAG+промпт не решают. Ориентир: осень–декабрь 2026 при наличии данных.
             </div>
             <div class="box or">
                 <h3>Автоматизация и интеграции</h3>n8n (пайплайны), MCP (стандарт), Playwright, Telegram Bot API,
@@ -2574,9 +2556,7 @@
             <div class="risk"><b>&#9888; Риск 1 &mdash; Темп:</b> ProGlib 2&ndash;3 занятия/нед + самостоятельная
                 программа параллельно &mdash; плотно. Если ProGlib отстаёт &mdash; самостоятельное НЕ режешь. Режешь
                 время на ProGlib.</div>
-            <div class="risk"><b>&#9888; Риск 2 &mdash; Fine-tuning:</b> Глубокий fine-tuning за 6 мес при текущем
-                уровне нереален. Теория &mdash; с апреля. Базовый LoRA эксперимент &mdash; август. Полноценно &mdash;
-                осень. Так и запланировано.</div>
+            <div class="risk"><b>&#9888; Риск 2 &mdash; Fine-tuning:</b> Fine-tuning отложен до появления реального доменного датасета. 90–95% задач закрываются правильным промптингом и RAG. Браться за fine-tuning без конкретного датасета и конкретной задачи — типичная ошибка самоучки. Вернуться: осень 2026 при наличии ≥200–500 доменных примеров.</div>
             <div class="risk"><b>&#9888; Риск 3 &mdash; Выгорание:</b> 180 дней подряд по 3&ndash;4 ч &mdash;
                 физиология. Реши заранее: 1&ndash;2 тихих дня в месяц. Это управление ресурсами, не слабость.</div>
             <div class="risk"><b>&#9888; Риск 4 &mdash; Монетизация:</b> Первые коммерческие проекты в октябре–ноябре опираются на реальный спрос. LinkedIn + GitHub создают видимость, но требуют постоянного наполнения. Стабильный доход зависит от качества портфолио и способности находить и удерживать клиентов.</div>
@@ -2867,9 +2847,9 @@
                     Гл.1–2: нед.4 (читать, не кодить — нет базы DL)<br>
                     Гл.3–4: нед.5–6 (читать теорию fine-tuning — нед.5 перегружена, при нехватке времени сдвинуть на нед.6)<br>
                     Гл.5–6: нед.6–7 (Datasets + Tokenizers — читать)<br>
-                    Гл.7 + 11: нед.19–22 (июль) — <b>запускать код!</b> NLP tasks + LoRA/PEFT с trl<br>
-                    Гл.10: нед.23–26 (август) — curate datasets для fine-tuning<br>
-                    Гл.12: сентябрь — reasoning models (DeepSeek R1-style)<br>
+                    Гл.7 + 11: ⏸ отложено (LoRA/PEFT) — вернуться при появлении доменного датасета<br>
+                    Гл.10: ⏸ отложено (curate datasets) — вернуться вместе с fine-tuning треком<br>
+                    Гл.12: ⏸ отложено (reasoning models) — вернуться при необходимости<br>
                     Гл.8, 9: пропустить (форумы и Gradio — не приоритет)<br>
                     <a href="https://huggingface.co/learn/llm-course" target="_blank">→
                         huggingface.co/learn/llm-course</a><br>
