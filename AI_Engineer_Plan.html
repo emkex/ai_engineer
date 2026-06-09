@@ -789,13 +789,14 @@
 </head>
 
 <body>
-    <h1>AI Engineer / AI Integrator &mdash; Master Plan v5.1 &mdash; <span>реалистичный</span>
+    <h1>AI Engineer / AI Integrator &mdash; Master Plan v5.2 &mdash; <span>реалистичный</span>
         <br>9 марта 2026 &rarr; 1 января 2027
         <small>
             Фаза 0 (март&ndash;апр): Фундамент &nbsp;|&nbsp; Фаза 1 (апр&ndash;июн): Агентский стек &nbsp;|&nbsp;
             Фаза 2 (июн): Безопасность+Деплой+Диплом &nbsp;|&nbsp; Фаза 3 (июл&ndash;сен): Fine-tuning+Специализация &nbsp;|&nbsp;
             Осень&ndash;декабрь: Добивка+Коммерция<br>
-            v5.1: нед.11 тоже не закрыта → итого 4 недели нагона. ProGlib ML и Math AI равномерно распределены по нед.12–15. Фаза 3 сдвинута на 1 неделю (нед.17 → 6 июл).
+            v5.1: нед.11 тоже не закрыта → итого 4 недели нагона. ProGlib ML и Math AI равномерно распределены по нед.12–15. Фаза 3 сдвинута на 1 неделю (нед.17 → 6 июл).<br>
+            v5.2 (9 июн): догон нед.11–13 ведётся по Checklist.html (отдельный файл, без дат, по порядку). Календарь Фазы 2 сдвинут: диплом-спринт → 22 июн–5 июл (защита 28.06), Фаза 3 → старт 13 июл.
         </small>
     </h1>
 
@@ -1012,7 +1013,7 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>Anthropic API</b><span>Claude из кода. Платишь за токены (~$0.003/1K).
+                        <div class="tcard"><b>Anthropic API</b><span>Claude из кода. Платишь за токены; актуальный прайс: docs.claude.com/en/docs/about-claude/pricing.
                                 Основа всех агентов.</span></div>
                         <div class="tcard"><b>requests + dotenv</b><span>requests = HTTP из Python. dotenv = секреты в
                                 .env, не в коде.</span></div>
@@ -1258,8 +1259,8 @@
             </tr>
         </table>
         <!-- ====== ФАЗА 1 ====== -->
-        <div class="ph">ФАЗА 1 &mdash; АГЕНТСКАЯ БАЗА <span>20 апреля &rarr; 7 июня (нед.6&ndash;13)</span>
-            <div class="ph-pct">35 &rarr; 74%</div>
+        <div class="ph">ФАЗА 1 &mdash; АГЕНТСКАЯ БАЗА <span>20 апреля &rarr; 7 июня (нед.7&ndash;13)</span>
+            <div class="ph-pct">35 &rarr; 71%</div>
         </div>
         <table>
             <tr>
@@ -1469,7 +1470,7 @@
                 </td>
                 <td>
                     <div class="tcards">
-                        <div class="tcard"><b>Claude Code (CLI-агент)</b><span>Агент в терминале. Читает файлы, пишет код, запускает команды. Основной инструмент разработки. $20/мес.</span></div>
+                        <div class="tcard"><b>Claude Code (CLI-агент)</b><span>Агент в терминале. Читает файлы, пишет код, запускает команды. Основной инструмент разработки. $20/мес (в составе подписки; актуальные планы см. support.claude.com).</span></div>
                         <div class="tcard"><b>Playwright</b><span>Управляет реальным браузером из Python. Для сайтов без API.</span></div>
                     </div>
                 </td>
@@ -1567,7 +1568,7 @@
                         <li>Human-in-the-loop: пауза, ожидание</li>
                         <li>Time-travel дебаг &mdash; откат к любому состоянию</li>
                     </ul>
-                    <div class="warn">&#9888;&#65039; БОЛЕЗНЬ. Неделя пропущена полностью. Всё содержимое перенесено на нед.12&ndash;13. Порядок сохранён.</div>
+                    <div class="warn">&#9888;&#65039; БОЛЕЗНЬ. Неделя пропущена полностью. Всё содержимое перенесено на нед.12&ndash;13. Порядок сохранён.<br>Фактический догон &mdash; по Checklist.html (Блоки I&ndash;III).</div>
                     <div class="src">&#128218; ProGlib + modelcontextprotocol.io + langflow.org + langchain-ai.github.io/langgraph/tutorials</div>
                 </td>
                 <td>
@@ -1590,15 +1591,7 @@
                     <div class="src">&#128218; Ahillary ур.6 + supply_chain_agent ноутбуки (файлы проекта) + modelcontextprotocol.io + ПОЛНЫЙ ГАЙД + github.com/modelcontextprotocol/servers + redis.io + shad.yandex.ru/agentsweek</div>
                 </td>
                 <td>
-                    <ul class="clist">
-                        <li><span class="exp"><a href="mlroadmap/claude-code/11-mcp-basics.md" target="_blank"><b>claude-code/11-mcp-basics</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Базовый протокол для инструментов агента EM. По FastMCP-примеру пишется первый tool get_news(topic) — без MCP агент EM ограничен встроенными функциями и не дотянется до RSS/котировок.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же паттерн @mcp.tool() оборачивает get_hplc_run(sample_id) — агент тянет данные хроматографа как встроенную функцию для интерпретации.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>MCP-разработчики редки в 2025-2026: большинство знают только function calling. Нужно любой компании с внутренними источниками данных, желающей LLM поверх них.</span></span></span> &mdash; MCP теория + FastMCP пример</li>
-                        <li><span class="exp"><a href="mlroadmap/claude-code/12-mcp-servers.md" target="_blank"><b>claude-code/12-mcp-servers</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>claude mcp add + права mcp__server__tool: так EM подключает Postgres (read-only) с базой новостей/оценок и filesystem к корпусу экономики. Read-only роль = агент не испортит базу знаний.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Postgres MCP с read-only доступом к LIMS-базе лаборатории — агент читает результаты анализов, но физически не может в них писать.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Безопасная интеграция LLM с боевой БД (read-only роль, granular permissions) — то, что enterprise требует до запуска агента в прод.</span></span></span> &mdash; filesystem-сервер через npx, /mcp, claude mcp list</li>
-                        <li><span class="exp"><a href="mlroadmap/llm-engineering/12-agents-react.md" target="_blank"><b>llm-engineering/12-agents-react</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Защита агента EM от зацикливания: max_steps, max_cost, детектор повтора действий. Без них агент крутится на одной новости и сжигает бюджет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; общий каркас агента. Применим к агенту-интерпретатору данных прибора.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Агент с жёсткими лимитами стоимости/шагов — обязательное требование прода; runaway-агента никто в прод не пустит.</span></span></span> &mdash; max_steps, max_cost, same-action detector</li>
-                        <li><span class="exp"><a href="mlroadmap/llm-engineering/13-orchestration.md" target="_blank"><b>llm-engineering/13-orchestration</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Ядро EM — граф fetch→evaluate→human_review→store с checkpointer SQLite: kill процесса → рестарт → продолжение с нужного узла. Без этого долгий human-in-the-loop теряет состояние.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же граф оркеструет многостадийный анализ: загрузка→препроцессинг→модель→отчёт с точками паузы.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Production-оркестрация с восстановлением состояния отличает «демо в ноутбуке» от системы, которую можно сдать заказчику.</span></span></span> &mdash; LangGraph conditional edges, checkpointer SQLite, kill/restart test</li>
-                        <li><span class="exp"><a href="mlroadmap/llm-engineering/14-mcp.md" target="_blank"><b>llm-engineering/14-mcp</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Разделение прав MCP в EM: новостные источники — read-only, запись в базу знаний — только после human_review. Логирование каждого вызова инструмента для аудита.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>read-only MCP к данным прибора + аудит-лог = соответствие лабораторным требованиям прослеживаемости.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Аудируемые, разграниченные по правам интеграции LLM — прямое требование регулируемых отраслей (фарма, метрология).</span></span></span> &mdash; read/write прав разделение, логирование вызовов</li>
-                        <li><span class="exp"><a href="mlroadmap/claude-code/02-claude-md.md" target="_blank"><b>claude-code/02-claude-md</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>CLAUDE.md в корне EM фиксирует стек, конвенции и блок «что нельзя» — агент держит архитектуру EM в голове каждую сессию, не переобъясняешь заново.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; организационный навык. Аналог — README-контракт для воспроизводимости хим. пайплайна.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Часть услуги «онбординг Claude Code в репозиторий заказчика». Грамотный мини-CLAUDE.md (30-50 строк) экономит токены и ускоряет всю команду.</span></span></span> &mdash; создать CLAUDE.md в проекте</li>
-                        <li><span class="exp"><a href="mlroadmap/claude-code/13-custom-commands.md" target="_blank"><b>claude-code/13-custom-commands</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>/commit и /review автоматизируют ежедневную фиксацию работы над EM; повторяющийся промпт ревью кода узлов LangGraph — одной командой.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет. Та же идея сохранённого промпта = /analyze_spectrum как шаблон интерпретации спектра под рукой.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Кастомные команды + CLAUDE.md продаются как «настройка Claude Code под процессы заказчика» — ускорение его команды разработки.</span></span></span> &mdash; /commit и /review в .claude/commands/</li>
-                    </ul>
+                    <div class="note">&rarr; перенесено в нед.12 + Checklist.html (Блок I)</div>
                 </td>
                 <td>
                     <div class="why"><b>Было:</b> Нед.9 недоделана, нед.10 болезнь.<br><b>Сейчас:</b> Болезнь вторую неделю подряд. Всё содержимое переходит на нед.12. Нед.12 насыщенная: 4 урока ProGlib в записи + MCP-серверы + LangGraph на практике.</div>
@@ -1674,7 +1667,6 @@
                         <li><a href="mlroadmap/llm-engineering/12-agents-react.md" target="_blank"><b>llm-engineering/12-agents-react</b></a> &mdash; max_steps, max_cost, same-action detector</li>
                         <li><a href="mlroadmap/llm-engineering/13-orchestration.md" target="_blank"><b>llm-engineering/13-orchestration</b></a> &mdash; LangGraph conditional edges, checkpointer SQLite, kill/restart test</li>
                         <li><a href="mlroadmap/llm-engineering/14-mcp.md" target="_blank"><b>llm-engineering/14-mcp</b></a> &mdash; read/write разделение, логирование вызовов</li>
-                        <li class="opt"><span class="exp"><a href="mlroadmap/claude-code/15-hooks.md" target="_blank"><b>claude-code/15-hooks</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>PreToolUse-хук блокирует rm -rf / DROP TABLE по базе знаний EM; PostToolUse гоняет ruff. Защита агента от собственных деструктивных действий над боевыми данными.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Хук-guard критичен где агент трогает данные приборов: блокировать перезапись сырых файлов хроматограмм и калибровок.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Агент, который физически не может удалить прод» — обязательный пункт enterprise-чеклиста перед допуском LLM к инфраструктуре.</span></span></span> &mdash; блокировка rm -rf, DROP TABLE, автоформат</li>
                         <li class="opt"><span class="exp"><a href="mlroadmap/data-science/10-statistics.md" target="_blank"><b>data-science/10-statistics</b></a><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Статбаза под eval EM: bootstrap-доверительные интервалы для метрик, поправки на множественные сравнения при A/B промптов, размер эффекта vs значимость.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание в твою метрологию: CI, t-тесты, ошибки I/II рода — язык калибровок и сертифицированных стандартных образцов.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Корректная статистика — то, чего не хватает многим ML-практикам; в связке с метрологией = редкое преимущество для промышленной аналитики.</span></span></span> &mdash; статистические основы под L1/L2 регуляризацию</li>
                     </ul>
                 </td>
@@ -1793,8 +1785,8 @@
         </table>
 
         <!-- ====== ФАЗА 2 ====== -->
-        <div class="ph">ФАЗА 2 &mdash; БЕЗОПАСНОСТЬ + ДЕПЛОЙ + ДИПЛОМ <span>8 июня &rarr; 28 июня</span>
-            <div class="ph-pct">74 &rarr; 84%</div>
+        <div class="ph">ФАЗА 2 &mdash; БЕЗОПАСНОСТЬ + ДЕПЛОЙ + ДИПЛОМ <span>15 июня &rarr; 5 июля</span>
+            <div class="ph-pct">71 &rarr; 84%</div>
         </div>
         <table>
             <tr>
@@ -1810,7 +1802,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">8&ndash;14 июн</span><span class="pls">Неделя 14</span></td>
+                <td><span class="pbl">15&ndash;21 июн</span><span class="pls">Неделя 14</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 8</span><br>
                     <span class="exp"><b>Random Forest</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Ансамбль деревьев (бэггинг) для оценки сигналов EM — устойчивее одного дерева, даёт важность признаков: какие факторы новости реально влияют на оценку важности.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>RF на хим. дескрипторах — рабочая лошадь QSAR/классификации образцов; importance показывает значимые признаки.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>RF — дефолтный сильный бейзлайн для табличных задач промышленной аналитики; быстро даёт результат заказчику.</span></span></span>
@@ -1827,12 +1819,13 @@
                 </td>
                 <td>
                     <span class="tag t2">Самост. &mdash; Безопасность + VPS + Telegram Bot</span><br>
+                    <div class="warn">&#9888;&#65039; Нед.14 стартует ТОЛЬКО после закрытия Блока III чеклиста догона (Langfuse + eval.py + golden set &ge;30 + LLM-judge откалиброван). До этого &mdash; работа строго по Checklist.html.</div>
                     <ul class="clist">
                         <li>Ahillary бонус ур.4: SSH, nginx, systemd, шифрование данных &mdash; полностью</li>
                         <li>Dockerfile multi-stage для Python-агента</li>
                         <li>Docker Compose: агент + Qdrant + Langfuse &mdash; один файл, одна команда</li>
                         <li>Все секреты в .env &mdash; никаких ключей в коде</li>
-                        <li><span class="exp">Задеплоить на VPS<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Деплой EM на Hetzner/DO с restart:always — агент живёт 24/7, а не только когда открыт ноутбук. LangGraph(нед.11)+Langfuse(нед.13)+VPS = агент, который живёт и мониторится.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; инфраструктура.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Поднял вашего агента на сервере 24/7 с автоперезапуском» — конкретная сдаваемая работа; €4-6/мес инфраструктуры.</span></span></span>: Hetzner CX21 (&euro;3.9/мес) или DigitalOcean ($6/мес) с restart: always</li>
+                        <li><span class="exp">Задеплоить на VPS<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Деплой EM на Hetzner/DO с restart:always — агент живёт 24/7, а не только когда открыт ноутбук. LangGraph(нед.11)+Langfuse(нед.13)+VPS = агент, который живёт и мониторится.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; инфраструктура.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>«Поднял вашего агента на сервере 24/7 с автоперезапуском» — конкретная сдаваемая работа; €4-6/мес инфраструктуры.</span></span></span>: Hetzner CX22/CX23 (~&euro;3.5&ndash;3.8/мес; внимание: с 1 апр 2026 Hetzner поднял цены &mdash; проверь актуальный прайс при заказе) или DigitalOcean ($6/мес) с restart: always</li>
                         <li><span class="exp">aiogram&ge;3<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>aiogram≥3 — асинхронный интерфейс EM в Telegram: вопрос → ответ с источником и уверенностью. Это «лицо» системы для пользователя.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же бот — интерфейс к лабораторному ассистенту: запрос по образцу → ответ.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Telegram-бот как UI к LLM-агенту — дешёвый и быстрый способ отдать заказчику рабочий продукт без веб-фронта.</span></span></span>: bot + Dispatcher + @dp.message_handler + polling, отвечает на /start</li>
                         <li>Prompt injection &mdash; попробовать на своём агенте, добавить простой guardrail</li>
                         <li><span class="exp">PII-redactor через <code>presidio</code><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>presidio маскирует PII в данных до отправки в API EM — защита персональных данных в новостях/запросах пользователей.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: маскировать имена пациентов/коды в био-аналитических данных (ЭЛИСА) перед облачным LLM.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>PII-redaction — требование GDPR/комплаенса; обязательно для фармы и любых персональных данных.</span></span></span> перед отправкой в API на 50 тестовых примерах</li>
@@ -1863,7 +1856,7 @@
                 <td>
                     <div class="tcards">
                         <div class="tcard"><b>Docker Compose</b><span>Весь стек одной командой: docker compose up -d.</span></div>
-                        <div class="tcard"><b>VPS (Hetzner/DO)</b><span>Сервер 24/7. &euro;3.9&ndash;6/мес.</span></div>
+                        <div class="tcard"><b>VPS (Hetzner/DO)</b><span>Сервер 24/7. ~&euro;3.5&ndash;6/мес (Hetzner поднял цены с 1 апр 2026 &mdash; проверь актуальный прайс).</span></div>
                         <div class="tcard"><b>aiogram</b><span>Async Telegram Bot framework. Интерфейс к «Задумке».</span></div>
                         <div class="tcard"><b>presidio</b><span>Microsoft PII-redactor. Детектирует и маскирует персональные данные до отправки в LLM.</span></div>
                     </div>
@@ -1885,7 +1878,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">15&ndash;28 июн</span><span class="pls">Нед. 15&ndash;16</span><br><span style="font-size:10px;color:#6a1b9a;font-weight:700">ДИПЛОМ-СПРИНТ</span></td>
+                <td><span class="pbl">22 июн&ndash;5 июл</span><span class="pls">Нед. 15&ndash;16</span><br><span style="font-size:10px;color:#6a1b9a;font-weight:700">ДИПЛОМ-СПРИНТ</span></td>
                 <td>
                     <span class="tag t1">ProGlib 8.06</span><br>
                     <span class="exp"><b>Дипломный проект ProGlib v1</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Момент синтеза: RAG + LangGraph + MCP + Telegram + VPS + Langfuse в одном проекте «как в проде» (метрики, бюджеты, воспроизводимость). «Задумка» = диплом = первый кейс портфолио.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же сквозной проект переносится на хим. домен (RAG по нормативам + агент-ассистент).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Готовый end-to-end кейс с метриками и README — главный аргумент на рынке; три в одном (диплом, портфолио, продукт).</span></span></span>
@@ -1898,7 +1891,7 @@
                     <ul class="clist">
                         <li>Мат. ожидание, дисперсия, Naive Bayes</li>
                     </ul>
-                    <br><b>&#127891; Защита диплома ProGlib 18.06</b> (или 28.06)
+                    <br><b>&#127891; Защита диплома ProGlib 28.06</b> <span style="font-size:10px;color:#888">(вариант 18.06 пропущен &mdash; нереален после сдвига)</span>
                     <div class="src">&#128218; ProGlib + langchain-ai.github.io/langgraph + StatQuest</div>
                 </td>
                 <td>
@@ -1909,6 +1902,7 @@
                         <li>LangGraph граф: fetch_news() &rarr; evaluate() (PydanticAI &rarr; NewsItem) &rarr; human_review() (пауза, вопрос в Telegram) &rarr; store_or_reject()</li>
                         <li>Telegram: вопрос &rarr; ответ с источником и уверенностью</li>
                         <li>Langfuse трейсы видны, стоимость под контролем</li>
+                        <li class="must">mlroadmap <code>llm-engineering/05-context-management.md</code> &mdash; бюджет контекста агента: деградация LLM на длинном контексте реальна (полевое наблюдение: уже ~200k токенов &mdash; обрыв качества у топ-моделей). Для EM: суммаризация истории + жёсткий лимит контекста на узел графа.</li>
                         <li>Парсинг PDF: pypdfium2 + RecursiveCharacterTextSplitter + bge-small + faiss с page-номерами</li>
                         <li>Hybrid Search: BM25 + dense + reciprocal rank fusion + reranker (bge-reranker-v2-m3). Recall@5 до/после</li>
                         <li>Contextual Retrieval от Anthropic (каждый чанк дополняется LLM-контекстом из родительского документа)</li>
@@ -1917,9 +1911,11 @@
                         <li>README на английском: архитектура (Mermaid-схема), как запустить</li>
                         <li><span class="exp"><b>Практика к Математике AI Зан.9:</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Naive Bayes в NumPy с нуля + сравнение со sklearn GaussianNB — проверка, что понимаешь механику, а не магию библиотеки.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Тот же классификатор на спектральных признаках; понимание допущения независимости критично (в спектрах признаки коррелируют!).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Понимание когда Naive Bayes врёт из-за корреляций — отличает инженера от «вызывателя fit/predict».</span></span></span> Naive Bayes в NumPy с нуля, сравнить со sklearn GaussianNB</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">Random Forest Pt.1</a> (~10 мин) если не закрыто на нед.14</li>
+                        <li class="opt">SQL основы: SELECT/WHERE/JOIN/GROUP BY &mdash; <a href="https://mode.com/sql-tutorial" target="_blank">mode.com/sql-tutorial</a>, 2&ndash;3 вечера + mlroadmap <code>data-science/03-sql.md</code></li>
                         <li class="opt">Naive Bayes в NumPy + сравнение со sklearn GaussianNB (полная практика)</li>
                         <li class="opt">3B1B NN гл.6 «Attention» (~27 мин) &mdash; в свободный вечер</li>
                     </ul>
+                    <div class="note"><b>Архитектурное разделение в EM:</b> (1) RAG по корпусу знаний (PDF, новости) &mdash; остаётся как есть; (2) ПАМЯТЬ агента (что он решал, какие оценки ставил, выводы) &mdash; НЕ векторная база, а структурированное хранилище (SQLite/Postgres таблицы решений + краткие саммари, подгружаемые в контекст каждый прогон). Критика из поля: retrieval-память реактивна &mdash; агент вспоминает только когда сам догадался поискать; решения EM должны попадать в контекст проактивно. Это прямое усиление ветки графа human_review&rarr;store.</div>
                     <div class="src">&#128218; langchain-ai.github.io/langgraph + StatQuest + 3B1B NN</div>
                 </td>
                 <td>
@@ -1959,7 +1955,7 @@
         </table>
 
         <!-- ====== ФАЗА 3 ====== -->
-        <div class="ph">ФАЗА 3 &mdash; FINE-TUNING + СПЕЦИАЛИЗАЦИЯ <span>6 июля &rarr; 20 сентября (11 недель)</span>
+        <div class="ph">ФАЗА 3 &mdash; FINE-TUNING + СПЕЦИАЛИЗАЦИЯ <span>13 июля &rarr; 27 сентября (11 недель)</span>
             <div class="ph-pct">84 &rarr; 100%</div>
         </div>
         <table>
@@ -1976,7 +1972,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">6&ndash;12 июл</span><span class="pls">Неделя 17</span></td>
+                <td><span class="pbl">13&ndash;19 июл</span><span class="pls">Неделя 17</span></td>
                 <td>
                     <span class="tag t1">ProGlib (конец июня)</span><br>
                     <span class="exp"><b>FinOps: оптимизация затрат</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Semantic/prefix caching + model routing (дешёвая→дорогая) = прямое снижение счёта EM за API. Routing ≥30% экономии без потери качества.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; экономика инференса.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>FinOps для LLM — измеримая ценность; «срезал ваш счёт за API на треть» легко превращается в инвойс.</span></span></span>
@@ -1999,7 +1995,7 @@
                 <td>
                     <span class="tag t2">Самост. &mdash; FinOps + Boosting</span><br>
                     <ul class="clist">
-                        <li>Model routing: простые на haiku/gpt-4o-mini, сложные на sonnet/gpt-4o. Замерить экономию ≥30% в Langfuse</li>
+                        <li>Model routing: простые запросы на дешёвый тир (Haiku-класс / flash-класс), сложные на дорогой тир (Sonnet/Opus-класс). Конкретные модели выбирать по актуальным ценам через openrouter.ai на момент выполнения. Замерить экономию ≥30% в Langfuse. <span style="color:#888;font-size:10px">Наблюдение из поля (весна 2026): flash-класс модели стали радикально дешевле при сопоставимом качестве — экономия от routing может превышать заявленные 30%.</span></li>
                         <li>Prompt caching у Anthropic для стабильного префикса системного промпта (-50&ndash;90% input cost)</li>
                         <li>Streaming ответов в UX</li>
                         <li>Ollama локальный fallback: Qwen2.5-7B (Q4_K_M, ~5 ГБ) через OpenAI-compatible endpoint. Замерить quality vs Claude на 30 вопросах golden set</li>
@@ -2008,7 +2004,6 @@
                         <li><code>ccusage</code> (community CLI) &mdash; расход Claude Code, пересмотреть CLAUDE.md (срезать до 50&ndash;80 строк), отключить ненужные MCP, привычка /clear</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">AdaBoost</a> (~22 мин) + Gradient Boost Pt.1 (~15 мин) + XGBoost Pt.1 (~20 мин) &mdash; под ML Тему 9</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (фоном):</b> <a href="https://shad.yandex.ru/llmscalingweek" target="_blank">LLM Scaling Week &mdash; Тема 1 «Арифметика DL»</a> (~1 ч) &mdash; до vLLM-экспериментов.</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (по теме):</b> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: AdaBoost (~22 мин) + Gradient Boost Part 1 (~15 мин) + XGBoost Part 1 (~20 мин) &mdash; прямо под ML Тему 9.</li>
                         <li class="opt">vLLM локально (без NVIDIA GPU не запустится &mdash; Ollama закрывает кейс)</li>
                     </ul>
                     <div class="src">&#128218; ollama.ai + StatQuest + shad.yandex.ru/llmscalingweek</div>
@@ -2047,7 +2042,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">13&ndash;19 июл</span><span class="pls">Неделя 18</span></td>
+                <td><span class="pbl">20&ndash;26 июл</span><span class="pls">Неделя 18</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 10</span><br>
                     <span class="exp"><b>Кластеризация (K-means, DBSCAN)</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Unsupervised-группировка embedding'ов новостей EM: автоматически находить кластеры тем (нефть, ФРС, Китай) без разметки.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: кластеризация хроматограмм/спектров для группировки похожих образцов; DBSCAN ловит выбросы (аномальные пробы).</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Кластеризация без разметки — частый первый шаг анализа данных заказчика, когда меток ещё нет.</span></span></span>
@@ -2061,7 +2056,7 @@
                     <ul class="clist">
                         <li>Qdrant advanced filtering: payload indexing, sparse vectors &mdash; production-ready поиск с фильтрами</li>
                         <li>Production-ready RAG: метаданные, фильтрация по источнику, hybrid search (dense + sparse)</li>
-                        <li>SQL основы: SELECT, WHERE, JOIN, GROUP BY &mdash; mode.com/sql-tutorial (2&ndash;3 вечера)</li>
+                        <li class="must">SQL основы: SELECT, WHERE, JOIN, GROUP BY &mdash; mode.com/sql-tutorial (2&ndash;3 вечера). <b>Обязательный дедлайн закрытия</b>, если не сделано раньше (opt на нед.15&ndash;16).</li>
                         <li><span class="exp">Chemometrics PDF гл.1&ndash;3<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Базовая статистика аналитической химии — мост между твоим опытом (ВЭЖХ, метрология) и ML; фундамент под PCA/PLS нед.19-20.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Язык хемометрики + ML = редкая комбинация; именно она открывает фарму/нефтехимию.</span></span></span>: базовая статистика для аналитической химии</li>
                         <li>sklearn K-means + DBSCAN на embeddings из «Задумки», визуализация в 2D</li>
                         <li>PCA через SVD на NumPy за 15 строк. На MNIST: сжать 784&rarr;50, замерить kNN до и после</li>
@@ -2103,7 +2098,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">20&ndash;26 июл</span><span class="pls">Неделя 19</span></td>
+                <td><span class="pbl">27 июл&ndash;2 авг</span><span class="pls">Неделя 19</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 11</span><br>
                     <span class="exp"><b>PCA, t-SNE, Isolation Forest</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Снижение размерности + визуализация embedding'ов EM, Isolation Forest для аномалий (нетипичная новость/выброс).</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: PCA-биплот спектральных/хроматографических данных, t-SNE для визуализации кластеров проб, IsolationForest для аномальных образцов.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>PCA/аномалии на спектрах — базовый инструмент QC в фарме/промышленности; понятен лаборантам и аудиторам.</span></span></span>
@@ -2127,7 +2122,7 @@
                         <li>Финальный проект Math AI довести до конца, README с объяснением</li>
                         <li><span class="exp">Первые PCA-эксперименты на хроматографических данных<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: PCA на реальных хроматографических данных (sklearn) — связка твоего ВЭЖХ-опыта с ML; видно какие компоненты разделяют образцы.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Демо «PCA на ваших хроматограммах» — конкретный артефакт для разговора с лабораторией/фармой.</span></span></span> (sklearn)</li>
                         <li>Self-attention руками на NumPy: Attention(Q,K,V) = softmax(QK&#7488;/√d_k) &middot; V в 10 строк &mdash; пререквизит к Karpathy</li>
-                        <li>Karpathy micrograd (если не закрыто на нед.18)</li>
+                        <li>Karpathy micrograd</li>
                         <li>Refactor legacy: characterization-тесты на RAG-код из нед.13, потом extraction слоёв domain/service/repository, итерации по 200&ndash;300 строк</li>
                         <li><b>&#128290; StatQuest:</b> <a href="https://www.youtube.com/@statquest" target="_blank">PCA Step-by-Step</a> (~22 мин) + t-SNE (~12 мин) &mdash; под ML Тему 11</li>
                         <li style="margin-top:8px"><b>&#128250; ШАД (фоном):</b> <a href="https://shad.yandex.ru/gptweek" target="_blank">GPT Week &mdash; Лек.6 «Ускорение инференса»</a> (~45 мин).</li>
@@ -2166,7 +2161,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">27 июл&ndash;23 авг</span><span class="pls">Нед. 20&ndash;23</span></td>
+                <td><span class="pbl">3&ndash;30 авг</span><span class="pls">Нед. 20&ndash;23</span></td>
                 <td>
                     <span class="tag t1">ProGlib ML Тема 12 (финал)</span><br>
                     <span class="exp"><b>Рекомендательные системы &mdash; &#127881; ML курс завершён!</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Matrix factorization / collaborative filtering — обзорно. Идея латентных факторов = то же, что эмбеддинги тем/источников в EM.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет; матричная факторизация — родственник PCA/SVD на разреженных данных.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Рекомендательные системы — отдельный большой рынок; даже обзорное владение расширяет круг проектов.</span></span></span>
@@ -2196,11 +2191,10 @@
                         <li><span class="exp">MCP-инструмент <code>analyze_chromatogram(file_path)</code><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Прямого нет; перенос MCP-паттерна EM на химию.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: собственный MCP-инструмент тянет файл хроматограммы → агент интерпретирует пики. Объединяет твой ВЭЖХ-опыт с агентами.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Доменный MCP-инструмент для хроматографии — публичная витрина для фарм/аналитических заказчиков.</span></span></span> &rarr; интерпретация пиков</li>
                         <li><a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: «Coding a ChatGPT-Like Transformer from Scratch» (~31 мин) &mdash; перед Karpathy</li>
                         <li><a href="https://www.youtube.com/@AndrejKarpathy" target="_blank">Andrej Karpathy</a>: Let&rsquo;s build GPT &mdash; PyTorch с нуля</li>
-                        <li>Multimodal-прототип ColPali: 5&ndash;10 хроматограмм (PNG) &rarr; embedding &rarr; retrieval &rarr; VLM (Claude 3.5 Sonnet Vision) &rarr; описание пиков</li>
+                        <li>Multimodal-прототип ColPali (делать в нед.20&ndash;23, не раньше): 5&ndash;10 хроматограмм (PNG) &rarr; embedding &rarr; retrieval &rarr; VLM (актуальная Claude-модель с vision &mdash; Sonnet/Opus текущего поколения) &rarr; описание пиков</li>
                         <li>matrix factorization на MovieLens или surprise library (под ML Тему 12)</li>
                         <li>2 subagent'а в .claude/agents/: <code>security-reviewer</code> + <code>chemistry-data-validator</code></li>
                         <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B NN</a> гл.8&ndash;9 (Attention + GPT from scratch) &mdash; под Karpathy</li>
-                        <li style="margin-top:8px"><b>&#128290; Математика (по теме):</b> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: PCA Step-by-Step (~22 мин) + t-SNE (~12 мин) &mdash; прямо под ML Тему 11.</li>
                         <li class="opt">DPO теоретически &mdash; только «Зачем alignment» + «DPO без RL» (для статьи в октябре)</li>
                     </ul>
                     <div class="src">&#128218; postgresql.org/docs + qdrant.tech/documentation + Chemometrics PDF (гл.4-6) + StatQuest Coding Transformer + Karpathy YouTube</div>
@@ -2229,7 +2223,6 @@
                         <div class="tcard"><b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-prog">PROG</span> PyTorch Tutorials</b><span><a href="https://pytorch.org/tutorials/beginner/basics/intro.html" target="_blank">pytorch.org</a> &mdash; Basics: Tensors, Autograd, Training Loop</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>: Coding a ChatGPT-Like Transformer (~31 мин)</b><span><a href="https://www.youtube.com/@statquest" target="_blank">YouTube</a> &mdash; смотреть перед Karpathy «Let&rsquo;s build GPT». Гл.1&ndash;9 <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">3B1B NN</a> просмотрены ранее (нед.8&ndash;15).</span></div>
                         <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-dl">DL</span> Karpathy: Let&rsquo;s build GPT</b><span><a href="https://www.youtube.com/@AndrejKarpathy" target="_blank">YouTube</a> &mdash; PyTorch трансформер с нуля</span></div>
-                        <div class="tcard"><b><span class="src-tag st-yt">YT</span><span class="src-tag st-ml">ML</span> StatQuest: PCA + t-SNE</b><span>Прямо под ML Тему 11 &mdash; ~34 мин</span></div>
                     </div>
                 </td>
                 <td><span class="sp new">PostgreSQL</span><span class="sp new">Corrective RAG</span><span class="sp new">Chemometrics ML</span><span class="sp new">ColPali</span></td>
@@ -2242,7 +2235,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">24 авг&ndash;13 сен</span><span class="pls">Нед. 24&ndash;26</span></td>
+                <td><span class="pbl">31 авг&ndash;20 сен</span><span class="pls">Нед. 24&ndash;26</span></td>
                 <td>
                     <span class="tag t1">ProGlib 6.08</span> <span class="exp">Local Inference углублённо<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Углублённый локальный инференс для приватного/отказоустойчивого контура EM (vLLM, квантование, мониторинг GPU).</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>On-prem инференс хим/мед данных без облака.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>On-premise LLM — прямой запрос регулируемых отраслей: «работает без интернета на вашем железе».</span></span></span><br>
                     <span class="tag t1">ProGlib 10.08</span> <span class="exp">Governance &amp; Compliance<span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Управление доступом, аудит, политики — что можно/нельзя агенту EM, журналирование решений (важность, верификация).</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямое попадание: GxP/ISO-требования фармы и метрологии к прослеживаемости и аудиту решений.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Compliance-готовность (аудит, governance) — пропуск в фарму/регулируемое производство; без неё к данным не пустят.</span></span></span><br>
@@ -2289,7 +2282,7 @@
                     </ul>
                 </td>
                 <td>
-                    <div class="why"><b>Было:</b> оба проекта работают, LoRA-эксперимент готов.<br><b>Сейчас:</b> упаковать в портфолио. AI-инженер без публичного кода &mdash; невидимка. 2 репо + LinkedIn + кейсы = рыночная видимость.</div>
+                    <div class="why"><b>Было:</b> оба проекта работают.<br><b>Сейчас:</b> упаковать в портфолио. AI-инженер без публичного кода &mdash; невидимка. 2 репо + LinkedIn + кейсы = рыночная видимость.</div>
                 </td>
                 <td>
                     <div class="tcards">
@@ -2303,7 +2296,7 @@
                         <div class="tcard"><b><span class="src-tag st-book">BOOK</span><span class="src-tag st-llm">LLM</span> Hands-On LLMs (D1)</b><span><a href="https://amzn.to/4kGW0ld" target="_blank">финальные главы</a>: deployment</span></div>
                     </div>
                 </td>
-                <td><span class="sp mastered">PEFT/LoRA</span><span class="sp new">Evidently</span><span class="sp new">Release Eng.</span></td>
+                <td><span class="sp mastered">Drift monitoring</span><span class="sp new">Evidently</span><span class="sp new">Release Eng.</span></td>
                 <td>
                     <div class="pb">
                         <div class="pf" style="width:99%;background:#e65100"></div>
@@ -2313,7 +2306,7 @@
             </tr>
 
             <tr>
-                <td><span class="pbl">14&ndash;20 сен</span><span class="pls">Неделя 27</span><br><span style="font-size:10px;color:#b71c1c;font-weight:700">ФИНАЛ</span></td>
+                <td><span class="pbl">21&ndash;27 сен</span><span class="pls">Неделя 27</span><br><span style="font-size:10px;color:#b71c1c;font-weight:700">ФИНАЛ</span></td>
                 <td>
                     <span class="tag t1">ProGlib 31.08 (или 7 сен)</span><br>
                     <span class="exp"><b>&#127891; Capstone ProGlib &mdash; защита</b><span class="exp-card"><span class="ef ef-em"><b>📊 Для EM</b>Финальная защита Capstone — публичная презентация системы; для EM это репетиция продажи архитектуры заказчику.</span><span class="ef ef-chem"><b>🧪 Химия / данные</b>Прямого нет.</span><span class="ef ef-sell"><b>💰 Продаваемость</b>Защищённый Capstone = верифицированный кейс в портфолио; «прошёл review экспертов» усиливает доверие.</span></span></span>
@@ -2363,7 +2356,7 @@
                 <div>
                     <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
-                        <li><b>Нед.1 (1–7 сент):</b> Math гэпы &mdash; при ступоре открывать MML Book гл.X (mml-book.github.io) — не курс, а справочник по запросу. 3B1B + Math AI уже пройдены. Если тема ясна &mdash; пропускать.</li>
+                        <li><b>Нед.1 (1–7 сент):</b> Math гэпы &mdash; при ступоре открывать MML Book гл.X (mml-book.github.io) — не курс, а справочник по запросу. 3B1B + Math AI уже пройдены. Если тема ясна &mdash; пропускать. <i>(После сдвига Фазы 3 нед.1 сентября может частично уйти на хвосты Фазы 3 — это нормально, помесячные блоки осени поглощают сдвиг.)</i></li>
                         <li><b>Нед.2–3 (8–21 сент):</b> Первый реальный прикладной проект &mdash; выбрать конкретную задачу из области хим. данных или экономики которую RAG+промпт не закрывает. Corrective RAG + Self-RAG поверх «Задумки по экономике» &mdash; практика которая в 80% случаев заменяет fine-tuning.</li>
                         <li><b>Нед.4 (22–30 сент):</b> A/B тест промптов с корректной статистикой (ШАД A/B Week нед.3–5) &mdash; golden set, bootstrap CI, оформить как эксперимент. Начало Проекта 3: AI-агент для автоматизации лабораторной отчётности.</li>
                         <li class="opt"><b>Нед.1 доп:</b> fast.ai &laquo;Practical Deep Learning for Coders&raquo; — урок 1&ndash;3 (fast.ai/courses). Альтернативный путь если StatQuest не зашёл.</li>
@@ -2391,7 +2384,7 @@
                 <div>
                     <div class="mh">Что изучаешь (по неделям)</div>
                     <ul class="clist">
-                        <li><b>Нед.1 (1–7 окт):</b> <b>SQL основы (2&ndash;3 часа, обязательно первым делом):</b> mode.com/sql-tutorial или Khan Academy SQL &mdash; SELECT, WHERE, JOIN, GROUP BY, CREATE/INSERT. Один вечер, не курс. Затем: Stepik «PostgreSQL для разработчиков» — переход с SQLite на Postgres.</li>
+                        <li><b>Нед.1 (1–7 окт):</b> Добить хвосты SQL, если остались (база уже заложена на нед.15&ndash;18). Затем: Stepik «PostgreSQL для разработчиков» — переход с SQLite на Postgres.</li>
                         <li><b>Нед.2 (8–14 окт):</b> <b>D2 «AI Engineering» (Chip Huyen)</b> — по 1 главе в вечер. Начать с гл.1 (системная архитектура) &rarr; гл.2 (evaluation). DeepEval/Phoenix (Arize) — сравнить с RAGAS, выбрать лучший инструмент. Corrective RAG поверх «Задумки по экономике» — агент сам проверяет качество ответа.</li>
                         <li><b>Нед.3 (15–21 окт):</b> Corrective RAG — закончить интеграцию. Паттерны: Reflection, Self-RAG — stateful агенты нового уровня. <b>Первый коммерческий проект:</b> реальная компания (LinkedIn / знакомые / холодные обращения) &rarr; автоматизация одного процесса &rarr; коммерческий договор.</li>
                         <li><b>Нед.4 (22–31 окт):</b> Продолжение Проекта 3. Продолжение коммерческого проекта.</li>
@@ -2562,6 +2555,17 @@
             <div class="risk"><b>&#9888; Риск 4 &mdash; Монетизация:</b> Первые коммерческие проекты в октябре–ноябре опираются на реальный спрос. LinkedIn + GitHub создают видимость, но требуют постоянного наполнения. Стабильный доход зависит от качества портфолио и способности находить и удерживать клиентов.</div>
         </div>
 
+        <!-- ====== ПОЛЕВЫЕ УРОКИ ====== -->
+        <div class="ph">&#9889; Полевые уроки (из практики автономных агентов, весна 2026)</div>
+        <div class="day-rule">
+            <b>1. «Agent = LLM(s) + harness».</b> Качество агента определяется обвязкой (лимиты, инструменты, состояние, логирование), а не только моделью. <span style="color:#1565c0">&rarr; подтверждает приоритет LangGraph/MCP/Langfuse (нед.11&ndash;13).</span><br><br>
+            <b>2.</b> Агент без хуков-ограничителей способен удалить собственную рабочую директорию (реальный кейс: CLI-агент снёс себя и проект). PreToolUse-блокировки &mdash; не паранойя, а норма. <span style="color:#1565c0">&rarr; нед.14, hooks обязательны.</span><br><br>
+            <b>3.</b> Деградация на длинном контексте: ~200k токенов &mdash; практический потолок даже топ-моделей. Контекст &mdash; бюджетируемый ресурс. <span style="color:#1565c0">&rarr; нед.15&ndash;16, context management.</span><br><br>
+            <b>4.</b> Adversarial multi-model review (агент проверяет агента) часто дороже и хуже одного хорошего агента с тестами: реальный кейс &mdash; 5 часов, $200, код ВЫРОС вместо сокращения. <span style="color:#1565c0">&rarr; подтверждает ADR «single vs multi-agent» нед.13 и анти-паттерн переусложнения.</span><br><br>
+            <b>5.</b> Cost-дисциплина: счета за агентов улетают в тысячи $ незаметно. Лимиты max_cost/max_steps + дашборд стоимости &mdash; с первого дня, не «потом». <span style="color:#1565c0">&rarr; нед.13 Langfuse + нед.17 FinOps.</span><br><br>
+            <b>6.</b> Routing на дешёвые модели: flash-класс модели (2026) дают качество близкое к среднему тиру при цене в 3&ndash;4 раза ниже &mdash; экономия от routing может превышать заявленные 30%. <span style="color:#1565c0">&rarr; нед.17.</span>
+        </div>
+
         <!-- ====== ПРАВИЛО ДНЯ ====== -->
         <div class="ph">&#9201; Правила продуктивного дня</div>
         <div class="day-rule">
@@ -2578,7 +2582,7 @@
                 ДОБАВЛЕНО в v3)</b>, Pydantic (архив ур.2 &mdash; только Pydantic-раздел), RAG ур.2/3/5/6. <br><br>
             <b>HuggingFace LLM Course (<a href="https://huggingface.co/learn/llm-course"
                     target="_blank">huggingface.co/learn/llm-course</a>):</b> гл.1&ndash;2 (нед.4, читать) &rarr;
-            гл.3&ndash;4 (<b>нед.5&ndash;6</b>, читать при наличии времени &mdash; нед.5 перегружена, можно перенести на нед.6) &rarr; гл.5&ndash;6 (нед.6&ndash;7, читать) &rarr; гл.7+11 (июль, <b>запускать код!</b>) &rarr; гл.10 (август) &rarr; гл.12 (сентябрь). Гл.8 и 9 &mdash; пропустить.<br><br>
+            гл.3&ndash;4 (<b>нед.5&ndash;6</b>, читать при наличии времени &mdash; нед.5 перегружена, можно перенести на нед.6) &rarr; гл.5&ndash;6 (нед.6&ndash;7, читать) &rarr; гл.7+11 (LoRA/PEFT) &mdash; <b>⏸ отложено</b> до появления доменного датасета &rarr; гл.10 (curate datasets) &mdash; <b>⏸ отложено</b> вместе с fine-tuning треком &rarr; гл.12 (отложено). Гл.8 и 9 &mdash; пропустить.<br><br>
             <b>Математика (недели 2–8):</b> 20–30 мин/день — 3Blue1Brown (линал + calculus) и <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> YouTube
             (статистика).
             Не отдельным блоком — вечером перед сном или в перерыве. К неделе 6 у тебя будет концептуальная база для
@@ -2883,14 +2887,14 @@
             </div>
 
             <!-- ===== ГРУППА 6: ХИМИЯ ===== -->
-            <h3 style="margin-top:20px">&#9879;&#65039; ХИМИЯ + ML — специализация (июнь–июль)</h3>
+            <h3 style="margin-top:20px">&#9879;&#65039; ХИМИЯ + ML — специализация (июль–август)</h3>
             <div class="src-grid">
                 <div class="src-entry">
                     <b><span class="src-tag st-pdf">PDF</span><span class="src-tag st-chem">CHEM</span> Statistics &
                         Chemometrics for Analytical Chemistry (H1)</b>
                     Файл в проекте: Statistics_and_Chemometrics_for_Analytical_Chemistry_6th.pdf<br>
-                    Гл.1–3 (нед.16–18, июнь): базовая статистика для хим. данных.<br>
-                    Гл.4–6 (нед.19–22, июль): PCA, PLS, Cluster Analysis → прямо для хроматографии.<br>
+                    Гл.1–3 (нед.18, ~20–26 июл): базовая статистика для хим. данных.<br>
+                    Гл.4–6 (нед.20–23, авг): PCA, PLS, Cluster Analysis → прямо для хроматографии.<br>
                     <span class="when">Сравнение: единственный специализированный источник по хемометрике в списке.
                         Дополняется sklearn docs (decomposition) и <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> PCA видео.</span>
                 </div>
@@ -2898,7 +2902,7 @@
                     <b><span class="src-tag st-yt">YT</span><span class="src-tag st-chem">CHEM</span> <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> — PCA
                         Step-by-Step</b>
                     Лучшее визуальное объяснение PCA. Прямо под хроматографические данные.<br>
-                    Июль — параллельно с Chemometrics гл.4–6.<br>
+                    Конец июля–август — параллельно с Chemometrics гл.4–6 (нед.19–23).<br>
                     <a href="https://www.youtube.com/@statquest" target="_blank">→ @StatQuest</a> → поиск "PCA
                     <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a>"<br>
                     <span class="when">Сравнение: Chemometrics PDF = что делать с данными, <a href="https://www.youtube.com/@statquest" target="_blank">StatQuest</a> PCA = почему это
@@ -2956,8 +2960,8 @@
                     Практики Яндекс Лавки, Алисы, Yandex Cloud. 5 лекционных дней. Самый важный ШАД-курс для AI Engineer.<br>
                     <b>Нед.5:</b> Лек.1.1 «Intro to AI Agents LLM» (~50 мин) — ReAct loop, архитектура агентов<br>
                     <b>Нед.5:</b> Лек.1.2 «Tools. MCP» (~50 мин) — инструменты и MCP концептуально<br>
-                    <b>Нед.9:</b> Лек.2 «Memory and Guardrails» (~1 час) — память агента, ограничители поведения<br>
-                    <b>Нед.9:</b> Лек.3 «AI Agent Workflow. Multi-Agent. Multimodality» (~55 мин) — оркестрация<br>
+                    <b>Фон Фазы 3 (опционально):</b> Лек.2 «Memory and Guardrails» (~1 час) — память агента, ограничители поведения<br>
+                    <b>Фон Фазы 3 (опционально):</b> Лек.3 «AI Agent Workflow. Multi-Agent. Multimodality» (~55 мин) — оркестрация<br>
                     <b>Нед.10:</b> Лек.5.1 «Production Engineering for LLM Agents» (~60 мин) — Docker, деплой, мониторинг<br>
                     <b>Нед.12:</b> Лек.4 «Agent Evaluation» (~1 час) + Лек.5.2 «Production Engineering (продолжение)» (~60 мин)<br>
                     <a href="https://shad.yandex.ru/agentsweek" target="_blank">→ shad.yandex.ru/agentsweek</a><br>
@@ -2992,22 +2996,9 @@
 
 <script>
 (function() {
-  var STORAGE_KEY = 'ai_plan_done_items';
-
-  function loadDone() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
-    catch(e) { return {}; }
-  }
-
-  function saveDone(done) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(done)); }
-    catch(e) {}
-  }
-
-  function getItemId(li) {
-    return li.textContent.trim().substring(0, 60).replace(/\s+/g, '_');
-  }
-
+  // Зелёная подсветка недели вычисляется ТОЛЬКО из классов done/skip,
+  // прописанных вручную в HTML. Никакого localStorage и кликабельности —
+  // страница статичная и публичная, прогресс владелец правит руками.
   function checkWeekDone(tr) {
     var items = tr.querySelectorAll('.clist li:not(.skip):not(.opt)');
     if (items.length === 0) return;
@@ -3018,18 +3009,9 @@
     else tr.classList.remove('week-done');
   }
 
-  // Восстанавливаем состояние из localStorage
-  var done = loadDone();
-  document.querySelectorAll('.clist li:not(.skip):not(.opt)').forEach(function(li) {
-    var id = getItemId(li);
-    if (done[id]) li.classList.add('done');
-  });
-
-  // После восстановления — проверяем все недели
   document.querySelectorAll('tr').forEach(function(tr) {
     checkWeekDone(tr);
   });
-
 })();
 </script>
 <script>
