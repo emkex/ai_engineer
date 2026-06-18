@@ -12,7 +12,7 @@ services:
     environment:
     - USE_LOCAL_MODEL=false
     - OLLAMA_HOST=http://host.docker.internal:11434
-    - AGENT_TASK=Зайди на coinmarketcap.com и верни топ-5 криптовалют по капитализации
+    - AGENT_TASK=Зайди на coinmarketcap.com и верни цену токена HYPE и то, как она менялась в 2026 году
     - HTTPS_PROXY=http://squid-proxy:3128
     - HTTP_PROXY=http://squid-proxy:3128
     - NO_PROXY=localhost,127.0.0.1,::1

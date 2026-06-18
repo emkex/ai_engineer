@@ -3,6 +3,7 @@
 # ============================================================
 .env
 .env.*
+!.env.example
 *_cookies.json
 .env.local
 .env.production

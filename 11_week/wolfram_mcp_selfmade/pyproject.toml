@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wolfram-mcp"
+version = "1.0.0"
+description = "Free MCP server + Python client for the Wolfram|Alpha REST APIs (ground-truth computation for agents)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["wolfram", "wolfram-alpha", "mcp", "model-context-protocol", "llm", "agents"]
+dependencies = [
+    "mcp>=1.9.0",
+    "httpx>=0.27.0",
+]
+
+[project.scripts]
+# After `pip install -e .` you get a `wolfram-mcp` command (runs the server).
+wolfram-mcp = "wolfram_mcp.server:main"
+
+[tool.setuptools]
+packages = ["wolfram_mcp"]

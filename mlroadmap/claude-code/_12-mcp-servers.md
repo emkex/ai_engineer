@@ -65,7 +65,7 @@ claude mcp add filesystem \
 
 ### Brave / DuckDuckGo Search
 
-Поиск в интернете (доки, ansверы по библиотекам).
+Поиск в интернете (доки, ответы по библиотекам).
 
 ### Context7
 
