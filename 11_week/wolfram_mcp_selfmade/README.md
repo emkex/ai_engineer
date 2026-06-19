@@ -30,6 +30,60 @@ calling LLM choose the right one per task:
 > to the Full Results API (pulling the per-pod image URLs and showing one
 > inline) so these queries return an image instead of an error.
 
+### When to use Wolfram — and when NOT to (the honest scope)
+
+This is a **computational engine + curated/historical reference**, not a search
+engine. Used in scope it's deterministic ground truth; used out of scope it
+wastes tokens and returns stale or empty answers. The server `instructions`
+encode this so the agent routes itself.
+
+| ✅ Use Wolfram | ❌ Use web search instead (Tavily / Brave / Wikipedia) |
+|---|---|
+| Math: integrals, derivatives, solve, matrices, eigenvalues | **Live** stock / ETF / crypto / commodity **spot** prices |
+| Statistics, distributions, **regression**, hypothesis tests | Current market caps, **today's** billionaire net worth |
+| Unit / currency / date conversions, exact constants | Breaking news, current events, wars, politics |
+| Chemistry / physics / astronomy properties | Company / startup / product info, opinions, sentiment |
+| Geography & curated facts (population, area, GDP) | Anything that changed **this week** |
+| **Historical** values & **time series** ("X in 2018", prices/inflation/GDP by year) | |
+
+> **History is a strength, "now" is not.** Wolfram returns curated data *as of a
+> date*. `Elon Musk net worth 2018` → `$19B` (with its date) is reliable; his
+> *current* net worth is stale. Use it for **dynamics / trends / regression on
+> history**, not the live number.
+>
+> **Token discipline:** prefer `wolfram_short_answer` (one value, cheapest);
+> `wolfram_full_results` is the heaviest (pods + metadata) — use it sparingly and
+> narrow with `include_pod_ids`. Don't call Wolfram "just because there's a
+> number" — call it when it adds real value (verifiable math, constants,
+> curated/historical data).
+>
+> **Then compute on the result:** the point isn't just lookup — once the agent
+> has a number or series it can chain it into further math (derive, fit, test a
+> hypothesis) toward your goal.
+>
+> **Query etiquette:** qualify ambiguous data with units/currency — `neodymium
+> price in USD per kg` → `$450/kg`, whereas a bare `neodymium price` may answer in
+> a foreign currency.
+
+### Which tools your model can use (text vs. vision)
+
+Pick the model first; the tool descriptions encode what each one needs so the
+model routes itself correctly (and you can deny tools a model can't consume).
+
+| Output | Tools | Model requirement |
+|---|---|---|
+| **Text** | `wolfram_short_answer`, `wolfram_ask`, `wolfram_spoken`, `wolfram_full_results`, `wolfram_verify` | **Any** LLM. `wolfram_ask` / `wolfram_full_results` even return plots/maps as **image URLs inside the text** — a text-only model still gets the link + data. |
+| **Image bytes** | `wolfram_visual` | **Vision-capable (multimodal)** model **and** an image-capable client. A text-only / small model should not call it — use `wolfram_ask` instead. |
+
+> Practical lever: in Claude Code you can allow/deny specific MCP tools per
+> project in `.claude/settings.local.json` — e.g. omit `wolfram_visual` when the
+> session model can't see images.
+
+**Ground truth is "as of a date", not real-time.** Wolfram returns the last
+curated value with its measurement date. For fast-moving figures (net worth,
+prices) report them *as of* that date and sanity-check — a value can be
+"stale-correct" (right when measured, outdated after a recent event).
+
 ---
 
 ## Your three questions, answered

@@ -43,41 +43,65 @@ from .core import (
 # Server + shared client
 # --------------------------------------------------------------------------- #
 INSTRUCTIONS = """\
-Wolfram|Alpha as a deterministic, ground-truth computation and knowledge layer.
+Wolfram|Alpha — a deterministic computation engine + curated knowledge base.
+Use it as a CALCULATOR and a SCIENTIFIC / HISTORICAL REFERENCE, NOT a web search.
+It computes (doesn't hallucinate) and returns curated data AS OF A DATE.
 
-Core principle: DO NOT answer math, numbers, units, dates, physical/chemical
-constants, or curated real-world data from memory. If a value can be computed
-or looked up, verify it here FIRST, then answer. Wolfram computes
-deterministically and does not hallucinate — prefer it over a guess every time.
+USE Wolfram (high value — prefer it over memory or web) for:
+- Math: integrals, derivatives, limits, sums, ODEs, solve / factor / simplify.
+- Linear algebra & stats: matrices/eigenvalues, distributions, regression, tests.
+- Units / currency / date conversions and exact physical & chemical constants.
+- Chemistry/physics/astronomy properties (bp, density, dipole, pKa, mass, spectra).
+- Geography & curated facts: population, area, coordinates, country data.
+- HISTORICAL numeric values & TIME SERIES: "X in 2018", prices / inflation / GDP
+  by year or over a range (e.g. "Elon Musk net worth 2018" -> $19B with its date;
+  "crude oil price 2005 to 2015"). Excellent for dynamics, trends and regression
+  on history — pull the series, then compute on it.
 
-Always route through a tool (not memory) for:
-- derivatives, integrals, limits, sums, ODEs/PDEs
-- solving equations / systems, factoring, simplification
-- matrices (eigenvalues, determinant, inverse), linear algebra
-- statistics, distributions, regression, hypothesis tests
-- unit / currency / date conversions and exact constants
-- curated data: GDP, population, elements, astronomy, geography, finance series
+DON'T use Wolfram (use web search / Tavily / Brave / Wikipedia instead) for:
+- LIVE / current prices: stocks, ETFs, crypto, commodity spot prices.
+- Current market caps, today's billionaire net worth, real-time anything.
+- Breaking news, current events, wars, politics, company/startup/product info,
+  opinions, sentiment. Wolfram is stale or empty here — don't burn a call.
+(Rule of thumb: if the answer changed this week, it's probably NOT Wolfram.)
 
-Routing rule (pick the smallest tool that answers the question):
-- wolfram_short_answer  -> one number/phrase, fastest. ("derivative of x^3")
-- wolfram_ask           -> default; detailed LLM-ready answer WITH image URLs.
-- wolfram_verify        -> check a specific CLAIM ("France population is 70M")
-                           against ground truth before you assert it.
-- wolfram_spoken        -> a single natural sentence (good for voice replies).
-- wolfram_visual        -> when the answer is VISUAL: maps, plots/graphs,
-                           geometry, geographic borders / country neighbors,
-                           formatted tables, the full result page as one image
-                           (e.g. "neighbors of Spain", "plot sin(x)/x").
-- wolfram_full_results  -> structured data / disambiguation (pods, assumptions).
-- wolfram_usage         -> check remaining free quota.
+WORK WITH THE NUMBERS (the point of this server): once you obtain a value or
+series, CHAIN it into computation — derive quantities, fit a regression, test a
+hypothesis, combine series — proactively toward the user's goal, even if not
+explicitly asked. Wolfram gives both the numbers AND the engine to compute on them.
+Before building a numerical argument, estimate, forecast, comparison, or economic
+reasoning chain, ask whether ONE Wolfram query could replace several guessed
+assumptions. Fetch numbers to REDUCE hallucination — not numbers for their own sake.
 
-Query tips: send English, keyword-style queries ("France population", not
-"how many people live in France"); use '6*10^14' not '6e14'; single-letter
-variables; make separate calls for separate properties. If a result is not
-relevant and Wolfram offers assumptions, re-send the same query with the
-'assumption' value rather than rephrasing. A "timed out / response in time"
-message is NOT a bad query — it is a server-side compute limit; retry or raise
-the timeout (wolfram_visual already does this and falls back automatically).
+TOKEN EFFICIENCY (don't waste calls/tokens):
+- Prefer wolfram_short_answer for one value (cheapest).
+- wolfram_ask for an explained answer + image URLs (text).
+- wolfram_full_results is the HEAVIEST (pods + metadata + assumptions) — use ONLY
+  when you truly need structure / assumptions / multiple fields; never as default.
+- Don't call Wolfram "just because there's a number". Call when it adds real
+  value: verifiable math, exact constants, curated/historical data, high-stakes
+  facts you'd otherwise guess. One good call beats three reflexive ones.
+
+AS OF A DATE, not real-time: fast-moving figures come back with a measurement
+date — report them "as of <date>", don't present them as the live value.
+
+MODEL CAPABILITY: all tools return TEXT except wolfram_visual, which returns
+IMAGE BYTES (vision-capable model + image client ONLY; text-only models use
+wolfram_ask — it returns plots/maps as image URLs inside the text). Visual hard
+triggers: show / plot / graph / chart / map / visualize / draw / diagram /
+borders / neighbors.
+
+Routing: short_answer[ANY] one value · ask[ANY] explained + URLs ·
+verify[ANY] check a claim · spoken[ANY] one sentence · full_results[ANY]
+structured/disambiguation (heavy) · visual[VISION] see an image · usage quota.
+
+Query etiquette: English keywords ("France population"); QUALIFY ambiguous data
+with units/currency ("neodymium price in USD per kg" — otherwise it may answer in
+a foreign currency); '6*10^14' not '6e14'; single-letter vars; separate calls per
+property. A "response in time" / timeout 501 is a server-side compute limit, NOT
+a bad query — retry or raise the timeout (wolfram_visual auto-falls back to image
+URLs + a summary, so visuals are never silently lost). If a result is ambiguous,
+re-send the same query with the 'assumption' value Wolfram offers.
 """
 
 mcp = FastMCP(
@@ -117,10 +141,19 @@ def wolfram_ask(
 ) -> str:
     """Ask Wolfram|Alpha and get a detailed, LLM-ready answer (the default tool).
 
+    Model/client: ANY model (TEXT output). No vision needed — any maps/plots/
+    tables come back as `image: https://...` URLs *inside the text*, so even a
+    text-only model gets the data and the link. This is the tool to use instead
+    of wolfram_visual when the running model cannot see images.
+
     Returns the interpretation, computed result and, where relevant, **image
     URLs** (maps, plots, periodic-table highlights, tables) embedded inline as
     `image: https://...`. Use this to VERIFY math/data or to answer factual and
     computational questions with a trustworthy engine instead of memory.
+
+    Data is ground-truth AS OF A DATE, not real-time: for fast-moving values
+    (net worth, prices) report the figure with its measurement date and don't
+    treat it as the live number.
 
     Good queries: "integrate x^2 sin(x) dx", "solve x^2-5x+6=0",
     "standard deviation 2,4,4,4,5,5,7,9", "GDP of Germany 2023",
@@ -155,6 +188,9 @@ def wolfram_ask(
 def wolfram_short_answer(query: str, units: str | None = None) -> str:
     """Get a single concise plain-text answer (fastest; one value or phrase).
 
+    Model/client: ANY model (TEXT output, one line). Safest default for small /
+    text-only / non-multimodal models — nothing to render or interpret visually.
+
     Use for quick scalar checks where you only need the result, not the working.
     Example: "derivative of x^3" -> "3 x^2"; "speed of light" -> "299792458 m/s".
     If no sufficiently short result exists, returns a message suggesting
@@ -174,6 +210,8 @@ def wolfram_short_answer(query: str, units: str | None = None) -> str:
 @mcp.tool()
 def wolfram_spoken(query: str, units: str | None = None) -> str:
     """Get a single natural-language sentence answer (good for spoken/voice use).
+
+    Model/client: ANY model (TEXT output, one sentence). No vision needed.
 
     Example: "How far is the Moon?" -> "The average distance ... is about ...".
 
@@ -200,10 +238,24 @@ def wolfram_visual(
 ):
     """Render the full Wolfram|Alpha result as an IMAGE you can actually see.
 
+    ⚠️ Model/client requirement: this returns rendered IMAGE BYTES. It is only
+    useful to a VISION-CAPABLE (multimodal) model AND an image-capable client.
+    If the running model CANNOT see images (e.g. a small text-only model), do
+    NOT call this — call `wolfram_ask` or `wolfram_full_results` instead, which
+    return the same plots/maps as image URLs + data *as text*. Only call this on
+    explicit visual intent — hard triggers: show, plot, graph, chart, map,
+    visualize, draw, diagram, geometry, borders, neighbors, "what does ... look
+    like". For a plain number/fact, prefer wolfram_short_answer / wolfram_ask.
+
+    Never loses visuals: the single-image render has a server-side compute
+    budget; if it times out (common for rich maps/tables) this tool automatically
+    retries via the Full Results API and returns the recovered image (inline) +
+    all image URLs + a short data summary as text — so something useful always
+    comes back, even on a non-image client.
+
     Use this when the value is visual: maps, plots/graphs, geometry, formatted
     tables, the whole result page. Classic example: "neighbors of Spain" returns
-    a map plus a bordering-country table in one image. Returns the rendered image
-    (plus a short caption); MCP clients that support images will display it.
+    a map plus a bordering-country table in one image.
 
     Args:
         query: The question/expression to visualize.
@@ -232,7 +284,12 @@ def wolfram_visual(
         # Full Results API, which exposes the same renders as per-pod image URLs.
         return _visual_fallback(query, units, str(e))
     _usage.record("simple")
-    caption = f"Wolfram|Alpha rendered result for: {query}"
+    caption = (
+        f"Wolfram|Alpha rendered IMAGE for: {query}\n"
+        "(This block is image bytes — readable only by a vision-capable model/"
+        "client. If you can't see images, call wolfram_ask for the same result "
+        "as text + image URLs.)"
+    )
     warn = _usage.warning()
     if warn:
         caption += f"\n[wolfram-mcp quota] {warn}"
@@ -296,10 +353,19 @@ def wolfram_full_results(
 ) -> str:
     """Query the Full Results API and get STRUCTURED output (pods + assumptions).
 
+    Model/client: ANY model (TEXT/JSON output). Image pods come back as URLs in
+    the text — no vision needed; a text-only model can use this to get a visual's
+    link + data without wolfram_visual.
+
+    ⚠️ TOKEN COST: this is the HEAVIEST tool — it returns every pod, plaintext,
+    image URLs, assumptions and metadata (often thousands of tokens). Do NOT use
+    it as a default. For a single value use `wolfram_short_answer`; for an
+    explained answer use `wolfram_ask`. Reach for this ONLY when you genuinely
+    need structure, multiple fields, or to drive disambiguation; narrow it with
+    `include_pod_ids` (e.g. "Result") to keep the payload small.
+
     Most powerful endpoint. Returns each result pod (title + plaintext + image
-    URL) plus any assumptions and "did you mean" suggestions. Use it for
-    structured/programmatic needs or to drive disambiguation when `wolfram_ask`
-    is ambiguous.
+    URL) plus any assumptions and "did you mean" suggestions.
 
     Args:
         query: The question/expression.
@@ -333,10 +399,21 @@ def wolfram_full_results(
 def wolfram_verify(claim: str, units: str | None = None) -> str:
     """Check a specific factual/numeric CLAIM against Wolfram ground truth.
 
+    Model/client: ANY model (TEXT output). This is the workhorse for the most
+    common use of this server: verifying slowly-changing facts/values before you
+    assert them.
+
     Use this right before asserting a checkable statement, instead of trusting
     memory. It sends the claim to Wolfram|Alpha (deterministic engine, curated
     data) and returns the ground-truth result next to your claim so you can
     confirm it or correct it.
+
+    AS OF A DATE, not real-time: Wolfram gives the last curated value with its
+    measurement date. For fast-moving figures (net worth, prices) a claim can be
+    "stale-correct" — e.g. a net worth that was right at Wolfram's measurement
+    date but outdated after a recent event. Treat a mismatch on a volatile value
+    as "verify the date / may have moved", not necessarily "the claim is false",
+    and always report the measurement date Wolfram returns.
 
     Best for claims that resolve to a value or fact:
       "the derivative of x^3 is 3x^2", "France population is 70 million",
