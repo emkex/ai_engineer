@@ -91,6 +91,11 @@ wolfram_ask — it returns plots/maps as image URLs inside the text). Visual har
 triggers: show / plot / graph / chart / map / visualize / draw / diagram /
 borders / neighbors.
 
+VISUAL OUTPUT POLICY: wolfram_visual returns the rendered image AND its source
+URL(s) as text. Always show the image and display EVERY URL it returns; if it
+says "No image URL was available", state that. The URL is part of the result,
+not optional metadata — never present a visual without exposing its URL(s).
+
 Routing: short_answer[ANY] one value · ask[ANY] explained + URLs ·
 verify[ANY] check a claim · spoken[ANY] one sentence · full_results[ANY]
 structured/disambiguation (heavy) · visual[VISION] see an image · usage quota.
@@ -247,6 +252,11 @@ def wolfram_visual(
     visualize, draw, diagram, geometry, borders, neighbors, "what does ... look
     like". For a plain number/fact, prefer wolfram_short_answer / wolfram_ask.
 
+    Always returns the image AND its public source URL(s) as text (plus a short
+    summary) — the URL is part of the result, so a non-image client never loses
+    the link. (Getting the URL costs one extra Full Results call, since the
+    Simple API returns only bytes; visual queries are rare, so this is worth it.)
+
     Never loses visuals: the single-image render has a server-side compute
     budget; if it times out (common for rich maps/tables) this tool automatically
     retries via the Full Results API and returns the recovered image (inline) +
@@ -284,16 +294,36 @@ def wolfram_visual(
         # Full Results API, which exposes the same renders as per-pod image URLs.
         return _visual_fallback(query, units, str(e))
     _usage.record("simple")
+    # VISUAL OUTPUT CONTRACT: always surface the public image URL(s) as text so
+    # the URL is part of the result (never optional metadata the model can drop)
+    # and non-image clients still get a usable link. The Simple API returns only
+    # bytes — and its own URL embeds the AppID — so we fetch the public per-pod
+    # URLs from Full Results. One extra call, but visual queries are rare.
     caption = (
         f"Wolfram|Alpha rendered IMAGE for: {query}\n"
-        "(This block is image bytes — readable only by a vision-capable model/"
-        "client. If you can't see images, call wolfram_ask for the same result "
-        "as text + image URLs.)"
+        f"{_image_url_lines(query, units)}\n"
+        "(Image bytes below are readable only by a vision-capable client; the "
+        "URL(s) above open anywhere. Text-only models: prefer wolfram_ask.)"
     )
     warn = _usage.warning()
     if warn:
         caption += f"\n[wolfram-mcp quota] {warn}"
     return [caption, Image(data=img.data, format=img.image_format)]
+
+
+def _image_url_lines(query: str, units: str | None) -> str:
+    """Fetch public image URL(s) for a visual query via Full Results (robust)."""
+    try:
+        qr = client().full(query, units=units, formats="image")
+        _usage.record("full")
+        pairs = WolframClient.image_urls(qr)
+    except WolframError:
+        pairs = []
+    if not pairs:
+        return "No image URL was available from Wolfram."
+    lines = ["Image URL(s):"]
+    lines += [f"- {title}: {src}" for title, src in pairs[:12]]
+    return "\n".join(lines)
 
 
 def _visual_fallback(query: str, units: str | None, simple_error: str):

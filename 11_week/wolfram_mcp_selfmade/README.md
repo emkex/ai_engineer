@@ -16,7 +16,7 @@ calling LLM choose the right one per task:
 | `wolfram_ask` | LLM API | LLM-ready text **+ image URLs** | the default; verify math, full answers |
 | `wolfram_verify` | LLM API | claim **+ ground truth** | check a specific claim before asserting it |
 | `wolfram_spoken` | Spoken Results | one natural sentence | voice / conversational replies |
-| `wolfram_visual` | Simple API (+ Full Results fallback) | a **rendered image** | maps, plots, tables you want to *see* |
+| `wolfram_visual` | Simple API (+ Full Results) | a **rendered image + its URL(s)** | maps, plots, tables you want to *see* |
 | `wolfram_full_results` | Full Results | **structured JSON** (pods + assumptions) | programmatic data, disambiguation |
 | `wolfram_usage` | — | quota estimate | check remaining free calls |
 
@@ -26,9 +26,16 @@ calling LLM choose the right one per task:
 >
 > Rich renders (maps, country borders, large tables) exceed the Simple API's
 > default 5-second compute budget and come back as a "could not give a response
-> in time" 501. `wolfram_visual` defaults that budget to 15s **and** falls back
-> to the Full Results API (pulling the per-pod image URLs and showing one
-> inline) so these queries return an image instead of an error.
+> in time" 501. `wolfram_visual` defaults that budget to 15s, and on failure
+> falls back to the Full Results API so the query returns an image instead of an
+> error.
+>
+> **`wolfram_visual` always returns the image AND its public URL(s) as text**
+> (plus a short summary). The Simple API gives only bytes — and its own URL
+> embeds the AppID — so the tool fetches the public per-pod URLs from Full
+> Results (one extra call; visual queries are rare). This makes the URL part of
+> the result, so a non-image client never loses the link and the model can't
+> "forget" to show it. If no URL is available it says so explicitly.
 
 ### When to use Wolfram — and when NOT to (the honest scope)
 
